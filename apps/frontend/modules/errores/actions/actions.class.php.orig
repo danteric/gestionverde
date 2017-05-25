@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * Clase de acciones para errores
+ */
+class ErroresActions extends sfActions
+{
+
+  public function executeError() {
+    return $this->renderPartial
+                 ('error/error');
+  }
+  
+  public function executeForbidden() {
+      
+  }
+  
+}
+?>

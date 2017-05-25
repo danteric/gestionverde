@@ -1,0 +1,1 @@
+<a title="Filtrar" href="#" onclick="$('#ocultar_mostrar').toggle(200);"><i class="icon-gear text-warning"></i> Opciones de Filtrado</a>

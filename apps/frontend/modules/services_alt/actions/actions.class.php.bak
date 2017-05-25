@@ -1,0 +1,297 @@
+<?php
+
+/**
+ * servicios actions.
+ *
+ * @package    prosegur
+ * @subpackage servicios
+ * @author     Your name here
+ * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
+ */
+class servicesActions extends sfActions
+{
+
+
+	/**
+	* Acciones para metodos ajax
+	*
+	* @param sfWebRequest $request
+	* @return type
+	*/
+	public function executeTraeProvinciasPorPais(sfWebRequest $request) {
+
+		$pais = $request->getParameter("pais");
+		$input_name = $request->getParameter("input_name");
+		if(empty($input_name)) {
+			$input_name = "provincia";
+		}
+		$sql = "begin ".sfConfig::get("SCHEMA_ORACLE").".GET_PROVINCIAS_RS('ENTIDADES','".$pais."', '', :data); end;";
+		$this->provincias = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+		return $this->renderPartial
+					('services/traeProvinciasPorPais', array('provincias' => $this->provincias,
+															'input_name' => $input_name)
+									 );
+	}
+
+	/**
+	* Acciones para metodos ajax
+	*
+	* @param sfWebRequest $request
+	* @return type
+	*/
+	public function executeTraeProvinciasPorPaisGenerico(sfWebRequest $request) {
+
+		$pais = $request->getParameter("pais");
+		$sql = "begin ".sfConfig::get("SCHEMA_ORACLE").".GET_PROVINCIAS_RS('ENTIDADES','".$pais."', '', :data); end;";
+		$this->provincias = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+		return $this->renderPartial
+					('services/traeProvinciasPorPaisGenerico', array('provincias' => $this->provincias)
+									 );
+	}
+
+	public function executeTraeLocalidadesPorProvinciaGenerico(sfWebRequest $request) {
+
+		$pais = $request->getParameter("pais");
+		$provincia = $request->getParameter("provincia");
+
+		$sql = "begin ".sfConfig::get("SCHEMA_ORACLE").".GET_LOCALIDADES_RS('ENTIDADES','".$pais."', '".$provincia."', '', :data); end;";
+		$this->localidades = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+		//print_r($this->localidades);exit;
+		return $this->renderPartial
+					('services/traeLocalidadesPorProvinciaGenerico', array('localidades' => $this->localidades)
+									 );
+	}
+
+	public function executeTraeCpPorLocalidadGenerico(sfWebRequest $request) {
+		
+	
+
+		$pais = $request->getParameter("pais");
+		$provincia = $request->getParameter("provincia");
+		$localidad = $request->getParameter("localidad");
+		
+
+		$sql = "begin ".sfConfig::get("SCHEMA_ORACLE").".GET_LOC_CP_RS('ENTIDADES','".$pais."', '".$provincia."', '".$localidad."', '', :data); end;";
+		$this->cps = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+		return $this->renderPartial
+					('services/traeCpPorLocalidadGenerico', array('cps' => $this->cps)
+									 );
+	}
+
+	public function executeTraeLocalidadesPorProvincia(sfWebRequest $request) {
+
+		$pais = $request->getParameter("pais");
+		$provincia = $request->getParameter("provincia");
+
+		$sql = "begin ".sfConfig::get("SCHEMA_ORACLE").".GET_LOCALIDADES_RS('ENTIDADES','".$pais."', '".$provincia."', '', :data); end;";
+		$this->localidades = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+		return $this->renderPartial
+					('services/traeLocalidadesPorProvincia', array('localidades' => $this->localidades)
+									 );
+	}
+
+	public function executeTraeZonasPorEmpresa(sfWebRequest $request) {
+		$empresa = $request->getParameter("empresa");
+		$zona = $request->getParameter("zona");
+		$sql = "begin ".sfConfig::get("SCHEMA_ORACLE").".GET_EMP_SUCURSALES_RS('".$_SESSION["usuario"]["empresa"]."','".$zona."','', '', '', :data); end;";
+		$this->zonas = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+		//print_r($this->zonas);exit;
+		return $this->renderPartial
+					('services/traeZonasPorEmpresa', array('zonas' => $this->zonas)
+									 );
+	}
+
+	public function executeTraeResponsablesPorZona(sfWebRequest $request) {
+		$zona = $request->getParameter("zona");
+
+		$sql = "begin ".sfConfig::get('SCHEMA_ORACLE').".SEL_EMP_RESPONSABLES_ZONA_RS('ENTI_COIN_CODIGO_LEGAJO', '".$_SESSION["usuario"]["empresa"]."','".$zona."', :data); end;";
+		$this->responsables = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+		return $this->renderPartial
+					('services/traeResponsablesPorZona', array('responsables' => $this->responsables));
+	}
+
+	public function executeTraeEntesReguladoresPorPais(sfWebRequest $request) {
+
+		$pais = $request->getParameter("pais");
+		$sql = "begin ".sfConfig::get("SCHEMA_ORACLE").".SEL_ENTE_REG_ACTIVIDADES_RS('ENTI_ENRA_ACTIVIDAD','".$pais."', :data); end;";
+		//echo $sql;exit;
+		$this->actividades = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+		//print_r($this->actividades);exit;
+		//unset($this->actividades[0]);
+		//print_r($this->actividades);exit;
+		return $this->renderPartial
+					('services/traeEntesReguladoresPorPais', array('actividades' => $this->actividades)
+									 );
+	}
+
+	public function executeTraeMascaraCuit(sfWebRequest $request) {
+		$pais = $request->getParameter("pais");
+		$sql = "begin ".sfConfig::get('SCHEMA_ORACLE').".GET_PAISES_RS (null,'".$pais."', :data); end;";
+
+		$cuit = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+		$mascara = $cuit[0]['MASK_CUIT'];
+		return $this->renderText(json_encode(array('mascara' => $mascara, 'label' => $cuit[0]['CUIT_DENOMINA'])));
+
+	}
+
+	public function executeTraeClienteAsignacion(sfWebRequest $request) {
+		$nro_orden_sel = $request->getParameter("nro_orden_sel");
+		$cliente = $request->getParameter("cliente_".$nro_orden_sel);
+
+		$sql = "begin ".sfConfig::get('SCHEMA_ORACLE').".SEL_VALIDA_CLIEN_SIST_EXT_RS ('".$_SESSION["usuario"]["empresa"]."','".$cliente."', :data); end;";
+		$cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+		$respuesta = $cursor[0]['RESPUESTA'];
+		$razon = "";
+
+		if("OK" == $respuesta){
+			$razon = $cursor[0]['DESCRIP'];
+		}
+
+		return $this->renderText(json_encode(array('respuesta' => $respuesta, 'razon' => $razon)));
+
+	}
+	
+	public function executeBuscarActividades(sfWebRequest $request) {
+		$nombre = $request->getParameter("nombre");
+		$etiqueta_actividad = $request->getParameter("etiqueta_actividad");
+		$etiqueta_entidad = $request->getParameter("etiqueta_entidad");
+		$enra_actividad = $request->getParameter("ENRA_ACTIVIDAD");
+        $etiqueta_sujeto = $request->getParameter("ENRA_SUJETO");
+        //ver el comportamiento de este render q creo que no esta en funcionamiento
+        return $this->renderPartial('services/buscarActividades',array('nombre' => $nombre,'etiqueta_actividad' => $etiqueta_actividad, 'ENRA_ACTIVIDAD' => $enra_actividad, 'etiqueta_entidad' => $etiqueta_entidad, 'ENRA_SUJETO' => $etiqueta_sujeto));
+    
+		//return $this->renderPartial('services/buscarActividades',array('nombre' => $nombre,'etiqueta_actividad' => $etiqueta_actividad, 'ENRA_ACTIVIDAD' => $enra_actividad, 'etiqueta_entidad' => $etiqueta_entidad));
+	}
+	
+	public function executeBuscarSujetos(sfWebRequest $request) {
+		$nombresujeto = $request->getParameter("nombresujeto");
+		$etiqueta_sujeto = $request->getParameter("etiqueta_sujeto");
+		$enra_sujeto = $request->getParameter("ENRA_SUJETO");
+		
+		return $this->renderPartial('services/buscarActividades',array('nombresujeto' => $nombresujeto,'etiqueta_sujeto' => $etiqueta_sujeto, 'ENRA_SUJETO' => $enra_sujeto));
+	}
+   public function executeTraeDescripcionActi(sfWebRequest $request)
+  {
+    $sql = sprintf('BEGIN %s.GET_ENTIDAD_ACTIVI_BUSCAR_RS(\'%s\', :data); END;',
+      sfConfig::get('SCHEMA_ORACLE'),
+      $request->getParameter('codigoactividad')
+      );
+
+    $response = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+    $this->setLayout(false);
+    $this->getResponse()->setContentType('text/json');
+    
+    return $this->renderText(json_encode($response));
+  }
+     public function executeTraeDescripcionSuj(sfWebRequest $request)
+  {
+    $sql = sprintf('BEGIN %s.GET_ENTIDAD_SUJETO_BUSCAR_RS(\'%s\', :data); END;',
+      sfConfig::get('SCHEMA_ORACLE'),
+      $request->getParameter('codigosujeto')
+      );
+
+    $response = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+    $this->setLayout(false);
+    $this->getResponse()->setContentType('text/json');
+    
+    return $this->renderText(json_encode($response));
+  }
+  // nueva implementacio para invocar localidades y provincias
+  
+  public function executeGetLocalizacion(sfWebRequest $request)
+	{
+		$cadena = $request->getParameter('cadena');
+		$response = Localizaciones::buscar($cadena);
+		$this->setLayout(false);
+	    $this->getResponse()->setContentType('text/json');
+	    return $this->renderText(json_encode($response));		
+	}
+  public function executeGetLocaDomi(sfWebRequest $request)
+	{
+
+		$this->datos = $request->getParameter('valor');
+        //echo $this->nombre; exit;
+ $sql = sprintf('BEGIN %s.SEL_LOCALIDAD_BUSCAR_RS(\'%s\',\'%s\',\'%s\',\'%s\', :data); END;',
+	      sfConfig::get('SCHEMA_ORACLE'),
+	      $this->datos,
+	      '',
+	      '',
+	      ''
+	      );  
+          $this->resulta = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+         if($this->resulta == null){
+         	$this->resultadomi = 'Nulo';
+         }else{
+         	$this->resultadomi = $this->resulta;
+         }
+         return $this->renderPartial('services/autocompleteLocalizaciones', array('resulRespuesta' =>$this->resultadomi));
+		
+		
+	}
+	
+  	  public function executeGetMostrarlocalidades(sfWebRequest $request)
+	  {
+           $errors = array();
+		   $this->text = 'NULL';
+		   $this->domicilio_real_localidad = $request->getParameter('domicilio_localidad'); 
+           $this->domicilio_real_provincia = $request->getParameter('domicilio_provincia');
+		   $this->domicilio_real_pais = $request->getParameter('domicilio_pais'); 
+
+		   $sql = "begin ".sfConfig::get('SCHEMA_ORACLE').".SEL_LOCALIDAD_BUSCAR_RS
+																				   (
+																				   ".$this->text.",
+																				   '".$this->domicilio_real_localidad."',
+																				   '".$this->domicilio_real_provincia."',
+																				   '".$this->domicilio_real_pais."', 
+																				   :data
+																				   ); end;";            
+		   $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+		   $resultado = $this->cursor[0]['DESC_LOCA'];
+		   if($resultado == NULL){
+		   	$respuesta = 'No se ha seleccionado ningun dato..';
+		   return $this->renderText(json_encode($respuesta));
+		   }
+		   return $this->renderText(json_encode($resultado));
+	} 
+ 
+    /*
+	public function executeGetMostrarCpPorLocalidadGenerico(sfWebRequest $request) {
+
+		$pais = $request->getParameter("domicilio_pais");
+		$provincia = $request->getParameter("domicilio_provincia");
+		$localidad = $request->getParameter("domicilio_localidad");
+
+		$sql = "begin ".sfConfig::get("SCHEMA_ORACLE").".GET_LOC_CP_RS('ENTIDADES','".$pais."', '".$provincia."', '".$localidad."', '', :data); end;";
+		$this->cps = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+		$result = $this->cps[0]['LOCP_CODIGO'];
+		
+       
+        $r = [];
+		$cantidad = 0;
+        foreach ($this->cps as $value) {
+        $s = '';
+        $s = $value['LOCP_CODIGO'];
+        $r[] = $s;
+		$cantidad++;
+        }
+        
+		return $this->renderText(json_encode(array($r)));
+		
+		
+		//return $this->renderText(json_encode(array("caracu" => $lopi)));
+		//return json_encode($r);
+		
+		//exit;
+	}
+	*/
+    
+}
+

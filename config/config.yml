@@ -1,0 +1,20 @@
+local:
+#   desv:
+    IP_HOST:     localhost
+    USER_NAME: 	 root 
+    PASS :      
+    DB_NAME:   gestionverde
+ 
+#           $host = "localhost";
+#            $port = "3306";
+#            $dbname = "adaclub"; 
+#            $username = "root"; 
+#            $password = "";
+
+
+#    IP_ORACLE:     //localhost:1521/XE
+#    USER_ORACLE:   smog
+#    PASS_ORACLE:   smog
+#    SCHEMA_ORACLE: SMOG
+#    SERVER_NAME: <?php echo @$_SERVER['HTTP_HOST']; ?>
+

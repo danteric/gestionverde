@@ -1,0 +1,53 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/13-View
+
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    #title:        symfony project
+    #description:  symfony project
+    #keywords:     symfony, project
+    #language:     en
+    #robots:       index, follow
+
+  stylesheets:    
+    - smoothness/jquery-ui-1.8.23.custom.css
+    - jquery.tablesorter.pager.css
+    - autoCompleteCalles.css
+    - jquery.checkboxtree.min.css
+    - bootstrap.min.css
+    - font-awesome.min.css
+    - main.css
+    - chosen.css
+    - estilovarios.css
+    - bootstrap.min.css
+    - dataTables.bootstrap.min.css    
+    - responsive.dataTables.min.css
+
+  javascripts:    
+    - jquery-1.11.3.js
+    - jquery-ui-1.8.23.custom.min.js
+    - jquery.tablesorter.min.js
+    - jquery.tablesorter.pager.js
+    - jquery.lightbox_me.js
+    - chosen.jquery.min.js
+    - jquery.validate.js
+    - jquery.sticky.js
+    - base.js
+    - masks.js
+    - bootstrap.min.js
+    - jquery.checkboxtree.min.js
+    - mustache.js
+    - buscador/buscador.js
+    - buscador/elastic.min.js
+    - buscador/elastic-jquery-client.min.js
+    - jquery.dataTables.min.js
+    - dataTables.bootstrap.min.js
+    - moments.min.js
+    - datetime_sort.js
+    - dataTables.responsive.min.js
+
+  has_layout:     true
+  layout:         layout

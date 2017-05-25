@@ -1,0 +1,46 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <link rel="shortcut icon" href="/favicon.ico"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <?php include_http_metas() ?>
+        <?php include_metas() ?>
+        <?php include_title() ?>
+        <?php include_stylesheets() ?>
+        <?php include_javascripts() ?>
+    </head>
+    <body>
+        <div class="row-fluid" id="header">
+            <div id="corpo">
+                <?php if(isset($_SESSION["usuario"])): ?>
+                    <div class="info">                
+                        <ul class="breadcrumb">
+                            <li><strong>Sistema SMOG</strong></li>
+                            <li><span class="divider">-</span></li>
+                            <li><?php if(isset($_SESSION["usuario"]["username"])): ?> <?php echo $_SESSION["usuario"]["pais"];?><span class="divider">-</span> <?php endif; ?></li>
+                            <li><?php if(isset($_SESSION["usuario"]["username"])): ?> <?php echo $_SESSION["usuario"]["empresa_razon"]; ?><span class="divider">-</span> <?php endif; ?></li>
+                            <li><?php if(isset($_SESSION["usuario"]["username"])): ?> <?php echo $_SESSION["usuario"]["username"]; ?><span class="divider">-</span> <?php endif; ?></li>
+                            <li><?php if(isset($_SESSION["usuario"]["username"])): ?> <?php echo $_SESSION["hoy"];?><?php endif; ?></li>
+                        </ul>                   
+                    </div>
+                <?php endif; ?>                
+            </div>
+                <?php if(isset($_SESSION["usuario"])): ?>
+                    <?php require '_menu.php' ?>
+                <?php endif; ?>
+        </div>             
+        <div class="container">
+            <div  class="row-fluid" id="flashMessages">
+                <?php include_partial('services/flashes') ?>
+            </div>
+             <div class="row-fluid" id="content">
+                <?php echo $sf_content ?>
+             </div>
+             <div class="row-fluid" id="footer">
+
+             </div>
+        </div>
+        <?php require '_script.php'; ?>
+    </body>
+</html>

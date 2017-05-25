@@ -1,0 +1,64 @@
+sf_guard_signin:
+  url:   /login
+  param: { module: preinscripciones, action: login }
+
+sf_guard_signout:
+  url:   /logout
+  param: { module: sfGuardAuth, action: signout }
+
+sf_guard_password:
+  url:   /request_password
+  param: { module: sfGuardAuth, action: password }
+
+
+# default rules
+homepage:
+  url:   /
+  param: { module: cronoActividades, action: home }
+
+# generic rules
+# please, remove them by adding more specific rules
+doc_reg:
+  url:   /documRegistrada/documRegistrada
+  param: { module: docReg, action: index }
+  
+default_index:
+  url:   /:module
+  param: { module: cronoActividades, action: home }
+
+ 
+default:
+  url:   /:module/:action/*
+
+#requerimientos:
+#  url:   /req
+#  param: { module: requerimientos, action: requerimientos }
+
+#
+#requerimiento_req_logs:
+#  url:   /req/logs/:req_codigo
+#  param: { module: requerimientos, action: logs }
+#
+#requerimiento_req_firm:
+#  url:   /req/firmantes/:req_codigo
+#  param: { module: requerimientos, action: firmantes }
+#
+#requerimiento_req_inf:
+#  url:   /req/informes/:req_codigo
+#  param: { module: requerimientos, action: informes }
+#
+#requerimiento_req_tipos_inf:
+#  url:   /req/tipos/informes
+#  param: { module: requerimientos, action: tinformes }
+#
+#requerimiento_req_tipos:
+#  url:   /req/tipos
+#  param: { module: requerimientos, action: tipos }
+#
+#requerimiento_req_entes:
+#  url:   /req/entes
+#  param: { module: requerimientos, action: entes }
+#
+#requerimiento_req:
+#  url:   /req/:req_codigo
+#  param: { module: requerimientos, action: requerimiento }

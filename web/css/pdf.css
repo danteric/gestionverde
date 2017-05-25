@@ -1,0 +1,11 @@
+body, table
+{
+  font-size: 10pt;
+  white-space:nowrap;
+  font-family: "Andale Mono", AndaleMono, monospace, "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter";
+}
+.page-break {
+  display: block;
+  clear: both;
+  page-break-after: always;
+}

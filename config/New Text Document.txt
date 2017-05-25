@@ -1,0 +1,13 @@
+local:
+#    desv:
+    IP_ORACLE:     //10.54.248.158:1521/SMOGD
+    USER_ORACLE:   SMOGAR
+    PASS_ORACLE:   smogdesa
+    SCHEMA_ORACLE: SMOGAR
+    SERVER_NAME: <?php echo @$_SERVER['HTTP_HOST']."\n"; ?>
+    elastic_search: {servidor: "10.54.248.167", puerto: 9200, indice: "lista", tipo: "persona"}
+#    IP_ORACLE:     //localhost:1521/XE
+#    USER_ORACLE:   smog
+#    PASS_ORACLE:   smog
+#    SCHEMA_ORACLE: SMOG
+#    SERVER_NAME: <?php echo @$_SERVER['HTTP_HOST']; ?>

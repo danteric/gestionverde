@@ -1,0 +1,86 @@
+[
+    {
+        "name": "ruflin/elastica",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ruflin/Elastica.git",
+            "reference": "2a551076c57b1a1eebd0b369323b4433568a084e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/ruflin/Elastica/zipball/2a551076c57b1a1eebd0b369323b4433568a084e",
+            "reference": "2a551076c57b1a1eebd0b369323b4433568a084e",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "munkie/elasticsearch-thrift-php": "1.4.*",
+            "psr/log": "~1.0"
+        },
+        "suggest": {
+            "monolog/monolog": "Logging request",
+            "munkie/elasticsearch-thrift-php": "Allow using thrift transport",
+            "psr/log": "for logging"
+        },
+        "time": "2013-08-01 08:40:03",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "0.20.5.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Elastica": "lib/",
+                "Elastica\\Test": "test/lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache 2.0"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Ruflin",
+                "homepage": "http://ruflin.com/"
+            }
+        ],
+        "description": "Elasticsearch Client",
+        "homepage": "http://ruflin.github.com/Elastica/",
+        "keywords": [
+            "client",
+            "search"
+        ]
+    },
+    {
+        "name": "symfony/symfony",
+        "version": "1.4.20",
+        "version_normalized": "1.4.20.0",
+        "dist": {
+            "type": "tar",
+            "url": "http://pear.symfony-project.com/get/symfony-1.4.20.tgz",
+            "reference": null,
+            "shasum": null
+        },
+        "type": "library",
+        "installation-source": "dist"
+    },
+    {
+        "name": "phphtml2pdf/phphtml2pdf",
+        "version": "4.0.3",
+        "version_normalized": "4.0.3.0",
+        "dist": {
+            "type": "zip",
+            "url": "http://sourceforge.net/projects/phphtml2pdf/files/release/html2pdf_v4.03_php5.zip/download",
+            "reference": null,
+            "shasum": null
+        },
+        "type": "library",
+        "installation-source": "dist"
+    }
+]

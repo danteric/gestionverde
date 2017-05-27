@@ -6,12 +6,11 @@
 
    
         $('#spinner').show();
-      
 
         $.get("<?php echo url_for('abmFichas/tablaFichas') ?> ", 
       {
        id_ficha: $('#id_ficha').val(),
-       id_nombre: $('#id_nombre').val(),
+       id_nombre: $('#id_nombre').val()
        },
             function(data){
                 $('#tablaFichas').html(data);
@@ -22,7 +21,7 @@
       }
 
  </script>
-  <div style="float:left;">> 
+
 <?php 
 
 	$cabecera = new Cabecera();
@@ -35,7 +34,6 @@
 
     $cabecera->ini_filtro(__("Catalogo"));
     $optionsSelect = $dd_cata;?>
-
     <select id= "id_ficha" name="ficha" class="form-control" onchange="cargarGrilla()">
     <?php foreach ($optionsSelect as $arraySelect) { ?>
         <option value="<?php echo $arraySelect['cata_id'];?>"><?php echo $arraySelect['cata_deno']; ?>
@@ -43,36 +41,21 @@
     <?php } ?>
     <?php $cabecera->fin_filtro(__("Catalogo")); ?>
 
-<<<<<<< HEAD
         
-    <?php $cabecera->ini_filtro(__("o complete denominacion de ficha"));?>
-    <input type="text" id="id_nombre" name="nombre" class="form-control" placeholder="Nombre de ficha"/>
-    <?php $cabecera->fin_filtro(__("o complete denominacion de ficha")); 
-
-    $cabecera->accion(sprintf('<a href="%s"><i class="icon-plus text-info"></i> Nueva Ficha</a>', url_for("abmFichas/formularioFichas"))); 
-    ?>
-=======
-         
     <?php $cabecera->ini_filtro(__("o complete denominacion de ficha<i class=\"icon-user\"></i>"));?>
-    <input type="text" id="id_nombre" name="nombre"  class="form-control" />
+    <input type="text" id="id_nombre" name="nombre" class="form-control pull-right" />
     <?php $cabecera->fin_filtro(__("o complete denominacion de ficha<i class=\"icon-user\"></i>")); 
 
     $cabecera->accion(sprintf('<a href="%s"><i class="icon-plus text-info"></i> Nueva Ficha</a>', url_for("abmFichas/formularioFichas"))); 
->>>>>>> 9c588d58be3f1a674cbd71568dc3a6e7df34c0b6
+
 
    
        
 
-	<?php echo $cabecera; ?>
+	echo $cabecera;
 
-<<<<<<< HEAD
-=======
 ?>
-</div>
 
->>>>>>> 9c588d58be3f1a674cbd71568dc3a6e7df34c0b6
-
-    
     <div id="tablaFichas" class="responsiveWidth">
     </div>
 

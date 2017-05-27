@@ -79,7 +79,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" href="#"><img src="/img/favicon.png" class="img-circle" alt="Universidad Favaloro"></a>
+                  <a class="navbar-brand" href="#"><img src="/img/camarco.png" class="img-circle" alt="CAMARCO"></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->

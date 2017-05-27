@@ -1,5 +1,26 @@
 <script languaje= "JavaScript" type="text/javascript" src= "js/configvarios.js"> </script>
 
+<script>
+    /*-------------------Funcion para cargar la lista de catalogos--------*/
+    cargarGrilla = function() {
+
+   
+        $('#spinner').show();
+
+        $.get("<?php echo url_for('abmFichas/tablaFichas') ?> ", 
+      {
+       id_ficha: $('#id_ficha').val(),
+       id_nombre: $('#id_nombre').val()
+       },
+            function(data){
+                $('#tablaFichas').html(data);
+                startTableOnlySorter();
+                $('#spinner').hide();
+            });
+         
+      }
+
+ </script>
 
 <?php 
 
@@ -7,46 +28,37 @@
 	$cabecera->ruta('ABMFichas');
 	$cabecera->titulo(__('Administración de Fichas'));
 
-	$cabecera->accion(sprintf('<a href="%s"><i class="icon-plus text-info"></i> Nueva Ficha</a>', url_for("abmFichas/formularioFichas"))); 
-    
+    $cabecera->boton('filtrar') ;
+    $cabecera->accion('<input type="button" value="Filtrar" class="btn btn-warning" onclick="$(\'#pagina\').val(1);cargarGrilla();" />');
+
+
+    $cabecera->ini_filtro(__("Catalogo"));
+    $optionsSelect = $dd_cata;?>
+    <select id= "id_ficha" name="ficha" class="form-control" onchange="cargarGrilla()">
+    <?php foreach ($optionsSelect as $arraySelect) { ?>
+        <option value="<?php echo $arraySelect['cata_id'];?>"><?php echo $arraySelect['cata_deno']; ?>
+        </option> 
+    <?php } ?>
+    <?php $cabecera->fin_filtro(__("Catalogo")); ?>
+
+        
+    <?php $cabecera->ini_filtro(__("o complete denominacion de ficha<i class=\"icon-user\"></i>"));?>
+    <input type="text" id="id_nombre" name="nombre" class="form-control pull-right" />
+    <?php $cabecera->fin_filtro(__("o complete denominacion de ficha<i class=\"icon-user\"></i>")); 
+
+    $cabecera->accion(sprintf('<a href="%s"><i class="icon-plus text-info"></i> Nueva Ficha</a>', url_for("abmFichas/formularioFichas"))); 
+
+
+   
+       
+
 	echo $cabecera;
 
 ?>
 
-<?php include_partial('services/notices', array('errors' => $errors, 'notices' => $notices)) ?>
-    <div class="wrapper tipoframe">
-    <div class="panel-body">
-    <table border="0" frame="" class="tablesorter responsiveWidth table table-striped table-bordered">
-        <thead>
-                <tr class="alert-success wrapper">
-                    <th style="text-align:center"><?php echo "Cod Interno"; ?></th>
-                    <th style="text-align:center"><?php echo "Catálogo"; ?></th>
-                    <th style="text-align:center"><?php echo "Denominacion"; ?></th>
-                    <th class="nosort" style="text-align: center">Acciones</th>
-                </tr>
-        </thead>
-        <tbody>
-                <?php $c = 0; foreach($fichas as $row){ ?>
-                <tr onMouseOver="CambiaColor(this,'#dff0d8','blue')" onMouseOut="CambiaColor2(this,'#000000')">
-                    <td style="text-align: center"><?php echo $row['fich_id']; ?></td>
-                    <td><?php echo $row['fich_cata_id']; ?></td>
-                    <td><?php echo $row['fich_deno']; ?></td>
-                    <td style="text-align: center">
-                        <?php if($_SESSION["usuario"]["modi"] == "S"){ ?>
-                            <a class = "btn btn-mini" href="<?php echo url_for("abmFichas/formularioFichas?fich_id=".$row['fich_id']) ?>">
-                                <i class="icon icon-pencil text-success"></i>
-                            </a>
-                            <a class = "btn btn-mini" onclick="eliminarEntidad('<?php echo url_for("abmFichas/baja?fich_id=".$row['fich_id']) ?>">
-                                <i class="icon icon-remove text-danger"></i>
-                            </a>
-                        <?php } ?>
-                    </td>
-                </tr>
-                <?php $c++; } ?>
-        </tbody>
-    </table>
+    <div id="tablaFichas" class="responsiveWidth">
     </div>
-    </div>
+
 <?php //require __DIR__. '/../../pagcomun/templates/_paginaciona_listas_ajax.php' ?>
 <?php require __DIR__. '/../../pagcomun/templates/_pagcomun.php' ?> 
 <!-- /ayuda -->

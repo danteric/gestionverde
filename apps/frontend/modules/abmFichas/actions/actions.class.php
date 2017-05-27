@@ -19,11 +19,53 @@ class abmFichasActions extends sfActions
 		 $this->errors = array();
          $this->notices = array();
 
-         $sql = "GET_ABM_FICHA_RS(null)";
-         $this->fichas = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+         $sql = "GET_CATALOGO_RS(null,'S')";
+         $this->dd_cata = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
          $this->filasPorPagina = $_SESSION['usuario']['filas_pag'];
 
+
+
 	}
+
+	public function executeTablaFichas(sfWebRequest $request) {
+     // echo "<pre>"; print_r($_REQUEST); exit;
+   		$this->id_ficha   	= $request->getParameter("id_ficha");
+      	$this->id_nombre	= $request->getParameter("id_nombre");
+     
+		$this->cursor       = array();
+		$this->total_paginas = 1;
+
+    	$sql = "GET_ABM_FICHA_RS('".
+                                  $_SESSION["usuario"]["username"]."', '".
+                                  $this->id_ficha."','".
+                                  $this->id_nombre."')";
+                                  //echo $sql;exit;   
+
+
+		$cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+	//echo "<pre>"; print_r($cursor); exit;
+   
+    	$this->cursor = $cursor;
+
+		if ($cursor == NULL){
+        	$this->sindatos = '0';
+		}else{
+         	$this->sindatos = '1';
+		}
+		
+		if(empty($this->cursor)){
+			$this->cursor = array(0);
+		}
+
+    //echo "<pre>"; print_r($cursor); exit;
+		return $this->renderPartial
+				('abmFichas/tablaFichas', array('cursor' =>$this->cursor,
+											     'sindatos' =>$this->sindatos,
+												 'total_paginas' => $this->total_paginas,
+					                            'total_registros' =>$this->total_registros,
+					                            'pagina' => $this->pagina));
+	}
+	
 	
 	/*--------------------------Alta/modificación de Fichas ---------------------------------*/
 	public function executeFormularioFichas (sfWebRequest $request)

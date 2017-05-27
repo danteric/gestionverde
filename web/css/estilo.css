@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 body{
-background-image: url("../img/header.png");
+background-image: url("../img/camarco-icono-menu.png");
 background-repeat: repeat-x;
  margin: 0 auto;
 font-family: Helvetica,Arial,Verdana,sans-serif;
@@ -33,7 +33,7 @@ margin: 0 auto;
 }
 
 #header {
-    background-image: url("../img/logoCiudad.png");
+    background-image: url("../img/camarco-icono-menu.png");
     background-position: 0% 5%;
     background-repeat: no-repeat;
     height: 137px;

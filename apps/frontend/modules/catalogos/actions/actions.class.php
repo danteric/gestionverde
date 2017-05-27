@@ -19,7 +19,7 @@ class catalogosActions extends sfActions
             $this->errors = array();
             $this->notices = array();
       
-            $sql = "GET_CATALOGO_RS(null)";
+            $sql = "GET_CATALOGO_RS(null,'N')";
             $this->catalogos = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
             
 		#echo "<pre>";print_r($this->catalogos);die;  funcion para mostrar variables por pantalla para probar

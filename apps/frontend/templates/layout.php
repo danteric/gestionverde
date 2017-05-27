@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <link rel="shortcut icon" href="/favicon.ico"/>
+        <link rel="shortcut icon" href="/camarco-logo.ico"/>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">  
@@ -79,7 +79,7 @@
                     <span class="icon-bar" style="border: 1px solid #071689;"></span>
                     <span class="icon-bar" style="border: 1px solid #071689;"></span>
                   </button>
-                  <a class="navbar-brand" href="#"><img src="/img/icono.png" style="margin-top: -8px;" alt="Universidad Favaloro"></a>
+                  <a class="navbar-brand" href="#"><img src="/img/camarco-icono-menu.png" style="margin-top: -8px;" alt="Camara Argentina de la Construccion"></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->

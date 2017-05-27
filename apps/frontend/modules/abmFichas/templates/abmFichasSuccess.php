@@ -6,11 +6,12 @@
 
    
         $('#spinner').show();
+      
 
         $.get("<?php echo url_for('abmFichas/tablaFichas') ?> ", 
       {
        id_ficha: $('#id_ficha').val(),
-       id_nombre: $('#id_nombre').val()
+       id_nombre: $('#id_nombre').val(),
        },
             function(data){
                 $('#tablaFichas').html(data);
@@ -42,20 +43,20 @@
     <?php $cabecera->fin_filtro(__("Catalogo")); ?>
 
         
-    <?php $cabecera->ini_filtro(__("o complete denominacion de ficha<i class=\"icon-user\"></i>"));?>
-    <input type="text" id="id_nombre" name="nombre" class="form-control pull-right" />
-    <?php $cabecera->fin_filtro(__("o complete denominacion de ficha<i class=\"icon-user\"></i>")); 
+    <?php $cabecera->ini_filtro(__("o complete denominacion de ficha"));?>
+    <input type="text" id="id_nombre" name="nombre" class="form-control" placeholder="Nombre de ficha"/>
+    <?php $cabecera->fin_filtro(__("o complete denominacion de ficha")); 
 
     $cabecera->accion(sprintf('<a href="%s"><i class="icon-plus text-info"></i> Nueva Ficha</a>', url_for("abmFichas/formularioFichas"))); 
-
+    ?>
 
    
        
 
-	echo $cabecera;
+	<?php echo $cabecera; ?>
 
-?>
 
+    
     <div id="tablaFichas" class="responsiveWidth">
     </div>
 

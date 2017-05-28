@@ -24,10 +24,10 @@
 					<td><?php echo $row['fich_desc'] ?></td>
 					<td>
 						<?php if($_SESSION["usuario"]["modi"] == "S"){ ?>
-							<a class = "btn btn-mini" href="<?php echo url_for("abmFichas/formularioAbmFichas?soci_codi=".$row['fich_id']) ?>">
+							<a class = "btn btn-mini" href="<?php echo url_for("abmFichas/formularioFichas?fich_id=".$row['fich_id']) ?>">
 								<i class="icon icon-pencil text-success"></i>
 							</a>
-							<a class = "btn btn-mini" href="<?php echo url_for("abmFichas/baja?soci_codi=".$row['fich_id']) ?>">
+							<a class = "btn btn-mini" href="<?php echo url_for("abmFichas/baja?fich_id=".$row['fich_id']) ?>">
 								<i class="icon icon-remove text-danger"></i>
 							</a>
 						<?php } ?>

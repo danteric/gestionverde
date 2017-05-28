@@ -46,7 +46,13 @@ class abmFichasActions extends sfActions
 	//echo "<pre>"; print_r($cursor); exit;
    
     	$this->cursor = $cursor;
-
+  /*  	if(isset($this->cursor)){
+			$this->total_paginas = $this->cursor[0]['total_paginas'];
+		}
+		if(isset($this->cursor)){
+			$this->total_registros = $this->cursor[0]['total_registros'];
+		}
+*/     
 		if ($cursor == NULL){
         	$this->sindatos = '0';
 		}else{
@@ -71,71 +77,105 @@ class abmFichasActions extends sfActions
 	public function executeFormularioFichas (sfWebRequest $request)
 	{
 			
+
+		$this->errors = array();
+		$this->notices = array();
+		$this->fich_id = null;
+
+		$fich_id = $request->getParameter('fich_id');
+
+
+ 		$sql = "GET_CATALOGO_RS(null,'N')";
+        $this->dd_cata = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+		
+ 		$sql = "SEL_FASES_FICHA_RS('".$fich_id."')";
+        $this->l_fase = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+ 		$sql = "SEL_FUENTES_FICHA_RS('".$fich_id."')";
+        $this->l_fuen = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+
+		/*----si recibe id es una modificación y se necesita rellenar los campos--*/
+		
+		if(!empty($fich_id))
+		{
+			$this->fich_id = $request->getParameter('fich_id');
+			$sql = "GET_FICHA_RS('".$this->fich_id."')";
+			$this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+			$this->cursor = $this->cursor[0];
+
+			$this->fich_id = $this->cursor['fich_id'];
+			$this->fich_deno = $this->cursor['fich_deno'];
 			
-			$this->errors = array();
-			$this->notices = array();
-			$this->fich_id = null;
+		}
 
-			$fich_id = $request->getParameter('fich_id');
 
-			/*----si recibe id es una modificación y se necesita rellenar los campos--*/
+		/*--------------------Alta-------------------------------------*/
+
+		if($request->getMethod() == "POST")
+		{
+
+			$parametros = BackendServices::getInstance()->limpiarParametros($request->getPostParameters());
+
+			$this->fich_id 		= $request->getParameter("fich_id");
+			$this->fich_deno 	= $request->getParameter("fich_deno");
+			$this->fich_cata_id = $request->getParameter("fich_cata_id");
+			$this->graba_ok 	= 1;
+
+		/*-----------Validacion de campos vacios y tipos de datos---------*/
+
+            $sql = "AM_FICHA_RS('".$_SESSION['usuario']['username']."',
+                                   '".$this->fich_id."',
+                                   '".$this->fich_deno."',
+                                   '".$this->fich_cata_id."');";
+
+            $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql); 
+ 
+            $resp_sp = $this->cursor[0]['respuesta'];
+            if ($resp_sp != 'OK') {
+                $this->getUser()->setFlash('error', $this->cursor[0]['respuesta']);
+                $this->graba_ok = 0;
+            }
+ 
+            /*----------- si grabo ok sigo  con fases -----------*/
+            if ($this->graba_ok == 1) { 	
+
+			        $this->anota_fase_f = $request->getParameter('anota_fase_f');
+			        $this->listaAnota   = '';
+
+			        // recorro items =========================================
+			        foreach ($this->anota_fase_f as $value)
+			           {
+			           $this->listaAnota=$this->listaAnota.$value.',';
+			           }
+	//print_r($_REQUEST);echo $this->listaAnota ; exit;
+			        $sql = "AM_FICHA_FASES_RS('".$_SESSION["usuario"]["username"]."','"
+			                                        .$this->fich_id."','"
+			                                        .$this->listaAnota."')";                        
+			        $this->cursor_fases = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+			        $this->listaAnota   = '';
+			     
+			//echo $sql; print_r($_REQUEST) ; exit;
+			        $resp_sp = $this->cursor_fases[0]['respuesta'];
+			        $exito   = $this->cursor_fases[0]['respues_exito'];
+			        if ($resp_sp != 'OK') {
+			            $this->getUser()->setFlash('error', $this->cursor_fases[0]['respuesta']);
+			            $this->graba_ok = 0;
+			        }
+   
+			} ;
+
+			if ($this->graba_ok == 1) {
+				$this->redirect("abmFichas/abmFichas");
+			    $this->getUser()->setFlash('notice', $this->cursor[0]['respues_exito']);			        
+			}else{    // error vuelve al item editado
+ 				$this->redirect("abmFichas/formularioFichas?fich_id=".$this->fich_id);
+				//echo ' ';formularioFichas/fich_id/4
+			} ;
+
+		};//de post
 			
-			if(!empty($fich_id))
-			{
-				$this->fich_id = $request->getParameter('fich_id');
-				$sql = "GET_FICHA_RS('".$this->fich_id."')";
-				$this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-				$this->cursor = $this->cursor[0];
-
-				$this->fich_id = $this->cursor['fich_id'];
-				$this->fich_deno = $this->cursor['fich_deno'];
-				$this->fich_cata_id = $this->cursor['fich_cata_id'];
-				$this->fich_tama_id = $this->cursor['fich_tama_id'];
-				$this->fich_proc_id = $this->cursor['fich_proc_id'];
-				$this->fich_recu_id = $this->cursor['fich_recu_id'];
-				$this->fich_fuen_id = $this->cursor['fich_fuen_id'];
-			}//end if
-
-
-			/*--------------------Alta-------------------------------------*/
-			/*
-			if($request->getMethod() == "POST")
-			{
-				$parametros = BackendServices::getInstance()->limpiarParametros($request->getPostParameters());
-
-				$this->fich_id = $request->getParameter("fich_id");
-				$this->fich_deno = $request->getParameter("fich_deno");
-				$this->fich_cata_id = $request->getParameter("fich_cata_id");
-				$this->fich_tama_id = $request->getParameter("fich_tama_id");
-				$this->fich_proc_id = $request->getParameter("fich_proc_id");
-				$this->fich_recu_id = $request->getParameter("fich_recu_id");
-				$this->fich_fuen_id = $request->getParameter("fich_fuen_id");
-			}
-
-			/*-----------Validacion de campos vacios y tipos de datos---------*/
-             /*
-                $sql = "AM_FICHA_RS('".$_SESSION['usuario']['username']."',
-                                       '".$this->fich_id."',
-                                       '".$this->fich_deno."',
-                                       '".$this->fich_cata_id."',
-                                       '".$this->fich_tama_id."',
-                                       '".$this->fich_proc_id."',
-                                       '".$this->fich_recu_id."',
-                                       '".$this->fich_fuen_id."');";
-
-                $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql); 
-     
-                $resp_sp = $this->cursor[0]['respuesta'];
-                if ($resp_sp != 'OK') {
-                    $this->getUser()->setFlash('error', $this->cursor[0]['respuesta']);
-                }else{
-                    $resp_ok = $this->cursor[0]['respues_exito'];
-                    $this->getUser()->setFlash('notice', $resp_ok);
-                }
-
-			}//end if
-			*/
-			$this->redirect("abmFichas/abmFichas");
+			
 	}//end function formularioFichas
 
 	/*-------------------------------Baja de una Ficha--------------------------------*/

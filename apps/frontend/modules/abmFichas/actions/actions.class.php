@@ -82,30 +82,26 @@ class abmFichasActions extends sfActions
 		$this->notices = array();
 		$this->fich_id = null;
 
-		$fich_id = $request->getParameter('fich_id');
+		$fich_id = $request->getParameter('fich_id');	//obtiene el id de la ficha del array $request
 
-
+		// trae todos los datos de la ficha
  		$sql = "GET_CATALOGO_RS(null,'N')";
         $this->dd_cata = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 		
  		$sql = "SEL_FASES_FICHA_RS('".$fich_id."')";
         $this->l_fase = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
- 		$sql = "SEL_FUENTES_FICHA_RS('".$fich_id."')";
-        $this->l_fuen = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+ 		$sql = "SEL_MEDIOS_FICHA_RS('".$fich_id."')";
+        $this->l_medi = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
 
 		/*----si recibe id es una modificación y se necesita rellenar los campos--*/
 		
 		if(!empty($fich_id))
 		{
-			$this->fich_id = $request->getParameter('fich_id');
-			$sql = "GET_FICHA_RS('".$this->fich_id."')";
+			//$this->fich_id = $request->getParameter('fich_id');
+			$sql = "GET_FICHA_RS(".$fich_id.")";
 			$this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-			$this->cursor = $this->cursor[0];
-
-			$this->fich_id = $this->cursor['fich_id'];
-			$this->fich_deno = $this->cursor['fich_deno'];
 			
 		}
 
@@ -119,8 +115,9 @@ class abmFichasActions extends sfActions
 
 			$this->fich_id 		= $request->getParameter("fich_id");
 			$this->fich_deno 	= $request->getParameter("fich_deno");
+			$this->fich_desc 	= $request->getParameter("fich_desc");
 			$this->fich_cata_id = $request->getParameter("fich_cata_id");
-			$this->graba_ok 	= 1;
+			$this->graba_ok 	= 1;	 
 
 		/*-----------Validacion de campos vacios y tipos de datos---------*/
 
@@ -132,13 +129,47 @@ class abmFichasActions extends sfActions
             $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql); 
  
             $resp_sp = $this->cursor[0]['respuesta'];
+            
+            //si hubo problemas, no graba
             if ($resp_sp != 'OK') {
                 $this->getUser()->setFlash('error', $this->cursor[0]['respuesta']);
-                $this->graba_ok = 0;
+                $this->graba_ok = 0;	
             }
  
-            /*----------- si grabo ok sigo  con fases -----------*/
+            /*----------- si grabo ok sigo con las fases -----------*/
             if ($this->graba_ok == 1) { 	
+
+
+			    $this->anota_fase_f = $request->getParameter('anota_fase_f');
+			    $this->listaAnota   = '';
+
+			    // recorro items =========================================
+			    foreach ($this->anota_fase_f as $value)
+			      {
+			         $this->listaAnota=$this->listaAnota.$value.',';
+			      }
+				//print_r($_REQUEST);echo $this->listaAnota ; exit;
+			    $sql = "AM_FICHA_FASES_RS('".$_SESSION["usuario"]["username"]."','"
+			                                        .$this->fich_id."','"
+			                                        .$this->listaAnota."')";                        
+			    $this->cursor_fases = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+			    $this->listaAnota   = '';
+			     
+				//echo $sql; print_r($_REQUEST) ; exit;
+			    $resp_sp = $this->cursor_fases[0]['respuesta'];
+			    $exito   = $this->cursor_fases[0]['respues_exito'];
+			    if ($resp_sp != 'OK') 
+			    {
+			        $this->getUser()->setFlash('error', $this->cursor_fases[0]['respuesta']);
+			        $this->graba_ok = 0;
+			    }
+   
+			} ;
+
+
+
+            /*----------- si grabo ok sigo  con MEDIO -----------*/
+/*            if ($this->graba_ok == 1) { 	
 
 			        $this->anota_fase_f = $request->getParameter('anota_fase_f');
 			        $this->listaAnota   = '';
@@ -164,6 +195,7 @@ class abmFichasActions extends sfActions
 			        }
    
 			} ;
+*/
 
 			if ($this->graba_ok == 1) {
 				$this->redirect("abmFichas/abmFichas");

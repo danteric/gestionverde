@@ -1551,7 +1551,7 @@ if v_respuesta = 'OK' then
 	  END IF;
 
 
-		
+	/*	
 	values  (p_user,
 			1,
 			1,
@@ -1791,8 +1791,7 @@ select 0 as cata_id,
 		'(todos)' as cata_deno,
         '(todos)' as cata_deno_redu
         from dual
-        where p_todos ='S'
-order by 2;
+        where p_todos ='S';
 END ;;
 DELIMITER ;
  
@@ -3644,3 +3643,4 @@ DELIMITER ;
 
 
 -- Dump completed on 2017-06-04 11:06:14
+

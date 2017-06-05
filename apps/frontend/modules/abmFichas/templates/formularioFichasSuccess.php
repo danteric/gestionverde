@@ -52,6 +52,10 @@
           <li>
             <a data-toggle="tab" href="#menu1">Aplica a</a>
           </li>
+
+           <li>
+            <a data-toggle="tab" href="#menu2">Procedimientos</a>
+          </li>
         </ul>
              
         <div class="tab-content" id="content">
@@ -84,28 +88,29 @@
 
               <div class="form-group row">
                 <label for="example-tel-input" class="col-xs-3 col-form-label">Catálogo</label>
-                <div class="col-xs-9">
+                <div class="col-xs-3">
                  <?php $optionsSelect = $dd_cata;?>
-                  <select id= "id_ficha" name="ficha" class="form-control">
+                  <select id= "fich_cata_id" name="fich_cata_id" class="form-control">
                   <?php foreach ($optionsSelect as $arraySelect) { ?>
-                      <option value="<?php echo $arraySelect['cata_id'];?>"><?php echo $arraySelect['cata_deno']; ?>
+                      <option value="<?php echo $arraySelect['cata_id'];?>" <?php if($arraySelect['cata_id'] == $row['fich_cata_id']){echo 'selected';} ?> >
+                        <?php echo $arraySelect['cata_deno']; ?>
                       </option> 
                   <?php } ?>
                 </div>
               </div>
-    
+              
               <div class="form-group row">
                 <label for="example-tel-input" class="col-xs-3 col-form-label">Catálogo</label>
                 <div class="col-xs-9">
                  <?php $optionsSelect = $dd_cata;?>
-                  <select id= "id_ficha" name="ficha" class="form-control">
+                  <select id= "fich_1" name="fich_2" class="form-control">
                   <?php foreach ($optionsSelect as $arraySelect) { ?>
                       <option value="">
                       </option> 
                   <?php } ?>
                 </div>
               </div>
-
+              
             </div> <!--cierre del div id=home-->
             
             <!---  solapa de Aplica a .. -->
@@ -113,7 +118,7 @@
 
                 <div class="row">
 
-                  <div class="col-xs-12 col-md-6">
+                  <div class="col-xs-6 col-md-3">
                     <table id="fases" class="table table-striped table-bordered font12" cellspacing="0" >
                         <thead>
                             <tr class="alert-info wrapper">
@@ -139,11 +144,11 @@
                     </table>
                   </div>
 
-                  <div class="col-xs-12 col-md-6">
-                    <table id="fuentes" class="table table-striped table-bordered font12" cellspacing="0" >
+                  <div class="col-xs-6 col-md-3">
+                    <table id="medios" class="table table-striped table-bordered font12" cellspacing="0" >
                         <thead>
                             <tr class="alert-info wrapper">
-                                <th><?php echo "Fuentes"; ?></th>
+                                <th><?php echo "Medios"; ?></th>
                                 <th width="80" class="nosort" style="text-align: center">Aplica</th>
                             </tr>
                         </thead>
@@ -167,14 +172,73 @@
 
                 </div> <!-- cierre del row -->
               </div> <!-- cierre solapa "aplica a" -->
+
+<!---  solapa de Aplica a .. -->
+            <div id="menu2" class="tab-pane fade">
+
+                <div class="row">
+
+                  <div class="col-xs-12 col-md-6">
+                    <table id="proc_reg" class="table table-striped table-bordered font12" cellspacing="0" >
+                        <thead>
+                            <tr class="alert-info wrapper">
+                                <th><?php echo "Procedimientos Registrados"; ?></th>
+                                <th width="80" class="nosort" style="text-align: center">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $c = 0; foreach($l_proc as $row){ ?>
+                            <tr  onMouseOver="CambiaColor(this,'#dff0d8','blue')" onMouseOut="CambiaColor2(this,'#000000')">
+                                
+                                <td>
+                                  <textarea class="form-control" name="new_proc_f['<?php echo $row['fipr_proce_id'] ?>']">
+                                  <?php echo $row['fipr_texto']; ?>
+                                  </textarea>             
+                                </td>
+                                <td style="text-align: center"> 
+                                    <label class="switch">
+                                         <input type="checkbox" name="proc_nro_f['<?php echo $c ?>']" id="proc_id_f<?php echo $row['fipr_proce_id'] ?>" value="<?php echo $row['fase_id'] ?>"  class="switch-input" 
+                                                <?php if ($row['si_no'] == "S") {echo "checked";} ?> >
+                                         <span class="switch-label" id="lopi" data-on="Si" data-off="No"></span>
+                                         <span class="switch-handle"></span>
+                                    </label>
+                                </td> 
+                            </tr>
+                            <?php $c++; } ?>
+                        </tbody>
+                    </table>
+                  </div>
+
+                  <div class="col-xs-12 col-md-6">
+                    <table id="medios" class="table table-striped table-bordered font12" cellspacing="0" >
+                        <thead>
+                            <tr class="alert-info wrapper">
+                                <th><?php echo "Procedimientos nuevos"; ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php for ($new_p = 0; $new_p <= 10; $new_p++) { ?>
+                            <tr  onMouseOver="CambiaColor(this,'#dff0d8','blue')" onMouseOut="CambiaColor2(this,'#000000')">
+                                <td>
+                                  <textarea class="form-control" name="new_proc_f['<?php echo $new_p ?>']" 
+                                    placeholder="Agregue aqui nuevo procedimiento..." >
+                                  </textarea>             
+                                </td>
+                            </tr>
+                            <?php $c++; } ?>
+                        </tbody>
+                    </table>
+                  </div>
+
+                </div> <!-- cierre del row -->
+              </div> <!-- cierre solapa "procedimientos" -->
+
+
             </div> <!--cierre id=content-->
     </div><!--cierre panel body-->
 </div>
 	 
-<!--
-</div>    
-</div>
-</form>
-<!-- ayuda -->
+
+
 <?php require __DIR__. '/../../ayuda/templates/_datos_top.php' ?>
 <!-- /ayuda -->

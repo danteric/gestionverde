@@ -1,8 +1,9 @@
 <script language="JavaScript" type="text/javascript" src="/js/configvarios.js"></script>
 
-	<input type="hidden" id="total_paginas" name="total_paginas" value="<?php echo $total_paginas ?>"/>
-	<div class="wrapper tipoframe">
-    <div class="panel-body">
+<input type="hidden" id="total_paginas" name="total_paginas" value="<?php echo $total_paginas ?>"/>
+<div class="wrapper tipoframe">
+ <div class="panel-body">
+  
   <?php if ($sindatos == '1'){ ?>
 	<table border="0"  frame=""  class="tablesorter responsiveWidth table table-striped table-hover table-bordered">
 	

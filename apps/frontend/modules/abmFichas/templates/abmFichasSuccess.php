@@ -34,13 +34,16 @@
 
     $cabecera->ini_filtro(__("Catalogo"));
     $optionsSelect = $dd_cata;?>
+
     <select id= "id_ficha" name="ficha" class="form-control" onchange="cargarGrilla()">
     <?php foreach ($optionsSelect as $arraySelect) { ?>
-        <option value="<?php echo $arraySelect['cata_id'];?>"><?php echo $arraySelect['cata_deno']; ?>
-        </option> 
+        <option value="<?php echo $arraySelect['cata_id'];?>" >
+            <?php echo $arraySelect['cata_deno']; ?>
+        </option>
+        
     <?php } ?>
     <?php $cabecera->fin_filtro(__("Catalogo")); ?>
-
+    
         
     <?php $cabecera->ini_filtro(__("o complete denominacion de ficha"));?>
     <input type="text" id="id_nombre" name="nombre" class="form-control pull-right" />

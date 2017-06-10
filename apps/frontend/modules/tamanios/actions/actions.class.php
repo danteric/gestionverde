@@ -35,41 +35,55 @@ class tamaniosActions extends sfActions
             //$bservice = new BackendServices();
             $this->errors  = array();
             $this->notices = array();
-            $this->tamanio_id = null;
+            $this->tama_id = null;
+            
+            //echo "<pre>";print_r($_REQUEST); die;
+
+            $tama_id = $request->getParameter('tama_id');
             
 
-            $tamanio_id = $request->getParameter('tamanio_id');
-            
             /* ---Si recibe id es una modificacion y se necesitan rellenar los campos ---*/
-            if(!empty($tamanio_id)) //es una modificacion
+            if(!empty($tama_id)) //es una modificacion
             {
-               $this->tamanio_id = $request->getParameter('tamanio_id');
+               $this->tama_id = $request->getParameter('tama_id');
 
-               $sql = "GET_TAMANIO_RS('".$this->tamanio_id."')";
+
+               $sql = "GET_TAMANIO_RS('".$this->tama_id."')";
                $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+               
+               //echo "<pre>";print_r($this->cursor);die; 
+
                $this->cursor = $this->cursor[0];
                
                //echo "<pre>";print_r($this->cursor);die;  para verificar que trae los datos
-               $this->tamanio_id         = $this->cursor['tamanio_id'];
-               $this->tamanio_deno       = $this->cursor['tamanio_deno'];
-               $this->tamanio_deno_redu  = $this->cursor['tamanio_deno_redu'];
+               $this->tama_id         = $this->cursor['tama_id'];
+               $this->tama_deno       = $this->cursor['tama_deno'];
+               $this->tama_deno_redu  = $this->cursor['tama_deno_redu'];
+
+
             }
             
             /*----alta-----*/
             if($request->getMethod() == "POST")
             {
-            
+
                 $parametros = BackendServices::getInstance()->limpiarParametros($request->getPostParameters());
-             
-                $this->tamanio_id        = $request->getParameter("tamanio_id");
-                $this->tamanio_deno      = $request->getParameter("tamanio_deno");
-                $this->tamanio_deno_redu = $request->getParameter("tamanio_deno_redu");
-   
+              
+                //echo "<pre>";print_r($_REQUEST); die;
+      
+
+                $this->tama_id        = $request->getParameter("tama_id");
+                $this->tama_deno      = $request->getParameter("tama_deno");
+                $this->tama_deno_redu = $request->getParameter("tama_deno_redu");
+                
+              
                 /* Validacion de campos vacios y tipos de datos*/
                 $sql = "AM_TAMANIO_RS('".$_SESSION['usuario']['username']."',
-                                       '".$this->tamanio_id."',
-                                       '".$this->tamanio_deno."',
-                                       '".$this->tamanio_deno_redu."');";
+                                       '".$this->tama_id."',
+                                       '".$this->tama_deno."',
+                                       '".$this->tama_deno_redu."');";
+
+
 
                 $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql); 
       
@@ -84,6 +98,7 @@ class tamaniosActions extends sfActions
 
                 $this->redirect("tamanios/tamanios");
             }//end if
+
           }//end function
                         
         /*-----------------------------Baja de Tamanio---------------------------------*/
@@ -93,10 +108,10 @@ class tamaniosActions extends sfActions
             $this->errors = array();
             $this->notices = array();
            
-            if($request->getParameter('tamanio_id') && $request->getMethod() == "GET")
+            if($request->getParameter('tama_id') && $request->getMethod() == "GET")
             {
-               $this->tamanio_id = $request->getParameter('tamanio_id');
-                $sql = "B_TAMANIO_RS('".$_SESSION['usuario']['username']."','".$this->tamanio_id."')";
+               $this->tama_id = $request->getParameter('tama_id');
+                $sql = "B_TAMANIO_RS('".$_SESSION['usuario']['username']."','".$this->tama_id."')";
 
                $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
                $this->redirect("tamanios/tamanios");

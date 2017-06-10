@@ -29,14 +29,16 @@
                     <td><?php echo $row['cata_deno']; ?></td>
                     <td><?php echo $row['cata_deno_redu']; ?></td>
                     <td style="text-align: center">
+
                         <?php if($_SESSION["usuario"]["modi"] == "S"){ ?>
                             <a class = "btn btn-mini" href="<?php echo url_for("catalogos/formularioCatalogos?cata_id=".$row['cata_id']) ?>">
                                 <i class="icon icon-pencil text-success"></i>
                             </a>
-                            <a class = "btn btn-mini" onclick="eliminarEntidad('<?php echo url_for("catalogos/baja?cata_id=".$row['cata_id']) ?>" href="#">
+                            <a class = "btn btn-mini" onclick="eliminarEntidad('<?php echo url_for("catalogos/baja?cata_id=".$row['cata_id']) ?>');" href="#">
                                 <i class="icon icon-remove text-danger"></i>
                             </a>
                         <?php } ?>
+
                     </td>
                 </tr>
                 <?php $c++; } ?>

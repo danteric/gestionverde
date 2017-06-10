@@ -132,8 +132,7 @@ class abmFichasActions extends sfActions
                                    '".$this->fich_deno."',
                                    '".$this->fich_desc."',
                                    '".$this->fich_cata_id."');";
-
-           
+          
             $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql); 
             $resp_sp = $this->cursor[0]['respuesta'];
             
@@ -219,6 +218,31 @@ class abmFichasActions extends sfActions
 			} 
 			
 			
+			/*----------- si grabo ok sigo  con procedimientos ----------- */
+
+
+            if ($this->graba_ok == 1) {    // == 1 	
+
+			    $this->proc_id_f 	= $request->getParameter('proc_id_f');
+			    $this->proc_text_f 	= $request->getParameter('proc_text_f');
+			    $this->proc_borr_f 	= $request->getParameter('proc_borr_f');
+			    $max = sizeof($this->proc_id_f); //$this->listaAnota   = '';
+
+			    for( $ind = 1; $ind<=$max; $ind++ ) {
+	
+			        $sql = "AMB_FICHA_PROCEDIMIENTOS_RS('".$_SESSION["usuario"]["username"]."','"
+			        								.$this->fich_id."','"
+			                                        .$this->proc_id_f[$ind]."','"
+			                                        .$this->proc_text_f[$ind]."','"
+			                                        .$this->proc_borr_f[$ind]."')";   
+			         echo $sql;                    
+			        $this->cur_proc = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+
+         		};
+         	};
+         		
+
 			if ($this->graba_ok == 1) {
 				$this->redirect("abmFichas/abmFichas");
 			    $this->getUser()->setFlash('notice', $this->cursor[0]['respues_exito']);			        

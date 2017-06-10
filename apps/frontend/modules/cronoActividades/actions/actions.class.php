@@ -23,7 +23,7 @@ class cronoActividadesActions extends sfActions {
         endif;
 
         $sql = "SEL_CAMP_CABE_ALUMNO_RS('".$_SESSION["usuario"]["username"]."')" ;
-        $this->dd_cabe = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+        //$this->dd_cabe = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
         //echo "<pre>"; print_r($this->dd_sexo); exit;
 
     }
@@ -41,7 +41,7 @@ class cronoActividadesActions extends sfActions {
         //$pagina = (!empty($request->getParameter('pagina'))?$request->getParameter('pagina'):1);
         $pagina = 0;
         $sql = "SEL_CAMP_CARTELERA('".$_SESSION["usuario"]["username"]."',".$this->carre.")";                      
-        $this->carte = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+        //$this->carte = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
         //echo "<pre>";print_r($this->carte);die;
         $this->filasPorPagina = 10; //$_SESSION['usuario']['filas_pag'];
@@ -57,11 +57,11 @@ class cronoActividadesActions extends sfActions {
         $this->cursor          = array(0);
   
         $sql = "SEL_CAMP_CABE_ALUMNO_RS('".$_SESSION["usuario"]["username"]."')" ;
-        $this->dd_cabe = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+        //$this->dd_cabe = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
         //echo "<pre>"; print_r($this->dd_cabe); exit;
 
         $sql = "SEL_CAMP_INCRIP_FECHAS_STATUS_RS('".$_SESSION["usuario"]["username"]."')" ;
-        $this->inscrip = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+        //$this->inscrip = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
 
         $sql = "USU_GET_LAST_LOGIN_RS('".$_SESSION["usuario"]["username"]."')" ;
@@ -69,7 +69,7 @@ class cronoActividadesActions extends sfActions {
 
         // echo "<pre>";  print_r($request->getOptions());  print_r($request->getRequestContext());
         $sql = "SEL_CAMP_CARTEL_TODA_HOY('".$_SESSION["usuario"]["username"]."')" ;
-        $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);  
+        //$this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);  
           
     }
 }

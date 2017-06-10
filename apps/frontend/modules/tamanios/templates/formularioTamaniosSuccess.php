@@ -51,19 +51,19 @@
       <div class="form-group row">
         <label for="example-tel-input" class="col-xs-3 col-form-label">Cod interno</label>
         <div class="col-xs-9">
-          <input class="form-control" type="text" name="tamanio_id" value="<?php echo $tamanio_id ?>" readonly >
+          <input class="form-control" type="text" name="tama_id" value="<?php echo $tama_id ?>" readonly >
         </div>
       </div>
       <div class="form-group row">
         <label for="example-tel-input" class="col-xs-3 col-form-label">Denominacion extensa</label>
         <div class="col-xs-9">
-          <input class="form-control" type="text" name="tamanio_deno" value="<?php echo $tamanio_deno ?>" required >
+          <input class="form-control" type="text" name="tama_deno" value="<?php echo $tama_deno ?>" required >
         </div>
       </div>
       <div class="form-group row">
         <label for="example-tel-input" class="col-xs-3 col-form-label">Denominacion reducida</label>
         <div class="col-xs-9">
-          <input class="form-control" type="text" name="tamanio_deno_redu" value="<?php echo $tamanio_deno_redu ?>" required>
+          <input class="form-control" type="text" name="tama_deno_redu" value="<?php echo $tama_deno_redu ?>" required>
         </div>
       </div>
   </div> 

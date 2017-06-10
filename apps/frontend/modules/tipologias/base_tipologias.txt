@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `AM_TIPOLOGIA_RS`(
+﻿CREATE DEFINER=`root`@`localhost` PROCEDURE `AM_TIPOLOGIA_RS`(
   IN p_user varchar(50),
   IN p_tipo_id int,
   IN p_tipo_deno varchar(500),
@@ -113,3 +113,7 @@ WHERE (tipo_id = p_tipo_id or p_tipo_id is null)
 AND tipo_baja_f is null
 order by 2;
 END
+
+------------------Insert usu_menues_apli
+
+INSERT INTO `gestionverde`.`usu_menues_apli` (`usma_usap_apli`, `usma_item`, `usma_nivel1`, `usma_nivel2`, `usma_des_item`, `usma_enlace`, `usma_habilitado`, `usma_fch_alta`, `usma_usr_alta`, `usma_orden`, `usma_icono`) VALUES ('GAMSI', 'm_tipologia', 'm_tablas', 'm_tipologia', 'Tipologias', 'tipologias/tipologias', 'S', '2017-05-01', 'admin', '30', 'icon-user');

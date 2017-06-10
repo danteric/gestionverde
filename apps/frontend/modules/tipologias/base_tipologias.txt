@@ -1,0 +1,115 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AM_TIPOLOGIA_RS`(
+  IN p_user varchar(50),
+  IN p_tipo_id int,
+  IN p_tipo_deno varchar(500),
+  IN p_tipo_deno_redu varchar(500)
+)
+BEGIN
+  DECLARE v_tipo_id int; 
+  DECLARE v_respuesta varchar(100) DEFAULT 'OK';
+  DECLARE v_errores varchar(2000) DEFAULT NULL;
+  
+IF NOT EXISTS (SELECT 1 FROM tipologia
+                    WHERE tipo_id = p_tipo_id) THEN
+      BEGIN -- alta
+        DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+        BEGIN -- de excepcion
+        	ROLLBACK;
+            SET v_respuesta = F_ZZI_LOG_ERR(p_user,'ERROR interno al insert tipo','AM_TIPOLOGIA_RS');
+        END; -- de excepcion
+        
+        INSERT INTO tipologia (
+          tipo_deno,
+          tipo_deno_redu,
+          tipo_alta_f,
+          tipo_alta_usu)
+        VALUES (
+          p_tipo_deno,
+          p_tipo_deno_redu,
+          date(CURDATE()),
+          p_user);
+      END; -- alta
+ELSE -- no es alta
+        BEGIN -- modifica
+          DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+          BEGIN -- de excepcion
+          	ROLLBACK;
+          	SET v_respuesta = F_ZZI_LOG_ERR(p_user,'ERROR interno al update tamaño','AM_TIPOLOGIA_RS');
+          END; -- de excepcion
+
+          UPDATE tipologia
+             SET tipo_deno      = p_tipo_deno,
+				 tipo_deno_redu = p_tipo_deno_redu,
+                 tipo_baja_f    = null
+           WHERE tipo_id = p_tipo_id;
+        END;
+  -- DBMS_OUTPUT.PUT_LINE('Log...'||trim(p_user)||'-'||upper(trim(P_TIDC_CODIGO))||'-'|| v_log||' de tipo de documento : '||initcap(trim(P_TIDC_DESCRIPCION)));
+  -- A_LOG_CATALOGOS(trim(p_user), upper(trim(P_TIDC_CODIGO)), v_log||' de tipo de documento : '||initcap(trim(P_TIDC_DESCRIPCION)));
+  END IF;
+
+
+INSERT INTO usu_accesos_log (usal_usua_nombre,usal_orden,usal_empre,usal_clave,usal_codigo_number,usal_codigo_char,usal_vistas,usal_alta_f)
+	
+values  (p_user,
+		1,
+		1,
+		'ACTUALIZA',
+		LAST_INSERT_ID(),
+		'tipologia',
+		concat('Tamaño ',p_tipo_deno),
+		now());
+    
+COMMIT;
+  
+  SELECT v_respuesta as respuesta,
+         case when v_respuesta = 'OK' then 'Actualización correcta' else '' end as respues_exito
+    FROM DUAL;  
+
+  
+END
+
+------------------------------------------------------------------------------
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `B_TIPOLOGIA_RS`(
+  IN p_user varchar(50),
+  IN p_tipo_id int
+)
+BEGIN
+ DECLARE v_respuesta varchar(100) DEFAULT 'OK';
+  
+
+BEGIN 
+  DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+  BEGIN -- de excepcion
+	ROLLBACK;
+	SET v_respuesta = F_ZZI_LOG_ERR(p_user,'ERROR interno baja tipologia','B_TIPOLOGIA_RS');
+  END; -- de excepcion
+
+  UPDATE tipologia
+	 SET tipo_baja_f    = date(CURDATE()),
+		 tipo_baja_usu  = p_user
+   WHERE tipo_id = p_tipo_id;
+END;
+ 
+COMMIT;
+
+SELECT v_respuesta as respuesta,
+	 case when v_respuesta = 'OK' then 'Actualización correcta' else '' end as respues_exito
+FROM DUAL;  
+
+END
+
+----------------------------------------------------------
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_TIPOLOGIA_RS`(
+  IN p_tipo_id int
+)
+BEGIN
+SELECT tipo_id, 
+	   f_proper(tipo_deno) as tipo_deno,
+       f_proper(tipo_deno_redu) as tipo_deno_redu
+FROM tipologia
+WHERE (tipo_id = p_tipo_id or p_tipo_id is null)
+AND tipo_baja_f is null
+order by 2;
+END

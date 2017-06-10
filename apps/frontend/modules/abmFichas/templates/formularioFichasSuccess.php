@@ -1,10 +1,29 @@
 <script src="/js/validaciones.js"></script>
+<script type="text/javascript">
 
-	  <script type="text/javascript">
-	  cancelar = function(){   //funcion para volver al clickear boton "volver"
-	      var defaultPrevented;
-	      location.href = '<?php echo url_for("abmFichas/abmFichas") ?>';
-	  }
+    cancelar = function(){   //funcion para volver al clickear boton "volver"
+        var defaultPrevented;
+        location.href = '<?php echo url_for("abmFichas/abmFichas") ?>';
+    }
+
+    agregarProce = function() {
+        var fila=$("#tablaProc tr").length;
+
+        $(".tablaProc").append('<tr><td colspan="2">'+
+                                  '<textarea class="form-control" name="proc_text_f['+fila+']" placeholder="Nuevo procedimiento...">'+ 
+                                  '</textarea></td>'+       
+                                  '<input type="hidden" name="proc_id_f['+fila+']" value="0">'+      
+                                  '<td style="text-align: center">'+ 
+                                    '<label class="switch">'+
+                                         '<input type="checkbox" name="proc_borr_f['+fila+']" id="proc_id_new_f'+fila+'"'+
+                                          ' class="switch-input" >'+
+                                                //<?php //if ($row['si_no'] == "S") {echo "checked";} ?> >
+                                         '<span class="switch-label" id="lopi" data-on="Si" data-off="No"></span>'+
+                                         '<span class="switch-handle"></span>'+
+                                    '</label>'+
+                                  '</td></tr>');
+    }
+
 </script>
 
 <style>  input[type="text"] {  width: 150px;}  </style>
@@ -173,37 +192,42 @@
                 </div> <!-- cierre del row -->
               </div> <!-- cierre solapa "aplica a" -->
 
-<!---  solapa de Aplica a .. -->
+        <!---  solapa de procedimientos .. -->
             <div id="menu2" class="tab-pane fade">
 
                 <div class="row">
 
                   <div class="col-xs-12 col-md-6">
-                    <table id="proc_reg" class="table table-striped table-bordered font12" cellspacing="0" >
+                  <table id="tablaProc" class="tablaProc table-striped table-bordered font12" cellspacing="0" >
                         <thead>
                             <tr class="alert-info wrapper">
-                                <th><?php echo "Procedimientos Registrados"; ?></th>
-                                <th width="80" class="nosort" style="text-align: center">Eliminar</th>
+                                <th ><?php echo "Procedimientos Registrados"; ?>
+                                <th><a title="Agregar un procedimiento" onclick="agregarProce(); return false;" class="btn btn-info pull-right"> <i class="icon-plus text-info"></i>  Nuevo </a>
+                                </th>
+                             <!--     <a title="Agregar un procedimiento" onclick="agregarProce(); return false;" class="btn btn-info pull-right"> <i class="icon-plus text-info"></i>  Nuevo </a> -->
+
+                                </th>
+                                <th  class="nosort" style="text-align: center">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $c = 0; foreach($l_proc as $row){ ?>
+                            <?php $c = 1; foreach($l_proc as $row){ ?>
                             <tr  onMouseOver="CambiaColor(this,'#dff0d8','blue')" onMouseOut="CambiaColor2(this,'#000000')">
                                 
-                                <td>
-                                  <textarea class="form-control" name="new_proc_f['<?php echo $row['fipr_proce_id'] ?>']">
-                                  <?php echo $row['fipr_texto']; ?>
-                                  </textarea>             
+                                <td colspan="2">
+                                  <textarea class="form-control" name="proc_text_f[<?php echo $c ?>]" id="id_proc_text<?php echo $c ?>"><?php echo $row['fipr_texto'];?></textarea>
+                                  <input type="hidden" name="proc_id_f[<?php echo $c ?>]"
+                                                       value="<?php echo $row['fipr_proce_id'] ?>">     
                                 </td>
                                 <td style="text-align: center"> 
                                     <label class="switch">
-                                         <input type="checkbox" name="proc_nro_f['<?php echo $c ?>']" id="proc_id_f<?php echo $row['fipr_proce_id'] ?>" value="<?php echo $row['fase_id'] ?>"  class="switch-input" 
+                                         <input type="checkbox" name="proc_borr_f[<?php echo $c ?>]" id="proc_id_f<?php echo $row['fipr_proce_id'] ?>" class="switch-input" 
                                                 <?php if ($row['si_no'] == "S") {echo "checked";} ?> >
                                          <span class="switch-label" id="lopi" data-on="Si" data-off="No"></span>
                                          <span class="switch-handle"></span>
                                     </label>
                                 </td> 
-                            </tr>
+                              </tr>
                             <?php $c++; } ?>
                         </tbody>
                     </table>
@@ -213,7 +237,7 @@
                     <table id="medios" class="table table-striped table-bordered font12" cellspacing="0" >
                         <thead>
                             <tr class="alert-info wrapper">
-                                <th><?php echo "Procedimientos nuevos"; ?></th>
+                                <th><?php echo "URLs registradas"; ?></th>
                             </tr>
                         </thead>
                         <tbody>

@@ -48,7 +48,7 @@ class catalogosActions extends sfActions
                //$this->acti_id   = $request->getParameter('acti_id');
                $this->cata_id = $request->getParameter('cata_id');
 
-               $sql = "GET_CATALOGO_RS('".$this->cata_id."')";
+               $sql = "GET_CATALOGO_RS('".$this->cata_id."','N')";
                $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
                $this->cursor = $this->cursor[0];
                
@@ -93,18 +93,18 @@ class catalogosActions extends sfActions
             }
 	     }
                         
-        /*
-         * Baja de fecha
-         */
+        /*-------------------------Baja del catálogo-------------------------*/
 	     public function executeBaja(sfWebRequest $request)
         {   
-            #¿Permisos administrador?
+            
             $this->errors = array();
             $this->notices = array();
-            #if($request->isXmlHttpRequest()){}
+            
+          
             if($request->getParameter('cata_id') && $request->getMethod() == "GET")
             {
                $this->cata_id = $request->getParameter('cata_id');
+               
                 $sql = "B_CATALOGO_RS('".$_SESSION['usuario']['username']."',
                                        '".$this->cata_id."')";
 

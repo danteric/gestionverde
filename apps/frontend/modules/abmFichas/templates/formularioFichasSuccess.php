@@ -188,6 +188,57 @@
                         </tbody>
                     </table>
                   </div>
+					<div class="col-xs-6 col-md-3">
+                    <table id="tamanio" class="table table-striped table-bordered font12" cellspacing="0" >
+                        <thead>
+                            <tr class="alert-info wrapper">
+                                <th><?php echo "Tamaño"; ?></th>
+                                <th width="80" class="nosort" style="text-align: center">Aplica</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $c = 0; foreach($l_tama as $row){ ?>
+                            <tr  onMouseOver="CambiaColor(this,'#dff0d8','blue')" onMouseOut="CambiaColor2(this,'#000000')">
+                                <td><?php echo $row['tama_deno']; ?></td>
+                                <td style="text-align: center"> 
+                                    <label class="switch">
+                                         <input type="checkbox" name="anota_tama_f['<?php echo $c ?>']" id="anota_tama_f<?php echo $row['tama_id'] ?>" value="<?php echo $row['tama_id'] ?>"  class="switch-input" 
+                                                <?php if ($row['si_no'] == "S") {echo "checked";} ?> >
+                                         <span class="switch-label" id="lopi" data-on="Si" data-off="No"></span>
+                                         <span class="switch-handle"></span>
+                                    </label>
+                                </td> 
+                            </tr>
+                            <?php $c++; } ?>
+                        </tbody>
+                    </table>
+                  </div>
+				  
+				  <div class="col-xs-6 col-md-3">
+                    <table id="tipologia" class="table table-striped table-bordered font12" cellspacing="0" >
+                        <thead>
+                            <tr class="alert-info wrapper">
+                                <th><?php echo "Tipologia"; ?></th>
+                                <th width="80" class="nosort" style="text-align: center">Aplica</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $c = 0; foreach($l_tipo as $row){ ?>
+                            <tr  onMouseOver="CambiaColor(this,'#dff0d8','blue')" onMouseOut="CambiaColor2(this,'#000000')">
+                                <td><?php echo $row['tipo_deno']; ?></td>
+                                <td style="text-align: center"> 
+                                    <label class="switch">
+                                         <input type="checkbox" name="anota_tipo_f['<?php echo $c ?>']" id="anota_tipo_f<?php echo $row['tipo_id'] ?>" value="<?php echo $row['tipo_id'] ?>"  class="switch-input" 
+                                                <?php if ($row['si_no'] == "S") {echo "checked";} ?> >
+                                         <span class="switch-label" id="lopi" data-on="Si" data-off="No"></span>
+                                         <span class="switch-handle"></span>
+                                    </label>
+                                </td> 
+                            </tr>
+                            <?php $c++; } ?>
+                        </tbody>
+                    </table>
+                  </div>
 
                 </div> <!-- cierre del row -->
               </div> <!-- cierre solapa "aplica a" -->

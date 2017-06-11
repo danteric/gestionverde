@@ -95,6 +95,12 @@ class abmFichasActions extends sfActions
 
  		$sql = "SEL_MEDIOS_FICHA_RS('".$fich_id."')";
         $this->l_medi = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+		
+		$sql = "SEL_TAMANIO_FICHA_RS('".$fich_id."')";
+        $this->l_tama = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+		$sql = "SEL_TIPOLOGIA_FICHA_RS('".$fich_id."')";
+        $this->l_tipo = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
         $sql = "GET_FICHA_PROCEDIMIENTOS_RS('".$fich_id."')";         
         $this->l_proc = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
@@ -131,12 +137,16 @@ class abmFichasActions extends sfActions
                                    '".$this->fich_id."',
                                    '".$this->fich_deno."',
                                    '".$this->fich_desc."',
-                                   '".$this->fich_cata_id."');";
+                                   '".$this->fich_cata_id."',
+								   @out_id);";
           
             $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql); 
             $resp_sp = $this->cursor[0]['respuesta'];
-            
-            //si hubo problemas, no graba
+			$resp_sp_id = $this->cursor[0]['respuesta_id'];
+			$this->fich_id= $resp_sp_id ;
+					
+			
+			  //si hubo problemas, no graba
             if ($resp_sp != 'OK') {
                 $this->getUser()->setFlash('error', $this->cursor[0]['respuesta']);
                 $this->graba_ok = 0;	
@@ -156,13 +166,17 @@ class abmFichasActions extends sfActions
 			      {
 			         $this->listaAnota=$this->listaAnota.$value.',';
 			      }
-			
+				
 			    $sql = "AM_FICHA_FASES_RS('".$_SESSION["usuario"]["username"]."','"
 			                                        .$this->fich_id."','"
-			                                        .$this->listaAnota."')";                        
+			                                        .$this->listaAnota."')"; 
+				
+			 
 			    $this->cursor_fases = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-			    $this->listaAnota   = '';
-			     
+			     $this->listaAnota   = '';
+				 
+				
+			    
 				
 			    $resp_sp = $this->cursor_fases[0]['respuesta'];
 			    $exito   = $this->cursor_fases[0]['respues_exito'];
@@ -181,7 +195,7 @@ class abmFichasActions extends sfActions
             { 	
 
 			    $this->anota_medi_f = $request->getParameter('anota_medi_f');
-			    $this->listaAnota   = '';
+			    $this->listaAnota  = '';
 			 	
 
 			        // recorro items =========================================
@@ -199,7 +213,8 @@ class abmFichasActions extends sfActions
 			                                        .$this->fich_id."','"
 			                                        .$this->listaAnota."')";      
 			        
-			                         	
+			    
+			                	
 			        $this->cursor_medios = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 			        $this->listaAnota   = '';
 			     
@@ -207,7 +222,8 @@ class abmFichasActions extends sfActions
 			        $resp_sp = $this->cursor_medios[0]['respuesta'];
 			        $exito   = $this->cursor_medios[0]['respues_exito'];
 			        
-			
+				 
+				
 			        if ($resp_sp != 'OK') 
 			        {
 			            $this->getUser()->setFlash('error', $this->cursor_medios[0]['respuesta']);
@@ -216,6 +232,95 @@ class abmFichasActions extends sfActions
 
    
 			} 
+			
+			
+			 /*----------- si grabo ok sigo  con tamaño -----------*/
+            
+		       if ($this->graba_ok == 1) 
+            { 	
+
+			    $this->anota_tama_f = $request->getParameter('anota_tama_f');
+			    $this->listaAnota  = '';
+			 	
+
+			        // recorro items =========================================
+			        foreach ($this->anota_tama_f as $value)
+			           {
+			           $this->listaAnota = $this->listaAnota.$value.',';
+			        
+			           }
+					//print_r($_REQUEST);
+					//echo $this->listaAnota ; exit;
+				   		
+			        //echo "<pre>"; print_r($this->listaAnota); exit;
+
+			        $sql = "AM_FICHA_TAMANIOS_RS('".$_SESSION["usuario"]["username"]."','"
+			                                        .$this->fich_id."','"
+			                                        .$this->listaAnota."')";      
+			        
+			    
+			                	
+			        $this->cursor_tamanios = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+			        $this->listaAnota   = '';
+			     
+					//echo $sql; print_r($_REQUEST) ; exit;
+			        $resp_sp = $this->cursor_tamanios[0]['respuesta'];
+			        $exito   = $this->cursor_tamanios[0]['respues_exito'];
+			        
+				 
+				
+			        if ($resp_sp != 'OK') 
+			        {
+			            $this->getUser()->setFlash('error', $this->cursor_tamanios[0]['respuesta']);
+			            $this->graba_ok = 0;
+			        }
+
+   
+			} 
+			 /*----------- si grabo ok sigo  con tipologia -----------*/
+            
+            if ($this->graba_ok == 1) 
+            { 	
+
+			    $this->anota_tipo_f = $request->getParameter('anota_tipo_f');
+			    $this->listaAnota  = '';
+			 	
+
+			        // recorro items =========================================
+			        foreach ($this->anota_tipo_f as $value)
+			           {
+			           $this->listaAnota = $this->listaAnota.$value.',';
+			        
+			           }
+					//print_r($_REQUEST);
+					//echo $this->listaAnota ; exit;
+				   		
+			        //echo "<pre>"; print_r($this->listaAnota); exit;
+
+			        $sql = "AM_FICHA_TIPOLOGIAS_RS('".$_SESSION["usuario"]["username"]."','"
+			                                        .$this->fich_id."','"
+			                                        .$this->listaAnota."')";      
+			        
+			    
+			                	
+			        $this->cursor_tipologias = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+			        $this->listaAnota   = '';
+			     
+					//echo $sql; print_r($_REQUEST) ; exit;
+			        $resp_sp = $this->cursor_tipologias[0]['respuesta'];
+			        $exito   = $this->cursor_tipologias[0]['respues_exito'];
+			        
+				 
+				
+			        if ($resp_sp != 'OK') 
+			        {
+			            $this->getUser()->setFlash('error', $this->cursor_tipologias[0]['respuesta']);
+			            $this->graba_ok = 0;
+			        }
+
+   
+			} 
+			
 			
 			
 			/*----------- si grabo ok sigo  con procedimientos ----------- */
@@ -259,7 +364,7 @@ class abmFichasActions extends sfActions
 	/*-------------------------------Baja de una Ficha--------------------------------*/
 	public function executeBaja (sfWebRequest $request)
 	{
-			/*
+			
             $this->errors = array();
             $this->notices = array();
            
@@ -272,7 +377,7 @@ class abmFichasActions extends sfActions
                $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
                $this->redirect("abmFichas/abmFichas");
             }
-			*/
+			
 
 	}//end function Baja
 

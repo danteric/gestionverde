@@ -152,8 +152,9 @@ class abmFichasActions extends sfActions
                 $this->graba_ok = 0;	
             }
  
-            /*----------- si grabo ok sigo con las fases -----------*/
-            
+			/*----------- si grabo ok sigo con las fases -----------*/
+		         
+		 
             if ($this->graba_ok == 1) { 	
 
 
@@ -168,14 +169,13 @@ class abmFichasActions extends sfActions
 			      }
 				
 			    $sql = "AM_FICHA_FASES_RS('".$_SESSION["usuario"]["username"]."','"
-			                                        .$this->fich_id."','"
+			                                        .$fich_id."','"
 			                                        .$this->listaAnota."')"; 
 				
-			 
+			 	
 			    $this->cursor_fases = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-			     $this->listaAnota   = '';
+			    $this->listaAnota   = '';
 				 
-				
 			    
 				
 			    $resp_sp = $this->cursor_fases[0]['respuesta'];
@@ -210,7 +210,7 @@ class abmFichasActions extends sfActions
 			        //echo "<pre>"; print_r($this->listaAnota); exit;
 
 			        $sql = "AM_FICHA_MEDIOS_RS('".$_SESSION["usuario"]["username"]."','"
-			                                        .$this->fich_id."','"
+			                                        .$fich_id."','"
 			                                        .$this->listaAnota."')";      
 			        
 			    
@@ -255,7 +255,7 @@ class abmFichasActions extends sfActions
 			        //echo "<pre>"; print_r($this->listaAnota); exit;
 
 			        $sql = "AM_FICHA_TAMANIOS_RS('".$_SESSION["usuario"]["username"]."','"
-			                                        .$this->fich_id."','"
+			                                        .$fich_id."','"
 			                                        .$this->listaAnota."')";      
 			        
 			    
@@ -298,7 +298,7 @@ class abmFichasActions extends sfActions
 			        //echo "<pre>"; print_r($this->listaAnota); exit;
 
 			        $sql = "AM_FICHA_TIPOLOGIAS_RS('".$_SESSION["usuario"]["username"]."','"
-			                                        .$this->fich_id."','"
+			                                        .$fich_id."','"
 			                                        .$this->listaAnota."')";      
 			        
 			    

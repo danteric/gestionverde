@@ -1,0 +1,71 @@
+<script languaje= "JavaScript" type="text/javascript" src= "js/configvarios.js"> </script>
+
+<script>
+
+    cargarGrilla = function() {
+
+   
+        $('#spinner').show();
+
+        $.get("<?php echo url_for('consultaFichas/tablaFichas') ?> ", 
+      {
+       id_ficha: $('#id_ficha').val(),
+       id_nombre: $('#id_nombre').val()
+       },
+            function(data){
+                $('#tablaFichas').html(data);
+                startTableOnlySorter();
+                $('#spinner').hide();
+            });
+         
+      }
+
+ </script>
+
+<?php 
+
+	$cabecera = new Cabecera();
+	$cabecera->ruta('consultaFichas');
+	$cabecera->titulo(__('Administración de Fichas'));
+
+    $cabecera->boton('filtrar') ;
+    $cabecera->accion('<input type="button" value="Filtrar" class="btn btn-warning" onclick="$(\'#pagina\').val(1);cargarGrilla();" />');
+
+
+    $cabecera->ini_filtro(__("Catalogo"));
+    $optionsSelect = $dd_cata;?>
+
+    <select id= "id_ficha" name="ficha" class="form-control" onchange="cargarGrilla()">
+    <?php foreach ($optionsSelect as $arraySelect) { ?>
+        <option value="<?php echo $arraySelect['cata_id'];?>" >
+            <?php echo $arraySelect['cata_deno']; ?>
+        </option>
+        
+    <?php } ?>
+    <?php $cabecera->fin_filtro(__("Catalogo")); ?>
+    
+        
+    <?php $cabecera->ini_filtro(__("o complete denominacion de ficha"));?>
+    <input type="text" id="id_nombre" name="nombre" class="form-control pull-right" />
+    <?php $cabecera->fin_filtro(__("o complete denominacion de ficha")); 
+
+    //$cabecera->accion(sprintf('<a href="%s"><i class="btn btn-primary"></i> + Nueva Ficha</a>', url_for("consultaFichas/formularioFichas"))); 
+
+    $cabecera->accion(sprintf('<a href="%s" button type="button" class="btn btn-success"> <i class="icon-plus"></i> Nueva Ficha</a>', url_for("consultaFichas/formularioFichas")));
+
+    //$cabecera->accion('<button type="button" onclick="cancelar()" class="btn btn-warning"><i class="icon-chevron-left"></i> Volver</button>');
+     
+
+
+	echo $cabecera;
+
+?>
+
+    <div id="tablaFichas" class="responsiveWidth">
+    </div>
+
+<?php //require __DIR__. '/../../pagcomun/templates/_paginaciona_listas_ajax.php' ?>
+<?php require __DIR__. '/../../pagcomun/templates/_pagcomun.php' ?> 
+<!-- /ayuda -->
+<?php require __DIR__. '/../../ayuda/templates/_datos_top.php' ?>
+<!-- /ayuda -->

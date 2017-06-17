@@ -86,21 +86,21 @@
 
               <div class="form-group row">
                   <label for="example-tel-input" class="col-xs-3 col-form-label">Cod interno</label>
-                  <div class="col-xs-9">
+                  <div class="col-xs-3">
                       <input class="form-control" type="text" name="fich_id" value="<?php echo $row['fich_id'] ?>" readonly >
                   </div>
               </div>
 
               <div class="form-group row">
                 <label for="example-tel-input" class="col-xs-3 col-form-label">Denominacion</label>
-                <div class="col-xs-9">
+                <div class="col-xs-3">
                   <input class="form-control" type="text" name="fich_deno" value="<?php echo $row['fich_deno'] ?>" required>
                 </div>
               </div>
 
               <div class="form-group row">
                 <label for="example-tel-input" class="col-xs-3 col-form-label">Descripción</label>
-                <div class="col-xs-9">
+                <div class="col-xs-6">
                   <textarea class="form-control" name="fich_desc"><?php echo $row['fich_desc'] ?></textarea>
                 </div>  
               </div>

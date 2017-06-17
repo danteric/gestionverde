@@ -42,27 +42,28 @@
         </option>
         
     <?php } ?>
+    </select>
+
     <?php $cabecera->fin_filtro(__("Catalogo")); ?>
-    
-        
     <?php $cabecera->ini_filtro(__("o complete denominacion de ficha"));?>
     <input type="text" id="id_nombre" name="nombre" class="form-control pull-right" />
     <?php $cabecera->fin_filtro(__("o complete denominacion de ficha")); 
 
-    //$cabecera->accion(sprintf('<a href="%s"><i class="btn btn-primary"></i> + Nueva Ficha</a>', url_for("abmFichas/formularioFichas"))); 
-
+    
     $cabecera->accion(sprintf('<a href="%s" button type="button" class="btn btn-success"> <i class="icon-plus"></i> Nueva Ficha</a>', url_for("abmFichas/formularioFichas")));
 
-    //$cabecera->accion('<button type="button" onclick="cancelar()" class="btn btn-warning"><i class="icon-chevron-left"></i> Volver</button>');
-     
+    
 
 
 	echo $cabecera;
 
 ?>
 
-    <div id="tablaFichas" class="responsiveWidth">
-    </div>
+        <div id="tablaFichas" class="responsiveWidth"></div>
+
+
+
+  
 
 <?php //require __DIR__. '/../../pagcomun/templates/_paginaciona_listas_ajax.php' ?>
 <?php require __DIR__. '/../../pagcomun/templates/_pagcomun.php' ?> 

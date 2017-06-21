@@ -19,7 +19,7 @@ class fasesActions extends sfActions
             $this->errors = array();
             $this->notices = array();
 
-            $sql = "GET_FASE_RS(null)";
+            $sql = "GET_FASE_RS(null,'N')";
             $this->fases = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
             
 		        //echo "<pre>";print_r($this->fases);die;  funcion para mostrar variables por pantalla para probar

@@ -28,7 +28,7 @@
 							<a class = "btn btn-mini" href="<?php echo url_for("abmFichas/formularioFichas?fich_id=".$row['fich_id']) ?>">
 								<i class="icon icon-pencil text-success"></i>
 							</a>
-							<a class = "btn btn-mini" href="<?php echo url_for("abmFichas/baja?fich_id=".$row['fich_id']) ?>">
+							<a class = "btn btn-mini" onclick="eliminarEntidad('<?php echo url_for("abmFichas/baja?fich_id=".$row['fich_id']) ?>');" href="#">
 								<i class="icon icon-remove text-danger"></i>
 							</a>
 						<?php } ?>

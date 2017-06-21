@@ -6,8 +6,15 @@
         $('#spinner').show();
         $.get("<?php echo url_for('consultaFichas/consultaTablaFichas') ?> ", 
         {
-        id_ficha: $('#id_ficha').val(),
-        id_nombre: $('#id_nombre').val()
+        cata_id: $('#cata_id').val(),
+        opci_id: $('#opci_id').val(),
+        medi_id: $('#medi_id').val(),
+        tipo_id: $('#tipo_id').val(),
+        tama_id: $('#tama_id').val(),
+        fase_id: $('#fase_id').val(),
+        text_desc: $('#text_desc').val()
+        
+
         },
             function(data){
                 $('#tablaFichas').html(data);
@@ -15,6 +22,7 @@
                 $('#spinner').hide();
             });     
     }
+
 
  cargarFicha = function(ficha_id) {
         $('#spinner').show();
@@ -28,6 +36,9 @@
                 $('#spinner').hide();
             });
     }
+
+
+
  </script>
 
 <?php 
@@ -39,26 +50,106 @@
     $cabecera->boton('filtrar') ;
     $cabecera->accion('<input type="button" value="Filtrar" class="btn btn-warning" onclick="$(\'#pagina\').val(1);cargarGrilla();" />');
 
-
+    //---------Filtro catálogo--------------------
     $cabecera->ini_filtro(__("Catalogo"));
     $optionsSelect = $dd_cata;?>
-
-    <select id= "id_ficha" name="ficha" class="form-control" onchange="cargarGrilla()">
-    <?php foreach ($optionsSelect as $arraySelect) { ?>
-        <option value="<?php echo $arraySelect['cata_id'];?>" >
-            <?php echo $arraySelect['cata_deno']; ?>
-        </option>
-        
-    <?php } ?>
-    </select>
+    
+    
+        <select id= "cata_id" name="ficha" class="form-control">
+        <?php foreach ($optionsSelect as $arraySelect) { ?>
+            <option value="<?php echo $arraySelect['cata_id'];?>" >
+                <?php echo $arraySelect['cata_deno']; ?>
+            </option>
+            
+        <?php } ?>
+        </select>
     <?php $cabecera->fin_filtro(__("Catalogo")); ?>
-       
-    <?php $cabecera->ini_filtro(__("o complete denominacion de ficha"));?>
-    <input type="text" id="id_nombre" name="nombre" class="form-control pull-right" />
-    <?php $cabecera->fin_filtro(__("o complete denominacion de ficha")); 
+    
 
-    //$cabecera->accion('<button type="button" onclick="cancelar()" class="btn btn-warning"><i class="icon-chevron-left"></i> Volver</button>');
-     
+     <!---Filtro Fases-->
+    <?php
+    $cabecera->ini_filtro(__("Fase"));
+    $optionsSelectFase = $dd_fase;?>
+
+        <select id= "fase_id" name="fases" class="form-control" >
+            <?php foreach ($optionsSelectFase as $arraySelect) { ?>
+                <option value="<?php echo $arraySelect['fase_id'];?>" >
+                    <?php echo $arraySelect['fase_deno']; ?>
+                </option>
+                
+            <?php } ?>
+        </select>
+    <?php $cabecera->fin_filtro(__("Fase")); ?>
+
+
+    <!---Filtro Medios-->
+    <?php
+    $cabecera->ini_filtro(__("Medio"));
+    $optionsSelectMedi = $dd_medi;?>
+    
+        <select id= "medi_id" name="medios" class="form-control" >
+            <?php foreach ($optionsSelectMedi as $arraySelect) { ?>
+                <option value="<?php echo $arraySelect['medi_id'];?>" >
+                    <?php echo $arraySelect['medi_deno']; ?>
+                </option>
+                
+            <?php } ?>
+        </select>
+    <?php $cabecera->fin_filtro(__("Medio")); ?>
+
+
+    <!---Filtro Tamanios-->
+    <?php
+    $cabecera->ini_filtro(__("Tamaño de obra"));
+    $optionsSelectTama = $dd_tama;?>
+
+        <select id= "tama_id" name="tamanios" class="form-control" >
+            <?php foreach ($optionsSelectTama as $arraySelect) { ?>
+                <option value="<?php echo $arraySelect['tama_id'];?>" >
+                    <?php echo $arraySelect['tama_deno']; ?>
+                </option>
+                
+            <?php } ?>
+        </select>
+    <?php $cabecera->fin_filtro(__("Tamaño de obra")); ?>
+
+
+    <!---Filtro Tipologia-->
+    <?php
+    $cabecera->ini_filtro(__("Tipología"));
+    $optionsSelectTipo = $dd_tipo;?>
+
+        <select id= "tipo_id" name="Tipologia" class="form-control" >
+            <?php foreach ($optionsSelectTipo as $arraySelect) { ?>
+                <option value="<?php echo $arraySelect['tipo_id'];?>" >
+                    <?php echo $arraySelect['tipo_deno']; ?>
+                </option>
+                
+            <?php } ?>
+        </select>
+    <?php $cabecera->fin_filtro(__("Tipología")); ?>
+
+    
+     <!---Filtro nombre-->
+    <?php
+    $cabecera->ini_filtro(__("Búsqueda en"));
+    $optionsSelectOpc = $dd_opciones;?>
+
+        <select id= "opci_id" name="opciones" class="form-control" >
+            <?php foreach ($optionsSelectOpc as $arraySelect) { ?>
+                <option value="<?php echo $arraySelect['tabla'];?>" >
+                    <?php echo $arraySelect['deno']; ?>
+                </option>
+                
+            <?php } ?>
+        </select>
+    <?php $cabecera->fin_filtro(__("Búsqueda en")); ?>
+
+
+    <?php $cabecera->ini_filtro(__("texto a buscar"));?>
+    <input type="text" id="text_desc" name="nombre" class="form-control pull-right" />
+    <?php $cabecera->fin_filtro(__("texto a buscar")); 
+    
 	echo $cabecera;
 
 ?>
@@ -68,7 +159,8 @@
         <div id="tablaFichas" class="responsiveWidth"></div>
   </div>
   <div class="col-xs-10 col-md-10">
-        <div id="derecha" class="wrapper tipoframe" style="background:#D3FFCE; padding-left:15px;">
+        <div id="derecha" class="wrapper tipoframe" style="
+        ; padding-left:15px;">
             <div class="panel-body">
                 <div id="detalleFicha" class="responsiveWidth"></div>
             </div>

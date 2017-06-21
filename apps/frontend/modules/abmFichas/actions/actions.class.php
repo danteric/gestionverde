@@ -30,30 +30,24 @@ class abmFichasActions extends sfActions
 	/*------------------------filtro para buscar una ficha------------------------------*/
 	public function executeTablaFichas(sfWebRequest $request) {
      // echo "<pre>"; print_r($_REQUEST); exit;
-   		$this->id_ficha   	= $request->getParameter("id_ficha");
+   		$this->cata_id   	= $request->getParameter("cata_id");
       	$this->id_nombre	= $request->getParameter("id_nombre");
      
 		$this->cursor       = array();
 		$this->total_paginas = 1;
 
     	$sql = "GET_ABM_FICHA_RS('".
-                                  $_SESSION["usuario"]["username"]."', '".
-                                  $this->id_ficha."','".
-                                  $this->id_nombre."')";
-                                  //echo $sql;exit;   
+                                  $_SESSION["usuario"]["username"]."','"
+                                  .$this->cata_id."','0','0','0','0','NF','".                                 
+                                   $this->id_nombre."')";
+                                   
+
 
 
 		$cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-	//echo "<pre>"; print_r($cursor); exit;
    
     	$this->cursor = $cursor;
-  /*  	if(isset($this->cursor)){
-			$this->total_paginas = $this->cursor[0]['total_paginas'];
-		}
-		if(isset($this->cursor)){
-			$this->total_registros = $this->cursor[0]['total_registros'];
-		}
-*/     
+
 		if ($cursor == NULL){
         	$this->sindatos = '0';
 		}else{
@@ -64,7 +58,6 @@ class abmFichasActions extends sfActions
 			$this->cursor = array(0);
 		}
 
-    //echo "<pre>"; print_r($cursor); exit;
 		return $this->renderPartial
 				('abmFichas/tablaFichas', array('cursor' =>$this->cursor,
 											     'sindatos' =>$this->sindatos,
@@ -328,26 +321,29 @@ class abmFichasActions extends sfActions
 
             if ($this->graba_ok == 1) {    // == 1 	
 
+
 			    $this->proc_id_f 	= $request->getParameter('proc_id_f');
 			    $this->proc_text_f 	= $request->getParameter('proc_text_f');
 			    $this->proc_borr_f 	= $request->getParameter('proc_borr_f');
-			    $max = sizeof($this->proc_id_f); //$this->listaAnota   = '';
+			    $max = sizeof($this->proc_id_f); 
+
+
 
 			    for( $ind = 1; $ind<=$max; $ind++ ) {
 	
 			        $sql = "AMB_FICHA_PROCEDIMIENTOS_RS('".$_SESSION["usuario"]["username"]."','"
-			        								.$this->fich_id."','"
+			        								.$fich_id."','"
 			                                        .$this->proc_id_f[$ind]."','"
 			                                        .$this->proc_text_f[$ind]."','"
 			                                        .$this->proc_borr_f[$ind]."')";   
-			         echo $sql;                    
+			                            
 			        $this->cur_proc = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
 
          		};
          	};
          		
-
+         	
 			if ($this->graba_ok == 1) {
 				$this->redirect("abmFichas/abmFichas");
 			    $this->getUser()->setFlash('notice', $this->cursor[0]['respues_exito']);			        

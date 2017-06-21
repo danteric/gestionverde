@@ -19,7 +19,7 @@ class tipologiasActions extends sfActions
             $this->errors = array();
             $this->notices = array();
 
-            $sql = "GET_TIPOLOGIA_RS(null)";
+            $sql = "GET_TIPOLOGIA_RS(null,'S')";
             $this->tipologias = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
             
 		        //echo "<pre>";print_r($this->tipologias);die;  funcion para mostrar variables por pantalla para probar

@@ -6,6 +6,7 @@
         location.href = '<?php echo url_for("abmFichas/abmFichas") ?>';
     }
 
+    // funcion para agregar los procedimientos dinamicamente
     agregarProce = function() {
         var fila=$("#tablaProc tr").length;
 
@@ -29,15 +30,17 @@
 <style>  input[type="text"] {  width: 150px;}  </style>
 
 <form id="formulario" method="POST" action="<?php echo url_for("abmFichas/formularioFichas") ?>">
+<?php $optionsSelect = $cursor;?>
 <?php
 		$cabecera = new cabecera();
 		$cabecera->ruta(link_to(__("AbmFichas"),'abmFichas/abmFichas'));
+
 
 		if($alta)
         {  
             $cabecera->titulo(__("Nueva Ficha"))->ruta(__("Nueva Ficha"));
         }else{
-            $cabecera->titulo(__("Editando Ficha"))->ruta(__("Editando Ficha"));
+            $cabecera->titulo(__("Editando Ficha '".$optionsSelect[0]['fich_deno']."'" ))->ruta(__("Editando Ficha"));
         }
 
         if($_SESSION["usuario"]["modi"] == "S")
@@ -75,13 +78,18 @@
            <li>
             <a data-toggle="tab" href="#menu2">Procedimientos</a>
           </li>
+
+           <li>
+            <a data-toggle="tab" href="#menu3">Fuentes</a>
+          </li>
+
         </ul>
              
         <div class="tab-content" id="content">
             <div id="home" class="tab-pane fade in active">
               
               <!-- selecciona cursor que es donde estan todos los datos de la ficha en abmFicha.php -->
-              <?php $optionsSelect = $cursor;?>
+              
               <?php foreach ($cursor as $row) {} ?>
 
               <div class="form-group row">
@@ -238,30 +246,29 @@
                             <?php $c++; } ?>
                         </tbody>
                     </table>
-                  </div>
+              </div>
 
-                </div> <!-- cierre del row -->
-              </div> <!-- cierre solapa "aplica a" -->
+          </div> <!-- cierre del row -->
+        </div> <!-- cierre solapa "aplica a" -->
 
         <!---  solapa de procedimientos .. -->
             <div id="menu2" class="tab-pane fade">
-
                 <div class="row">
 
-                  <div class="col-xs-12 col-md-6">
+                <div class="col-xs-12 col-md-6">
                   <table id="tablaProc" class="tablaProc table-striped table-bordered font12" cellspacing="0" >
+
                         <thead>
                             <tr class="alert-info wrapper">
                                 <th ><?php echo "Procedimientos Registrados"; ?>
+                                
                                 <th><a title="Agregar un procedimiento" onclick="agregarProce(); return false;" class="btn btn-info pull-right"> <i class="icon-plus text-info"></i>  Nuevo </a>
-                                </th>
-                             <!--     <a title="Agregar un procedimiento" onclick="agregarProce(); return false;" class="btn btn-info pull-right"> <i class="icon-plus text-info"></i>  Nuevo </a> -->
-
-                                </th>
+                           
                                 <th  class="nosort" style="text-align: center">Eliminar</th>
                             </tr>
                         </thead>
-                        <tbody>
+
+                      <tbody>
                             <?php $c = 1; foreach($l_proc as $row){ ?>
                             <tr  onMouseOver="CambiaColor(this,'#dff0d8','blue')" onMouseOut="CambiaColor2(this,'#000000')">
                                 
@@ -278,25 +285,25 @@
                                          <span class="switch-handle"></span>
                                     </label>
                                 </td> 
-                              </tr>
-                            <?php $c++; } ?>
-                        </tbody>
-                    </table>
-                  </div>
+                            </tr>
+                          <?php $c++; } ?>
+                      </tbody>
+                  </table>
+                </div>
 
                   <div class="col-xs-12 col-md-6">
-                    <table id="medios" class="table table-striped table-bordered font12" cellspacing="0" >
+                    <table id="tablaFuente" class="table table-striped table-bordered font12" cellspacing="0" >
                         <thead>
                             <tr class="alert-info wrapper">
                                 <th><?php echo "URLs registradas"; ?></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php for ($new_p = 0; $new_p <= 10; $new_p++) { ?>
+                            <?php for ($new_p = 0; $new_p <= 3; $new_p++) { ?>
                             <tr  onMouseOver="CambiaColor(this,'#dff0d8','blue')" onMouseOut="CambiaColor2(this,'#000000')">
                                 <td>
-                                  <textarea class="form-control" name="new_proc_f['<?php echo $new_p ?>']" 
-                                    placeholder="Agregue aqui nuevo procedimiento..." >
+                                  <textarea class="form-control" name="new_fuen_f['<?php echo $new_f ?>']" 
+                                    placeholder="Agregue aqui nueva fuente..." >
                                   </textarea>             
                                 </td>
                             </tr>
@@ -307,6 +314,36 @@
 
                 </div> <!-- cierre del row -->
               </div> <!-- cierre solapa "procedimientos" -->
+
+  <!---  solapa de fuente .. -->
+            <div id="menu3" class="tab-pane fade">
+                <div class="row">
+
+
+                  <div class="col-xs-12 col-md-6">
+                    <table id="tablaFuente" class="table table-striped table-bordered font12" cellspacing="0" >
+                        <thead>
+                            <tr class="alert-info wrapper">
+                                <th><?php echo "URLs registradas"; ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php for ($new_p = 0; $new_p <= 3; $new_p++) { ?>
+                            <tr  onMouseOver="CambiaColor(this,'#dff0d8','blue')" onMouseOut="CambiaColor2(this,'#000000')">
+                                <td>
+                                  <textarea class="form-control" name="new_fuen_f['<?php echo $new_f ?>']" 
+                                    placeholder="Agregue aqui nueva fuente..." >
+                                  </textarea>             
+                                </td>
+                            </tr>
+                            <?php $c++; } ?>
+                        </tbody>
+                    </table>
+                  </div>
+
+                </div> <!-- cierre del row -->
+              </div> <!-- cierre solapa "procedimientos" -->
+
 
 
             </div> <!--cierre id=content-->

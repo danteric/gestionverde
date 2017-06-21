@@ -9,7 +9,7 @@
 
         $.get("<?php echo url_for('abmFichas/tablaFichas') ?> ", 
       {
-       id_ficha: $('#id_ficha').val(),
+       cata_id: $('#cata_id').val(),
        id_nombre: $('#id_nombre').val()
        },
             function(data){
@@ -35,7 +35,7 @@
     $cabecera->ini_filtro(__("Catalogo"));
     $optionsSelect = $dd_cata;?>
 
-    <select id= "id_ficha" name="ficha" class="form-control" onchange="cargarGrilla()">
+    <select id= "cata_id" name="ficha" class="form-control" onchange="cargarGrilla()">
     <?php foreach ($optionsSelect as $arraySelect) { ?>
         <option value="<?php echo $arraySelect['cata_id'];?>" >
             <?php echo $arraySelect['cata_deno']; ?>

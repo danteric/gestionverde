@@ -31,7 +31,7 @@ CREATE TABLE `catalogo` (
   `cata_baja_f` date DEFAULT NULL,
   `cata_baja_usu` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`cata_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `catalogo` (
 
 LOCK TABLES `catalogo` WRITE;
 /*!40000 ALTER TABLE `catalogo` DISABLE KEYS */;
-INSERT INTO `catalogo` VALUES (1,'Prevención de la contaminación','Prev. Cont','2017-05-07 20:49:40','',NULL,NULL),(2,'Consumo Eficiente de Recursos','Cons. Efic','2017-05-07 20:49:40','',NULL,NULL),(3,'Preservación de Actividades Vecinas','Preserv. A','2017-05-07 20:49:40','',NULL,NULL),(4,'Protección De Las Condiciones De Trabajo','Protec. ','2017-05-07 20:49:40','',NULL,NULL),(5,'coco','cococo r','2017-05-12 03:00:00','marino','2017-05-12','mariano'),(6,'coco','cococo r','2017-05-12 03:00:00','marino','2017-05-12','marisno'),(7,'extensa','redu','2017-05-13 03:00:00','admin','2017-05-13','admin'),(8,'Catalogo Nwe Maxi','Cata Reduc','2017-05-13 03:00:00','admin','2017-05-13','admin');
+INSERT INTO `catalogo` VALUES (1,'Prevención de la contaminación','Prev. Cont','2017-05-07 20:49:40','',NULL,NULL),(2,'Consumo Eficiente De Recursos','Cons. Efi','2017-05-07 20:49:40','',NULL,NULL),(3,'Preservación de Actividades Vecinas','Preserv. A','2017-05-07 20:49:40','',NULL,NULL),(4,'Protección De Las Condiciones De Trabajo','Protec. ','2017-05-07 20:49:40','','2017-06-10','admin'),(10,'Protección','prot','2017-06-10 03:00:00','admin',NULL,NULL);
 /*!40000 ALTER TABLE `catalogo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +60,7 @@ CREATE TABLE `fase` (
   `fase_baja_f` date DEFAULT NULL,
   `fase_baja_usu` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fase_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `fase` (
 
 LOCK TABLES `fase` WRITE;
 /*!40000 ALTER TABLE `fase` DISABLE KEYS */;
-INSERT INTO `fase` VALUES (1,'Documentación Inicial','Doc. Ini.','2017-05-07 20:51:38','',NULL,NULL),(2,'Puesta en Marcha','Puest. Mar','2017-05-07 20:51:38','',NULL,NULL),(3,'Ejecución','Ejec.','2017-05-07 20:51:38','',NULL,NULL),(4,'Retiro de Obra','Retir. Obr','2017-05-07 20:51:38','',NULL,NULL),(5,'','','2017-05-23 03:00:00','admin','2017-05-23','admin'),(6,'modif','modif','2017-05-23 03:00:00','admin','2017-05-23','admin'),(7,'modif','modif','2017-05-23 03:00:00','admin','2017-05-23','admin'),(8,'modif','modif','2017-05-23 03:00:00','admin','2017-05-23','admin');
+INSERT INTO `fase` VALUES (1,'Documentación Inal','Doc. I','2017-05-07 20:51:38','','2017-06-10','admin'),(2,'Puesta en Marcha','Puest. Mar','2017-05-07 20:51:38','',NULL,NULL),(3,'Ejecución','Ejec.','2017-05-07 20:51:38','',NULL,NULL),(4,'Retiro de Obra','Retir. Obr','2017-05-07 20:51:38','',NULL,NULL),(5,'','','2017-05-23 03:00:00','admin','2017-05-23','admin'),(6,'modif','modif','2017-05-23 03:00:00','admin','2017-05-23','admin'),(7,'modif','modif','2017-05-23 03:00:00','admin','2017-05-23','admin'),(8,'modif','modif','2017-05-23 03:00:00','admin','2017-05-23','admin'),(9,'asd','asdsad','2017-06-10 03:00:00','admin','2017-06-20','admin');
 /*!40000 ALTER TABLE `fase` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,17 +83,14 @@ DROP TABLE IF EXISTS `ficha`;
 CREATE TABLE `ficha` (
   `fich_id` int(11) NOT NULL AUTO_INCREMENT,
   `fich_deno` varchar(50) NOT NULL,
-  `fich_desc` varchar(200) NOT NULL,
+  `fich_desc` text NOT NULL,
   `fich_cata_id` int(11) NOT NULL,
-  `fich_tipo_id` int(11) NOT NULL,
-  `fich_medi_id` int(11) NOT NULL,
-  `fich_fase_id` int(11) NOT NULL,
   `fich_alta_f` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `fich_alta_usu` varchar(50) NOT NULL,
   `fich_baja_f` date DEFAULT NULL,
   `fich_baja_usu` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fich_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +99,7 @@ CREATE TABLE `ficha` (
 
 LOCK TABLES `ficha` WRITE;
 /*!40000 ALTER TABLE `ficha` DISABLE KEYS */;
-INSERT INTO `ficha` VALUES (1,'manipulación de residuos organicos','Evitar la contaminación de residuos',1,0,0,0,'2017-05-24 13:12:28','',NULL,NULL),(5,'sonido','contaminación sonora',1,0,0,0,'2017-06-03 03:00:00','admin',NULL,NULL),(6,'cascos','protección de cascos',0,0,0,0,'2017-06-03 03:00:00','admin',NULL,NULL),(7,'ropa','ropa de trabajo adecuada',0,0,0,0,'2017-06-03 03:00:00','admin',NULL,NULL);
+INSERT INTO `ficha` VALUES (1,'Prueba 1 ','Prueba 1',10,'2017-05-24 13:12:28','',NULL,NULL),(5,'sonido','contaminación sonora',4,'2017-06-03 03:00:00','admin',NULL,NULL),(6,'cascos','protección de cascos',1,'2017-06-03 03:00:00','admin',NULL,NULL),(7,'ropa','ropa de trabajo asdjasd',4,'2017-06-03 03:00:00','admin',NULL,NULL),(8,'ficha modi','ficha modi',10,'2017-06-10 03:00:00','admin',NULL,NULL),(9,'ficha nueva 2','ficha nueva 2 ',10,'2017-06-10 03:00:00','admin',NULL,NULL),(10,'nueva ficha3','nueva ficha3',3,'2017-06-10 03:00:00','admin','2017-06-11',NULL),(11,'prueba dante','prueba',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(12,'fases','fases',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(13,'medios','mdio',1,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(14,'aaa','aaa',10,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(15,'s','',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(16,'adad','asdasd',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(17,'aaaaa','13',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(18,'a','dante 18',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(19,'19','19',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(20,'20','20',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(21,'21','21',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(22,'22','22',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(23,'23','23',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(24,'24','24',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(25,'25','5',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(26,'nueva fichita','nueva fichita',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(27,'nueva aa','nueva fichita',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(28,'nueva aasa','nueva fichita',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(29,'nueva ava','nueva fichita',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(30,'aas ava','nueva fichita',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(31,'s ava','nueva fichita',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(32,'dante','nuevita',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(33,'aaasd','daste',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(34,'saaccsd ava','nueva fichita',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(35,'dante 1','datn',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(36,'saa11111ava','nueva fichita',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(37,'2222222','22222',2,'2017-06-11 03:00:00','admin','2017-06-11',NULL),(38,'ruenmodi','damodif',3,'2017-06-11 03:00:00','admin',NULL,NULL),(39,'Manipulación de residuos para obras','Manipulación de residuos para obras',2,'2017-06-11 03:00:00','admin','2017-06-17','admin'),(40,'full a','full a',2,'2017-06-11 03:00:00','admin','2017-06-17','admin'),(41,'ficha tipo','tipo',2,'2017-06-11 03:00:00','admin','2017-06-17','admin'),(42,'ficha tma','tam',2,'2017-06-11 03:00:00','admin','2017-06-17','admin'),(43,'fichitaa','dlala',2,'2017-06-11 03:00:00','admin',NULL,NULL),(44,'Cuidado suelo','dasdas',1,'2017-06-11 03:00:00','admin',NULL,NULL),(45,'ficha maxi 2','ficha maxi 2',10,'2017-06-12 03:00:00','admin',NULL,NULL),(46,'maxi2','maxi2',2,'2017-06-12 03:00:00','admin',NULL,NULL),(47,'maxxx','maxxx',10,'2017-06-17 03:00:00','admin',NULL,NULL);
 /*!40000 ALTER TABLE `ficha` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,7 +128,7 @@ CREATE TABLE `ficha_fases` (
 
 LOCK TABLES `ficha_fases` WRITE;
 /*!40000 ALTER TABLE `ficha_fases` DISABLE KEYS */;
-INSERT INTO `ficha_fases` VALUES (1,1,'2017-06-03 03:00:00','admin',NULL,NULL),(1,2,'2017-06-03 03:00:00','admin',NULL,NULL),(1,4,'2017-06-03 03:00:00','admin',NULL,NULL),(6,0,'2017-06-03 03:00:00','admin',NULL,NULL),(7,1,'2017-06-03 03:00:00','admin',NULL,NULL),(7,2,'2017-06-03 03:00:00','admin',NULL,NULL);
+INSERT INTO `ficha_fases` VALUES (1,2,'2017-06-10 03:00:00','admin',NULL,NULL),(1,3,'2017-06-10 03:00:00','admin',NULL,NULL),(1,4,'2017-06-10 03:00:00','admin',NULL,NULL),(1,9,'2017-06-10 03:00:00','admin',NULL,NULL),(5,0,'2017-06-04 03:00:00','admin',NULL,NULL),(6,0,'2017-06-03 03:00:00','admin',NULL,NULL),(7,1,'2017-06-04 03:00:00','admin',NULL,NULL),(7,2,'2017-06-04 03:00:00','admin',NULL,NULL),(8,2,'2017-06-10 03:00:00','admin',NULL,NULL),(8,3,'2017-06-10 03:00:00','admin',NULL,NULL),(8,4,'2017-06-10 03:00:00','admin',NULL,NULL),(8,9,'2017-06-10 03:00:00','admin',NULL,NULL),(12,0,'2017-06-11 03:00:00','admin',NULL,NULL),(14,9,'2017-06-11 03:00:00','admin',NULL,NULL),(38,2,'2017-06-17 03:00:00','admin',NULL,NULL),(38,4,'2017-06-17 03:00:00','admin',NULL,NULL),(38,9,'2017-06-17 03:00:00','admin',NULL,NULL),(39,3,'2017-06-17 03:00:00','admin',NULL,NULL),(39,9,'2017-06-17 03:00:00','admin',NULL,NULL),(40,2,'2017-06-17 03:00:00','admin',NULL,NULL),(40,3,'2017-06-17 03:00:00','admin',NULL,NULL),(40,4,'2017-06-17 03:00:00','admin',NULL,NULL),(40,9,'2017-06-17 03:00:00','admin',NULL,NULL),(41,0,'2017-06-17 03:00:00','admin',NULL,NULL),(42,0,'2017-06-11 03:00:00','admin',NULL,NULL),(43,2,'2017-06-20 03:00:00','admin',NULL,NULL),(43,4,'2017-06-20 03:00:00','admin',NULL,NULL),(44,2,'2017-06-11 03:00:00','admin',NULL,NULL),(44,3,'2017-06-11 03:00:00','admin',NULL,NULL),(45,9,'2017-06-12 03:00:00','admin',NULL,NULL),(46,9,'2017-06-12 03:00:00','admin',NULL,NULL),(47,2,'2017-06-17 03:00:00','admin',NULL,NULL),(47,3,'2017-06-17 03:00:00','admin',NULL,NULL),(47,9,'2017-06-17 03:00:00','admin',NULL,NULL);
 /*!40000 ALTER TABLE `ficha_fases` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,11 +142,11 @@ DROP TABLE IF EXISTS `ficha_fuentes`;
 CREATE TABLE `ficha_fuentes` (
   `fifu_fich_id` int(11) NOT NULL,
   `fifu_fuen_id` int(11) NOT NULL,
-  `fifu_text` text NOT NULL,
+  `fifu_texto` text NOT NULL,
   `fifu_alta_f` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `fifa_alta_usu` varchar(50) NOT NULL,
-  `fifa_baja_f` date DEFAULT NULL,
-  `fifa_baja_usu` varchar(50) DEFAULT NULL,
+  `fifu_alta_usu` varchar(50) NOT NULL,
+  `fifu_baja_f` date DEFAULT NULL,
+  `fifu_baja_usu` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fifu_fich_id`,`fifu_fuen_id`),
   CONSTRAINT `FK_ficha_fichafuente` FOREIGN KEY (`fifu_fich_id`) REFERENCES `ficha` (`fich_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -189,6 +186,7 @@ CREATE TABLE `ficha_medios` (
 
 LOCK TABLES `ficha_medios` WRITE;
 /*!40000 ALTER TABLE `ficha_medios` DISABLE KEYS */;
+INSERT INTO `ficha_medios` VALUES (1,1,'2017-06-10 03:00:00','admin',NULL,NULL),(1,2,'2017-06-10 03:00:00','admin',NULL,NULL),(1,3,'2017-06-10 03:00:00','admin',NULL,NULL),(1,4,'2017-06-10 03:00:00','admin',NULL,NULL),(1,5,'2017-06-10 03:00:00','admin',NULL,NULL),(7,5,'2017-06-04 03:00:00','admin',NULL,NULL),(8,1,'2017-06-10 03:00:00','admin',NULL,NULL),(8,2,'2017-06-10 03:00:00','admin',NULL,NULL),(8,3,'2017-06-10 03:00:00','admin',NULL,NULL),(8,4,'2017-06-10 03:00:00','admin',NULL,NULL),(8,6,'2017-06-10 03:00:00','admin',NULL,NULL),(12,1,'2017-06-11 03:00:00','admin',NULL,NULL),(12,2,'2017-06-11 03:00:00','admin',NULL,NULL),(12,3,'2017-06-11 03:00:00','admin',NULL,NULL),(12,4,'2017-06-11 03:00:00','admin',NULL,NULL),(12,6,'2017-06-11 03:00:00','admin',NULL,NULL),(14,0,'2017-06-11 03:00:00','admin',NULL,NULL),(38,2,'2017-06-17 03:00:00','admin',NULL,NULL),(38,4,'2017-06-17 03:00:00','admin',NULL,NULL),(39,0,'2017-06-17 03:00:00','admin',NULL,NULL),(40,1,'2017-06-17 03:00:00','admin',NULL,NULL),(40,2,'2017-06-17 03:00:00','admin',NULL,NULL),(40,3,'2017-06-17 03:00:00','admin',NULL,NULL),(40,4,'2017-06-17 03:00:00','admin',NULL,NULL),(40,6,'2017-06-17 03:00:00','admin',NULL,NULL),(41,0,'2017-06-17 03:00:00','admin',NULL,NULL),(42,2,'2017-06-11 03:00:00','admin',NULL,NULL),(43,2,'2017-06-20 03:00:00','admin',NULL,NULL),(43,3,'2017-06-20 03:00:00','admin',NULL,NULL),(44,1,'2017-06-11 03:00:00','admin',NULL,NULL),(44,2,'2017-06-11 03:00:00','admin',NULL,NULL),(45,6,'2017-06-12 03:00:00','admin',NULL,NULL),(46,6,'2017-06-12 03:00:00','admin',NULL,NULL),(47,2,'2017-06-17 03:00:00','admin',NULL,NULL),(47,6,'2017-06-17 03:00:00','admin',NULL,NULL);
 /*!40000 ALTER TABLE `ficha_medios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -218,7 +216,66 @@ CREATE TABLE `ficha_procedimientos` (
 
 LOCK TABLES `ficha_procedimientos` WRITE;
 /*!40000 ALTER TABLE `ficha_procedimientos` DISABLE KEYS */;
+INSERT INTO `ficha_procedimientos` VALUES (43,1,'hola','2017-06-18 03:00:00','admin','2017-06-20','admin'),(43,2,'hola2','2017-06-20 03:00:00','admin',NULL,NULL),(44,1,'tenes que limpiar el piso','2017-06-11 03:00:00','admin',NULL,NULL);
 /*!40000 ALTER TABLE `ficha_procedimientos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ficha_tamanio`
+--
+
+DROP TABLE IF EXISTS `ficha_tamanio`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ficha_tamanio` (
+  `fita_fich_id` int(11) NOT NULL,
+  `fita_tama_id` int(11) NOT NULL,
+  `fita_alta_f` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fita_alta_usu` varchar(50) NOT NULL,
+  `fita_baja_f` date DEFAULT NULL,
+  `fita_baja_usu` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`fita_fich_id`,`fita_tama_id`),
+  CONSTRAINT `FK_ficha_fichatamanio` FOREIGN KEY (`fita_fich_id`) REFERENCES `ficha` (`fich_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ficha_tamanio`
+--
+
+LOCK TABLES `ficha_tamanio` WRITE;
+/*!40000 ALTER TABLE `ficha_tamanio` DISABLE KEYS */;
+INSERT INTO `ficha_tamanio` VALUES (1,21,'2017-06-11 13:31:34','admin',NULL,NULL),(1,22,'2017-06-11 13:31:34','admin',NULL,NULL),(1,23,'2017-06-11 13:31:34','admin',NULL,NULL),(1,24,'2017-06-11 13:31:34','admin',NULL,NULL),(1,25,'2017-06-11 13:31:34','admin',NULL,NULL),(1,26,'2017-06-11 13:31:34','admin',NULL,NULL),(1,27,'2017-06-11 13:31:34','admin',NULL,NULL),(1,28,'2017-06-11 13:31:34','admin',NULL,NULL),(5,21,'2017-06-11 13:31:34','admin',NULL,NULL),(5,22,'2017-06-11 13:31:34','admin',NULL,NULL),(5,23,'2017-06-11 13:31:34','admin',NULL,NULL),(5,24,'2017-06-11 13:31:34','admin',NULL,NULL),(5,25,'2017-06-11 13:31:34','admin',NULL,NULL),(5,26,'2017-06-11 13:31:34','admin',NULL,NULL),(5,27,'2017-06-11 13:31:34','admin',NULL,NULL),(5,28,'2017-06-11 13:31:34','admin',NULL,NULL),(6,21,'2017-06-11 13:31:34','admin',NULL,NULL),(6,22,'2017-06-11 13:31:34','admin',NULL,NULL),(6,23,'2017-06-11 13:31:34','admin',NULL,NULL),(6,24,'2017-06-11 13:31:34','admin',NULL,NULL),(6,25,'2017-06-11 13:31:34','admin',NULL,NULL),(6,26,'2017-06-11 13:31:34','admin',NULL,NULL),(6,27,'2017-06-11 13:31:34','admin',NULL,NULL),(6,28,'2017-06-11 13:31:34','admin',NULL,NULL),(7,21,'2017-06-11 13:31:34','admin',NULL,NULL),(7,22,'2017-06-11 13:31:34','admin',NULL,NULL),(7,23,'2017-06-11 13:31:34','admin',NULL,NULL),(7,24,'2017-06-11 13:31:34','admin',NULL,NULL),(7,25,'2017-06-11 13:31:34','admin',NULL,NULL),(7,26,'2017-06-11 13:31:34','admin',NULL,NULL),(7,27,'2017-06-11 13:31:34','admin',NULL,NULL),(7,28,'2017-06-11 13:31:34','admin',NULL,NULL),(8,21,'2017-06-11 13:31:34','admin',NULL,NULL),(8,22,'2017-06-11 13:31:34','admin',NULL,NULL),(8,23,'2017-06-11 13:31:34','admin',NULL,NULL),(8,24,'2017-06-11 13:31:34','admin',NULL,NULL),(8,25,'2017-06-11 13:31:34','admin',NULL,NULL),(8,26,'2017-06-11 13:31:34','admin',NULL,NULL),(8,27,'2017-06-11 13:31:34','admin',NULL,NULL),(8,28,'2017-06-11 13:31:34','admin',NULL,NULL),(9,21,'2017-06-11 13:31:34','admin',NULL,NULL),(9,22,'2017-06-11 13:31:34','admin',NULL,NULL),(9,23,'2017-06-11 13:31:34','admin',NULL,NULL),(9,24,'2017-06-11 13:31:34','admin',NULL,NULL),(9,25,'2017-06-11 13:31:34','admin',NULL,NULL),(9,26,'2017-06-11 13:31:34','admin',NULL,NULL),(9,27,'2017-06-11 13:31:34','admin',NULL,NULL),(9,28,'2017-06-11 13:31:34','admin',NULL,NULL),(10,21,'2017-06-11 13:31:34','admin',NULL,NULL),(10,22,'2017-06-11 13:31:34','admin',NULL,NULL),(10,23,'2017-06-11 13:31:34','admin',NULL,NULL),(10,24,'2017-06-11 13:31:34','admin',NULL,NULL),(10,25,'2017-06-11 13:31:34','admin',NULL,NULL),(10,26,'2017-06-11 13:31:34','admin',NULL,NULL),(10,27,'2017-06-11 13:31:34','admin',NULL,NULL),(10,28,'2017-06-11 13:31:34','admin',NULL,NULL),(38,27,'2017-06-17 03:00:00','admin',NULL,NULL),(38,28,'2017-06-17 03:00:00','admin',NULL,NULL),(39,0,'2017-06-17 03:00:00','admin',NULL,NULL),(40,27,'2017-06-17 03:00:00','admin',NULL,NULL),(41,0,'2017-06-17 03:00:00','admin',NULL,NULL),(42,27,'2017-06-11 03:00:00','admin',NULL,NULL),(42,28,'2017-06-11 03:00:00','admin',NULL,NULL),(43,26,'2017-06-20 03:00:00','admin',NULL,NULL),(43,28,'2017-06-20 03:00:00','admin',NULL,NULL),(44,26,'2017-06-11 03:00:00','admin',NULL,NULL),(45,28,'2017-06-12 03:00:00','admin',NULL,NULL),(46,28,'2017-06-12 03:00:00','admin',NULL,NULL),(47,27,'2017-06-17 03:00:00','admin',NULL,NULL),(47,28,'2017-06-17 03:00:00','admin',NULL,NULL);
+/*!40000 ALTER TABLE `ficha_tamanio` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ficha_tipologia`
+--
+
+DROP TABLE IF EXISTS `ficha_tipologia`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ficha_tipologia` (
+  `fiti_fich_id` int(11) NOT NULL,
+  `fiti_tipo_id` int(11) NOT NULL,
+  `fiti_alta_f` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fiti_alta_usu` varchar(50) NOT NULL,
+  `fiti_baja_f` date DEFAULT NULL,
+  `fiti_baja_usu` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`fiti_fich_id`,`fiti_tipo_id`),
+  CONSTRAINT `FK_ficha_fichatipologia` FOREIGN KEY (`fiti_fich_id`) REFERENCES `ficha` (`fich_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ficha_tipologia`
+--
+
+LOCK TABLES `ficha_tipologia` WRITE;
+/*!40000 ALTER TABLE `ficha_tipologia` DISABLE KEYS */;
+INSERT INTO `ficha_tipologia` VALUES (1,1,'2017-06-11 13:32:25','admin',NULL,NULL),(1,2,'2017-06-11 13:32:25','admin',NULL,NULL),(1,3,'2017-06-11 13:32:25','admin',NULL,NULL),(1,4,'2017-06-11 13:32:25','admin',NULL,NULL),(1,5,'2017-06-11 13:32:25','admin',NULL,NULL),(1,6,'2017-06-11 13:32:25','admin',NULL,NULL),(1,7,'2017-06-11 13:32:25','admin',NULL,NULL),(1,8,'2017-06-11 13:32:25','admin',NULL,NULL),(5,1,'2017-06-11 13:32:25','admin',NULL,NULL),(5,2,'2017-06-11 13:32:25','admin',NULL,NULL),(5,3,'2017-06-11 13:32:25','admin',NULL,NULL),(5,4,'2017-06-11 13:32:25','admin',NULL,NULL),(5,5,'2017-06-11 13:32:25','admin',NULL,NULL),(5,6,'2017-06-11 13:32:25','admin',NULL,NULL),(5,7,'2017-06-11 13:32:25','admin',NULL,NULL),(5,8,'2017-06-11 13:32:25','admin',NULL,NULL),(6,1,'2017-06-11 13:32:25','admin',NULL,NULL),(6,2,'2017-06-11 13:32:25','admin',NULL,NULL),(6,3,'2017-06-11 13:32:25','admin',NULL,NULL),(6,4,'2017-06-11 13:32:25','admin',NULL,NULL),(6,5,'2017-06-11 13:32:25','admin',NULL,NULL),(6,6,'2017-06-11 13:32:25','admin',NULL,NULL),(6,7,'2017-06-11 13:32:25','admin',NULL,NULL),(6,8,'2017-06-11 13:32:25','admin',NULL,NULL),(7,1,'2017-06-11 13:32:25','admin',NULL,NULL),(7,2,'2017-06-11 13:32:25','admin',NULL,NULL),(7,3,'2017-06-11 13:32:25','admin',NULL,NULL),(7,4,'2017-06-11 13:32:25','admin',NULL,NULL),(7,5,'2017-06-11 13:32:25','admin',NULL,NULL),(7,6,'2017-06-11 13:32:25','admin',NULL,NULL),(7,7,'2017-06-11 13:32:25','admin',NULL,NULL),(7,8,'2017-06-11 13:32:25','admin',NULL,NULL),(8,1,'2017-06-11 13:32:25','admin',NULL,NULL),(8,2,'2017-06-11 13:32:25','admin',NULL,NULL),(8,3,'2017-06-11 13:32:25','admin',NULL,NULL),(8,4,'2017-06-11 13:32:25','admin',NULL,NULL),(8,5,'2017-06-11 13:32:25','admin',NULL,NULL),(8,6,'2017-06-11 13:32:25','admin',NULL,NULL),(8,7,'2017-06-11 13:32:25','admin',NULL,NULL),(8,8,'2017-06-11 13:32:25','admin',NULL,NULL),(9,1,'2017-06-11 13:32:25','admin',NULL,NULL),(9,2,'2017-06-11 13:32:25','admin',NULL,NULL),(9,3,'2017-06-11 13:32:25','admin',NULL,NULL),(9,4,'2017-06-11 13:32:25','admin',NULL,NULL),(9,5,'2017-06-11 13:32:25','admin',NULL,NULL),(9,6,'2017-06-11 13:32:25','admin',NULL,NULL),(9,7,'2017-06-11 13:32:25','admin',NULL,NULL),(9,8,'2017-06-11 13:32:25','admin',NULL,NULL),(10,1,'2017-06-11 13:32:25','admin',NULL,NULL),(10,2,'2017-06-11 13:32:25','admin',NULL,NULL),(10,3,'2017-06-11 13:32:25','admin',NULL,NULL),(10,4,'2017-06-11 13:32:25','admin',NULL,NULL),(10,5,'2017-06-11 13:32:25','admin',NULL,NULL),(10,6,'2017-06-11 13:32:25','admin',NULL,NULL),(10,7,'2017-06-11 13:32:25','admin',NULL,NULL),(10,8,'2017-06-11 13:32:25','admin',NULL,NULL),(38,3,'2017-06-17 03:00:00','admin',NULL,NULL),(38,4,'2017-06-17 03:00:00','admin',NULL,NULL),(39,0,'2017-06-17 03:00:00','admin',NULL,NULL),(40,0,'2017-06-17 03:00:00','admin',NULL,NULL),(41,3,'2017-06-17 03:00:00','admin',NULL,NULL),(41,4,'2017-06-17 03:00:00','admin',NULL,NULL),(41,5,'2017-06-17 03:00:00','admin',NULL,NULL),(42,0,'2017-06-11 03:00:00','admin',NULL,NULL),(43,1,'2017-06-20 03:00:00','admin',NULL,NULL),(43,2,'2017-06-20 03:00:00','admin',NULL,NULL),(43,5,'2017-06-20 03:00:00','admin',NULL,NULL),(43,7,'2017-06-20 03:00:00','admin',NULL,NULL),(43,8,'2017-06-20 03:00:00','admin',NULL,NULL),(44,4,'2017-06-11 03:00:00','admin',NULL,NULL),(44,5,'2017-06-11 03:00:00','admin',NULL,NULL),(44,6,'2017-06-11 03:00:00','admin',NULL,NULL),(45,3,'2017-06-12 03:00:00','admin',NULL,NULL),(46,3,'2017-06-12 03:00:00','admin',NULL,NULL),(47,3,'2017-06-17 03:00:00','admin',NULL,NULL),(47,4,'2017-06-17 03:00:00','admin',NULL,NULL);
+/*!40000 ALTER TABLE `ficha_tipologia` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -237,7 +294,7 @@ CREATE TABLE `medio` (
   `medi_baja_f` date DEFAULT NULL,
   `medi_baja_usu` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`medi_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -246,7 +303,7 @@ CREATE TABLE `medio` (
 
 LOCK TABLES `medio` WRITE;
 /*!40000 ALTER TABLE `medio` DISABLE KEYS */;
-INSERT INTO `medio` VALUES (1,'Urbano','Urb.','2017-05-07 20:54:18','',NULL,NULL),(2,'Periurbano','Periurb.','2017-05-07 20:54:18','',NULL,NULL),(3,'Rural','Rur.','2017-05-07 20:54:18','',NULL,NULL),(4,'Selvático - Agreste','Selv.','2017-05-07 20:54:18','',NULL,NULL),(5,'Costero','Cost.','2017-05-07 20:54:18','',NULL,NULL);
+INSERT INTO `medio` VALUES (1,'Urbano','Urb.','2017-05-07 20:54:18','',NULL,NULL),(2,'Periurbano','Periurb.','2017-05-07 20:54:18','',NULL,NULL),(3,'Rural','Rur.','2017-05-07 20:54:18','',NULL,NULL),(4,'Selvático - Agreste','Selv.','2017-05-07 20:54:18','',NULL,NULL),(5,'prueba1','prueba1','2017-05-07 20:54:18','','2017-06-10','admin'),(6,'Costero','Cost.','2017-06-10 03:00:00','admin',NULL,NULL);
 /*!40000 ALTER TABLE `medio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -383,15 +440,15 @@ DROP TABLE IF EXISTS `tamanio`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tamanio` (
-  `tamanio_id` int(11) NOT NULL AUTO_INCREMENT,
-  `tamanio_deno` varchar(50) NOT NULL,
-  `tamanio_deno_redu` varchar(10) NOT NULL,
-  `tamanio_alta_f` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `tamanio_alta_usu` varchar(50) NOT NULL,
-  `tamanio_baja_f` date DEFAULT NULL,
-  `tamanio_baja_usu` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`tamanio_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+  `tama_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tama_deno` varchar(50) NOT NULL,
+  `tama_deno_redu` varchar(10) NOT NULL,
+  `tama_alta_f` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tama_alta_usu` varchar(50) NOT NULL,
+  `tama_baja_f` date DEFAULT NULL,
+  `tama_baja_usu` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`tama_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -400,8 +457,37 @@ CREATE TABLE `tamanio` (
 
 LOCK TABLES `tamanio` WRITE;
 /*!40000 ALTER TABLE `tamanio` DISABLE KEYS */;
-INSERT INTO `tamanio` VALUES (10,'Pequeño','Peq.','2017-05-27 03:00:00','admin',NULL,NULL),(11,'Mediano','Med.','2017-05-27 03:00:00','admin','2017-05-27','admin'),(12,'Grande','Gran.','2017-05-27 03:00:00','admin','2017-05-27','admin'),(13,'Grande','Gran.','2017-05-27 03:00:00','admin','2017-05-27','admin'),(14,'Mediano','Med.','2017-05-27 03:00:00','admin',NULL,NULL),(15,'Grande','Gran.','2017-05-27 03:00:00','admin',NULL,NULL);
+INSERT INTO `tamanio` VALUES (21,'','','2017-06-10 03:00:00','admin','2017-06-10','admin'),(22,'','','2017-06-10 03:00:00','admin','2017-06-10','admin'),(23,'','','2017-06-10 03:00:00','admin','2017-06-10','admin'),(24,'','','2017-06-10 03:00:00','admin','2017-06-10','admin'),(25,'','','2017-06-10 03:00:00','admin','2017-06-10','admin'),(26,'Pequeña','Peq.','2017-06-10 03:00:00','admin',NULL,NULL),(27,'Mediana','Med,','2017-06-10 03:00:00','admin',NULL,NULL),(28,'Grande','Gran.','2017-06-10 03:00:00','admin',NULL,NULL);
 /*!40000 ALTER TABLE `tamanio` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tamaño_de_obra`
+--
+
+DROP TABLE IF EXISTS `tamaño_de_obra`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tamaño_de_obra` (
+  `tama_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tama_deno` varchar(50) NOT NULL,
+  `tama_deno_redu` varchar(10) NOT NULL,
+  `tama_alta_f` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tama_alta_usu` varchar(50) NOT NULL,
+  `tama_baja_f` date DEFAULT NULL,
+  `tama_baja_usu` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`tama_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tamaño_de_obra`
+--
+
+LOCK TABLES `tamaño_de_obra` WRITE;
+/*!40000 ALTER TABLE `tamaño_de_obra` DISABLE KEYS */;
+INSERT INTO `tamaño_de_obra` VALUES (1,'Pequeña','Peq.','2017-05-07 23:52:19','',NULL,NULL),(2,'Mediana','Med.','2017-05-07 23:52:19','',NULL,NULL),(3,'Grande','Gra.','2017-05-07 23:52:19','',NULL,NULL);
+/*!40000 ALTER TABLE `tamaño_de_obra` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -463,7 +549,7 @@ CREATE TABLE `usu_accesos_log` (
 
 LOCK TABLES `usu_accesos_log` WRITE;
 /*!40000 ALTER TABLE `usu_accesos_log` DISABLE KEYS */;
-INSERT INTO `usu_accesos_log` VALUES ('2017-05-07 22:20:02',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-07',NULL,NULL,NULL,1),('2017-05-12 22:33:16',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-12',NULL,NULL,NULL,1),('2017-05-12 22:42:43',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-12',NULL,NULL,NULL,1),('2017-05-12 22:43:47',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-12',NULL,NULL,NULL,1),('2017-05-12 23:30:23',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-12',NULL,NULL,NULL,1),('2017-05-12 23:37:05',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-12',NULL,NULL,NULL,1),('2017-05-12 23:45:20',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-12',NULL,NULL,NULL,1),('2017-05-13 01:52:30',1,'marino','ACTUALIZA',1,'Incripcion asignaturas','Catalogo hola',NULL,'2017-05-12',NULL,NULL,NULL,1),('2017-05-13 01:53:15',1,'marino','ACTUALIZA',1,'Incripcion asignaturas','Catalogo coco',NULL,'2017-05-12',NULL,NULL,NULL,1),('2017-05-13 01:54:02',1,'marino','ACTUALIZA',1,'Incripcion asignaturas','Catalogo coco',NULL,'2017-05-12',NULL,NULL,NULL,1),('2017-05-13 02:40:17',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:21:27',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:23:20',1,'admin','ACTUALIZA',0,'catalogo','Catalogo Protección De Las jj Condiciones De Trabajo',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:38:26',1,'admin','ACTUALIZA',7,'catalogo','Catalogo extensa',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:39:52',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:44:00',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:47:13',1,'admin','ACTUALIZA',0,'catalogo','Catalogo Protección De Las Condiciones De Trabajo',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:47:36',1,'admin','ACTUALIZA',8,'catalogo','Catalogo catalogo nuevo',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:47:46',1,'admin','ACTUALIZA',0,'catalogo','Catalogo Catalogo Nuevo maxi',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:54:46',1,'admin','ACTUALIZA',0,'catalogo','Catalogo Catalogo Nwe Maxi',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:57:53',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 21:19:55',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 22:16:43',1,'admin','ACTUALIZA',0,'catalogo','Catalogo Protección De Las Condiciones De Trabajo',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-15 00:44:26',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-15',NULL,NULL,NULL,1),('2017-05-20 20:52:45',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-20',NULL,NULL,NULL,1),('2017-05-20 21:45:26',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-20',NULL,NULL,NULL,1),('2017-05-21 23:48:18',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-21',NULL,NULL,NULL,1),('2017-05-23 13:45:44',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 14:08:15',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 15:44:48',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 16:46:55',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 17:46:12',1,'admin','ACTUALIZA',5,'fase','fase ',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 17:48:28',1,'admin','ACTUALIZA',6,'fase','fase modif',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 17:50:42',1,'admin','ACTUALIZA',7,'fase','fase modif',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 17:57:41',1,'admin','ACTUALIZA',0,'fase','fase Documentación ',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 17:57:52',1,'admin','ACTUALIZA',0,'fase','fase Documentación Inicial',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 17:58:24',1,'admin','ACTUALIZA',8,'fase','fase modif',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 19:56:57',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-24 13:19:19',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-24',NULL,NULL,NULL,1),('2017-05-24 17:27:34',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-24',NULL,NULL,NULL,1),('2017-05-24 21:52:27',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-24',NULL,NULL,NULL,1),('2017-05-25 19:47:57',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-25',NULL,NULL,NULL,1),('2017-05-25 21:25:50',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-25',NULL,NULL,NULL,1),('2017-05-27 18:27:01',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-27',NULL,NULL,NULL,1),('2017-05-27 20:12:43',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-27',NULL,NULL,NULL,1),('2017-05-27 23:18:02',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-27',NULL,NULL,NULL,1),('2017-05-28 19:22:03',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-28',NULL,NULL,NULL,1),('2017-05-29 23:39:29',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-29',NULL,NULL,NULL,1),('2017-05-30 00:49:16',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-30',NULL,NULL,NULL,1),('2017-05-30 00:58:26',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-30',NULL,NULL,NULL,1),('2017-06-03 12:09:14',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 13:21:24',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 13:56:53',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 21:37:08',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 22:18:56',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 22:20:24',NULL,'1','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 23:10:44',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 23:12:59',NULL,'6','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES ();)',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 23:24:58',NULL,'1','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 23:25:07',NULL,'1','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 23:26:27',NULL,'1','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 23:27:00',NULL,'1','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 23:28:57',NULL,'1','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2),(4);)',NULL,'2017-06-03',NULL,NULL,NULL,1);
+INSERT INTO `usu_accesos_log` VALUES ('2017-05-07 22:20:02',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-07',NULL,NULL,NULL,1),('2017-05-12 22:33:16',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-12',NULL,NULL,NULL,1),('2017-05-12 22:42:43',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-12',NULL,NULL,NULL,1),('2017-05-12 22:43:47',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-12',NULL,NULL,NULL,1),('2017-05-12 23:30:23',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-12',NULL,NULL,NULL,1),('2017-05-12 23:37:05',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-12',NULL,NULL,NULL,1),('2017-05-12 23:45:20',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-12',NULL,NULL,NULL,1),('2017-05-13 01:52:30',1,'marino','ACTUALIZA',1,'Incripcion asignaturas','Catalogo hola',NULL,'2017-05-12',NULL,NULL,NULL,1),('2017-05-13 01:53:15',1,'marino','ACTUALIZA',1,'Incripcion asignaturas','Catalogo coco',NULL,'2017-05-12',NULL,NULL,NULL,1),('2017-05-13 01:54:02',1,'marino','ACTUALIZA',1,'Incripcion asignaturas','Catalogo coco',NULL,'2017-05-12',NULL,NULL,NULL,1),('2017-05-13 02:40:17',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:21:27',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:23:20',1,'admin','ACTUALIZA',0,'catalogo','Catalogo Protección De Las jj Condiciones De Trabajo',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:38:26',1,'admin','ACTUALIZA',7,'catalogo','Catalogo extensa',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:39:52',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:44:00',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:47:13',1,'admin','ACTUALIZA',0,'catalogo','Catalogo Protección De Las Condiciones De Trabajo',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:47:36',1,'admin','ACTUALIZA',8,'catalogo','Catalogo catalogo nuevo',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:47:46',1,'admin','ACTUALIZA',0,'catalogo','Catalogo Catalogo Nuevo maxi',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:54:46',1,'admin','ACTUALIZA',0,'catalogo','Catalogo Catalogo Nwe Maxi',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 20:57:53',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 21:19:55',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-13 22:16:43',1,'admin','ACTUALIZA',0,'catalogo','Catalogo Protección De Las Condiciones De Trabajo',NULL,'2017-05-13',NULL,NULL,NULL,1),('2017-05-15 00:44:26',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-15',NULL,NULL,NULL,1),('2017-05-20 20:52:45',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-20',NULL,NULL,NULL,1),('2017-05-20 21:45:26',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-20',NULL,NULL,NULL,1),('2017-05-21 23:48:18',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-21',NULL,NULL,NULL,1),('2017-05-23 13:45:44',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 14:08:15',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 15:44:48',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 16:46:55',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 17:46:12',1,'admin','ACTUALIZA',5,'fase','fase ',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 17:48:28',1,'admin','ACTUALIZA',6,'fase','fase modif',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 17:50:42',1,'admin','ACTUALIZA',7,'fase','fase modif',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 17:57:41',1,'admin','ACTUALIZA',0,'fase','fase Documentación ',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 17:57:52',1,'admin','ACTUALIZA',0,'fase','fase Documentación Inicial',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 17:58:24',1,'admin','ACTUALIZA',8,'fase','fase modif',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-23 19:56:57',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-23',NULL,NULL,NULL,1),('2017-05-24 13:19:19',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-24',NULL,NULL,NULL,1),('2017-05-24 17:27:34',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-24',NULL,NULL,NULL,1),('2017-05-24 21:52:27',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-24',NULL,NULL,NULL,1),('2017-05-25 19:47:57',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-25',NULL,NULL,NULL,1),('2017-05-25 21:25:50',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-25',NULL,NULL,NULL,1),('2017-05-27 18:27:01',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-27',NULL,NULL,NULL,1),('2017-05-27 20:12:43',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-27',NULL,NULL,NULL,1),('2017-05-27 23:18:02',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-27',NULL,NULL,NULL,1),('2017-05-28 19:22:03',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-28',NULL,NULL,NULL,1),('2017-05-29 23:39:29',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-29',NULL,NULL,NULL,1),('2017-05-30 00:49:16',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-30',NULL,NULL,NULL,1),('2017-05-30 00:58:26',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-05-30',NULL,NULL,NULL,1),('2017-06-03 12:09:14',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 13:21:24',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 13:56:53',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 21:37:08',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 22:18:56',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 22:20:24',NULL,'1','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 23:10:44',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 23:12:59',NULL,'6','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES ();)',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 23:24:58',NULL,'1','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 23:25:07',NULL,'1','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 23:26:27',NULL,'1','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 23:27:00',NULL,'1','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-03 23:28:57',NULL,'1','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2),(4);)',NULL,'2017-06-03',NULL,NULL,NULL,1),('2017-06-04 14:08:18',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-04 21:38:01',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-04 21:52:29',NULL,'5','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES ();)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-04 22:31:51',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-04 23:48:50',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(3),(2),(4);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-04 23:49:03',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES ();)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-04 23:50:54',NULL,'7','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-04 23:51:53',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES ();)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-04 23:52:05',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES ();)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-04 23:53:47',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES ();)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-04 23:53:57',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES ();)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-04 23:56:22',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-04 23:56:30',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-04 23:56:42',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-04 23:56:51',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-04 23:57:03',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:00:13',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:00:19',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:01:11',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:01:40',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:02:12',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:02:50',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:32:30',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:32:55',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:33:10',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:38:29',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:39:30',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:39:41',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:40:11',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:40:40',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:41:12',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:41:19',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:41:56',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:42:45',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:45:22',NULL,'7','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (1),(2),(3);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:46:05',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:48:30',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:48:59',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:49:12',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:49:58',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:53:22',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:53:50',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:54:25',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:54:54',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:58:46',NULL,'7','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (1),(2),(3);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 00:59:52',NULL,'7','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (1),(2),(3);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 01:01:15',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 01:01:49',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 01:03:15',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 01:04:19',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 01:04:41',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 01:05:06',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 01:05:43',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 01:05:57',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 01:05:58',NULL,'7','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (2),(3),(4),(1);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 01:06:13',NULL,'7','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (1),(2);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-05 01:06:13',NULL,'7','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (5);)',NULL,'2017-06-04',NULL,NULL,NULL,1),('2017-06-09 13:17:35',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-09',NULL,NULL,NULL,1),('2017-06-09 14:04:17',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-09',NULL,NULL,NULL,1),('2017-06-09 15:02:26',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-09',NULL,NULL,NULL,1),('2017-06-09 20:35:33',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-09',NULL,NULL,NULL,1),('2017-06-09 21:37:54',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-09',NULL,NULL,NULL,1),('2017-06-09 22:43:42',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-09',NULL,NULL,NULL,1),('2017-06-10 19:26:37',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 19:39:59',1,'admin','ACTUALIZA',16,'tamanio','Tamaño ',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 19:41:18',1,'admin','ACTUALIZA',17,'tamanio','Tamaño ',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 19:41:54',1,'admin','ACTUALIZA',18,'tamanio','Tamaño ',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 19:43:40',1,'admin','ACTUALIZA',19,'tamanio','Tamaño ',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 19:49:33',1,'admin','ACTUALIZA',20,'tamanio','Tamaño pequeño',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 19:50:21',1,'admin','ACTUALIZA',21,'tamanio','Tamaño ',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 19:51:48',1,'admin','ACTUALIZA',22,'tamanio','Tamaño ',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 20:17:44',1,'admin','ACTUALIZA',23,'tamanio','Tamaño ',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 20:19:14',1,'admin','ACTUALIZA',24,'tamanio','Tamaño ',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 20:39:47',1,'admin','ACTUALIZA',25,'tamanio','Tamaño ',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 20:55:50',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 21:07:32',1,'admin','ACTUALIZA',26,'tamanio','Tamaño Pequeña',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 21:08:10',1,'admin','ACTUALIZA',0,'tamanio','Tamaño Pequeñas',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 21:08:17',1,'admin','ACTUALIZA',0,'tamanio','Tamaño Pequeña',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 21:08:28',1,'admin','ACTUALIZA',27,'tamanio','Tamaño Mediana',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 21:08:40',1,'admin','ACTUALIZA',28,'tamanio','Tamaño Grande',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 21:11:49',1,'admin','ACTUALIZA',0,'catalogo','Catalogo Consumo Eficient De Recursos',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 21:12:01',1,'admin','ACTUALIZA',0,'catalogo','Catalogo Consumo Eficiente De Recursos',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 21:18:22',1,'admin','ACTUALIZA',0,'catalogo','Catalogo Consumo Eficiente De Recursos',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 21:19:37',1,'admin','ACTUALIZA',0,'catalogo','Catalogo Consumo Eficiente De Recursos',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 21:26:30',1,'admin','ACTUALIZA',9,'catalogo','Catalogo mmm',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 21:52:27',1,'admin','ACTUALIZA',10,'catalogo','Catalogo Protección',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 21:52:44',1,'admin','ACTUALIZA',0,'fase','fase Documentación Inal',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 21:52:51',1,'admin','ACTUALIZA',0,'fase','fase Documentación Inal',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 21:53:02',1,'admin','ACTUALIZA',9,'fase','fase asd',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 22:07:39',NULL,'1','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (9),(3),(2),(4);)',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 22:07:40',NULL,'1','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (5),(2),(3),(4),(1);)',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 22:15:53',1,'admin','ACTUALIZA',0,'medio','Medio prueba1',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 22:16:04',1,'admin','ACTUALIZA',6,'medio','Medio Costero',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 22:19:57',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 22:21:42',NULL,'8','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (9),(3),(2),(4);)',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-10 22:21:43',NULL,'8','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (6),(2),(3),(4),(1);)',NULL,'2017-06-10',NULL,NULL,NULL,1),('2017-06-11 12:49:03',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-11 13:44:05',NULL,'12','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES ();)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-11 13:44:05',NULL,'12','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (6),(2),(3),(4),(1);)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-11 14:00:51',NULL,'14','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (9);)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-11 14:00:51',NULL,'14','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES ();)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-11 15:17:52',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-11 17:19:55',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-11 17:56:40',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-11 18:53:41',NULL,'39','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (9),(3);)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-11 18:55:11',NULL,'40','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (9),(3),(2),(4);)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-11 18:55:12',NULL,'40','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (6),(2),(3),(4),(1);)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-11 19:00:21',NULL,'41','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES ();)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-11 19:00:21',NULL,'41','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES ();)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-11 19:00:22',NULL,'41','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES ();)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-11 19:00:22',NULL,'41','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES (3),(4),(5);)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-11 19:00:49',NULL,'42','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES ();)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-11 19:00:49',NULL,'42','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (2);)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-11 19:00:50',NULL,'42','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES (28),(27);)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-11 19:00:50',NULL,'42','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES ();)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-12 01:31:28',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-12',NULL,NULL,NULL,1),('2017-06-12 01:32:03',NULL,'43','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (2),(4);)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-12 01:32:03',NULL,'43','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (2),(3);)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-12 01:32:04',NULL,'43','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES (28),(26);)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-12 01:32:04',NULL,'43','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES (5),(8),(1),(7),(2);)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-12 01:34:44',NULL,'44','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (3),(2);)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-12 01:34:45',NULL,'44','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (2),(1);)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-12 01:34:45',NULL,'44','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES (26);)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-12 01:34:45',NULL,'44','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES (4),(5),(6);)',NULL,'2017-06-11',NULL,NULL,NULL,1),('2017-06-12 23:10:40',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-12',NULL,NULL,NULL,1),('2017-06-12 23:11:19',NULL,'45','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (9);)',NULL,'2017-06-12',NULL,NULL,NULL,1),('2017-06-12 23:11:19',NULL,'45','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (6);)',NULL,'2017-06-12',NULL,NULL,NULL,1),('2017-06-12 23:11:19',NULL,'45','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES (28);)',NULL,'2017-06-12',NULL,NULL,NULL,1),('2017-06-12 23:11:20',NULL,'45','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES (3);)',NULL,'2017-06-12',NULL,NULL,NULL,1),('2017-06-12 23:16:47',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-12',NULL,NULL,NULL,1),('2017-06-12 23:17:31',NULL,'46','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (9);)',NULL,'2017-06-12',NULL,NULL,NULL,1),('2017-06-12 23:17:32',NULL,'46','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (6);)',NULL,'2017-06-12',NULL,NULL,NULL,1),('2017-06-12 23:17:32',NULL,'46','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES (28);)',NULL,'2017-06-12',NULL,NULL,NULL,1),('2017-06-12 23:17:33',NULL,'46','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES (3);)',NULL,'2017-06-12',NULL,NULL,NULL,1),('2017-06-17 13:54:41',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:02:29',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:12:49',NULL,'38','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (9),(2),(4);)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:12:50',NULL,'38','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (2),(4);)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:12:51',NULL,'38','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES (28),(27);)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:12:51',NULL,'38','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES (3),(4);)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:13:29',NULL,'47','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (9),(3),(2);)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:13:30',NULL,'47','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (6),(2);)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:13:31',NULL,'47','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES (28),(27);)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:13:31',NULL,'47','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES (3),(4);)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:24:19',NULL,'39','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (9),(3);)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:24:20',NULL,'39','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES ();)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:24:21',NULL,'39','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES ();)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:24:21',NULL,'39','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES ();)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:24:47',NULL,'39','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (9),(3);)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:24:48',NULL,'39','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES ();)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:24:48',NULL,'39','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES ();)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:24:49',NULL,'39','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES ();)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:57:05',NULL,'41','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES ();)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:57:05',NULL,'41','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES ();)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:57:06',NULL,'41','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES ();)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:57:06',NULL,'41','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES (3),(4),(5);)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:58:04',NULL,'40','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (9),(3),(2),(4);)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:58:04',NULL,'40','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (6),(2),(3),(4),(1);)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:58:04',NULL,'40','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES (27);)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 14:58:05',NULL,'40','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES ();)',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 15:31:17',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-17 19:46:47',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-17',NULL,NULL,NULL,1),('2017-06-18 20:47:25',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:08:39',NULL,'43','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (2),(4);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:08:39',NULL,'43','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (2),(3);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:08:40',NULL,'43','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES (28),(26);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:08:40',NULL,'43','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES (5),(8),(1),(7),(2);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:09:01',NULL,'43','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (2),(4);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:09:02',NULL,'43','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (2),(3);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:09:02',NULL,'43','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES (28),(26);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:09:03',NULL,'43','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES (5),(8),(1),(7),(2);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:10:24',NULL,'43','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (2),(4);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:10:25',NULL,'43','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (2),(3);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:10:26',NULL,'43','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES (28),(26);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:10:26',NULL,'43','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES (5),(8),(1),(7),(2);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:12:58',NULL,'43','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (2),(4);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:12:58',NULL,'43','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (2),(3);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:12:59',NULL,'43','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES (28),(26);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:12:59',NULL,'43','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES (5),(8),(1),(7),(2);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:37:01',NULL,'43','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (2),(4);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:37:02',NULL,'43','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (2),(3);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:37:03',NULL,'43','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES (28),(26);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-18 21:37:03',NULL,'43','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES (5),(8),(1),(7),(2);)',NULL,'2017-06-18',NULL,NULL,NULL,1),('2017-06-20 13:19:13',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:25:40',NULL,'43','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (2),(4);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:25:40',NULL,'43','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (2),(3);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:25:41',NULL,'43','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES (28),(26);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:25:41',NULL,'43','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES (5),(8),(1),(7),(2);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:27:09',NULL,'43','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (2),(4);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:27:10',NULL,'43','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (2),(3);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:27:10',NULL,'43','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES (28),(26);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:27:11',NULL,'43','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES (5),(8),(1),(7),(2);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:27:24',NULL,'43','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (2),(4);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:27:25',NULL,'43','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (2),(3);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:27:25',NULL,'43','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES (28),(26);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:27:26',NULL,'43','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES (5),(8),(1),(7),(2);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:28:16',NULL,'43','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (2),(4);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:28:16',NULL,'43','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (2),(3);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:28:17',NULL,'43','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES (28),(26);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:28:17',NULL,'43','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES (5),(8),(1),(7),(2);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:30:04',NULL,'43','ACTUALIZA',NULL,'0','Incruye fase  fases (INSERT INTO lisfas VALUES (2),(4);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:30:05',NULL,'43','ACTUALIZA',NULL,'0','Incluye medio  medios (INSERT INTO lismedi VALUES (2),(3);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:30:05',NULL,'43','ACTUALIZA',NULL,'0','Incluye tamanio  tamanios (INSERT INTO listama VALUES (28),(26);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 13:30:06',NULL,'43','ACTUALIZA',NULL,'0','Incluye tipologias  tipologias (INSERT INTO listipo VALUES (5),(8),(1),(7),(2);)',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 16:05:55',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-20',NULL,NULL,NULL,1),('2017-06-20 17:50:09',NULL,'admin','LOGIN',0,NULL,'Ingreso al sistema',NULL,'2017-06-20',NULL,NULL,NULL,1);
 /*!40000 ALTER TABLE `usu_accesos_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -511,7 +597,7 @@ CREATE TABLE `usu_incidentes_log` (
   `usil_error` varchar(350) DEFAULT NULL,
   `usil_empre` int(11) DEFAULT NULL,
   PRIMARY KEY (`usil_orden`)
-) ENGINE=InnoDB AUTO_INCREMENT=1471 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1638 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -520,7 +606,7 @@ CREATE TABLE `usu_incidentes_log` (
 
 LOCK TABLES `usu_incidentes_log` WRITE;
 /*!40000 ALTER TABLE `usu_incidentes_log` DISABLE KEYS */;
-INSERT INTO `usu_incidentes_log` VALUES (980,'2017-05-07 22:20:02','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(981,'2017-05-07 22:20:02','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(982,'2017-05-07 22:20:02','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(983,'2017-05-12 22:33:16','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(984,'2017-05-12 22:33:16','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(985,'2017-05-12 22:33:16','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(986,'2017-05-12 22:42:43','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(987,'2017-05-12 22:42:43','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(988,'2017-05-12 22:42:43','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(989,'2017-05-12 22:43:37','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(990,'2017-05-12 22:43:37','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(991,'2017-05-12 22:43:37','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(992,'2017-05-12 22:43:47','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(993,'2017-05-12 22:43:47','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(994,'2017-05-12 22:43:47','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(995,'2017-05-12 22:43:52','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(996,'2017-05-12 22:43:52','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(997,'2017-05-12 22:43:52','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(998,'2017-05-12 23:30:23','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(999,'2017-05-12 23:30:23','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1000,'2017-05-12 23:30:23','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1001,'2017-05-12 23:37:06','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1002,'2017-05-12 23:37:06','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1003,'2017-05-12 23:37:06','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1004,'2017-05-12 23:42:22','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1005,'2017-05-12 23:42:22','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1006,'2017-05-12 23:42:22','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1007,'2017-05-12 23:44:27','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1008,'2017-05-12 23:44:27','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1009,'2017-05-12 23:44:27','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1010,'2017-05-12 23:44:38','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1011,'2017-05-12 23:44:38','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1012,'2017-05-12 23:44:38','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1013,'2017-05-12 23:44:46','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1014,'2017-05-12 23:44:46','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1015,'2017-05-12 23:44:46','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1016,'2017-05-12 23:45:20','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1017,'2017-05-12 23:45:20','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1018,'2017-05-12 23:45:20','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1019,'2017-05-13 02:13:01','mariano','E','B_CATALOGO_RS','ERROR interno baja catalogo',NULL),(1020,'2017-05-13 02:17:08','mariano','E','B_CATALOGO_RS','ERROR interno baja catalogo',NULL),(1021,'2017-05-13 02:21:25','mariano','E','B_CATALOGO_RS','ERROR interno baja catalogo',NULL),(1022,'2017-05-13 02:40:17','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1023,'2017-05-13 02:40:17','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1024,'2017-05-13 02:40:17','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1025,'2017-05-13 02:40:21','admin','E','GET_CATALOGO_RS(\'null)','You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near \'\'null)\' at line 1',1),(1026,'2017-05-13 20:21:28','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1027,'2017-05-13 20:21:28','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1028,'2017-05-13 20:21:28','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1029,'2017-05-13 20:39:52','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1030,'2017-05-13 20:39:52','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1031,'2017-05-13 20:39:52','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1032,'2017-05-13 20:40:36','admin','E','begin .SEL_USUARIOS_AYUDA_RS(\'/usuarios/lista\', :data); end;','You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near \':data); end\' at line 1',1),(1033,'2017-05-13 20:44:00','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1034,'2017-05-13 20:44:00','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1035,'2017-05-13 20:44:00','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1036,'2017-05-13 20:45:18','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1037,'2017-05-13 20:45:18','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1038,'2017-05-13 20:45:18','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1039,'2017-05-13 20:45:23','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1040,'2017-05-13 20:45:23','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1041,'2017-05-13 20:45:23','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1042,'2017-05-13 20:46:45','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1043,'2017-05-13 20:46:45','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1044,'2017-05-13 20:46:45','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1045,'2017-05-13 20:54:25','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1046,'2017-05-13 20:54:25','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1047,'2017-05-13 20:54:25','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1048,'2017-05-13 20:57:54','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1049,'2017-05-13 20:57:54','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1050,'2017-05-13 20:57:54','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1051,'2017-05-13 21:19:56','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1052,'2017-05-13 21:19:56','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1053,'2017-05-13 21:19:56','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1054,'2017-05-13 22:31:23','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1055,'2017-05-13 22:31:23','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1056,'2017-05-13 22:31:23','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1057,'2017-05-13 22:45:39','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1058,'2017-05-13 22:45:39','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1059,'2017-05-13 22:45:39','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1060,'2017-05-15 00:44:28','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1061,'2017-05-15 00:44:29','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1062,'2017-05-15 00:44:29','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1063,'2017-05-15 01:04:44','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1064,'2017-05-15 01:04:44','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1065,'2017-05-15 01:04:44','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1066,'2017-05-15 01:04:56','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1067,'2017-05-15 01:04:56','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1068,'2017-05-15 01:04:56','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1069,'2017-05-15 01:06:02','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1070,'2017-05-15 01:06:02','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1071,'2017-05-15 01:06:02','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1072,'2017-05-20 20:52:46','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1073,'2017-05-20 20:52:46','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1074,'2017-05-20 20:52:46','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1075,'2017-05-20 20:52:58','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1076,'2017-05-20 20:52:58','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1077,'2017-05-20 20:52:58','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1078,'2017-05-20 21:45:26','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1079,'2017-05-20 21:45:26','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1080,'2017-05-20 21:45:26','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1081,'2017-05-20 21:45:31','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1082,'2017-05-20 21:45:31','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1083,'2017-05-20 21:45:31','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1084,'2017-05-20 21:48:37','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1085,'2017-05-20 21:48:37','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1086,'2017-05-20 21:48:37','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1087,'2017-05-20 21:48:43','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1088,'2017-05-20 21:48:44','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1089,'2017-05-20 21:48:44','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1090,'2017-05-20 21:50:08','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1091,'2017-05-20 21:50:09','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1092,'2017-05-20 21:50:09','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1093,'2017-05-20 21:50:26','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1094,'2017-05-20 21:50:26','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1095,'2017-05-20 21:50:26','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1096,'2017-05-20 21:50:36','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1097,'2017-05-20 21:50:36','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1098,'2017-05-20 21:50:36','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1099,'2017-05-20 21:52:12','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1100,'2017-05-20 21:52:12','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1101,'2017-05-20 21:52:12','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1102,'2017-05-20 21:52:44','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1103,'2017-05-20 21:52:44','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1104,'2017-05-20 21:52:44','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1105,'2017-05-20 21:53:31','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1106,'2017-05-20 21:53:31','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1107,'2017-05-20 21:53:31','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1108,'2017-05-20 21:53:33','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1109,'2017-05-20 21:53:33','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1110,'2017-05-20 21:53:33','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1111,'2017-05-20 21:53:37','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1112,'2017-05-20 21:53:37','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1113,'2017-05-20 21:53:37','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1114,'2017-05-20 21:59:54','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1115,'2017-05-20 21:59:54','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1116,'2017-05-20 21:59:54','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1117,'2017-05-21 23:48:21','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1118,'2017-05-21 23:48:21','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1119,'2017-05-21 23:48:21','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1120,'2017-05-22 00:16:28','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1121,'2017-05-22 00:16:29','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1122,'2017-05-22 00:16:29','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1123,'2017-05-23 13:45:45','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1124,'2017-05-23 13:45:45','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1125,'2017-05-23 13:45:45','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1126,'2017-05-23 13:58:15','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1127,'2017-05-23 13:58:15','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1128,'2017-05-23 13:58:15','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1129,'2017-05-23 14:08:15','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1130,'2017-05-23 14:08:15','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1131,'2017-05-23 14:08:16','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1132,'2017-05-23 15:44:49','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1133,'2017-05-23 15:44:49','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1134,'2017-05-23 15:44:49','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1135,'2017-05-23 15:44:54','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1136,'2017-05-23 15:44:54','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1137,'2017-05-23 15:44:54','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1138,'2017-05-23 15:45:06','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1139,'2017-05-23 15:45:07','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1140,'2017-05-23 15:45:07','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1141,'2017-05-23 15:45:12','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1142,'2017-05-23 15:45:12','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1143,'2017-05-23 15:45:12','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1144,'2017-05-23 15:46:07','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1145,'2017-05-23 15:46:07','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1146,'2017-05-23 15:46:07','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1147,'2017-05-23 15:46:10','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1148,'2017-05-23 15:46:10','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1149,'2017-05-23 15:46:10','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1150,'2017-05-23 15:47:31','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1151,'2017-05-23 15:47:31','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1152,'2017-05-23 15:47:31','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1153,'2017-05-23 15:47:36','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1154,'2017-05-23 15:47:36','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1155,'2017-05-23 15:47:36','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1156,'2017-05-23 16:11:01','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1157,'2017-05-23 16:11:01','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1158,'2017-05-23 16:11:01','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1159,'2017-05-23 16:46:55','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1160,'2017-05-23 16:46:55','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1161,'2017-05-23 16:46:55','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1162,'2017-05-23 18:28:40','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1163,'2017-05-23 18:28:41','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1164,'2017-05-23 18:28:41','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1165,'2017-05-23 18:29:03','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1166,'2017-05-23 18:29:03','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1167,'2017-05-23 18:29:03','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1168,'2017-05-23 19:30:16','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1169,'2017-05-23 19:30:16','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1170,'2017-05-23 19:30:16','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1171,'2017-05-23 19:30:59','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1172,'2017-05-23 19:30:59','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1173,'2017-05-23 19:30:59','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1174,'2017-05-23 19:31:01','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1175,'2017-05-23 19:31:01','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1176,'2017-05-23 19:31:01','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1177,'2017-05-23 19:35:06','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1178,'2017-05-23 19:35:06','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1179,'2017-05-23 19:35:06','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1180,'2017-05-23 19:35:07','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1181,'2017-05-23 19:35:07','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1182,'2017-05-23 19:35:07','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1183,'2017-05-23 19:35:11','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1184,'2017-05-23 19:35:11','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1185,'2017-05-23 19:35:11','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1186,'2017-05-23 19:37:45','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1187,'2017-05-23 19:37:45','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1188,'2017-05-23 19:37:45','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1189,'2017-05-23 19:38:21','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1190,'2017-05-23 19:38:21','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1191,'2017-05-23 19:38:21','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1192,'2017-05-23 19:38:31','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1193,'2017-05-23 19:38:31','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1194,'2017-05-23 19:38:31','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1195,'2017-05-23 19:38:35','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1196,'2017-05-23 19:38:35','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1197,'2017-05-23 19:38:35','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1198,'2017-05-23 19:50:25','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1199,'2017-05-23 19:50:25','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1200,'2017-05-23 19:50:25','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1201,'2017-05-23 19:50:29','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1202,'2017-05-23 19:50:29','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1203,'2017-05-23 19:50:29','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1204,'2017-05-23 19:50:41','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1205,'2017-05-23 19:50:41','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1206,'2017-05-23 19:50:41','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1207,'2017-05-23 19:56:57','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1208,'2017-05-23 19:56:57','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1209,'2017-05-23 19:56:57','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1210,'2017-05-23 19:57:01','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1211,'2017-05-23 19:57:01','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1212,'2017-05-23 19:57:01','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1213,'2017-05-23 19:57:04','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1214,'2017-05-23 19:57:04','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1215,'2017-05-23 19:57:04','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1216,'2017-05-23 19:58:37','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1217,'2017-05-23 19:58:37','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1218,'2017-05-23 19:58:37','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1219,'2017-05-23 19:59:46','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1220,'2017-05-23 19:59:46','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1221,'2017-05-23 19:59:46','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1222,'2017-05-23 19:59:57','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1223,'2017-05-23 19:59:57','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1224,'2017-05-23 19:59:57','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1225,'2017-05-23 20:05:37','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1226,'2017-05-23 20:05:37','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1227,'2017-05-23 20:05:37','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1228,'2017-05-23 20:05:49','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1229,'2017-05-23 20:05:49','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1230,'2017-05-23 20:05:49','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1231,'2017-05-23 20:06:31','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1232,'2017-05-23 20:06:31','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1233,'2017-05-23 20:06:31','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1234,'2017-05-23 20:06:48','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1235,'2017-05-23 20:06:48','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1236,'2017-05-23 20:06:48','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1237,'2017-05-23 20:06:59','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1238,'2017-05-23 20:06:59','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1239,'2017-05-23 20:06:59','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1240,'2017-05-23 20:07:11','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1241,'2017-05-23 20:07:11','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1242,'2017-05-23 20:07:11','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1243,'2017-05-23 20:09:18','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1244,'2017-05-23 20:09:18','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1245,'2017-05-23 20:09:18','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1246,'2017-05-23 20:09:35','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1247,'2017-05-23 20:09:35','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1248,'2017-05-23 20:09:36','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1249,'2017-05-23 20:09:40','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1250,'2017-05-23 20:09:40','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1251,'2017-05-23 20:09:40','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1252,'2017-05-24 13:19:21','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1253,'2017-05-24 13:19:21','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1254,'2017-05-24 13:19:21','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1255,'2017-05-24 13:19:31','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1256,'2017-05-24 13:19:31','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1257,'2017-05-24 13:19:31','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1258,'2017-05-24 13:52:26','admin','E','GET_FICHAS_RS(null)','PROCEDURE gestionverde.GET_FICHAS_RS does not exist',1),(1259,'2017-05-24 14:18:02','admin','E','GET_FICHA_RS(null)','Unknown column \'fich_deno_redu\' in \'field list\'',1),(1260,'2017-05-24 14:19:05','admin','E','GET_FICHA_RS(null)','Unknown column \'fich_deno_redu\' in \'field list\'',1),(1261,'2017-05-24 14:20:23','admin','E','GET_FICHA_RS(null)','Unknown column \'fich_deno_redu\' in \'field list\'',1),(1262,'2017-05-24 14:20:29','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1263,'2017-05-24 14:20:29','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1264,'2017-05-24 14:20:29','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1265,'2017-05-24 14:20:30','admin','E','GET_FICHA_RS(null)','Unknown column \'fich_deno_redu\' in \'field list\'',1),(1266,'2017-05-24 14:24:16','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1267,'2017-05-24 14:24:16','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1268,'2017-05-24 14:24:17','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1269,'2017-05-24 14:24:18','admin','E','GET_FICHA_RS(null)','Unknown column \'fich_deno_redu\' in \'field list\'',1),(1270,'2017-05-24 14:24:22','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1271,'2017-05-24 14:24:22','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1272,'2017-05-24 14:24:22','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1273,'2017-05-24 14:26:05','admin','E','GET_FICHA_RS(null)','Unknown column \'fich_deno_redu\' in \'field list\'',1),(1274,'2017-05-24 14:26:15','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1275,'2017-05-24 14:26:15','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1276,'2017-05-24 14:26:15','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1277,'2017-05-24 14:31:08','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1278,'2017-05-24 14:31:08','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1279,'2017-05-24 14:31:08','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1280,'2017-05-24 14:31:16','admin','E','GET_FICHA_RS(null)','Unknown column \'fich_deno_redu\' in \'field list\'',1),(1281,'2017-05-24 14:31:17','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1282,'2017-05-24 14:31:17','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1283,'2017-05-24 14:31:17','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1284,'2017-05-24 14:33:35','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1285,'2017-05-24 14:33:35','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1286,'2017-05-24 14:33:35','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1287,'2017-05-24 14:35:50','admin','E','GET_ABM_FICHA_RS(null)','Unknown column \'fich_deno_redu\' in \'field list\'',1),(1288,'2017-05-24 14:35:51','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1289,'2017-05-24 14:35:51','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1290,'2017-05-24 14:35:51','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1291,'2017-05-24 14:36:36','admin','E','GET_ABM_FICHA_RS(null)','Unknown column \'fich_deno_redu\' in \'field list\'',1),(1292,'2017-05-24 14:36:37','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1293,'2017-05-24 14:36:37','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1294,'2017-05-24 14:36:38','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1295,'2017-05-24 14:38:28','admin','E','GET_ABM_FICHA_RS(null)','Unknown column \'fich_deno_redu\' in \'field list\'',1),(1296,'2017-05-24 14:43:14','admin','E','GET_ABM_FICHA_RS(null)','Unknown column \'fch_cata_id\' in \'field list\'',1),(1297,'2017-05-24 14:47:08','admin','E','GET_ABM_FICHA_RS(null)','Unknown column \'ficha_cadaid\' in \'where clause\'',1),(1298,'2017-05-24 14:47:22','admin','E','GET_ABM_FICHA_RS(null)','Unknown column \'ficha_cata_id\' in \'where clause\'',1),(1299,'2017-05-24 14:47:33','admin','E','GET_ABM_FICHA_RS(null)','Unknown column \'ficha_cata_id\' in \'where clause\'',1),(1300,'2017-05-24 14:56:10','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1301,'2017-05-24 14:56:10','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1302,'2017-05-24 14:56:10','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1303,'2017-05-24 16:10:29','admin','E','GET_FICHA_RS(\'1\')','Unknown column \'fich_deno_redu\' in \'field list\'',1),(1304,'2017-05-24 16:10:32','admin','E','GET_FICHA_RS(\'1\')','Unknown column \'fich_deno_redu\' in \'field list\'',1),(1305,'2017-05-24 16:10:34','admin','E','GET_FICHA_RS(\'1\')','Unknown column \'fich_deno_redu\' in \'field list\'',1),(1306,'2017-05-24 16:19:48','admin','E','GET_FICHA_RS(\'1\')','Unknown column \'fich_deno_redu\' in \'field list\'',1),(1307,'2017-05-24 17:27:35','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1308,'2017-05-24 17:27:35','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1309,'2017-05-24 17:27:35','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1310,'2017-05-24 21:52:29','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1311,'2017-05-24 21:52:29','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1312,'2017-05-24 21:52:29','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1313,'2017-05-25 19:47:59','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1314,'2017-05-25 19:47:59','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1315,'2017-05-25 19:48:00','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1316,'2017-05-25 20:18:45','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1317,'2017-05-25 20:18:45','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1318,'2017-05-25 20:18:45','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1319,'2017-05-25 20:18:49','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1320,'2017-05-25 20:18:49','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1321,'2017-05-25 20:18:49','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1322,'2017-05-25 20:20:15','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1323,'2017-05-25 20:20:15','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1324,'2017-05-25 20:20:15','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1325,'2017-05-25 20:20:39','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1326,'2017-05-25 20:20:39','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1327,'2017-05-25 20:20:39','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1328,'2017-05-25 20:21:41','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1329,'2017-05-25 20:21:41','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1330,'2017-05-25 20:21:41','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1331,'2017-05-25 21:25:51','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1332,'2017-05-25 21:25:51','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1333,'2017-05-25 21:25:51','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1334,'2017-05-25 21:26:06','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1335,'2017-05-25 21:26:06','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1336,'2017-05-25 21:26:06','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1337,'2017-05-25 21:26:26','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1338,'2017-05-25 21:26:26','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1339,'2017-05-25 21:26:26','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1340,'2017-05-25 21:27:19','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1341,'2017-05-25 21:27:19','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1342,'2017-05-25 21:27:19','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1343,'2017-05-25 21:27:23','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1344,'2017-05-25 21:27:23','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1345,'2017-05-25 21:27:23','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1346,'2017-05-25 21:35:31','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1347,'2017-05-25 21:35:31','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1348,'2017-05-25 21:35:31','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1349,'2017-05-27 18:27:04','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1350,'2017-05-27 18:27:04','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1351,'2017-05-27 18:27:04','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1352,'2017-05-27 19:00:47','admin','E','GET_ABM_FICHA_RS(null)','Incorrect number of arguments for PROCEDURE gestionverde.GET_ABM_FICHA_RS; expected 3, got 1',1),(1353,'2017-05-27 19:00:51','admin','E','GET_TAMANIO_RS(null)','PROCEDURE gestionverde.GET_TAMANIO_RS does not exist',1),(1354,'2017-05-27 19:01:13','admin','E','GET_ABM_FICHA_RS(null)','Incorrect number of arguments for PROCEDURE gestionverde.GET_ABM_FICHA_RS; expected 3, got 1',1),(1355,'2017-05-27 19:02:09','admin','E','GET_ABM_FICHA_RS(null,0)','Incorrect number of arguments for PROCEDURE gestionverde.GET_ABM_FICHA_RS; expected 3, got 2',1),(1356,'2017-05-27 19:03:04','admin','E','GET_ABM_FICHA_RS(null,\'S\')','Incorrect number of arguments for PROCEDURE gestionverde.GET_ABM_FICHA_RS; expected 3, got 2',1),(1357,'2017-05-27 19:15:19','admin','E','GET_TAMANIO_RS(null)','PROCEDURE gestionverde.GET_TAMANIO_RS does not exist',1),(1358,'2017-05-27 19:25:37','admin','E','AM_TAMANIO_RS(\'admin\',\r\n                                       \'\',\r\n                                       \'Pequeño\',\r\n                                       \'Peq.\');','Unknown column \'p_cata_deno\' in \'field list\'',1),(1359,'2017-05-27 19:25:46','admin','E','AM_TAMANIO_RS(\'admin\',\r\n                                       \'\',\r\n                                       \'Mediano\',\r\n                                       \'Med.\');','Unknown column \'p_cata_deno\' in \'field list\'',1),(1360,'2017-05-27 19:26:01','admin','E','AM_TAMANIO_RS(\'admin\',\r\n                                       \'\',\r\n                                       \'Grande\',\r\n                                       \'Gran.\');','Unknown column \'p_cata_deno\' in \'field list\'',1),(1361,'2017-05-27 19:26:01','admin','E','AM_TAMANIO_RS(\'admin\',\r\n                                       \'\',\r\n                                       \'Grande\',\r\n                                       \'Gran.\');','Unknown column \'p_cata_deno\' in \'field list\'',1),(1362,'2017-05-27 19:26:56','admin','E','AM_TAMANIO_RS(\'admin\',\r\n                                       \'\',\r\n                                       \'Mediano\',\r\n                                       \'Med.\');','Unknown column \'p_cata_deno\' in \'field list\'',1),(1363,'2017-05-27 19:27:04','admin','E','AM_TAMANIO_RS(\'admin\',\r\n                                       \'\',\r\n                                       \'Grande\',\r\n                                       \'Gran.\');','Unknown column \'p_cata_deno\' in \'field list\'',1),(1364,'2017-05-27 20:12:44','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1365,'2017-05-27 20:12:44','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1366,'2017-05-27 20:12:44','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1367,'2017-05-27 20:17:37','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1368,'2017-05-27 20:17:37','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1369,'2017-05-27 20:17:37','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1370,'2017-05-27 20:17:42','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1371,'2017-05-27 20:17:42','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1372,'2017-05-27 20:17:42','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1373,'2017-05-27 20:18:19','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1374,'2017-05-27 20:18:19','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1375,'2017-05-27 20:18:19','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1376,'2017-05-27 20:18:57','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1377,'2017-05-27 20:18:57','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1378,'2017-05-27 20:18:57','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1379,'2017-05-27 20:19:15','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1380,'2017-05-27 20:19:15','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1381,'2017-05-27 20:19:15','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1382,'2017-05-27 20:19:37','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1383,'2017-05-27 20:19:37','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1384,'2017-05-27 20:19:37','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1385,'2017-05-27 20:19:56','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1386,'2017-05-27 20:19:56','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1387,'2017-05-27 20:19:56','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1388,'2017-05-27 20:20:29','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1389,'2017-05-27 20:20:29','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1390,'2017-05-27 20:20:30','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1391,'2017-05-27 20:22:05','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1392,'2017-05-27 20:22:05','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1393,'2017-05-27 20:22:05','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1394,'2017-05-27 20:22:10','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1395,'2017-05-27 20:22:11','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1396,'2017-05-27 20:22:11','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1397,'2017-05-27 20:23:40','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1398,'2017-05-27 20:23:41','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1399,'2017-05-27 20:23:41','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1400,'2017-05-27 20:24:56','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1401,'2017-05-27 20:24:56','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1402,'2017-05-27 20:24:56','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1403,'2017-05-27 20:26:51','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1404,'2017-05-27 20:26:51','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1405,'2017-05-27 20:26:51','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1406,'2017-05-27 23:18:04','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1407,'2017-05-27 23:18:04','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1408,'2017-05-27 23:18:04','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1409,'2017-05-28 00:04:29','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1410,'2017-05-28 00:04:29','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1411,'2017-05-28 00:04:29','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1412,'2017-05-28 19:22:05','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1413,'2017-05-28 19:22:05','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1414,'2017-05-28 19:22:05','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1415,'2017-05-28 19:22:13','admin','E','SEL_FUENTES_FICHA_RS(\'\')','Table \'gestionverde.fuente\' doesn\'t exist',1),(1416,'2017-05-28 19:25:44','admin','E','SEL_FUENTES_FICHA_RS(\'\')','Table \'gestionverde.fuente\' doesn\'t exist',1),(1417,'2017-05-28 19:28:23','admin','E','SEL_FUENTES_FICHA_RS(\'1\')','Table \'gestionverde.fuente\' doesn\'t exist',1),(1418,'2017-05-28 19:31:46','admin','E','SEL_FUENTES_FICHA_RS(\'\')','Table \'gestionverde.fuente\' doesn\'t exist',1),(1419,'2017-05-29 23:39:30','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1420,'2017-05-29 23:39:30','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1421,'2017-05-29 23:39:31','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1422,'2017-05-29 23:40:08','admin','E','SEL_FUENTES_FICHA_RS(\'1\')','Table \'gestionverde.fuente\' doesn\'t exist',1),(1423,'2017-05-30 00:23:54','admin','E','AM_FICHA_FASES_RS','ERROR interno al insert ficha_fases',NULL),(1424,'2017-05-30 00:49:17','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1425,'2017-05-30 00:49:17','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1426,'2017-05-30 00:49:17','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1427,'2017-05-30 00:58:27','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1428,'2017-05-30 00:58:27','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1429,'2017-05-30 00:58:27','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1430,'2017-06-03 12:09:16','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1431,'2017-06-03 12:09:16','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1432,'2017-06-03 12:09:16','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1433,'2017-06-03 13:21:25','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1434,'2017-06-03 13:21:25','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1435,'2017-06-03 13:21:25','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1436,'2017-06-03 13:56:53','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1437,'2017-06-03 13:56:53','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1438,'2017-06-03 13:56:53','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1439,'2017-06-03 21:37:08','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1440,'2017-06-03 21:37:08','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1441,'2017-06-03 21:37:08','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1442,'2017-06-03 22:15:16','admin','E','AM_FICHA_MEDIOS_RS','ERROR interno al insert temp #lisfas',NULL),(1443,'2017-06-03 22:15:16','admin','E','AM_FICHA_MEDIOS_RS','ERROR interno al insert temp #lisfas',NULL),(1444,'2017-06-03 22:15:16','admin','E','AM_FICHA_MEDIOS_RS','ERROR interno al insert temp #lisfas',NULL),(1445,'2017-06-03 22:15:25','admin','E','AM_FICHA_MEDIOS_RS','ERROR interno al insert temp #lisfas',NULL),(1446,'2017-06-03 22:15:26','admin','E','AM_FICHA_MEDIOS_RS','ERROR interno al insert temp #lisfas',NULL),(1447,'2017-06-03 22:15:26','admin','E','AM_FICHA_MEDIOS_RS','ERROR interno al insert temp #lisfas',NULL),(1448,'2017-06-03 22:15:26','admin','E','AM_FICHA_MEDIOS_RS','ERROR interno al insert temp #lisfas',NULL),(1449,'2017-06-03 22:16:01','admin','E','AM_FICHA_MEDIOS_RS','ERROR interno al insert temp #lisfas',NULL),(1450,'2017-06-03 22:16:01','admin','E','AM_FICHA_MEDIOS_RS','ERROR interno al insert temp #lisfas',NULL),(1451,'2017-06-03 22:16:01','admin','E','AM_FICHA_MEDIOS_RS','ERROR interno al insert temp #lisfas',NULL),(1452,'2017-06-03 22:16:01','admin','E','AM_FICHA_MEDIOS_RS','ERROR interno al insert temp #lisfas',NULL),(1453,'2017-06-03 22:17:14','admin','E','AM_FICHA_MEDIOS_RS','ERROR interno al insert ficha_fases',NULL),(1454,'2017-06-03 22:18:56','admin','E','SEL_CAMP_CABE_ALUMNO_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CABE_ALUMNO_RS does not exist',1),(1455,'2017-06-03 22:18:56','admin','E','SEL_CAMP_INCRIP_FECHAS_STATUS_RS(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_INCRIP_FECHAS_STATUS_RS does not exist',1),(1456,'2017-06-03 22:18:56','admin','E','SEL_CAMP_CARTEL_TODA_HOY(\'admin\')','PROCEDURE gestionverde.SEL_CAMP_CARTEL_TODA_HOY does not exist',1),(1457,'2017-06-03 22:20:24','admin','E','AM_FICHA_MEDIOS_RS','ERROR interno al insert ficha_fases',NULL),(1458,'2017-06-03 22:30:31','admin','E','AM_FICHA_FASES_RS','ERROR interno al insert ficha_fases',NULL),(1459,'2017-06-03 22:32:24','admin','E','AM_FICHA_RS(\'admin\',\r\n                                   \'\',\r\n                                   \'sonido\',\r\n                                   \'consideración sobre la contaminación del sonido\',\r\n                                   \'\');','Incorrect number of arguments for PROCEDURE gestionverde.AM_FICHA_RS; expected 4, got 5',1),(1460,'2017-06-03 22:34:25','admin','E','AM_FICHA_FASES_RS','ERROR interno al insert ficha_fases',NULL),(1461,'2017-06-03 22:37:37','admin','E','AM_FICHA_FASES_RS','ERROR interno al insert ficha_fases',NULL),(1462,'2017-06-03 22:39:43','admin','E','AM_FICHA_FASES_RS','ERROR interno al insert ficha_fases',NULL),(1463,'2017-06-03 22:44:38','admin','E','AM_FICHA_FASES_RS','ERROR interno al insert ficha_fases',NULL),(1464,'2017-06-03 22:59:00','admin','E','AM_FICHA_FASES_RS','ERROR interno al insert ficha_fases',NULL),(1465,'2017-06-03 23:10:44','admin','E','AM_FICHA_MEDIOS_RS','ERROR interno al insert ficha_fases',NULL),(1466,'2017-06-03 23:12:59','admin','E','AM_FICHA_MEDIOS_RS','ERROR interno al insert ficha_fases',NULL),(1467,'2017-06-03 23:24:58','admin','E','AM_FICHA_MEDIOS_RS','ERROR interno al insert ficha_fases',NULL),(1468,'2017-06-03 23:25:07','admin','E','AM_FICHA_MEDIOS_RS','ERROR interno al insert ficha_fases',NULL),(1469,'2017-06-03 23:26:28','admin','E','AM_FICHA_MEDIOS_RS','ERROR interno al insert ficha_fases',NULL),(1470,'2017-06-03 23:27:00','admin','E','AM_FICHA_MEDIOS_RS','ERROR interno al insert ficha_fases',NULL);
+INSERT INTO `usu_incidentes_log` VALUES (1608,'2017-06-12 01:56:14','admin','E','AM_FICHA_FASES_RS','ERROR interno al insert ficha_fases',NULL),(1609,'2017-06-12 01:56:42','admin','E','AM_FICHA_FASES_RS','ERROR interno al insert ficha_fases',NULL),(1610,'2017-06-12 01:59:21','admin','E','AM_FICHA_FASES_RS','ERROR interno al insert ficha_fases',NULL),(1611,'2017-06-12 23:10:52','admin','E','B_FICHA_RS(\'admin\',\r\n                                       \'38\')','PROCEDURE gestionverde.B_FICHA_RS does not exist',1),(1612,'2017-06-12 23:10:56','admin','E','B_FICHA_RS(\'admin\',\r\n                                       \'38\')','PROCEDURE gestionverde.B_FICHA_RS does not exist',1),(1613,'2017-06-12 23:11:41','admin','E','AM_FICHA_FASES_RS','ERROR interno al insert ficha_fases',NULL),(1614,'2017-06-12 23:17:17','admin','E','B_FICHA_RS(\'admin\',\r\n                                       \'8\')','PROCEDURE gestionverde.B_FICHA_RS does not exist',1),(1615,'2017-06-12 23:20:27','admin','E','AM_FICHA_FASES_RS','ERROR interno al insert ficha_fases',NULL),(1616,'2017-06-17 14:11:43','admin','E','B_FICHA_RS(\'admin\',\r\n                                       \'38\')','PROCEDURE gestionverde.B_FICHA_RS does not exist',1),(1617,'2017-06-17 14:13:15','admin','E','AM_FICHA_FASES_RS','ERROR interno al insert ficha_fases',NULL),(1618,'2017-06-17 14:57:06','admin','E','AMB_FICHA_PROCEDIMIENTOS_RS','ERROR interno al insert ficha_procedimientos',NULL),(1619,'2017-06-17 14:58:05','admin','E','AMB_FICHA_PROCEDIMIENTOS_RS','ERROR interno al insert ficha_procedimientos',NULL),(1620,'2017-06-18 21:08:40','admin','E','AMB_FICHA_PROCEDIMIENTOS_RS','ERROR interno al insert ficha_procedimientos',NULL),(1621,'2017-06-18 21:09:03','admin','E','AMB_FICHA_PROCEDIMIENTOS_RS','ERROR interno al insert ficha_procedimientos',NULL),(1622,'2017-06-20 13:27:26','admin','E','AMB_FICHA_PROCEDIMIENTOS_RS','ERROR interno al insert ficha_procedimientos',NULL),(1623,'2017-06-20 13:28:18','admin','E','AMB_FICHA_PROCEDIMIENTOS_RS','ERROR interno al insert ficha_procedimientos',NULL),(1624,'2017-06-20 14:58:58','admin','E','GET_FASE_RS(null)','Incorrect number of arguments for PROCEDURE gestionverde.GET_FASE_RS; expected 2, got 1',1),(1625,'2017-06-20 16:39:58','admin','E','GET_ABM_FICHA_RS(\'admin\', \'2\',\'\')','Incorrect number of arguments for PROCEDURE gestionverde.GET_ABM_FICHA_RS; expected 8, got 3',1),(1626,'2017-06-20 16:40:13','admin','E','GET_ABM_FICHA_RS(\'admin\', \'2\',\'\')','Incorrect number of arguments for PROCEDURE gestionverde.GET_ABM_FICHA_RS; expected 8, got 3',1),(1627,'2017-06-20 17:50:22','admin','E','GET_ABM_FICHA_RS(\'admin\', \r\n                                  \'2\',\'\"0\",\"0\",\"0\",\"0\",\"NF\",\')','Incorrect number of arguments for PROCEDURE gestionverde.GET_ABM_FICHA_RS; expected 8, got 3',1),(1628,'2017-06-20 17:50:30','admin','E','','You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near \'\' at line 1',1),(1629,'2017-06-20 17:51:40','admin','E','','You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near \'\' at line 1',1),(1630,'2017-06-20 17:51:53','admin','E','','You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near \'\' at line 1',1),(1631,'2017-06-20 17:55:09','admin','E','','You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near \'\' at line 1',1),(1632,'2017-06-20 17:55:59','admin','E','GET_ABM_FICHA_RS(\'admin\', \r\n                                  \'\',\'\"0\",\"0\",\"0\",\"0\",\"NF\",\')','Incorrect number of arguments for PROCEDURE gestionverde.GET_ABM_FICHA_RS; expected 8, got 3',1),(1633,'2017-06-20 18:07:49','admin','E','GET_ABM_FICHA_RS(\'admin\', \r\n                                  \'2\',\'\"0\",\"0\",\"0\",\"0\",\"NF\",\')','Incorrect number of arguments for PROCEDURE gestionverde.GET_ABM_FICHA_RS; expected 8, got 3',1),(1634,'2017-06-20 18:21:38','admin','E','GET_ABM_FICHA_RS(\'admin\', \'0\',\'0\',0\',0\',0\',\',\')','You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near \'\',0\',0\',\',\')\' at line 1',1),(1635,'2017-06-20 18:23:38','admin','E','GET_ABM_FICHA_RS(\'admin\', \'0\',\'0\',0\',0\',0\',\',\')','You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near \'\',0\',0\',\',\')\' at line 1',1),(1636,'2017-06-20 18:23:53','admin','E','GET_ABM_FICHA_RS(\'admin\', \'0\',\'0\',0\',0\',0\',\',\')','You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near \'\',0\',0\',\',\')\' at line 1',1),(1637,'2017-06-20 18:23:57','admin','E','GET_ABM_FICHA_RS(\'admin\', \'0\',\'0\',0\',0\',0\',\',\')','You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near \'\',0\',0\',\',\')\' at line 1',1);
 /*!40000 ALTER TABLE `usu_incidentes_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -555,7 +641,7 @@ CREATE TABLE `usu_menues_apli` (
 
 LOCK TABLES `usu_menues_apli` WRITE;
 /*!40000 ALTER TABLE `usu_menues_apli` DISABLE KEYS */;
-INSERT INTO `usu_menues_apli` VALUES ('GAMSI','m_abmfichas','m_fichas','m_abmfichas','ABM Fichas','abmFichas/abmFichas','S','2017-05-01','admin',NULL,NULL,10,'icon-user'),('GAMSI','m_admin','m_admin',' ','Seguridad',NULL,'S','2017-05-01','admin',NULL,NULL,40,'icon-user'),('GAMSI','m_catalogos','m_tablas','m_catalogos','Cat&aacute;logos','catalogos/catalogos','S','2017-05-01','admin',NULL,NULL,10,'icon-user'),('GAMSI','m_consfichas','m_fichas','m_consfichas','Consulta Fichas','consultaFichas/consultaFichas','S','2017-05-01','admin',NULL,NULL,20,'icon-user'),('GAMSI','m_fases','m_tablas','m_fases','Fases','fases/fases','S','2017-05-01','admin',NULL,NULL,20,'icon-user'),('GAMSI','m_fichas','m_fichas',' ','Fichas','','S','2017-05-01','admin',NULL,NULL,20,'icon-user'),('GAMSI','m_medios','m_tablas','m_medios','Medios','medios/medios','S','2017-05-01','admin',NULL,NULL,40,'icon-user'),('GAMSI','m_proyectos','m_proyectos',' ','Proyectos','','S','2017-05-01','admin',NULL,NULL,30,'icon-user'),('GAMSI','m_proye_arma','m_proyectos','m_proye_arma','Armado de Proyecto','armaProyecto/armaProyecto','S','2017-05-01','admin',NULL,NULL,10,'icon-user'),('GAMSI','m_proye_baja','m_proyectos','m_proye_baja','Baja de Proyecto','bajaProyecto/bajaProyecto','S','2017-05-01','admin',NULL,NULL,20,'icon-user'),('GAMSI','m_proye_segui','m_proyectos','m_proye_segui','Segumiento de Proyecto','seguiProyecto/seguiProyecto','S','2017-05-01','admin',NULL,NULL,30,'icon-user'),('GAMSI','m_tablas','m_tablas',' ','Tablas','','S','2017-05-01','admin',NULL,NULL,10,'icon-user'),('GAMSI','m_tamanio','m_tablas','m_tamanio','Tama&ntilde;os','tamanios/tamanios','S','2017-05-01','admin',NULL,NULL,30,'icon-user'),('GAMSI','m_ulogaccesos','m_admin','m_ulogaccesos','Log de Usuarios','usuarios/logs','S','2017-05-01','admin',NULL,NULL,60,'icon-user'),('GAMSI','m_uroles','m_admin','m_uroles','Definir Roles','roles/roles','S','2017-05-01','admin',NULL,NULL,20,'icon-user'),('GAMSI','m_usuarios','m_admin','m_usuarios','Usuarios','usuarios/lista','S','2017-05-01','admin',NULL,NULL,30,'icon-user');
+INSERT INTO `usu_menues_apli` VALUES ('GAMSI','m_abmfichas','m_fichas','m_abmfichas','ABM Fichas','abmFichas/abmFichas','S','2017-05-01','admin',NULL,NULL,10,'icon-user'),('GAMSI','m_admin','m_admin',' ','Seguridad',NULL,'S','2017-05-01','admin',NULL,NULL,40,'icon-user'),('GAMSI','m_catalogos','m_tablas','m_catalogos','Cat&aacute;logos','catalogos/catalogos','S','2017-05-01','admin',NULL,NULL,10,'icon-user'),('GAMSI','m_consfichas','m_fichas','m_consfichas','Consulta Fichas','consultaFichas/consultaFichas','S','2017-05-01','admin',NULL,NULL,20,'icon-user'),('GAMSI','m_fases','m_tablas','m_fases','Fases','fases/fases','S','2017-05-01','admin',NULL,NULL,20,'icon-user'),('GAMSI','m_fichas','m_fichas',' ','Fichas','','S','2017-05-01','admin',NULL,NULL,20,'icon-user'),('GAMSI','m_medios','m_tablas','m_medios','Medios','medios/medios','S','2017-05-01','admin',NULL,NULL,40,'icon-user'),('GAMSI','m_proyectos','m_proyectos',' ','Proyectos','','S','2017-05-01','admin',NULL,NULL,30,'icon-user'),('GAMSI','m_proye_arma','m_proyectos','m_proye_arma','Armado de Proyecto','armaProyecto/armaProyecto','S','2017-05-01','admin',NULL,NULL,10,'icon-user'),('GAMSI','m_proye_baja','m_proyectos','m_proye_baja','Baja de Proyecto','bajaProyecto/bajaProyecto','S','2017-05-01','admin',NULL,NULL,20,'icon-user'),('GAMSI','m_proye_segui','m_proyectos','m_proye_segui','Segumiento de Proyecto','seguiProyecto/seguiProyecto','S','2017-05-01','admin',NULL,NULL,30,'icon-user'),('GAMSI','m_tablas','m_tablas',' ','Tablas','','S','2017-05-01','admin',NULL,NULL,10,'icon-user'),('GAMSI','m_tamanio','m_tablas','m_tamanio','Tama&ntilde;os','tamanios/tamanios','S','2017-05-01','admin',NULL,NULL,30,'icon-user'),('GAMSI','m_tipologia','m_tablas','m_tipologia','Tipologias','tipologias/tipologias','S','2017-05-01','admin',NULL,NULL,30,'icon-user'),('GAMSI','m_ulogaccesos','m_admin','m_ulogaccesos','Log de Usuarios','usuarios/logs','S','2017-05-01','admin',NULL,NULL,60,'icon-user'),('GAMSI','m_uroles','m_admin','m_uroles','Definir Roles','roles/roles','S','2017-05-01','admin',NULL,NULL,20,'icon-user'),('GAMSI','m_usuarios','m_admin','m_usuarios','Usuarios','usuarios/lista','S','2017-05-01','admin',NULL,NULL,30,'icon-user');
 /*!40000 ALTER TABLE `usu_menues_apli` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1468,6 +1554,126 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `AMB_FICHA_PROCEDIMIENTOS_RS` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AMB_FICHA_PROCEDIMIENTOS_RS`(
+  IN p_user varchar(50),
+  IN p_fipr_fich_id int,
+  IN p_fipr_proce_id int,
+  IN p_fipr_texto varchar(900),
+  IN p_fipr_baja varchar(5)
+)
+BEGIN
+
+-- AMB_FICHA_PROCEDIMIENTOS_RS('admin',1,'5','proc uno ','')
+-- AMB_FICHA_PROCEDIMIENTOS_RS('admin',1,'6','proc 2 ','on')
+-- AMB_FICHA_PROCEDIMIENTOS_RS('admin',1,'0','nuevo','')  
+DECLARE v_respuesta varchar(100) DEFAULT 'OK';
+DECLARE v_errores varchar(2000) DEFAULT NULL;
+DECLARE v_baja char(1) DEFAULT 'N';
+
+
+IF p_fipr_baja = 'on' THEN
+	set v_baja = 'S';
+END IF;
+IF trim(p_fipr_texto) = '' or p_fipr_texto is null THEN
+	set v_baja = 'S';
+END IF;
+
+
+IF v_baja = 'S' THEN
+
+	BEGIN -- baja
+	  DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+	  BEGIN -- de excepcion
+		ROLLBACK;
+		SET v_respuesta = F_ZZI_LOG_ERR(p_user,'ERROR interno al eliminar ficha_procedimientos','AMB_FICHA_PROCEDIMIENTOS_RS');
+	  END; -- de excepcion
+
+	  UPDATE ficha_procedimientos
+		 SET fipr_baja_usu = p_user,
+			 fipr_baja_f   = date(CURDATE())
+	   WHERE fipr_fich_id = p_fipr_fich_id
+	   AND fipr_proce_id  = p_fipr_proce_id;
+	END;
+                
+ELSE  
+	IF p_fipr_proce_id = 0 THEN
+
+		  BEGIN -- alta
+			DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+			BEGIN -- de excepcion
+				ROLLBACK;
+				SET v_respuesta = F_ZZI_LOG_ERR(p_user,'ERROR interno al insert ficha_procedimientos','AMB_FICHA_PROCEDIMIENTOS_RS');
+			END; -- de excepcion
+		
+			INSERT INTO ficha_procedimientos (
+			  fipr_fich_id,
+			  fipr_proce_id,
+			  fipr_texto,
+			  fipr_alta_f,
+			  fipr_alta_usu) 
+			SELECT p_fipr_fich_id,
+				  ifnull(max(fipr_proce_id),0) + 1,
+				  trim(p_fipr_texto),
+				  date(CURDATE()),
+				  p_user
+			FROM ficha_procedimientos
+			WHERE fipr_fich_id  = p_fipr_fich_id; 
+			
+		  END; -- alta
+	ELSE -- no es alta
+			BEGIN -- modifica
+			  DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+			  BEGIN -- de excepcion
+				ROLLBACK;
+				SET v_respuesta = F_ZZI_LOG_ERR(p_user,'ERROR interno al update ficha_procedimientos','AMB_FICHA_PROCEDIMIENTOS_RS');
+			  END; -- de excepcion
+
+			  UPDATE ficha_procedimientos
+				 SET fipr_texto     = trim(p_fipr_texto),
+					 fipr_baja_f    = null
+			   WHERE fipr_fich_id = p_fipr_fich_id
+			   AND fipr_proce_id  = p_fipr_proce_id;
+			END;
+	  -- DBMS_OUTPUT.PUT_LINE('Log...'||trim(p_user)||'-'||upper(trim(P_TIDC_CODIGO))||'-'|| v_log||' de tipo de documento : '||initcap(trim(P_TIDC_DESCRIPCION)));
+	  -- A_LOG_ficha_procedimientosS(trim(p_user), upper(trim(P_TIDC_CODIGO)), v_log||' de tipo de documento : '||initcap(trim(P_TIDC_DESCRIPCION)));
+	  END IF;
+END IF;
+
+/*
+INSERT INTO usu_accesos_log (usal_usua_nombre,usal_orden,usal_empre,usal_clave,usal_codigo_number,usal_codigo_char,usal_vistas,usal_alta_f)
+	
+values  (p_user,
+		1,
+		1,
+		'ACTUALIZA',
+		LAST_INSERT_ID(),
+		'ficha_procedimientos',
+		concat('ficha_procedimientos ',p_cata_deno),
+		now());
+    */
+COMMIT;
+  
+  SELECT v_respuesta as respuesta,
+         case when v_respuesta = 'OK' then 'Actualización correcta' else '' end as respues_exito
+    FROM DUAL;  
+
+  
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `AM_CATALOGO_RS` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1833,13 +2039,15 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `AM_FICHA_RS`(
   IN p_fich_id int,
   IN p_fich_deno varchar(500),
   IN p_fich_desc varchar(500),
-  IN p_fich_cata_id int
+  IN p_fich_cata_id int,
+  OUT out_id int
 )
 BEGIN
   DECLARE v_fich_id_dup int; 
   DECLARE v_respuesta varchar(100) DEFAULT 'OK';
   DECLARE v_errores varchar(2000) DEFAULT NULL;
-  
+  DECLARE out_id  int;
+ 
   
 -- valildo que no haya otra denominacion igual
 select fich_id into v_fich_id_dup 
@@ -1876,6 +2084,7 @@ if v_respuesta = 'OK' then
 			  p_fich_cata_id,
 			  date(CURDATE()),
 			  p_user);
+		
 		  END; -- alta
 		  
 	ELSE -- no es alta
@@ -1910,13 +2119,282 @@ if v_respuesta = 'OK' then
 			now());
 	  */  
 	COMMIT;
+    
 end if;
+  
+  SELECT v_respuesta as respuesta,
+         case when v_respuesta = 'OK' then 'Actualización correcta' else '' end as respues_exito, 
+         case when v_respuesta = 'OK' then  (select  LAST_INSERT_ID()) else '' end as respuesta_id
+    FROM DUAL;
+ 
+
+  
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `AM_FICHA_TAMANIOS_RS` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AM_FICHA_TAMANIOS_RS`(
+  IN p_user varchar(50),
+  IN p_fich_id varchar(20),
+  IN p_lista_tamanios_apli varchar(500)
+)
+BEGIN
+  DECLARE v_respuesta varchar(100) DEFAULT 'OK';
+  DECLARE v_errores varchar(2000) DEFAULT NULL;
+  DECLARE v_sql varchar(1000);
+  DECLARE v_lista varchar(500) DEFAULT p_lista_tamanios_apli;
+
+-- call AM_FICHA_TAMANIOS_RS('admin','2','1,2,')
+  
+-- Borro todas y repongo las Ok
+BEGIN 
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+	BEGIN 
+		ROLLBACK;
+		SET v_respuesta = F_ZZI_LOG_ERR(p_user,'ERROR interno al delete ficha_fases','AM_FICHA_TAMANIOS_RS');
+	END; 
+	    
+	DELETE from ficha_tamanio
+	where fita_fich_id = p_fich_id;
+END; 
+
+BEGIN 
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+	BEGIN 
+		ROLLBACK;
+		SET v_respuesta = F_ZZI_LOG_ERR(p_user,'ERROR interno al insert temp #lisfas','AM_FICHA_TAMANIOS_RS');
+	END; 
+	
+	set v_lista = left(v_lista,length(v_lista) - 1);
+	set v_lista = concat('INSERT INTO listama VALUES (',replace(v_lista,',','),('),');');
+	DROP TEMPORARY TABLE IF EXISTS listama;
+	CREATE TEMPORARY TABLE listama (tama int NULL);
+	SET @query = v_lista;
+	PREPARE stmt FROM @query;
+	EXECUTE stmt;
+	DEALLOCATE PREPARE stmt;
+END;
+
+
+BEGIN 
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+	BEGIN 
+		ROLLBACK;
+		SET v_respuesta = F_ZZI_LOG_ERR(p_user,'ERROR interno al insert ficha_fases','AM_FICHA_TAMANIOS_RS');
+	END; 
+    
+    
+    INSERT INTO ficha_tamanio (fita_fich_id,
+								fita_tama_id,
+								fita_alta_f,
+								fita_alta_usu) 
+	  select  p_fich_id,
+			  listama.tama,
+			  date(CURDATE()),
+			  p_user
+		from listama;
+END;
+
+
+  IF v_respuesta = 'OK' THEN
+  	 
+	 INSERT INTO usu_accesos_log (usal_usua_nombre,usal_empre,usal_clave,usal_codigo_char,usal_vistas,usal_alta_f)
+        VALUES  (p_fich_id,1,'ACTUALIZA',0,concat('Incluye tamanio ',' tamanios (',v_lista,')'),now());
+  ELSE
+     SET v_respuesta := 'No se puede concretar la operacion : '||v_errores; 
+  END IF;
+  COMMIT;
   
   SELECT v_respuesta as respuesta,
          case when v_respuesta = 'OK' then 'Actualización correcta' else '' end as respues_exito
     FROM DUAL;  
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `AM_FICHA_TIPOLOGIAS_RS` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AM_FICHA_TIPOLOGIAS_RS`(
+  IN p_user varchar(50),
+  IN p_fich_id varchar(20),
+  IN p_lista_tipologias_apli varchar(500)
+)
+BEGIN
+  DECLARE v_respuesta varchar(100) DEFAULT 'OK';
+  DECLARE v_errores varchar(2000) DEFAULT NULL;
+  DECLARE v_sql varchar(1000);
+  DECLARE v_lista varchar(500) DEFAULT p_lista_tipologias_apli;
 
+-- call AM_FICHA_TIPOLOGIAS_RS('admin','2','1,2,')
   
+-- Borro todas y repongo las Ok
+BEGIN 
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+	BEGIN 
+		ROLLBACK;
+		SET v_respuesta = F_ZZI_LOG_ERR(p_user,'ERROR interno al delete ficha_fases','AM_FICHA_TIPOLOGIAS_RS');
+	END; 
+	    
+	DELETE from ficha_tipologia
+	where fiti_fich_id = p_fich_id;
+END; 
+
+BEGIN 
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+	BEGIN 
+		ROLLBACK;
+		SET v_respuesta = F_ZZI_LOG_ERR(p_user,'ERROR interno al insert temp #lisfas','AM_FICHA_TIPOLOGIAS_RS');
+	END; 
+	
+	set v_lista = left(v_lista,length(v_lista) - 1);
+	set v_lista = concat('INSERT INTO listipo VALUES (',replace(v_lista,',','),('),');');
+	DROP TEMPORARY TABLE IF EXISTS listipo;
+	CREATE TEMPORARY TABLE listipo (tipo int NULL);
+	SET @query = v_lista;
+	PREPARE stmt FROM @query;
+	EXECUTE stmt;
+	DEALLOCATE PREPARE stmt;
+END;
+
+
+BEGIN 
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+	BEGIN 
+		ROLLBACK;
+		SET v_respuesta = F_ZZI_LOG_ERR(p_user,'ERROR interno al insert ficha_fases','AM_FICHA_TIPOLOGIAS_RS');
+	END; 
+    
+    
+    INSERT INTO ficha_tipologia (fiti_fich_id,
+								fiti_tipo_id,
+								fiti_alta_f,
+								fiti_alta_usu) 
+	  select  p_fich_id,
+			  listipo.tipo,
+			  date(CURDATE()),
+			  p_user
+		from listipo;
+END;
+
+
+  IF v_respuesta = 'OK' THEN
+  	 
+	 INSERT INTO usu_accesos_log (usal_usua_nombre,usal_empre,usal_clave,usal_codigo_char,usal_vistas,usal_alta_f)
+        VALUES  (p_fich_id,1,'ACTUALIZA',0,concat('Incluye tipologias ',' tipologias (',v_lista,')'),now());
+  ELSE
+     SET v_respuesta := 'No se puede concretar la operacion : '||v_errores; 
+  END IF;
+  COMMIT;
+  
+  SELECT v_respuesta as respuesta,
+         case when v_respuesta = 'OK' then 'Actualización correcta' else '' end as respues_exito
+    FROM DUAL;  
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `AM_MEDIO_RS` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AM_MEDIO_RS`(
+	IN p_user varchar(50),
+	IN p_medio_id int,
+	IN p_medio_deno varchar(500),
+	IN p_medio_deno_redu varchar(500)
+)
+BEGIN
+	DECLARE v_medio_id int; 
+	DECLARE v_respuesta varchar(100) DEFAULT 'OK';
+	DECLARE v_errores varchar(2000) DEFAULT NULL;
+    
+    IF NOT EXISTS (SELECT 1 FROM medio WHERE medi_id = p_medio_id) THEN
+		BEGIN -- alta
+			DECLARE CONTINUE HANDLER FOR SQLEXCEPTION -- excepcion
+			BEGIN
+				ROLLBACK;
+				SET v_respuesta = F_ZZI_LOG_ERR(p_user,'ERROR interno al insert medio','AM_MEDIO_RS');
+			END;
+		
+			INSERT INTO medio (
+				medi_deno,
+				medi_deno_redu,
+				medi_alta_f,
+				medi_alta_usu)
+			VALUES (
+				p_medio_deno,
+				p_medio_deno_redu,
+				date(CURDATE()),
+				p_user);
+		END;
+	ELSE
+		BEGIN -- modifica
+			DECLARE CONTINUE HANDLER FOR SQLEXCEPTION -- excepcion
+			BEGIN
+				ROLLBACK;
+				SET v_respuesta = F_ZZI_LOG_ERR(p_user,'ERROR interno al actualizar medio','AM_MEDIO_RS');
+			END;
+			
+            UPDATE medio
+			SET medi_deno      = p_medio_deno,
+			medi_deno_redu = p_medio_deno_redu,
+			medi_baja_f    = null
+			WHERE medi_id = p_medio_id;
+        END;
+END IF;
+	
+    INSERT INTO usu_accesos_log (
+		usal_usua_nombre,usal_orden,
+		usal_empre,usal_clave,
+		usal_codigo_number,
+		usal_codigo_char,
+		usal_vistas,
+		usal_alta_f)
+	VALUES  (
+		p_user,
+		1,
+		1,
+		'ACTUALIZA',
+		LAST_INSERT_ID(),
+		'medio',
+		concat('Medio ',p_medio_deno),
+		now());
+    COMMIT;
+	SELECT v_respuesta as respuesta,
+		CASE WHEN v_respuesta = 'OK'
+		THEN 'Actualización correcta'
+		ELSE'' end as respues_exito
+    FROM DUAL;  
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1935,17 +2413,17 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `AM_TAMANIO_RS`( 
   IN p_user varchar(50),
-  IN p_tamanio_id int,
-  IN p_tamanio_deno varchar(500),
-  IN p_tamanio_deno_redu varchar(500)
+  IN p_tama_id int,
+  IN p_tama_deno varchar(500),
+  IN p_tama_deno_redu varchar(500)
 )
 BEGIN
-  DECLARE v_tamanio_id int; 
+  DECLARE v_tama_id int; 
   DECLARE v_respuesta varchar(100) DEFAULT 'OK';
   DECLARE v_errores varchar(2000) DEFAULT NULL;
   
 IF NOT EXISTS (SELECT 1 FROM tamanio
-                    WHERE tamanio_id = p_tamanio_id) THEN
+                    WHERE tama_id = p_tama_id) THEN
       BEGIN -- alta
         DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
         BEGIN -- de excepcion
@@ -1954,13 +2432,13 @@ IF NOT EXISTS (SELECT 1 FROM tamanio
         END; -- de excepcion
         
         INSERT INTO tamanio (
-          tamanio_deno,
-          tamanio_deno_redu,
-          tamanio_alta_f,
-          tamanio_alta_usu)
+          tama_deno,
+          tama_deno_redu,
+          tama_alta_f,
+          tama_alta_usu)
         VALUES (
-          p_tamanio_deno,
-          p_tamanio_deno_redu,
+          p_tama_deno,
+          p_tama_deno_redu,
           date(CURDATE()),
           p_user);
       END; -- alta
@@ -1973,10 +2451,10 @@ ELSE -- no es alta
           END; -- de excepcion
 
           UPDATE tamanio
-             SET tamanio_deno      = p_tamanio_deno,
-				 tamanio_deno_redu = p_tamanio_deno_redu,
-                 tamanio_baja_f    = null
-           WHERE tamanio_id = p_tamanio_id;
+             SET tama_deno      = p_tama_deno,
+				 tama_deno_redu = p_tama_deno_redu,
+                 tama_baja_f    = null
+           WHERE tama_id = p_tama_id;
         END;
   -- DBMS_OUTPUT.PUT_LINE('Log...'||trim(p_user)||'-'||upper(trim(P_TIDC_CODIGO))||'-'|| v_log||' de tipo de documento : '||initcap(trim(P_TIDC_DESCRIPCION)));
   -- A_LOG_CATALOGOS(trim(p_user), upper(trim(P_TIDC_CODIGO)), v_log||' de tipo de documento : '||initcap(trim(P_TIDC_DESCRIPCION)));
@@ -1990,7 +2468,7 @@ values  (p_user,
 		'ACTUALIZA',
 		LAST_INSERT_ID(),
 		'tamanio',
-		concat('Tamaño ',p_cata_deno),
+		concat('Tamaño ',p_tama_deno),
 		now());
     
 COMMIT;
@@ -1998,6 +2476,90 @@ COMMIT;
   SELECT v_respuesta as respuesta,
          case when v_respuesta = 'OK' then 'Actualización correcta' else '' end as respues_exito
     FROM DUAL;  
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `AM_TIPOLOGIA_RS` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AM_TIPOLOGIA_RS`(
+  IN p_user varchar(50),
+  IN p_tipo_id int,
+  IN p_tipo_deno varchar(500),
+  IN p_tipo_deno_redu varchar(500)
+)
+BEGIN
+  DECLARE v_tipo_id int; 
+  DECLARE v_respuesta varchar(100) DEFAULT 'OK';
+  DECLARE v_errores varchar(2000) DEFAULT NULL;
+  
+IF NOT EXISTS (SELECT 1 FROM tipologia
+                    WHERE tipo_id = p_tipo_id) THEN
+      BEGIN -- alta
+        DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+        BEGIN -- de excepcion
+        	ROLLBACK;
+            SET v_respuesta = F_ZZI_LOG_ERR(p_user,'ERROR interno al insert tipo','AM_TIPOLOGIA_RS');
+        END; -- de excepcion
+        
+        INSERT INTO tipologia (
+          tipo_deno,
+          tipo_deno_redu,
+          tipo_alta_f,
+          tipo_alta_usu)
+        VALUES (
+          p_tipo_deno,
+          p_tipo_deno_redu,
+          date(CURDATE()),
+          p_user);
+      END; -- alta
+ELSE -- no es alta
+        BEGIN -- modifica
+          DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+          BEGIN -- de excepcion
+          	ROLLBACK;
+          	SET v_respuesta = F_ZZI_LOG_ERR(p_user,'ERROR interno al update tamaño','AM_TIPOLOGIA_RS');
+          END; -- de excepcion
+
+          UPDATE tipologia
+             SET tipo_deno      = p_tipo_deno,
+				 tipo_deno_redu = p_tipo_deno_redu,
+                 tipo_baja_f    = null
+           WHERE tipo_id = p_tipo_id;
+        END;
+  -- DBMS_OUTPUT.PUT_LINE('Log...'||trim(p_user)||'-'||upper(trim(P_TIDC_CODIGO))||'-'|| v_log||' de tipo de documento : '||initcap(trim(P_TIDC_DESCRIPCION)));
+  -- A_LOG_CATALOGOS(trim(p_user), upper(trim(P_TIDC_CODIGO)), v_log||' de tipo de documento : '||initcap(trim(P_TIDC_DESCRIPCION)));
+  END IF;
+
+
+INSERT INTO usu_accesos_log (usal_usua_nombre,usal_orden,usal_empre,usal_clave,usal_codigo_number,usal_codigo_char,usal_vistas,usal_alta_f)
+	
+values  (p_user,
+		1,
+		1,
+		'ACTUALIZA',
+		LAST_INSERT_ID(),
+		'tipologia',
+		concat('Tamaño ',p_tipo_deno),
+		now());
+    
+COMMIT;
+  
+  SELECT v_respuesta as respuesta,
+         case when v_respuesta = 'OK' then 'Actualización correcta' else '' end as respues_exito
+    FROM DUAL;  
+
+  
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -2088,6 +2650,84 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `B_FICHA_RS` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `B_FICHA_RS`(
+  IN p_user varchar(50),
+  IN p_fich_id int
+)
+BEGIN
+	DECLARE v_respuesta varchar(100) DEFAULT 'OK';
+    
+	BEGIN
+		DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+		BEGIN -- de excepcion
+			ROLLBACK;
+			SET v_respuesta = F_ZZI_LOG_ERR(p_user,'ERROR interno baja catalogo','B_FICHA_RS');
+		END; -- de excepcion
+
+		UPDATE ficha
+		 SET fich_baja_f    = date(CURDATE()),
+			 fich_baja_usu  = p_user
+		WHERE fich_id = p_fich_id;
+	END;
+	 
+	COMMIT;
+
+	SELECT v_respuesta as respuesta,
+		 case when v_respuesta = 'OK' then 'Actualización correcta' else '' end as respues_exito
+	FROM DUAL;  
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `B_MEDIO_RS` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `B_MEDIO_RS`(
+	IN p_user varchar(50),
+	IN p_medio_id int
+)
+BEGIN
+	DECLARE v_respuesta varchar(100) DEFAULT 'OK';
+	BEGIN 
+		DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+		BEGIN -- de excepcion
+			ROLLBACK;
+			SET v_respuesta = F_ZZI_LOG_ERR(p_user,'ERROR interno baja medio','B_TAMANIO_RS');
+		END; -- de excepcion
+		UPDATE medio
+		SET medi_baja_f    = date(CURDATE()),
+		medi_baja_usu  = p_user
+		WHERE medi_id = p_medio_id;
+	END;
+	COMMIT;
+	SELECT v_respuesta as respuesta,
+	case when v_respuesta = 'OK' then 'Actualización correcta' else '' end as respues_exito
+	FROM DUAL;  
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `B_TAMANIO_RS` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -2100,7 +2740,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `B_TAMANIO_RS`(
 	IN p_user varchar(50),
-	IN p_tamanio_id int
+	IN p_tama_id int
 )
 BEGIN
  DECLARE v_respuesta varchar(100) DEFAULT 'OK';
@@ -2114,9 +2754,9 @@ BEGIN
   END; -- de excepcion
 
   UPDATE tamanio
-	 SET tamanio_baja_f    = date(CURDATE()),
-		 tamanio_baja_usu  = p_user
-   WHERE tamanio_id = p_tamanio_id;
+	 SET tama_baja_f    = date(CURDATE()),
+		 tama_baja_usu  = p_user
+   WHERE tama_id = p_tama_id;
 END;
  
 COMMIT;
@@ -2124,6 +2764,78 @@ COMMIT;
 SELECT v_respuesta as respuesta,
 	 case when v_respuesta = 'OK' then 'Actualización correcta' else '' end as respues_exito
 FROM DUAL;  
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `B_TIPOLOGIA_RS` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `B_TIPOLOGIA_RS`(
+  IN p_user varchar(50),
+  IN p_tipo_id int
+)
+BEGIN
+ DECLARE v_respuesta varchar(100) DEFAULT 'OK';
+  
+
+BEGIN 
+  DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+  BEGIN -- de excepcion
+	ROLLBACK;
+	SET v_respuesta = F_ZZI_LOG_ERR(p_user,'ERROR interno baja tipologia','B_TIPOLOGIA_RS');
+  END; -- de excepcion
+
+  UPDATE tipologia
+	 SET tipo_baja_f    = date(CURDATE()),
+		 tipo_baja_usu  = p_user
+   WHERE tipo_id = p_tipo_id;
+END;
+ 
+COMMIT;
+
+SELECT v_respuesta as respuesta,
+	 case when v_respuesta = 'OK' then 'Actualización correcta' else '' end as respues_exito
+FROM DUAL;  
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `GET_ABM_FICHA_OPCIONES_RS` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_ABM_FICHA_OPCIONES_RS`()
+BEGIN
+
+select  'NF' as tabla , 'Nombre de ficha' as deno
+UNION
+select  'DF' as tabla , 'Descrip ficha' as deno
+UNION
+select  'PR' as tabla , 'Procedimientos' as deno
+UNION
+select  'FU' as tabla , 'Fuentes' as deno
+UNION
+select  'RE' as tabla , 'Recurso' as deno;
 
 END ;;
 DELIMITER ;
@@ -2144,21 +2856,92 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_ABM_FICHA_RS`(
     IN p_user char(50),
 	IN p_cata_id int,
+    IN p_fase_id int,
+    IN p_medi_id int,
+    IN p_tipo_id int,
+    IN p_tama_id int,
+    IN p_tabla char(2),
     IN p_descri varchar(50))
 BEGIN
 
--- call GET_ABM_FICHA_RS ('ff',1,'manipula')
-SELECT fich_id,
+DECLARE v_descri varchar(100);
+DECLARE v_sql varchar(2000);
+-- call GET_ABM_FICHA_RS ('admin',0,1,0,0,1,'NF','manipula')
+-- call GET_ABM_FICHA_RS ('admin',1,0,0,0,0,'NF','manipula')
+-- tabla ( de que tabla busco la descrip) :
+--  NF=Nombre ficha , DF=descr ficha, PR=proc FU=fuentes, RE=recurso
+
+set v_sql = 'SELECT fich_id,
 		   f_proper(cata_deno) as cata_deno,
 		   f_proper(fich_deno) as fich_deno,
            fich_desc 
-	FROM ficha,catalogo
-    
-    WHERE fich_cata_id = cata_id
-    AND (cata_id = p_cata_id or p_cata_id = 0)
-    AND (fich_deno like concat('%',p_descri,'%') or p_descri is null)
+	FROM ficha, catalogo
+	WHERE fich_cata_id = cata_id
+    AND (fich_cata_id = p_cata_id or p_cata_id = 0)
     AND fich_baja_f is null
-    ORDER BY 2;
+    AND (exists(select 1 from ficha_fases
+			    where fifa_fich_id = fich_id
+                and   fifa_fase_id = p_fase_id
+                and   fifa_baja_f is null) or (p_fase_id = 0))
+    AND (exists(select 1 from ficha_medios
+			    where fime_fich_id = fich_id
+                and   fime_medi_id = p_medi_id
+                and   fime_baja_f is null) or (p_medi_id = 0))  
+/*	AND (exists(select 1 from ficha_tipologias
+			    where fifa_fich_id = fich_id
+                and   fifa_tipo_id = p_tipo_id
+                and   fifa_baja_f is null) or (p_tipo_id = 0))
+	AND (exists(select 1 from ficha_tamanio
+			    where fita_fich_id = fich_id
+                and   fita_tama_id = p_tama_id
+                and   fita_baja_f is null) or (p_tama_id = 0)) */
+    ';
+    
+
+SET v_sql = REPLACE(v_sql, 'p_cata_id', p_cata_id);
+SET v_sql = REPLACE(v_sql, 'p_fase_id', p_fase_id);
+SET v_sql = REPLACE(v_sql, 'p_medi_id', p_medi_id);
+SET v_sql = REPLACE(v_sql, 'p_tipo_id', p_tipo_id);
+SET v_sql = REPLACE(v_sql, 'p_tama_id', p_tama_id);
+
+if p_descri <> '' and p_descri is not null then
+	set v_descri = concat("'%",rtrim(p_descri),"%'");
+
+    if p_tabla = 'NF' then 
+		set v_sql = concat(v_sql,' AND fich_deno like ',v_descri) ;
+	end if;
+    if p_tabla = 'DF' then 
+		set v_sql = concat(v_sql,' AND fich_desc like ',v_descri) ;
+	end if;
+    if p_tabla = 'PR' then 
+		set v_sql = concat(v_sql,' AND exists(select 1 from ficha_procedimientos 
+ 			    where fipr_fich_id = fich_id
+                 and  fipr_texto like ',v_descri,'
+                 and  fipr_baja_f is null)') ;
+                 select v_descri;
+	end if;
+    if p_tabla = 'FU' then 
+         set v_sql = concat(v_sql,' AND exists(select 1 from ficha_fuentes
+ 			    where fifu_fich_id = fich_id
+                 and  fifu_texto like ',v_descri,'
+                 and  fifu_baja_f is null)');
+	end if;
+                 
+    if p_tabla = 'RE' then 
+		set v_sql = v_sql + '' ;
+    end if;
+
+end if;
+
+set v_sql = concat(v_sql,' ORDER BY 2;');
+
+-- select v_sql;
+
+SET @query = v_sql;
+PREPARE stmt FROM @query;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt; 
+
 
 END ;;
 DELIMITER ;
@@ -2236,7 +3019,9 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_FASE_RS`(
-	IN p_fase_id int)
+	IN p_fase_id int,
+	IN p_todos char(1)
+    )
 BEGIN
 	SELECT fase_id,
 		   f_proper(fase_deno) as fase_deno,
@@ -2245,7 +3030,41 @@ BEGIN
 	FROM fase
     WHERE (fase_id = p_fase_id or p_fase_id is null)
     AND fase_baja_f is null
+    UNION
+		select 0 as fase_id,
+		'(todos)' as fase_deno,
+        '(todos)' as fase_deno_redu
+        from dual
+        where p_todos ='S'
     ORDER BY 2;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `GET_FICHA_PROCEDIMIENTOS_RS` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_FICHA_PROCEDIMIENTOS_RS`(
+  IN p_fich_id int
+)
+BEGIN
+SELECT fipr_proce_id,
+    fipr_texto,
+    fipr_alta_f,
+    fipr_alta_usu
+FROM ficha_procedimientos
+WHERE (fipr_fich_id = p_fich_id)
+AND fipr_baja_f is null
+order by 2;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -2269,12 +3088,50 @@ BEGIN
 SELECT fich_id,
     fich_deno,
     fich_desc,
+    fich_cata_id,
     fich_alta_f,
-    fich_alta_usu
+    fich_alta_usu,
+	cata_deno
 FROM ficha
+  left outer join catalogo on fich_cata_id = cata_id
 WHERE (fich_id = p_fich_id or p_fich_id is null)
 AND fich_baja_f is null
 order by 2;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `GET_MEDIO_RS` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_MEDIO_RS`(
+	IN p_medio_id int,
+    IN p_todos char (1)
+)
+BEGIN
+	SELECT medi_id,
+	f_proper(medi_deno) as medi_deno,
+    f_proper(medi_deno_redu) as medi_deno_redu
+	FROM medio
+    WHERE (medi_id = p_medio_id or p_medio_id is null)
+    AND medi_baja_f is null
+    UNION
+		select 0 as medi_id,
+		'(todos)' as medi_deno,
+        '(todos)' as medi_deno_redu
+        from dual
+        where p_todos ='S'
+    
+    ORDER BY 2;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -2317,16 +3174,61 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_TAMANIO_RS`(
-	IN p_tamanio_id int)
+	IN p_tama_id int,
+	IN p_todos char(1)
+)
 BEGIN
-	SELECT tamanio_id,
-		   f_proper(tamanio_deno) as tamanio_deno,
-           f_proper(tamanio_deno_redu) as tamanio_deno_redu
+	SELECT tama_id,
+		   f_proper(tama_deno) as tama_deno,
+           f_proper(tama_deno_redu) as tama_deno_redu
 
 	FROM tamanio
-    WHERE (tamanio_id = p_tamanio_id or p_tamanio_id is null)
-    AND tamanio_baja_f is null
+    WHERE (tama_id = p_tama_id or p_tama_id is null)
+    AND tama_baja_f is null
+    UNION
+		select 0 as tama_id,
+		'(todos)' as tama_deno,
+        '(todos)' as tama_deno_redu
+        from dual
+        where p_todos ='S'
+    
     ORDER BY 2;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `GET_TIPOLOGIA_RS` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_TIPOLOGIA_RS`(
+  IN p_tipo_id int,
+  IN p_todos char(1)
+)
+BEGIN
+SELECT tipo_id, 
+	   f_proper(tipo_deno) as tipo_deno,
+       f_proper(tipo_deno_redu) as tipo_deno_redu
+FROM tipologia
+WHERE (tipo_id = p_tipo_id or p_tipo_id is null)
+AND tipo_baja_f is null
+ UNION
+		select 0 as tipo_id,
+		'(todos)' as tipo_deno,
+        '(todos)' as tipo_deno_redu
+        from dual
+        where p_todos ='S'
+
+
+order by 2;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -2530,6 +3432,66 @@ from medio
 	left outer join ficha_medios on fime_fich_id = p_fich_id
 							   and fime_medi_id = medi_id 
 where medi_baja_f is null 
+order by 2;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `SEL_TAMANIO_FICHA_RS` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SEL_TAMANIO_FICHA_RS`(
+IN p_fich_id integer)
+BEGIN
+
+ 
+select tama_id,
+	tama_deno,
+    case when fita_alta_f is null then 'N' else 'S' end as si_no
+from tamanio
+	left outer join ficha_tamanio on fita_fich_id = p_fich_id
+							   and fita_tama_id = tama_id 
+where tama_baja_f is null 
+order by 2;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `SEL_TIPOLOGIA_FICHA_RS` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SEL_TIPOLOGIA_FICHA_RS`(
+IN p_fich_id integer)
+BEGIN
+
+-- call SEL_MEDIOS_FICHA_RS(1)
+select tipo_id,
+	tipo_deno,
+    case when fiti_alta_f is null then 'N' else 'S' end as si_no
+from tipologia
+	left outer join ficha_tipologia on fiti_fich_id = p_fich_id
+							   and fiti_tipo_id = tipo_id 
+where tipo_baja_f is null 
 order by 2;
 
 END ;;
@@ -4500,4 +5462,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-04 11:06:14
+-- Dump completed on 2017-06-20 15:29:55

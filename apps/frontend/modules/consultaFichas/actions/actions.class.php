@@ -21,6 +21,22 @@ class consultaFichasActions extends sfActions
 
          $sql = "GET_CATALOGO_RS(null,'S')";
          $this->dd_cata = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+         $sql = "GET_FASE_RS(null,'S')";
+         $this->dd_fase = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+         $sql = "GET_MEDIO_RS(null,'S')";
+         $this->dd_medi = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+         $sql = "GET_TAMANIO_RS(null,'S')";
+         $this->dd_tama = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+         $sql = "GET_TIPOLOGIA_RS(null,'S')";
+         $this->dd_tipo = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+         $sql = "GET_ABM_FICHA_OPCIONES_RS()";
+         $this->dd_opciones = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
          $this->filasPorPagina = $_SESSION['usuario']['filas_pag'];
 
 	}
@@ -28,19 +44,32 @@ class consultaFichasActions extends sfActions
 	/*------------------------filtro para buscar una ficha------------------------------*/
 	public function executeConsultaTablaFichas(sfWebRequest $request) {
      // echo "<pre>"; print_r($_REQUEST); exit;
-   		$this->id_ficha   	= $request->getParameter("id_ficha");
-      	$this->id_nombre	= $request->getParameter("id_nombre");
-     
+   		$this->cata_id   	= $request->getParameter("cata_id");
+      	$this->fase_id	= $request->getParameter("fase_id");
+     	$this->medi_id	= $request->getParameter("medi_id");
+     	$this->tipo_id	= $request->getParameter("tipo_id");
+     	$this->tama_id	= $request->getParameter("tama_id");
+     	$this->opci_id	= $request->getParameter("opci_id");
+     	$this->text_desc	= $request->getParameter("text_desc");
+
+
+
 		$this->cursor       = array();
 		$this->total_paginas = 1;
 
     	$sql = "GET_ABM_FICHA_RS('".
                                   $_SESSION["usuario"]["username"]."', '".
-                                  $this->id_ficha."','".
-                                  $this->id_nombre."')";
+                                  $this->cata_id."','".
+                                  $this->fase_id."','".
+                                  $this->medi_id."','".
+                                  $this->tipo_id."','".
+                                  $this->tama_id."','".
+                                  $this->opci_id."','".
+								  $this->text_desc."')";
+
 
 		$cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-	//echo "<pre>"; print_r($cursor); exit;
+		
    
     	$this->cursor = $cursor;
      
@@ -63,6 +92,9 @@ class consultaFichasActions extends sfActions
 	}
 	
 	
+	
+
+
 	/*--------------------------Detalle de una Ficha ---------------------------------*/
 	public function executeDetalleFicha(sfWebRequest $request) {
 	

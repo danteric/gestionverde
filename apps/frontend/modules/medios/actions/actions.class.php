@@ -16,7 +16,7 @@ class mediosActions extends sfActions
             $this->errors = array();
             $this->notices = array();
 
-            $sql = "GET_MEDIO_RS(null)";
+            $sql = "GET_MEDIO_RS(null,'N')";
             $this->medios = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
             	 	               
             $this->filasPorPagina = $_SESSION['usuario']['filas_pag'];

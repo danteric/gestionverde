@@ -19,7 +19,7 @@ class tamaniosActions extends sfActions
             $this->errors = array();
             $this->notices = array();
 
-            $sql = "GET_TAMANIO_RS(null,'S')";
+            $sql = "GET_TAMANIO_RS(null,'N')";
             $this->tamanios = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
             
 		        //echo "<pre>";print_r($this->tamanios);die;  funcion para mostrar variables por pantalla para probar
@@ -48,7 +48,7 @@ class tamaniosActions extends sfActions
                $this->tama_id = $request->getParameter('tama_id');
 
 
-               $sql = "GET_TAMANIO_RS('".$this->tama_id."')";
+               $sql = "GET_TAMANIO_RS('".$this->tama_id."','N')";
                $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
                
                //echo "<pre>";print_r($this->cursor);die; 

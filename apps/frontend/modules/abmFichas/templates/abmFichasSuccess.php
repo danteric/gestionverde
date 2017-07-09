@@ -20,6 +20,8 @@
          
       }
 
+
+
  </script>
 
 <?php 
@@ -45,9 +47,9 @@
     </select>
 
     <?php $cabecera->fin_filtro(__("Catalogo")); ?>
-    <?php $cabecera->ini_filtro(__("o complete denominacion de ficha"));?>
+    <?php $cabecera->ini_filtro(__("o complete denom. de ficha"));?>
     <input type="text" id="id_nombre" name="nombre" class="form-control pull-right" />
-    <?php $cabecera->fin_filtro(__("o complete denominacion de ficha")); 
+    <?php $cabecera->fin_filtro(__("o complete denom. de ficha")); 
 
     
     $cabecera->accion(sprintf('<a href="%s" button type="button" class="btn btn-success"> <i class="icon-plus"></i> Nueva Ficha</a>', url_for("abmFichas/formularioFichas")));

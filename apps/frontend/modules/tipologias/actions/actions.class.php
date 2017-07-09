@@ -19,7 +19,7 @@ class tipologiasActions extends sfActions
             $this->errors = array();
             $this->notices = array();
 
-            $sql = "GET_TIPOLOGIA_RS(null,'S')";
+            $sql = "GET_TIPOLOGIA_RS(null,'N')";
             $this->tipologias = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
             
 		        //echo "<pre>";print_r($this->tipologias);die;  funcion para mostrar variables por pantalla para probar
@@ -45,7 +45,7 @@ class tipologiasActions extends sfActions
             {
                $this->tipo_id = $request->getParameter('tipo_id');
 
-               $sql = "GET_TIPOLOGIA_RS('".$this->tipo_id."')";
+               $sql = "GET_TIPOLOGIA_RS('".$this->tipo_id."','N')";
                $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
                $this->cursor = $this->cursor[0];
                

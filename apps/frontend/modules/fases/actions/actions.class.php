@@ -45,7 +45,7 @@ class fasesActions extends sfActions
             {
                $this->fase_id = $request->getParameter('fase_id');
 
-               $sql = "GET_FASE_RS('".$this->fase_id."')";
+               $sql = "GET_FASE_RS('".$this->fase_id."','N')";
                $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
                $this->cursor = $this->cursor[0];
                

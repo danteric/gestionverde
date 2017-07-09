@@ -23,15 +23,15 @@
         <tbody>
                 <?php $c = 0; foreach($medios as $row){ ?>
                 <tr onMouseOver="CambiaColor(this,'#dff0d8','blue')" onMouseOut="CambiaColor2(this,'#000000')">
-                    <td><?php echo $row['medio_id']; ?></td>
-                    <td><?php echo $row['medio_deno']; ?></td>
-                    <td><?php echo $row['medio_deno_redu']; ?></td>
+                    <td><?php echo $row['medi_id']; ?></td>
+                    <td><?php echo $row['medi_deno']; ?></td>
+                    <td><?php echo $row['medi_deno_redu']; ?></td>
                     <td style="text-align: center">
                         <?php if($_SESSION["usuario"]["modi"] == "S"){ ?>
-                            <a class = "btn btn-mini" href="<?php echo url_for("medios/formularioMedios?medio_id=".$row['medio_id']) ?>">
+                            <a class = "btn btn-mini" href="<?php echo url_for("medios/formularioMedios?medi_id=".$row['medi_id']) ?>">
                                 <i class="icon icon-pencil text-success"></i>
                             </a>
-                            <a class = "btn btn-mini" onclick="eliminarEntidad('<?php echo url_for("medios/baja?medio_id=".$row['medio_id']) ?>');" href="#">
+                            <a class = "btn btn-mini" onclick="eliminarEntidad('<?php echo url_for("medios/baja?medi_id=".$row['medi_id']) ?>');" href="#">
                                 <i class="icon icon-remove text-danger"></i>
                             </a>
                         <?php } ?>
@@ -47,3 +47,4 @@
 <!-- /ayuda -->
 <?php require __DIR__. '/../../ayuda/templates/_datos_top.php' ?>
 <!-- /ayuda -->
+

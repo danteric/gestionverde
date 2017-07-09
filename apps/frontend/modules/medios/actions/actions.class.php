@@ -18,7 +18,8 @@ class mediosActions extends sfActions
 
             $sql = "GET_MEDIO_RS(null,'N')";
             $this->medios = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-            	 	               
+            
+
             $this->filasPorPagina = $_SESSION['usuario']['filas_pag'];
         }
         
@@ -30,24 +31,24 @@ class mediosActions extends sfActions
             //$bservice = new BackendServices();
             $this->errors  = array();
             $this->notices = array();
-            $this->medio_id = null;
+            $this->medi_id = null;
             
 
-            $medio_id = $request->getParameter('medio_id');
+            $medi_id = $request->getParameter('medi_id');
             
             /* ---Si recibe id es una modificacion y se necesitan rellenar los campos ---*/
-            if(!empty($medio_id)) //es una modificacion
+            if(!empty($medi_id)) //es una modificacion
             {
-               $this->medio_id = $request->getParameter('medio_id');
+               $this->medi_id = $request->getParameter('medi_id');
 
-               $sql = "GET_MEDIO_RS('".$this->medio_id."')";
+               $sql = "GET_MEDIO_RS('".$this->medi_id."','N')";
                $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
                $this->cursor = $this->cursor[0];
                
                //echo "<pre>";print_r($this->cursor);die;  para verificar que trae los datos
-               $this->medio_id         = $this->cursor['medio_id'];
-               $this->medio_deno       = $this->cursor['medio_deno'];
-               $this->medio_deno_redu  = $this->cursor['medio_deno_redu'];
+               $this->medi_id         = $this->cursor['medi_id'];
+               $this->medi_deno       = $this->cursor['medi_deno'];
+               $this->medi_deno_redu  = $this->cursor['medi_deno_redu'];
             }
             
             /*----alta-----*/
@@ -56,15 +57,15 @@ class mediosActions extends sfActions
             
                 $parametros = BackendServices::getInstance()->limpiarParametros($request->getPostParameters());
              
-                $this->medio_id        = $request->getParameter("medio_id");
-                $this->medio_deno      = $request->getParameter("medio_deno");
-                $this->medio_deno_redu = $request->getParameter("medio_deno_redu");
+                $this->medi_id        = $request->getParameter("medi_id");
+                $this->medi_deno      = $request->getParameter("medi_deno");
+                $this->medi_deno_redu = $request->getParameter("medi_deno_redu");
    
                 /* Validacion de campos vacios y tipos de datos*/
                 $sql = "AM_MEDIO_RS('".$_SESSION['usuario']['username']."',
-                                       '".$this->medio_id."',
-                                       '".$this->medio_deno."',
-                                       '".$this->medio_deno_redu."');";
+                                       '".$this->medi_id."',
+                                       '".$this->medi_deno."',
+                                       '".$this->medi_deno_redu."');";
 
                 $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql); 
       
@@ -88,10 +89,10 @@ class mediosActions extends sfActions
             $this->errors = array();
             $this->notices = array();
            
-            if($request->getParameter('medio_id') && $request->getMethod() == "GET")
+            if($request->getParameter('medi_id') && $request->getMethod() == "GET")
             {
-               $this->medio_id = $request->getParameter('medio_id');
-                $sql = "B_MEDIO_RS('".$_SESSION['usuario']['username']."','".$this->medio_id."')";
+               $this->medi_id = $request->getParameter('medi_id');
+                $sql = "B_MEDIO_RS('".$_SESSION['usuario']['username']."','".$this->medi_id."')";
 
                $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
                $this->redirect("medios/medios");

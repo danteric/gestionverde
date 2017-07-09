@@ -100,7 +100,7 @@
 
     <!---Filtro Tamanios-->
     <?php
-    $cabecera->ini_filtro(__("Tamaño de obra"));
+    $cabecera->ini_filtro(__("Tamaño"));
     $optionsSelectTama = $dd_tama;?>
 
         <select id= "tama_id" name="tamanios" class="form-control" >
@@ -111,7 +111,7 @@
                 
             <?php } ?>
         </select>
-    <?php $cabecera->fin_filtro(__("Tamaño de obra")); ?>
+    <?php $cabecera->fin_filtro(__("Tamaño")); ?>
 
 
     <!---Filtro Tipologia-->
@@ -132,7 +132,7 @@
     
      <!---Filtro nombre-->
     <?php
-    $cabecera->ini_filtro(__("Búsqueda en"));
+    $cabecera->ini_filtro(__("Buscar en"));
     $optionsSelectOpc = $dd_opciones;?>
 
         <select id= "opci_id" name="opciones" class="form-control" >
@@ -143,12 +143,12 @@
                 
             <?php } ?>
         </select>
-    <?php $cabecera->fin_filtro(__("Búsqueda en")); ?>
+    <?php $cabecera->fin_filtro(__("Buscar en")); ?>
 
 
-    <?php $cabecera->ini_filtro(__("texto a buscar"));?>
+    <?php $cabecera->ini_filtro(__("texto a busc."));?>
     <input type="text" id="text_desc" name="nombre" class="form-control pull-right" />
-    <?php $cabecera->fin_filtro(__("texto a buscar")); 
+    <?php $cabecera->fin_filtro(__("texto a busc.")); 
     
 	echo $cabecera;
 

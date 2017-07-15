@@ -153,7 +153,6 @@ class abmFichasActions extends sfActions
             if ($resp_sp != 'OK') {
                 $this->getUser()->setFlash('error', $this->cursor[0]['respuesta']);
                 $this->graba_ok = 0;
-                echo "falló solapa propiedades";die;
             }
  
 			/*----------- si grabo ok sigo con las fases -----------*/
@@ -176,7 +175,7 @@ class abmFichasActions extends sfActions
 			                                        .$fich_id."','"
 			                                        .$this->listaAnota."')"; 
 			
-			 	echo $sql; die;
+
 
 			    $this->cursor_fases = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
@@ -189,7 +188,6 @@ class abmFichasActions extends sfActions
 			    {
 			        $this->getUser()->setFlash('error', $this->cursor_fases[0]['respuesta']);
 			        $this->graba_ok = 0;
-			        echo "falló solapa fases a";die;
 			    }
    
 			} 
@@ -234,7 +232,6 @@ class abmFichasActions extends sfActions
 			        {
 			            $this->getUser()->setFlash('error', $this->cursor_medios[0]['respuesta']);
 			            $this->graba_ok = 0;
-			             echo "falló solapa medios";die;
 			        }
 
    
@@ -280,7 +277,6 @@ class abmFichasActions extends sfActions
 			        {
 			            $this->getUser()->setFlash('error', $this->cursor_tamanios[0]['respuesta']);
 			            $this->graba_ok = 0;
-			             echo "falló solapa tamanios";die;
 			        }
 
    

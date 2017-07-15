@@ -155,12 +155,11 @@
 ?>
 
 <div class="row"> <!-- row de datos cabecera -->
-  <div class="col-xs-2 col-md-2">
+  <div class="col-xs-3 col-md-3">
         <div id="tablaFichas" class="responsiveWidth"></div>
   </div>
-  <div class="col-xs-10 col-md-10">
-        <div id="derecha" class="wrapper tipoframe" style="
-        ; padding-left:15px;">
+  <div class="col-xs-9 col-md-9">
+        <div id="derecha" class="wrapper tipoframe" style="; padding-left:15px;">
             <div class="panel-body">
                 <div id="detalleFicha" class="responsiveWidth"></div>
             </div>

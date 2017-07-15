@@ -1,64 +1,134 @@
 <div>
-    <div class="row"> <!-- row de datos cabecera -->
-      <div class="col-xs-10 col-md-5">
-          <?php foreach ($fich as $row) {} ?>
-          <div class="form-group row">
-           <h1><?php echo $row['fich_deno'] ?></h1>
+   
+    <!-- ...............row de datos cabecera ...............................-->
+    <div class="row" style="background-color:grey">
+        
+        <?php foreach ($fich as $row) {} ?> 
+          <div class="col-xs-10 col-md-8 text-capitalize"> 
+               <h2><?php echo $row['fich_deno'] ?></h2>    
           </div>
-          <div class="form-group row">
-            <h2>Catalogo <?php echo $row['cata_deno'] ?></h2>
-          </div>
-          <div class="form-group row">
-            <h2>Ficha <?php echo $row['fich_id'] ?></h2>
-          </div>
-      </div>
-      <div class="col-xs-10 col-md-5">
-          <div>
-            <textarea class="form-control" name="fich_desc" readonly><?php echo $row['fich_desc'] ?></textarea>
-          </div>  
-      </div>
-    </div> <!-- cierre del row de datos cabecera -->
 
-    <div class="row"> <!-- row de aplica a --> 
-      <div class="col-xs-10 col-md-5">
-          <div class="form-group row">
-           <h2 class="bg-primary">Para Fases</h2>
+          <div class="col-xs-3 col-md-4">
+              <h2><?php echo $row['cata_deno'] ?></h2>
           </div>
-          <?php foreach ($fase as $row) { ?>
-          <?php if ($row['si_no']=='S') { ?>
-          <div class="form-group row">
-            <p class="bg-success"><?php echo $row['fase_deno'] ?></p>
-          </div>
-          <?php } // del if ?>
-          <?php } // del ciclo ?>
-      </div>
-      <div class="col-xs-10 col-md-5">
-          <div class="form-group row">
-           <h2 class="bg-primary">Para Medios</h2>
-          </div>
-          <?php foreach ($medi as $row) { ?>
-          <?php if ($row['si_no']=='S') { ?>
-          <div class="form-group row">
-            <p class="bg-success"><?php echo $row['medi_deno'] ?></p>
-          </div>
-          <?php } // del if ?>
-          <?php } // del ciclo ?>
-      </div>  
-      </div>
-    </div> <!-- cierre del row de aplica a -->
+    </div>
 
-       <div class="row"> <!-- row de procedimientos --> 
-      <div class="col-xs-10 col-md-10">
-          <div class="form-group row">
-           <h2 class="bg-primary">Procedimientos</h2>
-          </div>
-          <?php foreach ($proc as $row) { ?>
-          <div class="form-group row">
-            <p><?php echo $row['fipr_texto'] ?></p>
-          </div>
-          <?php } // del ciclo ?>
+
+
+    <!-- ...............row de datos de descripción........................ . -->
+    <div class="row">
+        <div class="col-xs-12 col-md-12" style="background-color:lightgrey">
+              <h2><?php echo $row['fich_desc'] ?></h2>
+        </div>
+    </div>
+
+
+
+    <!-- ............ row de descripción....................................  --> 
+    <div class="row"> 
+      <div class="col-xs-12 col-md-12 bg-primary">
+          <h2>Esta buena práctica se recomienda:<h2>
       </div>
-     
-    </div> <!-- cierre del row de procedimientos  -->
+    <div>
+
+
+
+
+    <!-- ............row de fases-medios-tipologías-tamaños..............     -->
+    <div class="row">
+        
+          <div class="col-xs-3 col-md-3">
+                    <p class="bg-primary">Para Fases:</p>
+                   <?php foreach ($fase as $row) { ?>
+                       <?php if ($row['si_no']=='S') { ?>
+                            <p class="bg-success"><?php echo $row['fase_deno'] ?></p>
+                       <?php } // del if ?>
+                   <?php } // del ciclo ?>
+          </div>
+
+          <div class="col-xs-3 col-md-3">
+                  <p class="bg-primary">Para Medios:</p>
+              <?php foreach ($medi as $row) { ?>
+                   <?php if ($row['si_no']=='S') { ?>
+                         <p class="bg-success"><?php echo $row['medi_deno'] ?></p>
+                   <?php } // del if ?>
+              <?php } // del ciclo ?>
+         </div>  
+
+         <div class="col-xs-3 col-md-3">
+                  <p class="bg-primary">Para Tamaños:</p>
+              <?php foreach ($tama as $row) { ?>
+                   <?php if ($row['si_no']=='S') { ?>
+                         <p class="bg-success"><?php echo $row['tama_deno'] ?></p>
+                   <?php } // del if ?>
+              <?php } // del ciclo ?>
+         </div>  
+
+         <div class="col-xs-3 col-md-3">
+                  <p class="bg-primary">Para Tipologías:</p>
+              <?php foreach ($tipo as $row) { ?>
+                   <?php if ($row['si_no']=='S') { ?>
+                         <p class="bg-success"><?php echo $row['tipo_deno'] ?></p>
+                   <?php } // del if ?>
+              <?php } // del ciclo ?>
+         </div>  
+
+        
+    </div>
+
+
+
+
+    <!-- ........................row de procedimientos................................ --> 
+    <div class="row"> 
+            <div class="col-xs-12 col-md-12">
+                    <h2 class="bg-primary">Procedimientos recomendados:</h2>
+                <ul>
+                <?php foreach ($proc as $row) { ?>
+                        <li><p class="text-justify"><?php echo $row['fipr_texto'] ?></p></li>
+                <?php } // del ciclo ?>
+                </ul>
+            </div>
+    </div>
+
+
+
+
+     <!-- .....................row de recursos y fuentes................................. --> 
+    <div class="row bg-primary">
+           
+              <div class="col-xs-12 col-md-6">
+                    <h2>Previsión de recursos recomendada:</h2>
+              </div>
+
+              <div class="col-xs-12 col-md-6">
+                    <h2>Para más información sobre esta buena práctica recomendamos:</h2>
+              </div>
+    </div>
+
+
+    <div class="row">
+            
+            <div class="col-xs-12 col-md-6">
+                <ul>
+                <?php foreach ($recu as $row) { ?>
+                        <li><p class="text-justify"><?php echo $row['fire_texto'] ?></p></li>
+                <?php } // del ciclo ?>
+                </ul>
+            </div>
+
+            <div class="col-xs-12 col-md-6">
+                <ul>
+                <?php foreach ($fuen as $row) { ?>
+                        <li><p class="text-justify"><?php echo $row['fifu_texto'] ?></p></li>
+                <?php } // del ciclo ?>
+                </ul>
+            </div>
+
+    </div>
+
+
+
+
 </div>
 

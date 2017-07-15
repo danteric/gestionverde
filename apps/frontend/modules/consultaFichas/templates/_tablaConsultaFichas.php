@@ -8,7 +8,9 @@
 		<div class="btn-group-vertical" role="group" aria-label="...">
   			<?php foreach($cursor as $row) { ?>
 			<div class="btn-group" role="group">
-  				<button type="button" class="btn btn-primary" onclick="<?php echo 'cargarFicha('.$row['fich_id'].')' ?>"><?php echo $row['fich_deno'] ?></button>
+  				<button type="button" class="btn btn-primary btn-sm" style="text-align: left" onclick="<?php echo 'cargarFicha('.$row['fich_id'].')' ?>">
+          <?php echo $row['fich_deno'] ?>
+          </button>
 
   			</div>
   			<?php }; ?>

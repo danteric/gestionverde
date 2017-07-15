@@ -68,6 +68,7 @@ class consultaFichasActions extends sfActions
 								  $this->text_desc."')";
 
 
+
 		$cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 		
    
@@ -113,8 +114,20 @@ class consultaFichasActions extends sfActions
  		$sql = "SEL_MEDIOS_FICHA_RS('".$id_ficha."')";
         $this->medi = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
+        $sql = "SEL_TAMANIO_FICHA_RS('".$id_ficha."')";
+        $this->tama = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+		$sql = "SEL_TIPOLOGIA_FICHA_RS('".$id_ficha."')";
+        $this->tipo = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
  		$sql = "GET_FICHA_PROCEDIMIENTOS_RS('".$id_ficha."')";
         $this->proc = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+        $sql = "GET_FICHA_RECURSOS_RS('".$id_ficha."')";         
+        $this->recu = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+        $sql = "GET_FICHA_FUENTES_RS('".$id_ficha."')";         
+        $this->fuen = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
     //echo "<pre>"; echo $id_ficha, print_r($this->fase); exit;
 		if ($fich == NULL){
@@ -133,7 +146,11 @@ class consultaFichasActions extends sfActions
 		return $this->renderPartial('consultaFichas/detalleFicha', array('fich' =>$this->fich,
 													'fase' =>$this->fase,
 													'medi' =>$this->medi,
+													'tama' =>$this->tama,
+													'tipo' =>$this->tipo,
 													'proc' =>$this->proc,
+													'recu' =>$this->recu,
+													'fuen' =>$this->fuen,
 											     'sindatos' =>$this->sindatos)); 
 		
 	}

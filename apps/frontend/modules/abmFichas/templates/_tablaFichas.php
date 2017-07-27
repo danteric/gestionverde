@@ -42,6 +42,8 @@ $(document).ready(function() {
 </script>
 
 <input type="hidden" id="total_paginas" name="total_paginas" value="<?php echo $total_paginas ?>"/>
+
+
 <div class="wrapper tipoframe">
  <div class="panel-body">
   

@@ -77,6 +77,7 @@ $(document).ready(function () {
                     </select>
 					</td>
 				</tr>
+
                 <tr class="">
 					<td><?php echo "Permiso Excel" ?>:</td>
 					<td>
@@ -85,7 +86,7 @@ $(document).ready(function () {
                         <option value="S"<?php if ($excel == 'S') {echo ' selected ';} ?> >Si</option>
                     </select>
 					</td>
-				</tr>
+
                 <tr class="">
 					<td><?php echo "Permiso Modificar" ?>:</td>
 					<td>

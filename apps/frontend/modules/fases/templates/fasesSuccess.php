@@ -4,7 +4,7 @@
         $cabecera->ruta('Fases');
         $cabecera->titulo(__("Fases"));
         #$cabecera->accion(sprintf('<button type="button" data-target="#agregar_valoresayuda" data-toggle="modal" class="btn btn-success help"><i class="icon-question-sign"></i> Ayuda</button>'));
-        $cabecera->accion(sprintf('<a href="%s"><i class="icon-plus text-info"></i> Nueva Fase</a>', url_for("fases/formularioFases")));  
+        $cabecera->accion(sprintf('<a href="%s"button type="button" class="btn btn-success"><i class="icon-plus"></i> Nueva Fase</a>', url_for("fases/formularioFases")));  
         
         /*if($_SESSION["usuario"]["modi"] == "S")
         {
@@ -18,7 +18,7 @@
     <?php include_partial('services/notices', array('errors' => $errors, 'notices' => $notices)) ?>
     <div class="wrapper tipoframe">
     <div class="panel-body">
-    <table border="0" frame="" class="tablesorter responsiveWidth table table-striped table-bordered">
+    <table border="0" frame="" class="tablesorter responsiveWidth table table-striped table-hover table-bordered">
         <thead>
                 <tr class="alert-success wrapper">
                     <th style="text-align:center"><?php echo "Cod Interno"; ?></th>

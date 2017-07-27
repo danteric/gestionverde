@@ -3,7 +3,7 @@
 <?php $cabecera->titulo('Roles de usuarios en el sistema') ?>
 <?php $cabecera->ruta('Usuarios') ?>
 <?php $cabecera->ruta('Roles') ?>
-<?php $cabecera->accion('<a href="'.url_for("roles/formularioRoles").'" ><i class="icon icon-plus text-info"></i> Nuevo</a>') ?>
+<?php $cabecera->accion('<a href="'.url_for("roles/formularioRoles").'" button type="button" class="btn btn-success"> <i class="icon-plus"></i> Nuevo Rol</a>') ?>
 <?php //$cabecera->accion('<button type="button" data-target="#agregar_valoresayuda" data-toggle="modal" class="btn btn-danger help"><i class="icon-question-sign"></i> Ayuda</button>'); ?>
 <?php echo $cabecera ?>
 <?php //include_partial('services/notices', array('errors' => $errors, 'notices' => $notices)) ?>
@@ -16,7 +16,7 @@
                                                 <th><?php echo __("Observaciones") ?></th>
                                                 <th><?php echo __("Usuarios") ?></th>
                                                 <th style="text-align: center"><?php echo __("PDF") ?></th>
-                                                <th style="text-align: center"><?php echo __("EXCEL") ?></th>
+                                                <!--<th style="text-align: center"><?php //echo __("EXCEL") ?></th>-->
                                                 <th style="text-align: center"><?php echo __("Modif.") ?></th>
                                                 <th class="nosort" style="text-align: center">Acciones</th>
                                         </tr>
@@ -29,7 +29,10 @@
                                                         <td><?php echo $row['usro_observaciones'] ?></td>
                                                         <td><?php echo $row['lista_usuarios'] ?></td>
                                                         <td style="text-align: center"><i class="icon <?php if($row['usro_perm_pdf'] == "S"){ echo "glyphicon glyphicon-ok text-success"; } else { echo 'glyphicon glyphicon-minus-sign text-danger'; } ?>"> </i> </td>
-                                                        <td style="text-align: center"><i class="icon <?php if($row['usro_perm_excel']== "S"){ echo "glyphicon glyphicon-ok text-success"; } else { echo 'glyphicon glyphicon-minus-sign text-danger'; } ?>"> </i> </td>
+
+                                                        <!-- se comento la éxportación a excel-->
+                                                        <!--<td style="text-align: center"><i class="icon <?php //if($row['usro_perm_excel']== "S"){ echo "glyphicon glyphicon-ok text-success"; } else { echo 'glyphicon glyphicon-minus-sign text-danger'; } ?>"> </i> </td>-->
+      
                                                         <td style="text-align: center"><i class="icon <?php if($row['usro_perm_modi']== "S"){ echo "glyphicon glyphicon-ok text-success"; } else { echo 'glyphicon glyphicon-minus-sign text-danger'; } ?>"> </i> </td>
                                                         <td>
                                                             <div class="btn-groups text-center">

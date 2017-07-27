@@ -99,7 +99,7 @@
 		$cabecera->ruta(link_to(__("AbmFichas"),'abmFichas/abmFichas'));
 
 
-		if($alta==1)
+		if($alta == 1)
         {  
             $cabecera->titulo(__("Nueva Ficha"))->ruta(__("Nueva Ficha"));
         }else{
@@ -156,29 +156,29 @@
               <?php foreach ($cursor as $row) {} ?>
 
               <div class="form-group row">
-                  <label for="example-tel-input" class="col-xs-1 col-form-label">Cod interno</label>
-                  <div class="col-xs-3">
+                  <label for="example-tel-input" class="col-xs-2 col-form-label">Cod interno</label>
+                  <div class="col-xs-2">
                       <input class="form-control" type="text" name="fich_id" value="<?php echo $row['fich_id'] ?>" readonly >
                   </div>
               </div>
 
               <div class="form-group row">
-                <label for="example-tel-input" class="col-xs-1 col-form-label">Denominacion</label>
-                <div class="col-xs-3 col-md-6">
+                <label for="example-tel-input" class="col-xs-2 col-form-label">Denominacion</label>
+                <div class="col-xs-8 col-md-8">
                   <input class="form-control" name="fich_deno" value="<?php echo $row['fich_deno'] ?>" required>
                 </div>
               </div>
 
               <div class="form-group row">
-                <label for="example-tel-input" class="col-xs-1 col-form-label">Descripción</label>
-                <div class="col-xs-3 col-md-6">
+                <label for="example-tel-input" class="col-xs-2 col-form-label">Descripción</label>
+                <div class="col-xs-8 col-md-8">
                   <textarea class="form-control" name="fich_desc"><?php echo $row['fich_desc'] ?></textarea>
                 </div>  
               </div>
 
               <div class="form-group row">
-                <label for="example-tel-input" class="col-xs-1 col-form-label">Catálogo</label>
-                <div class="col-xs-3">
+                <label for="example-tel-input" class="col-xs-2 col-form-label">Catálogo</label>
+                <div class="col-xs-8">
                  <?php $optionsSelect = $dd_cata;?>
                   <select id= "fich_cata_id" name="fich_cata_id" class="form-control">
                   <?php foreach ($optionsSelect as $arraySelect) { ?>

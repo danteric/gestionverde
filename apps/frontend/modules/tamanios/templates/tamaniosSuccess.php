@@ -4,7 +4,7 @@
         $cabecera->ruta('Tamaños');
         $cabecera->titulo(__("Tamaños"));
         #$cabecera->accion(sprintf('<button type="button" data-target="#agregar_valoresayuda" data-toggle="modal" class="btn btn-success help"><i class="icon-question-sign"></i> Ayuda</button>'));
-        $cabecera->accion(sprintf('<a href="%s"><i class="icon-plus text-info"></i> Nuevo Tamaño</a>', url_for("tamanios/formularioTamanios")));  
+        $cabecera->accion(sprintf('<a href="%s"button type="button" class="btn btn-success"><i class="icon-plus"></i> Nuevo Tamaño</a>', url_for("tamanios/formularioTamanios")));  
         //$cabecera->accion('<input type="button" value="Filtrar" class="btn btn-warning" onclick="$(\'#pagina\').val(1);cargarGrilla();" />');
         echo $cabecera;
     ?>

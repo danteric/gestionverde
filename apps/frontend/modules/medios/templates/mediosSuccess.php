@@ -3,7 +3,7 @@
         $cabecera = new Cabecera();
         $cabecera->ruta('Medios');
         $cabecera->titulo(__("Medios"));
-        $cabecera->accion(sprintf('<a href="%s"><i class="icon-plus text-info"></i> Nuevo Medio</a>', url_for("medios/formularioMedios")));  
+        $cabecera->accion(sprintf('<a href="%s"button type="button" class="btn btn-success"><i class="icon-plus"></i> Nuevo Medio</a>', url_for("medios/formularioMedios")));  
         //$cabecera->accion('<input type="button" value="Filtrar" class="btn btn-warning" onclick="$(\'#pagina\').val(1);cargarGrilla();" />');
         echo $cabecera;
     ?>

@@ -63,11 +63,7 @@ class catalogosActions extends sfActions
             if($request->getMethod() == "POST")
             {
                 $parametros = BackendServices::getInstance()->limpiarParametros($request->getPostParameters());
-              /*  if(strpos($parametros['fecha'], "/")){
-                    $f1 = explode("/", $parametros['fecha']);
-                    $parametros['fecha'] = $f1[2]."-".$f1[1]."-".$f1[0];
-                }
-                */
+            
 
                 $this->cata_id        = $request->getParameter("cata_id");
                 $this->cata_deno      = $request->getParameter("cata_deno");
@@ -78,6 +74,7 @@ class catalogosActions extends sfActions
                                        '".$this->cata_id."',
                                        '".$this->cata_deno."',
                                        '".$this->cata_deno_redu."');";
+
 
                 $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql); 
       //echo $sql;exit;

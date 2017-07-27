@@ -38,6 +38,30 @@
     }
 
 
+var desktops = document.querySelectorAll('.desktop');
+
+function hide(element) {
+  element.style.setProperty('left', '-100%', element.style.getPropertyPriority('left'));
+}
+
+function hideAll() {
+  for (var i = 0; i < desktops.length; i++) {
+    hide(desktops[i]);
+  }
+}
+
+function show(element) {
+  element.style.setProperty('left', '0', element.style.getPropertyPriority('left'));
+}
+
+document.getElementById('tablaFichas').addEventListener('click', function () {
+  hideAll();
+  show(document.getElementById('one'));
+}, false);
+
+
+show(document.getElementById('one'));
+
 
  </script>
 
@@ -154,15 +178,22 @@
 
 ?>
 
-<div class="row"> <!-- row de datos cabecera -->
+
+<div class="row"> 
   <div class="col-xs-3 col-md-3">
         <div id="tablaFichas" class="responsiveWidth"></div>
   </div>
-  <div class="col-xs-9 col-md-9">
+
+  <div class="col-xs-11 col-md-11 col-md-offset-1">
         <div id="derecha" class="wrapper tipoframe" style="; padding-left:15px;">
             <div class="panel-body">
                 <div id="detalleFicha" class="responsiveWidth"></div>
             </div>
         </div>
-</div> <!-- cierre del row de datos cabecera -->
+  </div> 
+</div>
+
+
+
+
 

@@ -53,27 +53,31 @@ $(document).ready(function() {
 		<thead  class="alert-success wrapper" >
 			<tr>
 				<th style="text-align: center;"><?php echo __("ID") ?></th>
-				<th style="text-align: center;"><?php echo __("Catalogo") ?></th> 
-				<th style="text-align: center;"><?php echo __("Nombre") ?></th>
-				<th style="text-align: center;"><?php echo __("Descripcion") ?></th>
-				<th style="text-align: center;"><?php echo __("Acciones") ?></th>
+				<th style="text-align: center;"><?php echo __("Nombre Proyecto") ?></th> 
+				<th style="text-align: center;"><?php echo __("Localidad") ?></th>
+				<th style="text-align: center;"><?php echo __("Fecha Inicio") ?></th>
+                <th style="text-align: center;"><?php echo __("Fecha Fin Estimada") ?></th>
+				<th style="text-align: center;"><?php echo __("Observaciones") ?></th>
+                <th style="text-align: center;"><?php echo __("Acciones") ?></th>
             </tr>
 		</thead>
 		<tbody>
 
-			<?php foreach($cursor as $row): ?>
+		<?php foreach($cursor as $row): ?>
 
-				<tr class="<?php echo $class ?>">
-					<td style="text-align:center; vertical-align: middle;"><?php echo $row['fich_id'] ?></td>
-					<td style="vertical-align: middle;"><?php echo $row['cata_deno'] ?></td>
-					<td style="vertical-align: middle;"><?php echo $row['fich_deno'] ?></td>
-					<td style="vertical-align: middle;"><?php echo $row['fich_desc'] ?></td>
-					<td style="vertical-align: middle; width: 80px">
+		<tr class="<?php echo $class ?>">
+			<td style="text-align:center; vertical-align: middle;width: 50px"><?php echo $row['proy_id'] ?></td>
+			<td style="vertical-align: middle;"><?php echo $row['proy_nombre'] ?></td>
+			<td style="vertical-align: middle;text-align:center"><?php echo $row['proy_loca_id'] ?></td>
+			<td style="vertical-align: middle;text-align:center;width: 100px"><?php echo $row['proy_inicio_f'] ?></td>
+            <td style="vertical-align: middle;text-align:center;width: 150px"><?php echo $row['proy_fin_estimado_f'] ?></td>
+            <td style="vertical-align: middle;"><?php echo $row['proy_obser'] ?></td>
+			<td style="vertical-align: middle; width: 80px">
 						<?php if($_SESSION["usuario"]["modi"] == "S"){ ?>
-							<a class = "btn btn-mini" href="<?php echo url_for("abmFichas/formularioFichas?fich_id=".$row['fich_id']) ?>" >
+							<a class = "btn btn-mini" href="<?php echo url_for("abmProyecto/formularioProyecto?proy_id=".$row['proy_id']) ?>" >
 								<i class="icon icon-pencil text-success"></i>
 							</a>
-							<a class = "btn btn-mini" onclick="eliminarEntidad('<?php echo url_for("abmFichas/baja?fich_id=".$row['fich_id']) ?>');" href="#">
+							<a class = "btn btn-mini" onclick="eliminarEntidad('<?php echo url_for("abmProyecto/baja?proy_id=".$row['proy_id']) ?>');" href="#">
 								<i class="icon icon-remove text-danger"></i>
 							</a>
 						<?php } ?>

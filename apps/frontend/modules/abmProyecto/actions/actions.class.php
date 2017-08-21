@@ -1,9 +1,9 @@
 <?php  
 
 
-class abmFichasActions extends sfActions
+class abmProyectoActions extends sfActions
 {
-	protected $formulario = 'abmFichas';
+	protected $formulario = 'abmProyecto';
 
 	/*----------------------Redireccion a lista, como principal--------------------------*/
 	public function executeIndex (sfWebRequest $request)
@@ -12,43 +12,40 @@ class abmFichasActions extends sfActions
 
 	}
 
-	/*----------------------------------Listar las Fichas ---------------------------------*/
+	/*----------------------------------Listar las Proyecto ---------------------------------*/
 	
-	public function executeAbmFichas (sfWebRequest $request)
+	public function executeAbmProyecto (sfWebRequest $request)
 	{
 		 $this->errors = array();
          $this->notices = array();
 
-         $sql = "GET_CATALOGO_RS(null,'S')";
-         $this->dd_cata = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
          $this->filasPorPagina = $_SESSION['usuario']['filas_pag'];
 
 
 
 	}
 
-	/*------------------------filtro para buscar una ficha------------------------------*/
-	public function executeTablaFichas(sfWebRequest $request) {
+	/*------------------------filtro para buscar un proyecto------------------------------*/
+	public function executeTablaProyecto(sfWebRequest $request) {
      // echo "<pre>"; print_r($_REQUEST); exit;
-   		$this->cata_id   	= $request->getParameter("cata_id");
+	
       	$this->id_nombre	= $request->getParameter("id_nombre");
-     
 		$this->cursor       = array();
 		$this->total_paginas = 1;
 
-    	$sql = "GET_ABM_FICHA_RS('".
-                                  $_SESSION["usuario"]["username"]."','"
-                                  .$this->cata_id."','0','0','0','0','NF','".                                 
+
+    	$sql = "GET_ABM_PROYECTO_RS('".$_SESSION["usuario"]["username"]."','".                             
                                    $this->id_nombre."')";
                                    
 
-
-
-		$cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+		$cursor_nombre = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
    
-    	$this->cursor = $cursor;
 
-		if ($cursor == NULL){
+    	$this->cursor = $cursor_nombre;
+
+		if ($this->cursor == NULL)
+		{
         	$this->sindatos = '0';
 		}else{
          	$this->sindatos = '1';
@@ -59,73 +56,65 @@ class abmFichasActions extends sfActions
 		}
 
 		return $this->renderPartial
-				('abmFichas/tablaFichas', array('cursor' =>$this->cursor,
+				('abmProyecto/tablaProyecto', array('cursor' =>$this->cursor,
 											     'sindatos' =>$this->sindatos,
 												 'total_paginas' => $this->total_paginas,
 					                            'total_registros' =>$this->total_registros,
 					                            'pagina' => $this->pagina));
+	
 	}
 	
 	
-	/*--------------------------Alta/modificación de Fichas ---------------------------------*/
-	public function executeFormularioFichas (sfWebRequest $request)
+	/*--------------------------Alta/modificación de Proyecto ---------------------------------*/
+	public function executeFormularioProyecto (sfWebRequest $request)
 	{
-			
-
+					
 		$this->errors = array();
 		$this->notices = array();
-		$fich_id = null;
-		$this->fich_cata_id =null;
+		//$fich_id = null;
+		//$this->fich_cata_id =null;
 		$this->alta = 1;
 
 
-		$fich_id = $request->getParameter('fich_id');	//obtiene el id de la ficha del array $request
-	
-		// trae todos los datos de la ficha
- 		$sql = "GET_CATALOGO_RS(null,'V')";
-        $this->dd_cata = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+		$proy_id = $request->getParameter('proy_id');	//obtiene el id del proyecto del array $request
+
+		// trae todos los datos relevantes para el armado de un proyecto
 		
- 		$sql = "SEL_FASES_FICHA_RS('".$fich_id."')";
-        $this->l_fase = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
- 		$sql = "SEL_MEDIOS_FICHA_RS('".$fich_id."')";
-        $this->l_medi = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-		
-		$sql = "SEL_TAMANIO_FICHA_RS('".$fich_id."')";
-        $this->l_tama = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+		 $sql = "GET_TEMP_PROYE()";
+		 $this->c_numerador = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
-		$sql = "SEL_TIPOLOGIA_FICHA_RS('".$fich_id."')";
-        $this->l_tipo = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+ 		 $sql = "GET_MEDIO_RS(null,'B')";
+         $this->dd_medi = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
-        $sql = "GET_FICHA_PROCEDIMIENTOS_RS('".$fich_id."')";         
-        $this->l_proc = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+         //echo "<pre>"; print_r($this->c_numerador);
 
-        $sql = "GET_FICHA_RECURSOS_RS('".$fich_id."')";         
-        $this->l_recur = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+         $sql = "GET_TAMANIO_RS(null,'N')";
+         $this->dd_tama = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
-        $sql = "GET_FICHA_FUENTES_RS('".$fich_id."')";         
-        $this->l_fuen = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+         $sql = "GET_TIPOLOGIA_RS(null,'N')";
+         $this->dd_tipo = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
 
 		/*----si recibe id es una modificación y se necesita rellenar los campos--*/
 		
-
-		if(!empty($fich_id))
+		if(!empty($proy_id))
 		{
 			$this->alta = 0;
-			$sql = "GET_FICHA_RS(".$fich_id.")";
+			$sql = "GET_PROYECTO_RS(".$proy_id.")";
 			$this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-			$fich_cata_id = $this->cursor[0]['fich_cata_id'];
+			$proy_id = $this->cursor[0]['proy_id'];
 
 		}
 		
 		
 		/*--------------------Alta-------------------------------------*/
-
+		/*
 		if($request->getMethod() == "POST")
 		{
 
 			/*--si es modificación obtiene los parámetros---*/
-		
+			/*
 			$fich_id 		= $request->getParameter("fich_id");
 			$this->fich_deno 	= $request->getParameter("fich_deno");
 			$this->fich_desc 	= $request->getParameter("fich_desc");
@@ -135,7 +124,7 @@ class abmFichasActions extends sfActions
 
 			
 		/*-----------Validacion de campos vacios y tipos de datos---------*/
-			
+			/*
             $sql = "AM_FICHA_RS('".$_SESSION['usuario']['username']."',
                                    '".$fich_id."',
                                    '".$this->fich_deno."',
@@ -145,20 +134,19 @@ class abmFichasActions extends sfActions
           
             $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql); 
             $resp_sp = $this->cursor[0]['respuesta'];
-			
 			$resp_sp_id = $this->cursor[0]['respuesta_id'];
 			$fich_id= $resp_sp_id ;
 					
-			
+	
 
 			  //si hubo problemas, no graba
             if ($resp_sp != 'OK') {
                 $this->getUser()->setFlash('error', $this->cursor[0]['respuesta']);
                 $this->graba_ok = 0;
             }
- 			
+ 
 			/*----------- si grabo ok sigo con las fases -----------*/
-		     	
+		     	/*
 		 
             if ($this->graba_ok == 1) { 	
 
@@ -177,7 +165,7 @@ class abmFichasActions extends sfActions
 			                                        .$fich_id."','"
 			                                        .$this->listaAnota."')"; 
 			
-			                            		
+
 
 			    $this->cursor_fases = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
@@ -196,7 +184,7 @@ class abmFichasActions extends sfActions
 			
 
             /*----------- si grabo ok sigo  con medios -----------*/
-            
+            /*
             if ($this->graba_ok == 1) 
             { 	
 
@@ -241,7 +229,7 @@ class abmFichasActions extends sfActions
 			
 			
 			 /*----------- si grabo ok sigo  con tamaño -----------*/
-            
+            /*
 		       if ($this->graba_ok == 1) 
             { 	
 
@@ -258,7 +246,7 @@ class abmFichasActions extends sfActions
 					//print_r($_REQUEST);
 					//echo $this->listaAnota ; exit;
 				   		
-
+			        //echo "<pre>"; print_r($this->listaAnota); exit;
 
 			        $sql = "AM_FICHA_TAMANIOS_RS('".$_SESSION["usuario"]["username"]."','"
 			                                        .$fich_id."','"
@@ -268,7 +256,7 @@ class abmFichasActions extends sfActions
 			                	
 			        $this->cursor_tamanios = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
-			     	
+			     
 					//echo $sql; print_r($_REQUEST) ; exit;
 			        $resp_sp = $this->cursor_tamanios[0]['respuesta'];
 			        $exito   = $this->cursor_tamanios[0]['respues_exito'];
@@ -284,7 +272,7 @@ class abmFichasActions extends sfActions
    
 			} 
 			 /*----------- si grabo ok sigo  con tipologia -----------*/
-            
+            /*
             if ($this->graba_ok == 1) 
             { 	
 
@@ -326,7 +314,7 @@ class abmFichasActions extends sfActions
 			
 			
 			/*----------- si grabo ok sigo  con procedimientos ----------- */
-			
+			/*
 
             if ($this->graba_ok == 1) 
             {     	
@@ -354,7 +342,7 @@ class abmFichasActions extends sfActions
 		
 
 			/*----------- si grabo ok sigo  con recursos ----------- */
-
+/*		
 			
             if ($this->graba_ok == 1)
              {   	
@@ -383,7 +371,7 @@ class abmFichasActions extends sfActions
          		
 
 			/*----------- si grabo ok sigo  con fuentes ----------- */
- 			
+ 			/*
  			 if ($this->graba_ok == 1) 
  			 {     	
 
@@ -408,27 +396,71 @@ class abmFichasActions extends sfActions
          		};
          	};
          		
-          
+          /*
 			
 
 			/*-------Si hay algun error, no graba y continua en el ABM de la ficha -----*/
+			/*
 			if ($this->graba_ok == 1) 
 			{
-				$this->redirect("abmFichas/abmFichas");
+				$this->redirect("abmProyecto/abmProyecto");
 			    $this->getUser()->setFlash('notice', $this->cursor[0]['respues_exito']);			        
 			}else{    // error vuelve al item editado
- 				$this->redirect("abmFichas/formularioFichas?fich_id=".$fich_id);
+ 				$this->redirect("abmProyecto/formularioProyecto?fich_id=".$fich_id);
 				
 			} 
 
 		}//de post	
+		*/
+	}//end function formularioProyecto
 
-	}//end function formularioFichas
+	/*-------------------------------ABuscar fichas relacionadas--------------------------------*/
+	public function executeFichasRelacionadas(sfWebRequest $request) {
+	
+      	$this->proy_medi_id = $request->getParameter("proy_medi_id");
+      	$this->proy_tama_id = $request->getParameter("proy_tama_id");
+      	$this->proy_tipo_id = $request->getParameter("proy_tipo_id");
+		$this->cursor_fichas_rel   = array();
+		$this->total_paginas = 1;
+
+		
+    	$sql = "GET_PROYECTO_FICHAS_RELACIONADAS_RS('".$this->proy_medi_id."','".
+					                                   $this->proy_tama_id."','".
+					                                   $this->proy_tipo_id."')";
+        
+   
+
+		$cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+   		
+   		$this->cursor_fichas_rel = $cursor;
+
+   		//echo $sql;
+   		//echo "<pre>"; print_r($this->cursor_fichas_rel);die;
+   		if ($this->cursor_fichas_rel == NULL)
+		{
+        	$this->sindatos = '0';
+		}else{
+         	$this->sindatos = '1';
+		}
+		
+		if(empty($this->cursor_fichas_rel)){
+			$this->cursor_fichas_rel = array(0);
+		}
+
+		return $this->renderPartial
+				('abmProyecto/tablaFichasRel', array('cursor' =>$this->cursor_fichas_rel,
+											     'sindatos' =>$this->sindatos,
+												 'total_paginas' => $this->total_paginas,
+					                            'total_registros' =>$this->total_registros,
+					                            'pagina' => $this->pagina));
+	
+	}
+
 
 	/*-------------------------------Baja de una Ficha--------------------------------*/
 	public function executeBaja (sfWebRequest $request)
 	{
-			
+			/*
             $this->errors = array();
             $this->notices = array();
            
@@ -439,9 +471,9 @@ class abmFichasActions extends sfActions
                                        '".$fich_id."')";
 
                $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-               $this->redirect("abmFichas/abmFichas");
+               $this->redirect("abmProyecto/abmProyecto");
             }
-			
+			*/
 
 	}//end function Baja
 

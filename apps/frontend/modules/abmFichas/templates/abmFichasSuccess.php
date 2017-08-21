@@ -47,6 +47,8 @@
     </select>
 
     <?php $cabecera->fin_filtro(__("Catalogo")); ?>
+
+    
     <?php $cabecera->ini_filtro(__("o complete denom. de ficha"));?>
     <input type="text" id="id_nombre" name="nombre" class="form-control pull-right" />
     <?php $cabecera->fin_filtro(__("o complete denom. de ficha")); 

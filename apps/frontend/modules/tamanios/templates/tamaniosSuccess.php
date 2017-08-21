@@ -15,19 +15,19 @@
     <table border="0" frame="" class="tablesorter responsiveWidth table table-striped table-bordered">
         <thead>
                 <tr class="alert-success wrapper">
-                    <th style="text-align:center"><?php echo "Cod Interno"; ?></th>
-                    <th style="text-align:center"><?php echo "Denominacion"; ?></th>
-                    <th style="text-align:center"><?php echo "Denom reducida"; ?></th>
-                    <th class="nosort" style="text-align: center">Acciones</th>
+                    <th style="text-align: center;vertical-align: middle;"><?php echo "ID"; ?></th>
+                    <th style="text-align: center;vertical-align: middle;"><?php echo "Denominacion"; ?></th>
+                    <th style="text-align: center;vertical-align: middle;"><?php echo "Denominacion reducida"; ?></th>
+                    <th class="nosort" style="text-align: center;vertical-align: middle;">Acciones</th>
                 </tr>
         </thead>
         <tbody>
                 <?php $c = 0; foreach($tamanios as $row){ ?>
-                <tr onMouseOver="CambiaColor(this,'#dff0d8','blue')" onMouseOut="CambiaColor2(this,'#000000')">
-                    <td><?php echo $row['tama_id']; ?></td>
-                    <td><?php echo $row['tama_deno']; ?></td>
-                    <td><?php echo $row['tama_deno_redu']; ?></td>
-                    <td style="text-align: center">
+                <tr onMouseOver="CambiaColor(this,'#dff0d8')" onMouseOut="CambiaColor2(this,'#000000')">
+                    <td style="text-align: center;vertical-align: middle;"><?php echo $row['tama_id']; ?></td>
+                    <td style="vertical-align: middle;"><?php echo $row['tama_deno']; ?></td>
+                    <td style="vertical-align: middle;"><?php echo $row['tama_deno_redu']; ?></td>
+                    <td style="text-align: center;vertical-align: middle;">
                         <?php if($_SESSION["usuario"]["modi"] == "S"){ ?>
                             <a class = "btn btn-mini" href="<?php echo url_for("tamanios/formularioTamanios?tama_id=".$row['tama_id']) ?>">
                                 <i class="icon icon-pencil text-success"></i>

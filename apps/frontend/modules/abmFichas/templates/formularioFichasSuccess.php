@@ -90,20 +90,26 @@
 
 </script>
 
-<style>  input[type="text"] {  width: 150px;}  </style>
+<style>  input[type="text"] {  width: 150px;}  
+
+.encabezado {background-color: #37474f; color: white}
+
+</style>
 
 <form id="formulario" method="POST" action="<?php echo url_for("abmFichas/formularioFichas") ?>">
-<?php $optionsSelect = $cursor;?>
-<?php
+<?php $optionsSelect = $cursor;
+
 		$cabecera = new cabecera();
 		$cabecera->ruta(link_to(__("AbmFichas"),'abmFichas/abmFichas'));
+    
+    $alta_ficha = $alta; //para inicializar en esta sección si es un alta o no
 
-
-		if($alta == 1)
+   	if($alta_ficha == 1)
         {  
             $cabecera->titulo(__("Nueva Ficha"))->ruta(__("Nueva Ficha"));
         }else{
-            $cabecera->titulo(__("Editando Ficha '".$optionsSelect[0]['fich_deno']."'" ))->ruta(__("Editando Ficha"));
+            $cabecera->titulo(__("Editando Ficha: 
+              '".$optionsSelect[0]['fich_deno']."'" ))->ruta(__("Editando Ficha"));
         }
 
         if($_SESSION["usuario"]["modi"] == "S")
@@ -130,57 +136,57 @@
     <div class="panel-body">
 
         <ul id="tabs" class="nav nav-tabs">
-          <li class="active">
-            <a data-toggle="tab" href="#home">Propiedades</a>
-          </li>
+            <li class="active">
+              <a data-toggle="tab" href="#home">Propiedades</a>
+            </li>
 
-          <li>
-            <a data-toggle="tab" href="#menu1">Aplica a</a>
-          </li>
+            <li>
+              <a data-toggle="tab" href="#menu1">Aplica a</a>
+            </li>
 
-           <li>
-            <a data-toggle="tab" href="#menu2">Procedimientos y Recursos </a>
-          </li>
-
-           <li>
-            <a data-toggle="tab" href="#menu3">Fuentes</a>
-          </li>
-
+            <li>
+              <a data-toggle="tab" href="#menu2">Procedimientos y Recursos </a>
+            </li>
+              
+             <li>
+              <a data-toggle="tab" href="#menu3">Fuentes</a>
+            </li>
         </ul>
              
-        <div class="tab-content" id="content">
-            <div id="home" class="tab-pane fade in active">
+        <div class="tab-content" id="content" style="margin-top: 20px">
+
+            <div id="home" class="tab-pane fade in active" >
               
               <!-- selecciona cursor que es donde estan todos los datos de la ficha en abmFicha.php -->
               
               <?php foreach ($cursor as $row) {} ?>
 
               <div class="form-group row">
-                  <label for="example-tel-input" class="col-xs-2 col-form-label">Cod interno</label>
-                  <div class="col-xs-2">
+                  <label for="example-tel-input" class="col-md-1 col-form-label">Cod. interno</label>
+                  <div class="col-md-1">
                       <input class="form-control" type="text" name="fich_id" value="<?php echo $row['fich_id'] ?>" readonly >
                   </div>
               </div>
 
               <div class="form-group row">
-                <label for="example-tel-input" class="col-xs-2 col-form-label">Denominacion</label>
+                <label for="example-tel-input" class="col-md-1 col-form-label">Denominacion</label>
                 <div class="col-xs-8 col-md-8">
                   <input class="form-control" name="fich_deno" value="<?php echo $row['fich_deno'] ?>" required>
                 </div>
               </div>
 
               <div class="form-group row">
-                <label for="example-tel-input" class="col-xs-2 col-form-label">Descripción</label>
+                <label for="example-tel-input" class="col-md-1 col-form-label">Descripción</label>
                 <div class="col-xs-8 col-md-8">
                   <textarea class="form-control" name="fich_desc"><?php echo $row['fich_desc'] ?></textarea>
                 </div>  
               </div>
 
-              <div class="form-group row">
-                <label for="example-tel-input" class="col-xs-2 col-form-label">Catálogo</label>
+              <div class="form-group row" >
+                <label for="example-tel-input" class="col-md-1 col-form-label">Catálogo</label>
                 <div class="col-xs-8">
                  <?php $optionsSelect = $dd_cata;?>
-                  <select id= "fich_cata_id" name="fich_cata_id" class="form-control">
+                  <select id= "fich_cata_id" name="fich_cata_id" class="form-control" required>
                   <?php foreach ($optionsSelect as $arraySelect) { ?>
                       <option value="<?php echo $arraySelect['cata_id'];?>" <?php if($arraySelect['cata_id'] == $row['fich_cata_id']){echo 'selected';} ?> >
                         <?php echo $arraySelect['cata_deno']; ?>
@@ -189,7 +195,7 @@
                 </div>
               </div>
               
-
+              <!-- revisar porque al sacarlo se va la pantalla -->
               <div class="form-group row">
                 <label for="example-tel-input" class="col-xs-1 col-form-label">Catálogo</label>
                 <div class="col-xs-9">
@@ -209,10 +215,10 @@
 
                 <div class="row">
 
-                  <div class="col-xs-6 col-md-3">
-                    <table id="fases" class="table table-striped table-bordered font12" cellspacing="0" >
+                  <div class="col-xs-6 col-md-3" >
+                    <table id="fases" class="table table-striped table-bordered font12" cellspacing="0">
                         <thead>
-                            <tr class="alert-info wrapper">
+                            <tr class="encabezado">
                                 <th><?php echo "Fases"; ?></th>
                                 <th width="80" class="nosort" style="text-align: center">Aplica</th>
                             </tr>
@@ -238,7 +244,7 @@
                   <div class="col-xs-6 col-md-3">
                     <table id="medios" class="table table-striped table-bordered font12" cellspacing="0" >
                         <thead>
-                            <tr class="alert-info wrapper">
+                            <tr class="encabezado">
                                 <th><?php echo "Medios"; ?></th>
                                 <th width="80" class="nosort" style="text-align: center">Aplica</th>
                             </tr>
@@ -263,7 +269,7 @@
 					<div class="col-xs-6 col-md-3">
                     <table id="tamanio" class="table table-striped table-bordered font12" cellspacing="0" >
                         <thead>
-                            <tr class="alert-info wrapper">
+                            <tr class="encabezado">
                                 <th><?php echo "Tamaño"; ?></th>
                                 <th width="80" class="nosort" style="text-align: center">Aplica</th>
                             </tr>
@@ -289,7 +295,7 @@
 				  <div class="col-xs-6 col-md-3">
                     <table id="tipologia" class="table table-striped table-bordered font12" cellspacing="0" >
                         <thead>
-                            <tr class="alert-info wrapper">
+                            <tr class="encabezado">
                                 <th><?php echo "Tipologia"; ?></th>
                                 <th width="80" class="nosort" style="text-align: center">Aplica</th>
                             </tr>
@@ -316,25 +322,23 @@
         </div> <!-- cierre solapa "aplica a" -->
 
         <!---  solapa de procedimientos y recursos .. -->
-            <div id="menu2" class="tab-pane fade">
-                <div class="row">
+          <div id="menu2" class="tab-pane fade">
+              <div class="row">
 
-                <div class="col-xs-12 col-md-6">
-                  <table id="tablaProc" class="tablaProc table-striped table-bordered font12" cellspacing="0" >
+                  <table id="tablaProc" class="tablaProc table-striped col-md-5 col-xs-12" style="margin-left: 15px; ">
                       
                         <thead>
-                            <tr class="alert-info wrapper">
-                                <th ><?php echo "Procedimientos Recomendados"; ?>
-                                
+                            <tr class="encabezado">
+                                <th style="padding-left: 5px; box-sizing: border-box;"><?php echo "Procedimientos Recomendados"; ?></th>
                              
-                                <th><a title="Agregar un procedimiento" onclick="agregarProce(); return false;" class="btn btn-info pull-right"> <i class="icon-plus text-info"></i>  Nuevo </a>
+                                <th><a title="Agregar un procedimiento" onclick="agregarProce(); return false;" class="btn btn-info pull-right"> <i class="icon-plus text-info"></i>  Nuevo </a></th>
                                 
                                 <th  class="nosort" style="text-align: center">Eliminar</th>
       
                             </tr>
                         </thead>
                         
-                      <tbody>
+                        <tbody>
                             <?php $c = 1; foreach($l_proc as $row){ ?>
                             <tr  onMouseOver="CambiaColor(this,'#dff0d8','blue')" onMouseOut="CambiaColor2(this,'#000000')">
                                 
@@ -357,15 +361,14 @@
                       </tbody>
                        
                   </table>
-                </div>
-
-                <!--recursos-->
-               <div class="col-xs-12 col-md-6">
-                  <table id="tablaRecur" class="tablaRecur table-striped table-bordered font12" cellspacing="0" >
+                
+                
+                 <!-- ...................recursos............................................ -->
+                  <table id="tablaRecur" class="tablaRecur table-striped col-md-offset-1 col-md-5 col-xs-12">
 
                         <thead>
-                            <tr class="alert-info wrapper">
-                                <th ><?php echo "Previsión de recursos recomendada"; ?>
+                            <tr class="encabezado">
+                                <th style="padding-left: 5px; box-sizing: border-box;"><?php echo "Previsión de recursos recomendada"; ?>
                                 
                                 <th><a title="Agregar recurso" onclick="agregarRecurso(); return false;" class="btn btn-info pull-right"> <i class="icon-plus text-info"></i>  Nuevo </a>
                            
@@ -396,21 +399,20 @@
                           <?php $c++; } ?>
                       </tbody>
                   </table>
-                </div>
 
                 </div> <!-- cierre del row -->
               </div> <!-- cierre solapa "procedimientos" -->
-
+ 
   <!---  solapa de fuente .. -->
             <div id="menu3" class="tab-pane fade">
 
-                  <table id="tablaFuen" class="tablaFuen table-striped table-bordered font12" cellspacing="0" >
+                  <table id="tablaFuen" class="tablaFuen table-striped col-md-6" cellspacing="0" >
 
                         <thead>
-                            <tr class="alert-info wrapper">
-                                <th ><?php echo "Fuentes Registradas"; ?>
+                            <tr class="encabezado">
+                                <th style="padding-left: 5px; box-sizing: border-box;"><?php echo "Fuentes Registradas"; ?></th>
                                 
-                                <th><a title="Agregar fuente" onclick="agregarFuen(); return false;" class="btn btn-info pull-right"> <i class="icon-plus text-info"></i>  Nuevo </a>
+                                <th><a title="Agregar fuente" onclick="agregarFuen(); return false;" class="btn btn-info pull-right"> <i class="icon-plus text-info"></i>  Nuevo </a></th>
                            
                                 <th  class="nosort" style="text-align: center">Eliminar</th>
                                 <th colspan="2" style="text-align: center">Acciones</th>

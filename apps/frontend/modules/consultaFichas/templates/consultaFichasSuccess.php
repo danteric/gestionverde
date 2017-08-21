@@ -186,7 +186,7 @@ show(document.getElementById('one'));
 
   <div class="col-xs-11 col-md-11 col-md-offset-1">
         <div id="derecha" class="wrapper tipoframe" style="; padding-left:15px;">
-            <div class="panel-body">
+            <div>
                 <div id="detalleFicha" class="responsiveWidth"></div>
             </div>
         </div>

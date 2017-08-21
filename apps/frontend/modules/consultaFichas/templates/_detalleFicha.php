@@ -9,11 +9,11 @@
     <div class="row" >
         <?php foreach ($fich as $row) {} ?>  <!--declaro que voy a usar la info de fichas-->
 
-          <div class="col-md-8 bg-primary" style=" background: #01579b; padding: 5px 0px 5px 5px;box-sizing: border-box; font-size: 14px"> 
+          <div class="col-md-7 bg-primary" style=" background: #01579b; padding: 5px 0px 5px 5px;box-sizing: border-box; font-size: 14px;"> 
                <h2><?php echo $row['fich_deno'] ?></h2>    
           </div>
          
-          <div class="col-md-4" style="background-color:#424242 ;color: white; padding: 7.5px 0px 7.5px 5px;box-sizing: border-box; font-size: 11px">
+          <div class="col-md-4" style="background-color:#424242 ;color: white; padding: 7.5px 0px 7.5px 5px;box-sizing: border-box; font-size: 11px; margin-left: 95px">
               <h2><?php echo $row['cata_deno'] ?></h2>
           </div>
 
@@ -114,7 +114,7 @@
      <!-- .....................row de recursos y fuentes................................. --> 
     <div class="row">
            
-              <div class="col-md-6" style="background-color: #1976d2; color: white; padding: 5px 0px 5px 0px; font-size: 11px; font-weight: bold">
+              <div class="col-md-6" style="background-color: #1976d2; color: white; padding: 5px 0px 5px 0px; font-size: 11px; font-weight: bold;">
                     <h2 style="margin-left: 5px">Previsión de recursos recomendada:</h2>
               </div>
 

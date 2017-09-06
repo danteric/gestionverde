@@ -2,6 +2,7 @@
 
 <script>
 
+
 $.fn.dataTable.moment( 'DD/MM' );
 
 $(document).ready(function() {
@@ -76,7 +77,8 @@ $(document).ready(function() {
 							<a class = "btn btn-mini" onclick="eliminarEntidad('<?php echo url_for("abmFichas/baja?fich_id=".$row['fich_id']) ?>');" href="#">
 								<i class="icon icon-remove text-danger"></i>
 							</a>
-						<?php } ?>
+                            
+                     	<?php } ?>
 					</td>
                 </tr>
 			<?php endforeach; ?>

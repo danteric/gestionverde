@@ -20,6 +20,7 @@ class abmProyectoActions extends sfActions
          $this->notices = array();
 
 
+
          $this->filasPorPagina = $_SESSION['usuario']['filas_pag'];
 
 
@@ -87,15 +88,15 @@ class abmProyectoActions extends sfActions
  		 $sql = "GET_MEDIO_RS(null,'B')";
          $this->dd_medi = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
-         //echo "<pre>"; print_r($this->c_numerador);
-
-         $sql = "GET_TAMANIO_RS(null,'N')";
+         $sql = "GET_TAMANIO_RS(null,'B')";
          $this->dd_tama = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
-         $sql = "GET_TIPOLOGIA_RS(null,'N')";
+         $sql = "GET_TIPOLOGIA_RS(null,'B')";
          $this->dd_tipo = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
-
+         $sql = "GET_CAMP_PAISES_RS(null)" ;
+         $this->dd_pais = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+		
 		/*----si recibe id es una modificación y se necesita rellenar los campos--*/
 		
 		if(!empty($proy_id))
@@ -105,314 +106,93 @@ class abmProyectoActions extends sfActions
 			$this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 			$proy_id = $this->cursor[0]['proy_id'];
 
+
 		}
 		
-		
-		/*--------------------Alta-------------------------------------*/
-		/*
 		if($request->getMethod() == "POST")
 		{
 
 			/*--si es modificación obtiene los parámetros---*/
-			/*
-			$fich_id 		= $request->getParameter("fich_id");
-			$this->fich_deno 	= $request->getParameter("fich_deno");
-			$this->fich_desc 	= $request->getParameter("fich_desc");
-			$this->fich_cata_id = $request->getParameter("fich_cata_id");
-			$this->graba_ok 	= 1;	
 
+			$proy_id		= $request->getParameter("proy_id");
+			$this->proy_nombre 	= $request->getParameter("proy_nombre");
+			$this->proy_obser 	= $request->getParameter("proy_obser");
+			$this->proy_inicio_f = $request->getParameter("proy_inicio_f");
+			$this->proy_fin_estimado_f = $request->getParameter("proy_fin_estimado_f");
+			$this->proy_pais_id = $request->getParameter("proy_pais_id");
+			$this->proy_prov_id = $request->getParameter("p_id_provincia");
+			$this->proy_loca_id = $request->getParameter("proy_loca_id");
+			$this->proy_tama_id = $request->getParameter("proy_tama_id");
+			$this->proy_medi_id= $request->getParameter("proy_medi_id");
+			$this->proy_tipo_id = $request->getParameter("proy_tipo_id");
+			$this->graba_ok 	= 1;	
 
 			
 		/*-----------Validacion de campos vacios y tipos de datos---------*/
-			/*
-            $sql = "AM_FICHA_RS('".$_SESSION['usuario']['username']."',
-                                   '".$fich_id."',
-                                   '".$this->fich_deno."',
-                                   '".$this->fich_desc."',
-                                   '".$this->fich_cata_id."',
+
+            $sql = "AM_PROYECTO_RS('".$_SESSION['usuario']['username']."',
+                                   '".$proy_id."',
+                                   '".$this->proy_nombre."',
+                                   '".$this->proy_obser."',
+                                   '".$this->proy_inicio_f."',
+								   '".$this->proy_fin_estimado_f."',
+								   '".$this->proy_pais_id."',
+								   '".$this->proy_prov_id."',
+								   '".$this->proy_loca_id."',
+   								   '".$this->proy_tama_id."',
+                                   '".$this->proy_medi_id."',
+								   '".$this->proy_tipo_id."',
 								   @out_id);";
           
+
+
             $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql); 
             $resp_sp = $this->cursor[0]['respuesta'];
+			
 			$resp_sp_id = $this->cursor[0]['respuesta_id'];
-			$fich_id= $resp_sp_id ;
+			$proy_id= $resp_sp_id ;
 					
-	
+			
 
 			  //si hubo problemas, no graba
             if ($resp_sp != 'OK') {
                 $this->getUser()->setFlash('error', $this->cursor[0]['respuesta']);
                 $this->graba_ok = 0;
             }
- 
-			/*----------- si grabo ok sigo con las fases -----------*/
-		     	/*
-		 
-            if ($this->graba_ok == 1) { 	
+ 			
+			  			            
+        
 
-
-			    $this->anota_fase_f = $request->getParameter('anota_fase_f');
-			    $this->listaAnota   = '';
-				
-				
-			    // recorro items =========================================
-			    foreach ($this->anota_fase_f as $value)
-			      {
-			         $this->listaAnota=$this->listaAnota.$value.',';
-			      }
-
-			    $sql = "AM_FICHA_FASES_RS('".$_SESSION["usuario"]["username"]."','"
-			                                        .$fich_id."','"
-			                                        .$this->listaAnota."')"; 
-			
-
-
-			    $this->cursor_fases = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-
-				 
-			    
-				
-			    $resp_sp = $this->cursor_fases[0]['respuesta'];
-			    $exito   = $this->cursor_fases[0]['respues_exito'];
-			    if ($resp_sp != 'OK') 
-			    {
-			        $this->getUser()->setFlash('error', $this->cursor_fases[0]['respuesta']);
-			        $this->graba_ok = 0;
-			    }
-   
-			} 
-			
-
-            /*----------- si grabo ok sigo  con medios -----------*/
-            /*
-            if ($this->graba_ok == 1) 
-            { 	
-
-			    $this->anota_medi_f = $request->getParameter('anota_medi_f');
-			    $this->listaAnota  = '';
-			 	
-
-			        // recorro items =========================================
-			        foreach ($this->anota_medi_f as $value)
-			           {
-			           $this->listaAnota = $this->listaAnota.$value.',';
-			        
-			           }
-					//print_r($_REQUEST);
-					//echo $this->listaAnota ; exit;
-				   		
-			        //echo "<pre>"; print_r($this->listaAnota); exit;
-
-			        $sql = "AM_FICHA_MEDIOS_RS('".$_SESSION["usuario"]["username"]."','"
-			                                        .$fich_id."','"
-			                                        .$this->listaAnota."')";      
-			        
-			    
-			                	
-			        $this->cursor_medios = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-
-			     
-					//echo $sql; print_r($_REQUEST) ; exit;
-			        $resp_sp = $this->cursor_medios[0]['respuesta'];
-			        $exito   = $this->cursor_medios[0]['respues_exito'];
-			        
-				 
-				
-			        if ($resp_sp != 'OK') 
-			        {
-			            $this->getUser()->setFlash('error', $this->cursor_medios[0]['respuesta']);
-			            $this->graba_ok = 0;
-			        }
-
-   
-			} 
-			
-			
-			 /*----------- si grabo ok sigo  con tamaño -----------*/
-            /*
-		       if ($this->graba_ok == 1) 
-            { 	
-
-			    $this->anota_tama_f = $request->getParameter('anota_tama_f');
-			    $this->listaAnota  = '';
-			 	
-
-			        // recorro items =========================================
-			        foreach ($this->anota_tama_f as $value)
-			           {
-			           $this->listaAnota = $this->listaAnota.$value.',';
-			        
-			           }
-					//print_r($_REQUEST);
-					//echo $this->listaAnota ; exit;
-				   		
-			        //echo "<pre>"; print_r($this->listaAnota); exit;
-
-			        $sql = "AM_FICHA_TAMANIOS_RS('".$_SESSION["usuario"]["username"]."','"
-			                                        .$fich_id."','"
-			                                        .$this->listaAnota."')";      
-			        
-			    
-			                	
-			        $this->cursor_tamanios = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-
-			     
-					//echo $sql; print_r($_REQUEST) ; exit;
-			        $resp_sp = $this->cursor_tamanios[0]['respuesta'];
-			        $exito   = $this->cursor_tamanios[0]['respues_exito'];
-			        
-				 
-				
-			        if ($resp_sp != 'OK') 
-			        {
-			            $this->getUser()->setFlash('error', $this->cursor_tamanios[0]['respuesta']);
-			            $this->graba_ok = 0;
-			        }
-
-   
-			} 
-			 /*----------- si grabo ok sigo  con tipologia -----------*/
-            /*
-            if ($this->graba_ok == 1) 
-            { 	
-
-			    $this->anota_tipo_f = $request->getParameter('anota_tipo_f');
-			    $this->listaAnota  = '';
-			 	
-
-			        // recorro items =========================================
-			        foreach ($this->anota_tipo_f as $value)
-			           {
-			           $this->listaAnota = $this->listaAnota.$value.',';
-			        
-			           }
-
-
-			        $sql = "AM_FICHA_TIPOLOGIAS_RS('".$_SESSION["usuario"]["username"]."','"
-			                                        .$fich_id."','"
-			                                        .$this->listaAnota."')";      
-			        
-			    
-			                	
-			        $this->cursor_tipologias = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-
-			     
-					//echo $sql; print_r($_REQUEST) ; exit;
-			        $resp_sp = $this->cursor_tipologias[0]['respuesta'];
-			        $exito   = $this->cursor_tipologias[0]['respues_exito'];
-			        
-				 
-				
-			        if ($resp_sp != 'OK') 
-			        {
-			            $this->getUser()->setFlash('error', $this->cursor_tipologias[0]['respuesta']);
-			            $this->graba_ok = 0;
-			        }
-
-   
-			} 
-			
-			
-			/*----------- si grabo ok sigo  con procedimientos ----------- */
-			/*
-
-            if ($this->graba_ok == 1) 
-            {     	
-
-			    $this->proc_id_f 	= $request->getParameter('proc_id_f');
-			    $this->proc_text_f 	= $request->getParameter('proc_text_f');
-			    $this->proc_borr_f 	= $request->getParameter('proc_borr_f');
-			    $max = sizeof($this->proc_id_f); 
-			
-			    for( $ind = 1; $ind<=$max; $ind++ ) 
-			    {
-	
-			        $sql = "AMB_FICHA_PROCEDIMIENTOS_RS('".$_SESSION["usuario"]["username"]."','"
-			        								.$fich_id."','"
-			                                        .$this->proc_id_f[$ind]."','"
-			                                        .$this->proc_text_f[$ind]."','"
-			                                        .$this->proc_borr_f[$ind]."')";   
-			        
-
-			        $this->cur_proc = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-			  	};
-         	};
-         		
-         	
-		
-
-			/*----------- si grabo ok sigo  con recursos ----------- */
-/*		
-			
-            if ($this->graba_ok == 1)
-             {   	
-
-
-			    $this->recu_id_f 	= $request->getParameter('recu_id_f');
-			    $this->recu_text_f 	= $request->getParameter('recu_text_f');
-			    $this->recu_borr_f 	= $request->getParameter('recu_borr_f');
-			    $max = sizeof($this->recu_id_f); 
-
-
-
-			    for( $ind = 1; $ind<=$max; $ind++ ) 
-			    {
-	
-			        $sql = "AMB_FICHA_RECURSOS_RS('".$_SESSION["usuario"]["username"]."','"
-			        								.$fich_id."','"
-			                                        .$this->recu_id_f[$ind]."','"
-			                                        .$this->recu_text_f[$ind]."','"
-			                                        .$this->recu_borr_f[$ind]."')";   
-			                            
-			        $this->cur_recurso = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-
-         		};
-         	};
-         		
-
-			/*----------- si grabo ok sigo  con fuentes ----------- */
- 			/*
- 			 if ($this->graba_ok == 1) 
- 			 {     	
-
-			    $this->fuen_id_f 	= $request->getParameter('fuen_id_f');
-			    $this->fuen_text_f 	= $request->getParameter('fuen_text_f');
-			    $this->fuen_borr_f 	= $request->getParameter('fuen_borr_f');
-			    $max = sizeof($this->fuen_id_f); 
-
-			
-
-			    for( $ind = 1; $ind<=$max; $ind++ ) 
-			    {
-	
-			        $sql = "AMB_FICHA_FUENTES_RS('".$_SESSION["usuario"]["username"]."','"
-			        								.$fich_id."','"
-			                                        .$this->fuen_id_f[$ind]."','"
-			                                        .$this->fuen_text_f[$ind]."','"
-			                                        .$this->fuen_borr_f[$ind]."')";   
-			        
-			        $this->cur_fuen = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-			  
-         		};
-         	};
-         		
-          /*
-			
-
-			/*-------Si hay algun error, no graba y continua en el ABM de la ficha -----*/
-			/*
+           	/*-------Si hay algun error, no graba y continua en el ABM de un proyecto -----*/
 			if ($this->graba_ok == 1) 
 			{
 				$this->redirect("abmProyecto/abmProyecto");
 			    $this->getUser()->setFlash('notice', $this->cursor[0]['respues_exito']);			        
 			}else{    // error vuelve al item editado
- 				$this->redirect("abmProyecto/formularioProyecto?fich_id=".$fich_id);
+ 				$this->redirect("abmProyecto/formularioProyecto?proy_id=".$proy_id);
 				
 			} 
-
-		}//de post	
-		*/
+			
+		}//post
 	}//end function formularioProyecto
+
+
+	/*--- funcion para relacionar las provincias con los paises------------*/
+	 public function executeComboSubprovin(sfWebRequest $request){
+    
+
+        $p_id_pais       = $request->getParameter('proy_pais_id');
+        $this->codigoProvincia  = $request->getParameter('proy_prov_id'); // solo recuperar dato
+        
+        //$calu_id_provincia_pro  == 1; //$request->getParameter('calu_id_provincia_pro');
+        $sql = "SEL_CAMP_PROVINCIAS_DD_RS('".$p_id_pais."',null)";
+        $this->dd_provin = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+		//print_r($this->dd_provin); die;
+
+        return $this->renderPartial('abmProyecto/comboSubprovin', array('dd_provin' => $this->dd_provin, 'codigoProvincia' =>$this->codigoProvincia));
+    } 
+
+
 
 	/*-------------------------------ABuscar fichas relacionadas--------------------------------*/
 	public function executeFichasRelacionadas(sfWebRequest $request) {
@@ -455,6 +235,36 @@ class abmProyectoActions extends sfActions
 					                            'pagina' => $this->pagina));
 	
 	}
+
+
+/*-------------------------------ABuscar fichas relacionadas--------------------------------*/
+	public function executeFichaReducida(sfWebRequest $request) {
+	
+      	$this->fich_id = $request->getParameter("fich_id");
+
+
+    	$sql = "GET_FICHA_RS('".$this->fich_id."')";
+		$this->fich = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+		$sql = "GET_FICHA_PROCEDIMIENTOS_RS('".$this->fich_id."')";
+        $this->proc = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+        $sql = "GET_FICHA_RECURSOS_RS('".$this->fich_id."')";         
+        $this->recu = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+
+   		//echo $sql;
+   		//echo "<pre>"; print_r($this->cursor_fichas_rel);die;
+   		
+		return $this->renderPartial
+				('abmProyecto/fichaReducida', array('fich'=>$this->fich,
+												  'proc'=>$this->proc,
+												  'recu'=>$this->recu
+												 ));
+	
+	}
+
+
 
 
 	/*-------------------------------Baja de una Ficha--------------------------------*/

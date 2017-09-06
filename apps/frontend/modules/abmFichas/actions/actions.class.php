@@ -82,7 +82,7 @@ class abmFichasActions extends sfActions
 		$fich_id = $request->getParameter('fich_id');	//obtiene el id de la ficha del array $request
 	
 		// trae todos los datos de la ficha
- 		$sql = "GET_CATALOGO_RS(null,'V')";
+ 		$sql = "GET_CATALOGO_RS(null,'B')";
         $this->dd_cata = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 		
  		$sql = "SEL_FASES_FICHA_RS('".$fich_id."')";
@@ -431,13 +431,15 @@ class abmFichasActions extends sfActions
 			
             $this->errors = array();
             $this->notices = array();
-           
+           	
             if($request->getParameter('fich_id') && $request->getMethod() == "GET")
             {
+               
                $fich_id = $request->getParameter('fich_id');
+
                 $sql = "B_FICHA_RS('".$_SESSION['usuario']['username']."',
                                        '".$fich_id."')";
-
+				
                $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
                $this->redirect("abmFichas/abmFichas");
             }

@@ -153,7 +153,7 @@
             </li>
         </ul>
              
-        <div class="tab-content" id="content" style="margin-top: 20px">
+        <div class="tab-content" id="content" style="margin-top: 20px;overflow-x: hidden;">
 
             <div id="home" class="tab-pane fade in active" >
               
@@ -178,7 +178,7 @@
               <div class="form-group row">
                 <label for="example-tel-input" class="col-md-1 col-form-label">Descripción</label>
                 <div class="col-xs-8 col-md-8">
-                  <textarea class="form-control" name="fich_desc"><?php echo $row['fich_desc'] ?></textarea>
+                  <textarea class="form-control" name="fich_desc" required=""><?php echo $row['fich_desc'] ?></textarea>
                 </div>  
               </div>
 
@@ -192,23 +192,12 @@
                         <?php echo $arraySelect['cata_deno']; ?>
                       </option> 
                   <?php } ?>
+                  </select>
                 </div>
               </div>
+          
               
-              <!-- revisar porque al sacarlo se va la pantalla -->
-              <div class="form-group row">
-                <label for="example-tel-input" class="col-xs-1 col-form-label">Catálogo</label>
-                <div class="col-xs-9">
-                 <?php $optionsSelect = $dd_cata;?>
-                  <select id= "fich_1" name="fich_2" class="form-control">
-                  <?php foreach ($optionsSelect as $arraySelect) { ?>
-                      <option value="">
-                      </option> 
-                  <?php } ?>
-                </div>
-              </div>
-              
-            </div> <!--cierre del div id=home-->
+          </div> <!--cierre del div id=home-->
             
             <!---  solapa de Aplica a .. -->
             <div id="menu1" class="tab-pane fade">

@@ -7,53 +7,119 @@
         location.href = '<?php echo url_for("abmProyecto/abmProyecto") ?>';
     }
 
-     
+$(document).ready(function(){
+    $("[data-toggle='popover']").popover(); 
+
+});
+
+ 
+    //------------------Funcion del modal de Fichas relacionadas--------------------- 
    agregarFichaRel = function() {
 
-
-      //cata_id: $('#proy_nombre').val(),
+      var proy_medi_id = $('#proy_medi_id').val();
+      var proy_tama_id = $('#proy_tama_id').val();
+      var proy_tipo_id = $('#proy_tipo_id').val();
 
      //$("from#formulario").submit(function(){
-        //alert ("lo hizo");
-      $.get("<?php echo url_for('abmProyecto/FichasRelacionadas') ?> ", 
-      {
-       proy_medi_id: $('#proy_medi_id').val(),
-       proy_tama_id: $('#proy_tama_id').val(),
-       proy_tipo_id: $('#proy_tipo_id').val()
-       },
-            function(data){
-                $('#tablaFichasRel').html(data);
-                startTableOnlySorter();
-                $('#spinner').hide();
-            });
 
+     if ( (proy_medi_id == '') || (proy_tama_id == '') || (proy_tipo_id == '') )
+     {  
+        $('#men_err_completar').modal('show');
 
+     }else{
 
+        $.get("<?php echo url_for('abmProyecto/FichasRelacionadas') ?> ", 
+        {
+         proy_medi_id,
+         proy_tama_id,
+         proy_tipo_id
+         },
+              function(data){
+                  $('#tablaFichasRel').html(data);
+                  startTableOnlySorter();
+                  $('#spinner').hide();
+              });
 
-        $('#adjFichRel').modal('show');
-       // });
-      //alert ("no lo hizo");
+          $('#adjFichRel').modal('show');
+      } 
       
     }
+    
+  //  dependiendo del pais , trae el listado de provincias
+  mostrarSubProvin = function() {
 
-//$('#myModalExito').modal('show');
+    $.post("<?php echo url_for('abmProyecto/comboSubprovin') ?>",
+    { 
+     proy_pais_id: $("#proy_pais_id").val(),  
+     proy_prov_id: $("#proy_prov_id").val(),
+    },  
+          function(data){
+              $('#resulSubprov').html(data);
+              startTableOnlySorter();
+          });
+  }
 
-/*
-    $('.datepicker').datepicker({
-    format: 'mm/dd/yyyy',
-    startDate: '-3d'
-    }); 
-*/
+   $(document).ready(function(){
+        mostrarSubProvin();
+  });
+
+
+// funcion para mostrar dinamicamente las localidades al escribir en el input
+$(document).ready(function(){    
+    // llamado automatico para mostrar nombre de lalocal
+    var locaString = $("#proy_loca_id").val()+','+$("#proy_prov_id").val()+','+$("#proy_pais_id").val();
+    mostrarNombreGenerico(locaString,'loca_prov','datosinfo');
+    //autocomplete//
+    $('.datosinfo').keyup(function(){
+
+        var valor = $(this).val();   
+        var pais = $("#proy_pais_id").val();
+        var prov = $("#p_id_provincia").val();
+        
+        var accion = 'loca_prov';
+        var dataString = "valor="+valor+','+accion+','+pais+','+prov;
+
+        console.log(dataString);
+        $("#id_localidad").show();
+        $.ajax({
+            type: "POST",
+            url: "<?php echo url_for('/services/getgenerico') ?>",
+            data: dataString,
+            success: function(data) {
+                //alert(data);
+                $('#muestroayudabuscado').fadeIn(({width:250,height:250,left:-25,top:-25})).html(data);
+                 $("#id_localidad").hide(); 
+                 
+                 $('.activocombo').click(function()
+                 {
+                    var id = $(this).attr('id');
+                    console.log(id);
+                    $('#muestroayudabuscado').fadeOut(({width:200,height:200,left:0,top:0}),1000);
+                                $('#datosinfo').val($('#'+id).attr('data2'));
+                                $('#proy_loca_id').val($('#'+id).attr('data'));
+                               
+                }); 
+                // SI HAGLO CLICK AFUERA CIERRO EL DIV Y LIMPIO EL CAMPO
+                $('.container').click(function(){
+                     $('#muestroayudabuscado').hide();
+                    
+                });  
+          
+         } });     
+       
+    });
+    });
+
+
 </script>
 
-<style>  input[type="text"] {  width: 150px;}  
+<style>  input[type="text"] {  width: 150px;} 
 
 .encabezado {background-color: #37474f; color: white}
-.modal{top:20%;}
-.modal-wide .modal-body{overflow-y: auto;}
-.modal.modal-wide .modal-dialog{max-width: 60%}
-#adjFichRel .modal-body{margin-bottom: 250px}
- #adjOtrasFichas .modal-body{margin-bottom: 250px}
+.modal.modal-wide {top:10%;}
+.modal.modal-wide .modal-dialog{max-width: 50%;}
+
+
 
 </style>
 
@@ -114,42 +180,70 @@
               <?php foreach ($cursor as $row) {} ?>
 
               <div class="form-group row">
-                  <label for="example-tel-input" class="col-md-1 col-form-label">Cod. interno</label>
-                  <div class="col-md-1">
+                  <label for="example-tel-input" class="col-xs-1 col-md-1 col-form-label">Cod. interno</label>
+                  <div class="col-xs-1 col-md-1">
                       <input class="form-control" type="text" name="proy_id" value="<?php echo $row['proy_id'] ?>" readonly >
                   </div>
               </div>
 
               <div class="form-group row">
-                <label for="example-tel-input" class="col-md-1 col-form-label">Nombre</label>
+                <label for="example-tel-input" class="col-xs-1 col-md-1 col-form-label">Nombre</label>
                 <div class="col-xs-8 col-md-8">
                   <input class="form-control" id="proy_nombre" name="proy_nombre" value="<?php echo $row['proy_nombre'] ?>" required>
                 </div>
               </div>
 
               <div class="form-group row">
-                <label for="example-tel-input" class="col-md-1 col-form-label">Descripción</label>
+                <label for="example-tel-input" class="col-xs-1 col-md-1 col-form-label">Descripción</label>
                 <div class="col-xs-8 col-md-8">
                   <textarea class="form-control" name="proy_obser" required><?php echo $row['proy_obser'] ?></textarea>
                 </div>  
               </div>
+              
+              <div class="form-group row">
+                    
+                    <label for="proy_pais_id" class="col-md-1 col-form-label">Pais</label>
+                    <div class="col-xs-8 col-md-2">
+                        <?php $optionsSelect = $sf_data->getRaw('dd_pais');?>
+                        <select id="proy_pais_id" name="proy_pais_id" class="form-control" onchange="mostrarSubProvin()" required>
+                        <?php foreach ($optionsSelect as $arraySelect) { ?>                   
+                        <option data="<?php echo $arraySelect["cpai_id_pais"] ?>" <?php if($row['proy_pais_id']==$arraySelect["cpai_id_pais"]) { echo 'selected'; }; ?> value="<?php echo $arraySelect["cpai_id_pais"] ?>"><?php echo $arraySelect["cpai_pais"] ?></option> 
+                        <?php } ?>
+                         </select>
+                    </div>
+
+                    <label for="proy_prov_id" class="col-md-1 col-form-label">Provincia</label>
+                    <div class="col-xs-8 col-md-2">
+                        <input type="hidden" id="proy_prov_id" value="<?php echo $row['proy_prov_id'] ?>" required>
+                        <b id="resulSubprov" style="font-weight: normal"></b>
+                    </div>
+
+                      <!-- p_id_provincia estaba en provincia en echo -->
+
+                    <label for="id_localidad" class="col-md-1 col-form-label">Localidad</label>
+                    <div class="col-xs-8 col-md-2">
+                            <i id="id_localidad" style="display:none" class="icon-spinner icon-spin icon-large"></i>
+                            <input type='text' id="datosinfo"  placeholder="Escriba localidad" class='form-control datosinfo limpiarcampo' value=''>
+                            <input type="hidden" id="proy_loca_id" name="proy_loca_id" value="<?php echo $row['proy_loca_id']?>" />
+                            <div id="muestroayudabuscado"></div>
+                            <b class="focusMensajes" id="focusMensajes" ></b>  
+                    </div>
+                               
+              </div> <!-- form group localidad -->
+
 
               <div class="form-group row">
-                <label for="example-tel-input" class="col-md-1 col-form-label">Localidad</label>
-                <div class="col-xs-8 col-md-4">
-                  <select id= "proy_loca_id" name="proy_loca_id" class="form-control">
-                  </select>
-                </div>  
-              </div>
-
-              <div class="form-group row">
-                <label for="example-tel-input" class="col-md-1 col-form-label">Fecha de inicio</label>
-                <div class="col-xs-1 col-md-1 input-group date" data-provide="datepicker">
-                  <input type="date" class="form-control" required>
-                   <div class="input-group-addon">
-                      <span class="glyphicon glyphicon-th"></span>
-                  </div>
-                </div>  
+                 
+                    <label for="example-tel-input" class="col-xs-1 col-md-1 col-form-label">Fecha de inicio</label>
+                    <div class="col-xs-2 col-md-2">
+                      <input type="date" class="form-control" name="proy_inicio_f" value="<?php echo $row['proy_inicio_f']?>" required>
+                    </div>  
+                                 
+                    <label for="example-tel-input" class="col-xs-1 col-md-1 col-form-label">Cierre Estimado</label>
+                    <div class="col-xs-2 col-md-2">
+                      <input type="date" class="form-control" name="proy_fin_estimado_f" value="<?php echo $row['proy_fin_estimado_f']?>" required>
+                    </div>               
+              
               </div>
      
 
@@ -198,22 +292,47 @@
 
               
              <div class="form-group row" style="margin-left: 0px ;margin-top:15px">
+             
                 
-                <a  href="#" class="btn btn-primary" onclick="agregarFichaRel()"> Adjuntar Fichas Relacionadas</a>
-
-                <a data-toggle="modal" href="#adjOtrasFichas" class="btn btn-default"> Adjuntar otras Fichas</a>
-
-                <a data-toggle="modal" href="#adjFichAd" class="btn btn-default"> Adjuntar Ficha Ad-hoc</a>
+                <a  href="#" class="btn btn-primary" onclick="agregarFichaRel()" data-content="Fichas relacionadas a las clasificaciones seleccionadas (Medio/Tamaño/Tipología)" data-toggle="popover" data-trigger="hover" data-placement="right" >Adjuntar Fichas Relacionadas</a>
+    
             
-              </div>
+                <a data-toggle="modal" href="#adjOtrasFichas" class="btn btn-default">Adjuntar otras Fichas</a>
+                 
+                
+                <a data-toggle="modal" href="#adjFichAd" class="btn btn-default">Adjuntar Ficha Ad-hoc</a>
+            
+
+            </div>
+        
+
+
           </div> <!--cierre del div id=home-->
             
             
-          
 
 
+
+
+
+
+          <!-- ............modal de error al no completar campos de caracteristicas.... -->        
+          <div id="men_err_completar" class="modal modal-wide fade" style="top: 30%">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <p style="text-align: center;vertical-align: middle;font-size: 15px; font-weight: bold;">Completar Medio/Tamaño/Tipología</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+  
           <!-- .......................Modal de Adjuntar Fichas Relacionadas........................... -->
-          <div id="adjFichRel" class="modal modal-wide fade">
+          <div id="adjFichRel" class="modal modal-wide fade" data-backdrop="static" data-keyboard="false">
           <?php $optionsSelect = $cursor_fichas_rel;?>
 
             <div class="modal-dialog">
@@ -221,7 +340,7 @@
                   
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                      <h4 class="modal-title">Adjuntar Fichas Relacionadas </h4>
+                      <h4 class="modal-title">Fichas Relacionadas</h4>
                   </div>
                   
                   <div class="modal-body">
@@ -239,7 +358,7 @@
 
 
           <!-- .......................Modal de Adjuntar otras Fichas........................... -->
-          <div id="adjOtrasFichas" class="modal modal-wide fade">
+          <div id="adjOtrasFichas" class="modal modal-wide fade" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                   
@@ -262,7 +381,7 @@
            </div> <!-- modal--> 
 
            <!-- .......................Modal de Adjuntar Ficha adhoc........................... -->
-          <div id="adjFichAd" class="modal modal-wide fade">
+          <div id="adjFichAd" class="modal modal-wide fade" data-backdrop="static">
             <div class="modal-dialog">
                 <div class="modal-content">
                   
@@ -304,7 +423,10 @@
                 </div> <!-- modal content-->
              </div> <!-- modal dialog-->
            </div> <!-- modal--> 
+  
 
+
+    
       </div> <!--cierre id=content-->
     </div><!--cierre panel body-->
 </div>

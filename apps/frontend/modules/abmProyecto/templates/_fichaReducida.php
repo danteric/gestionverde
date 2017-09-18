@@ -6,8 +6,8 @@
   #item-tabla-ficha p {padding: 5px 0px 5px 8px; margin-top: -10px; border-bottom: 1px solid #ccc; background-color:#bdbdbd;}
 </style>
 
-<div class="wrapper tipoframe">
-  <div id=fichaReducida class="container-fluid">
+<div class="wrapper tipoframe" style="overflow-x: hidden;">
+  <div class="container-fluid">
      
       <!-- ...............row de datos cabecera ...............................-->
       <div class="row" >

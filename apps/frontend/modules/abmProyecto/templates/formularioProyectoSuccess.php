@@ -13,16 +13,20 @@ $(document).ready(function(){
 });
 
  
-    //------------------Funcion del modal de Fichas relacionadas--------------------- 
+    //------------------Funcion al confirmar datos--------------------- 
    agregarFichaRel = function() {
 
       var proy_medi_id = $('#proy_medi_id').val();
       var proy_tama_id = $('#proy_tama_id').val();
       var proy_tipo_id = $('#proy_tipo_id').val();
+      var proy_nombre = $('#proy_nombre').val();
+      var proy_inicio_f = $('#proy_inicio_f').val();
+      var proy_fin_estimado_f = $('#proy_fin_estimado_f').val();
 
      //$("from#formulario").submit(function(){
 
-     if ( (proy_medi_id == '') || (proy_tama_id == '') || (proy_tipo_id == '') )
+     if ( (proy_medi_id == '') || (proy_tama_id == '') || (proy_tipo_id == '') 
+            || (proy_nombre == '') || (proy_inicio_f == '') || (proy_fin_estimado_f == '') )
      {  
         $('#men_err_completar').modal('show');
 
@@ -40,11 +44,41 @@ $(document).ready(function(){
                   $('#spinner').hide();
               });
 
-          $('#adjFichRel').modal('show');
+        //deshabilito las opciones de la clasificación del proyecto
+         $('#proy_tama_id').attr("disabled",true);
+         $('#proy_tipo_id').attr("disabled",true);
+         $('#proy_medi_id').attr("disabled",true);
+
+        //habilito las pestañas para adjuntar fichas
+         $('#tabFichRel').removeClass('disabled disabledTab');    
+
+        //cambio el boton de confirmar a deshabilitado y habilito el de modificar datos
+         $('#botonConfirmar').removeClass('btn-primary');
+         $('#botonModificar').removeClass('disabled');
+         $('#botonConfirmar').addClass('btn-default');
+         $('#botonConfirmar').addClass('disabled');
+         $('#botonModificar').addClass('btn-primary');
+         
+
       } 
       
     }
-    
+
+
+  //modificar los datos de las clasificaciones de la obra
+  modificarDatos = function() {
+      $('#tabFichRel').addClass('disabled disabledTab');
+      $('#botonConfirmar').removeClass('disabled');
+      $('#botonConfirmar').addClass('btn-primary');
+      $('#botonModificar').addClass('disabled');
+      $('#botonModificar').removeClass('btn-primary');
+      $('#proy_tama_id').attr("disabled",false);
+      $('#proy_tipo_id').attr("disabled",false);
+      $('#proy_medi_id').attr("disabled",false);
+
+  }
+
+
   //  dependiendo del pais , trae el listado de provincias
   mostrarSubProvin = function() {
 
@@ -118,7 +152,7 @@ $(document).ready(function(){
 .encabezado {background-color: #37474f; color: white}
 .modal.modal-wide {top:10%;}
 .modal.modal-wide .modal-dialog{max-width: 50%;}
-
+.disabledTab{ pointer-events: none;}
 
 
 </style>
@@ -169,8 +203,20 @@ $(document).ready(function(){
               <a data-toggle="tab" href="#home">Datos del Proyecto</a>
             </li>
 
+            <li id="tabFichRel" class="disabled disabledTab">
+              <a data-toggle="tab" href="#fich_rel">Fichas Relacionadas</a>
+            </li>
+            
+            <li id="tabFichNoRel" class="disabled disabledTab">
+              <a data-toggle="tab" href="#fich_no_rel">Fichas no Relacionadas</a>
+            </li>
+
+            <li id="tabFichAdHoc" class="disabled disabledTab">
+              <a data-toggle="tab" href="#fich_ad_hoc">Ficha Ad-Hoc</a>
+            </li>
         </ul>
              
+        
         <div class="tab-content" id="content" style="margin-top: 20px; overflow-x: hidden;">
 
             <div id="home" class="tab-pane fade in active" >
@@ -217,9 +263,7 @@ $(document).ready(function(){
                         <input type="hidden" id="proy_prov_id" value="<?php echo $row['proy_prov_id'] ?>" required>
                         <b id="resulSubprov" style="font-weight: normal"></b>
                     </div>
-
-                      <!-- p_id_provincia estaba en provincia en echo -->
-
+      
                     <label for="id_localidad" class="col-md-1 col-form-label">Localidad</label>
                     <div class="col-xs-8 col-md-2">
                             <i id="id_localidad" style="display:none" class="icon-spinner icon-spin icon-large"></i>
@@ -236,12 +280,12 @@ $(document).ready(function(){
                  
                     <label for="example-tel-input" class="col-xs-1 col-md-1 col-form-label">Fecha de inicio</label>
                     <div class="col-xs-2 col-md-2">
-                      <input type="date" class="form-control" name="proy_inicio_f" value="<?php echo $row['proy_inicio_f']?>" required>
+                      <input type="date" class="form-control" id="proy_inicio_f" name="proy_inicio_f" value="<?php echo $row['proy_inicio_f']?>" required>
                     </div>  
                                  
                     <label for="example-tel-input" class="col-xs-1 col-md-1 col-form-label">Cierre Estimado</label>
                     <div class="col-xs-2 col-md-2">
-                      <input type="date" class="form-control" name="proy_fin_estimado_f" value="<?php echo $row['proy_fin_estimado_f']?>" required>
+                      <input type="date" class="form-control" id="proy_fin_estimado_f" name="proy_fin_estimado_f" value="<?php echo $row['proy_fin_estimado_f']?>" required>
                     </div>               
               
               </div>
@@ -292,48 +336,35 @@ $(document).ready(function(){
 
               
              <div class="form-group row" style="margin-left: 0px ;margin-top:15px">
-             
-                
-                <a  href="#" class="btn btn-primary" onclick="agregarFichaRel()" data-content="Fichas relacionadas a las clasificaciones seleccionadas (Medio/Tamaño/Tipología)" data-toggle="popover" data-trigger="hover" data-placement="right" >Adjuntar Fichas Relacionadas</a>
-    
-            
-                <a data-toggle="modal" href="#adjOtrasFichas" class="btn btn-default">Adjuntar otras Fichas</a>
-                 
-                
-                <a data-toggle="modal" href="#adjFichAd" class="btn btn-default">Adjuntar Ficha Ad-hoc</a>
-            
+                             
+                <a  href="#" id="botonConfirmar" class="btn btn-primary" onclick="agregarFichaRel()" data-content="Al confirmar podrá adjuntar fichas" data-toggle="popover" data-trigger="hover" data-placement="right">Confirmar datos</a>
 
-            </div>
+                <a  href="#" id="botonModificar" class="btn btn-default disabled" style="margin-left: 5px" onclick="modificarDatos()" data-content="Se eliminaran las fichas adjuntas" data-toggle="popover" data-trigger="hover" data-placement="right">Modificar Clasificaciones</a>
+
+             </div>
         
-
-
           </div> <!--cierre del div id=home-->
             
-            
-
-
-
-
-
-
-          <!-- ............modal de error al no completar campos de caracteristicas.... -->        
-          <div id="men_err_completar" class="modal modal-wide fade" style="top: 30%">
-            <div class="modal-dialog modal-sm">
-              <div class="modal-content">
-                <div class="modal-body">
-                  <p style="text-align: center;vertical-align: middle;font-size: 15px; font-weight: bold;">Completar Medio/Tamaño/Tipología</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                </div>
-              </div>
-            </div>
+        
+          <!-- .................................Panel de Fichas relacionadas........................ -->
+          <div id="fich_rel" class="tab-pane fade" >
+          
+            <div id="tablaFichasRel" class="responsiveWidth"></div>
+          
           </div>
 
-  
+
+
+
+
+
+         
+
+          
           <!-- .......................Modal de Adjuntar Fichas Relacionadas........................... -->
+          <!--
           <div id="adjFichRel" class="modal modal-wide fade" data-backdrop="static" data-keyboard="false">
-          <?php $optionsSelect = $cursor_fichas_rel;?>
+          <?php// $optionsSelect = $cursor_fichas_rel;?>
 
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -352,9 +383,10 @@ $(document).ready(function(){
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                   </div>
 
-                </div> <!-- modal content-->
-             </div> <!-- modal dialog-->
-           </div> <!-- modal-->
+                </div> 
+             </div> 
+           </div> 
+          -->
 
 
           <!-- .......................Modal de Adjuntar otras Fichas........................... -->
@@ -424,7 +456,19 @@ $(document).ready(function(){
              </div> <!-- modal dialog-->
            </div> <!-- modal--> 
   
-
+          <!-- ............modal de error al no completar campos de caracteristicas.... -->        
+          <div id="men_err_completar" class="modal modal-wide fade" style="top: 30%">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <p style="text-align: center;vertical-align: middle;font-size: 15px; font-weight: bold;">Completar los datos obligatorios</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
 
     
       </div> <!--cierre id=content-->

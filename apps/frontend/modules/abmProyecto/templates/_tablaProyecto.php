@@ -1,5 +1,6 @@
 <script language="JavaScript" type="text/javascript" src="/js/configvarios.js"></script>
 
+
 <script>
 
 $.fn.dataTable.moment( 'DD/MM' );
@@ -74,7 +75,7 @@ $(document).ready(function() {
             <td style="vertical-align: middle;"><?php echo $row['proy_obser'] ?></td>
 			<td style="vertical-align: middle; width: 80px">
 						<?php if($_SESSION["usuario"]["modi"] == "S"){ ?>
-							<a class = "btn btn-mini" href="<?php echo url_for("abmProyecto/formularioProyecto?proy_id=".$row['proy_id']) ?>" >
+							<a class = "btn btn-mini" href="<?php echo url_for("abmProyecto/formularioProyecto?proy_id=".$row['proy_id']) ?>" rel="tooltip" title="Modificar">
 								<i class="icon icon-pencil text-success"></i>
 							</a>
 							<a class = "btn btn-mini" onclick="eliminarEntidad('<?php echo url_for("abmProyecto/baja?proy_id=".$row['proy_id']) ?>');" href="#">

@@ -55,7 +55,6 @@ $(document).ready(function() {
 			<tr>
 				<th style="text-align: center;"><?php echo __("ID") ?></th>
 				<th style="text-align: center;"><?php echo __("Nombre Proyecto") ?></th> 
-				<th style="text-align: center;"><?php echo __("Localidad") ?></th>
 				<th style="text-align: center;"><?php echo __("Fecha Inicio") ?></th>
                 <th style="text-align: center;"><?php echo __("Fecha Fin Estimada") ?></th>
 				<th style="text-align: center;"><?php echo __("Observaciones") ?></th>
@@ -63,28 +62,25 @@ $(document).ready(function() {
             </tr>
 		</thead>
 		<tbody>
-
-		<?php foreach($cursor as $row): ?>
-
-		<tr class="<?php echo $class ?>">
-			<td style="text-align:center; vertical-align: middle;width: 50px"><?php echo $row['proy_id'] ?></td>
-			<td style="vertical-align: middle;"><?php echo $row['proy_nombre'] ?></td>
-			<td style="vertical-align: middle;text-align:center"><?php echo $row['proy_loca_id'] ?></td>
-			<td style="vertical-align: middle;text-align:center;width: 100px"><?php echo $row['proy_inicio_f'] ?></td>
-            <td style="vertical-align: middle;text-align:center;width: 150px"><?php echo $row['proy_fin_estimado_f'] ?></td>
-            <td style="vertical-align: middle;"><?php echo $row['proy_obser'] ?></td>
-			<td style="vertical-align: middle; width: 80px">
-						<?php if($_SESSION["usuario"]["modi"] == "S"){ ?>
-							<a class = "btn btn-mini" href="<?php echo url_for("abmProyecto/formularioProyecto?proy_id=".$row['proy_id']) ?>" rel="tooltip" title="Modificar">
-								<i class="icon icon-pencil text-success"></i>
-							</a>
-							<a class = "btn btn-mini" onclick="eliminarEntidad('<?php echo url_for("abmProyecto/baja?proy_id=".$row['proy_id']) ?>');" href="#">
-								<i class="icon icon-remove text-danger"></i>
-							</a>
-						<?php } ?>
-					</td>
-                </tr>
-			<?php endforeach; ?>
+    		<?php foreach($cursor as $row): ?>
+    		<tr class="<?php echo $class ?>">
+    		  <td style="text-align:center; vertical-align: middle;width: 50px"><?php echo $row['proy_id'] ?></td>
+    		  <td style="vertical-align: middle;"><?php echo $row['proy_nombre'] ?></td>
+    		  <td style="vertical-align: middle;text-align:center;width: 100px"><?php echo $row['proy_inicio_f'] ?></td>
+              <td style="vertical-align: middle;text-align:center;width: 150px"><?php echo $row['proy_fin_estimado_f'] ?></td>
+              <td style="vertical-align: middle;"><?php echo $row['proy_obser'] ?></td>
+    	      <td style="vertical-align: middle; width: 80px">
+    				<?php if($_SESSION["usuario"]["modi"] == "S"){ ?>
+    					<a class = "btn btn-mini" href="<?php echo url_for("abmProyecto/formularioProyecto?proy_id=".$row['proy_id']) ?>" rel="tooltip" title="Modificar">
+    						<i class="icon icon-pencil text-success"></i>
+    					</a>
+    					<a class = "btn btn-mini" onclick="eliminarEntidad('<?php echo url_for("abmProyecto/baja?proy_id=".$row['proy_id']) ?>');" href="#">
+    						<i class="icon icon-remove text-danger"></i>
+    					</a>
+    				<?php } ?>
+    		  </td>
+            </tr>
+            <?php endforeach; ?>
 		</tbody>
 	</table>
 	

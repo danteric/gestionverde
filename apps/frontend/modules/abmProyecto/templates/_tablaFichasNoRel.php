@@ -7,15 +7,13 @@ $(document).ready(function(){
 });
 
 
-
-     verFicha_rel = function(fich_id) {
-
+     verFicha_no_rel = function(fich_id) {
       $.get("<?php echo url_for('abmProyecto/fichaReducida') ?> ", 
         {
          fich_id : fich_id
          },
               function(data){
-                  $('#fichaReducida_rel').html(data);
+                  $('#fichaReducida_no_rel').html(data);
                   startTableOnlySorter();
                   $('#spinner').hide();
               });
@@ -54,7 +52,7 @@ $(document).ready(function(){
       	                     </div> 
                           </td>
                           <td style="text-align: center;vertical-align: middle;margin-right: 2px"> 
-                              <a  href="#" class="btn btn-primary btn-xs" id="proy_fich_id" onclick="verFicha_rel(<?php echo $row['fich_id']?>)" data-content="Ver ficha" data-toggle="popover" data-trigger="hover"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a>
+                              <a  href="#" class="btn btn-primary btn-xs" id="proy_fich_id" onclick="verFicha_no_rel(<?php echo $row['fich_id']?>)" data-content="Ver ficha" data-toggle="popover" data-trigger="hover"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a>
                           </td>
                       </tr>
                 <?php $c++; } //end foreach ?>
@@ -68,13 +66,8 @@ $(document).ready(function(){
     <!-- ..................................Detalle de la ficha................................... -->
     <div class="col-md-7">
 
-      <div id="fichaReducida_rel" class="responsiveWidth"></div>
+      <div id="fichaReducida_no_rel" class="responsiveWidth"></div>
 
     </div>
 
  </div> <!-- div row-->
-
-
-
-
-

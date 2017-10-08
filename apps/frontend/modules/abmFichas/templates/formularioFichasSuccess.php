@@ -251,7 +251,7 @@
                                     </label>
                                 </td> 
                             </tr>
-                            <?php $c++; } ?>
+                            <?php $c++; }//end foreach ?>
                         </tbody>
                     </table>
                   </div>

@@ -1,25 +1,21 @@
 <script type="text/javascript">
 //------------------------------------------------------------------------------
 
-$(document).ready(function(){
-    $("[data-toggle='popover']").popover(); 
-
-});
+     verFicha = function(fich_id) {
 
 
-
-     verFicha_rel = function(fich_id) {
 
       $.get("<?php echo url_for('abmProyecto/fichaReducida') ?> ", 
         {
          fich_id : fich_id
          },
               function(data){
-                  $('#fichaReducida_rel').html(data);
+                  $('#fichaReducida').html(data);
                   startTableOnlySorter();
                   $('#spinner').hide();
               });
-         }
+   
+      }
 
 </script>
 
@@ -39,7 +35,7 @@ $(document).ready(function(){
                </thead>
                                
               <tbody>
-                <?php $c = 0;foreach($cursor as $row){ ?>
+                <?php foreach($cursor as $row): ?>
                       <tr>
                           <td style="text-align:center; vertical-align: middle;"><?php echo $row['fich_id'] ?></td>
                           <td style="vertical-align: middle;"><?php echo $row['fich_deno'] ?></td>
@@ -54,10 +50,10 @@ $(document).ready(function(){
       	                     </div> 
                           </td>
                           <td style="text-align: center;vertical-align: middle;margin-right: 2px"> 
-                              <a  href="#" class="btn btn-primary btn-xs" id="proy_fich_id" onclick="verFicha_rel(<?php echo $row['fich_id']?>)" data-content="Ver ficha" data-toggle="popover" data-trigger="hover"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a>
+                              <a  href="#" class="btn btn-primary btn-xs" id="proy_fich_id" onclick="verFicha(<?php echo $row['fich_id']?>)"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a>
                           </td>
                       </tr>
-                <?php $c++; } //end foreach ?>
+                <?php endforeach; ?>
               </tbody>
 
       </table>
@@ -68,7 +64,7 @@ $(document).ready(function(){
     <!-- ..................................Detalle de la ficha................................... -->
     <div class="col-md-7">
 
-      <div id="fichaReducida_rel" class="responsiveWidth"></div>
+      <div id="fichaReducida" class="responsiveWidth"></div>
 
     </div>
 

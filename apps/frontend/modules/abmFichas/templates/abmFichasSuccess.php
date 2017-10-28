@@ -30,7 +30,7 @@
 	$cabecera->titulo(__('Administración de Fichas'));
 
     $cabecera->boton('filtrar') ;
-    $cabecera->accion('<input type="button" value="Filtrar" class="btn btn-warning" onclick="$(\'#pagina\').val(1);cargarGrilla();" />');
+    $cabecera->accion('<button class="btn btn-warning" onclick="$(\'#pagina\').val(1);cargarGrilla();"><i class="glyphicon glyphicon-filter"></i> Filtrar</button>');
 
 
     $cabecera->ini_filtro(__("Catalogo"));
@@ -69,7 +69,7 @@
   
 
 <?php //require __DIR__. '/../../pagcomun/templates/_paginaciona_listas_ajax.php' ?>
-<?php require __DIR__. '/../../pagcomun/templates/_pagcomun.php' ?> 
+<?php //require __DIR__. '/../../pagcomun/templates/_pagcomun.php' ?> 
 <!-- /ayuda -->
-<?php require __DIR__. '/../../ayuda/templates/_datos_top.php' ?>
+<?php //require __DIR__. '/../../ayuda/templates/_datos_top.php' ?>
 <!-- /ayuda -->

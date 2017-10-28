@@ -69,27 +69,24 @@ show(document.getElementById('one'));
 
 	$cabecera = new Cabecera();
 	$cabecera->ruta('Consulta Fichas');
-	$cabecera->titulo(__('Consulta de Fichas'));
 
     $cabecera->boton('filtrar') ;
-    $cabecera->accion('<input type="button" value="Filtrar" class="btn btn-warning" onclick="$(\'#pagina\').val(1);cargarGrilla();" />');
+    $cabecera->accion('<button class="btn btn-warning" onclick="$(\'#pagina\').val(1);cargarGrilla();"><i class="glyphicon glyphicon-filter"></i> Filtrar</button>');
 
     //---------Filtro catálogo--------------------
     $cabecera->ini_filtro(__("Catalogo"));
     $optionsSelect = $dd_cata;?>
     
-    
         <select id= "cata_id" name="ficha" class="form-control">
-        <?php foreach ($optionsSelect as $arraySelect) { ?>
-            <option value="<?php echo $arraySelect['cata_id'];?>" >
-                <?php echo $arraySelect['cata_deno']; ?>
-            </option>
-            
-        <?php } ?>
+                <?php foreach ($optionsSelect as $arraySelect) { ?>
+                    <option value="<?php echo $arraySelect['cata_id'];?>" >
+                        <?php echo $arraySelect['cata_deno']; ?>
+                    </option>
+                <?php } ?>
         </select>
     <?php $cabecera->fin_filtro(__("Catalogo")); ?>
     
-
+    
      <!---Filtro Fases-->
     <?php
     $cabecera->ini_filtro(__("Fase"));
@@ -180,12 +177,12 @@ show(document.getElementById('one'));
 
 
 <div class="row"> 
-  <div class="col-xs-3 col-md-3">
+  <div class="col-xs-1 col-md-1">
         <div id="tablaFichas" class="responsiveWidth"></div>
   </div>
 
-  <div class="col-xs-11 col-md-11 col-md-offset-1">
-        <div id="derecha" class="wrapper tipoframe" style="; padding-left:15px;">
+  <div class="col-xs-11 col-md-11 ">
+        <div id="derecha" class="wrapper tipoframe-noresize" style="; padding-left:15px;overflow-x: hidden;">
             <div>
                 <div id="detalleFicha" class="responsiveWidth"></div>
             </div>

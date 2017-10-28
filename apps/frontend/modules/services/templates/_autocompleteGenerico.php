@@ -1,5 +1,6 @@
         <ul style="top: auto; left: 0px; position: relative; display: block;" class="typeahead dropdown-menu selectcombox">
         <?php 
+          
               if($resulRespuesta == 'Nulo')
               {
                     echo '<li class=""><a style="text-decoration:none; cursor:pointer;" class="activocombo selectacomplete colorfondo3" data="" id="">Sin Resultados</a></li>'; 

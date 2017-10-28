@@ -30,14 +30,19 @@ class abmProyectoActions extends sfActions
 	/*------------------------filtro para buscar un proyecto------------------------------*/
 	public function executeTablaProyecto(sfWebRequest $request) {
 	
-      	$this->id_nombre	= $request->getParameter("id_nombre");
+      	$this->nombre_proyecto	= $request->getParameter("id_nombre");
+      	$this->estado	= $request->getParameter("id_estado");
+      	$this->fecha_desde	= $request->getParameter("id_fecha");
 		$this->cursor       = array();
 		$this->total_paginas = 1;
 
 
-    	$sql = "GET_ABM_PROYECTO_RS('".$_SESSION["usuario"]["username"]."','".                             
-                                   $this->id_nombre."')";
-                                   
+    	$sql = "GET_ABM_PROYECTO_RS('".$_SESSION["usuario"]["username"]."','".
+    							   $this->estado."','".
+    							   $this->fecha_desde."','".
+    							   $this->nombre_proyecto."','".                             
+                                   'P'."')";
+        	                           
 
 		$cursor_nombre = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
    
@@ -81,13 +86,13 @@ class abmProyectoActions extends sfActions
 		
 
 
- 		 $sql = "GET_MEDIO_RS(null,'B')";
+ 		 $sql = "GET_MEDIO_RS(null,'')";
          $this->dd_medi = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
-         $sql = "GET_TAMANIO_RS(null,'B')";
+         $sql = "GET_TAMANIO_RS(null,'')";
          $this->dd_tama = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
-         $sql = "GET_TIPOLOGIA_RS(null,'B')";
+         $sql = "GET_TIPOLOGIA_RS(null,'')";
          $this->dd_tipo = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
          $sql = "GET_CAMP_PAISES_RS(null)" ;
@@ -100,8 +105,14 @@ class abmProyectoActions extends sfActions
 			$this->alta = 0;	
 			$sql = "GET_PROYECTO_RS(".$proy_id.")";
 			$this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+			$sql_2 = "GET_PROYECTO_FICHA_ADHOC_RS(".$proy_id.")";
+			$this->cursor_fich_adhoc = BackendServices::getInstance()->getResultsFromStoreProcedure($sql_2);
+
 			$proy_id = $this->cursor[0]['proy_id'];
 		}
+
+
 
 		// -------------------------------grabar-----------------------------
 		if($request->getMethod() == "POST")
@@ -203,6 +214,37 @@ class abmProyectoActions extends sfActions
    
 			} 	            
         		
+
+			//----------- adjunto la ficha adhoc al proyecto-----------
+			
+            if ($this->graba_ok == 1) { 	
+
+            $this->pfad_nombre = $request->getParameter("pfad_nombre");
+			$this->pfad_proce = $request->getParameter("pfad_proce");
+			$this->pfad_recurso = $request->getParameter("pfad_recurso");
+
+
+            $sql = "AM_PROYECTO_FICHA_AD_HOC_RS('".$_SESSION["usuario"]["username"]."','"
+			                                        .$proy_id."','"
+			                                        .$this->pfad_nombre."','"
+			                                        .$this->pfad_proce."','"
+			                                        .$this->pfad_recurso."')"; 
+			
+			 
+			 $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+
+             $resp_sp = $this->cursor[0]['respuesta'];
+			 $exito   = $this->cursor[0]['respues_exito'];
+			    if ($resp_sp != 'OK') 
+			    {
+			        $this->getUser()->setFlash('error', $this->cursor[0]['respuesta']);
+			        $this->graba_ok = 0;
+			    }
+   
+			} 	  
+
+
 
            	//-------Si hay algun error, no graba y continua en el ABM de un proyecto -----
 			if ($this->graba_ok == 1) 
@@ -348,25 +390,41 @@ public function executeFichasNoRelacionadas(sfWebRequest $request) {
 	}
 
 
+	/*-------------------------------Baja de las fichas del proyecto--------------------------------*/
+	public function executeBorrarFichasProyecto (sfWebRequest $request)
+	{
+		$proy_id = $request->getParameter('proy_id');
+		$this->sindatos = array();
+		
+		$sql = "B_PROYECTO_FICHAS_RS ('".$_SESSION['usuario']['username']."',
+                                       '".$proy_id."')";   
+		$cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
+		echo 'Borrado ant:',$cursor[0]['respuesta'];
+		
+		return $this->renderPartial
+				('abmProyecto/tablaBorrados', array('cursor' =>$this->cursor,
+											     'sindatos' =>$this->sindatos));
+
+	}
 
 	/*-------------------------------Baja de una Ficha--------------------------------*/
 	public function executeBaja (sfWebRequest $request)
 	{
-			/*
+			
             $this->errors = array();
             $this->notices = array();
            
-            if($request->getParameter('fich_id') && $request->getMethod() == "GET")
+            if($request->getParameter('proy_id') && $request->getMethod() == "GET")
             {
-               $fich_id = $request->getParameter('fich_id');
-                $sql = "B_FICHA_RS('".$_SESSION['usuario']['username']."',
-                                       '".$fich_id."')";
+               $del_proy_id = $request->getParameter('proy_id');
+                $sql = "B_PROYECTO_RS('".$_SESSION['usuario']['username']."',
+                                       '".$del_proy_id."')";
 
                $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
                $this->redirect("abmProyecto/abmProyecto");
             }
-			*/
+			
 
 	}//end function Baja
 

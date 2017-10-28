@@ -112,7 +112,9 @@
 #footer {
  
 background-color: white;
-padding:  0 15px 15px 15px;
+padding:  0px 15px 15px 15px;
+min-height: 20px;
+
 }
 .info .breadcrumb 
 {
@@ -221,6 +223,13 @@ div.bar-is-sticky > .sticker {
 .importe {
   text-align: right !important;  
 }
+#formulario hr {margin-top: 5px; margin-bottom: 5px;}
+#content hr {margin-top: 5px; margin-bottom: 5px;}
+.selectcombox { position: absolute !important;
+    max-height: 100px !important;
+    overflow-y: scroll;
+    border: none !important;
+    box-shadow: none !important; }
 /*
 #ayuda-fondo
 {

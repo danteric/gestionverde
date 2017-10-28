@@ -3,16 +3,16 @@
 
 <script>
 
+$(document).ready(function(){
+    $("[data-toggle='popover']").popover(); 
+
+});
+
 $.fn.dataTable.moment( 'DD/MM' );
 
 $(document).ready(function() {
-    $('#cartel').DataTable({            
-    //"scrollY": '200px',
-    "dom" : '<"clear">',
-    "responsive" : true,
-    "scrollCollapse": true,
-    "paging": false , 
-    "processing": true, 
+$('#tabla').DataTable({            
+
     "language":{
         "sProcessing":     "<i class='fa fa-cog fa-spin'></i>   Procesando...",
         "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -42,49 +42,42 @@ $(document).ready(function() {
 
 </script>
 
-<input type="hidden" id="total_paginas" name="total_paginas" value="<?php echo $total_paginas ?>"/>
+<!-- <input type="hidden" id="total_paginas" name="total_paginas" value="<?php //echo $total_paginas ?>"/> -->
 
 
-<div class="wrapper tipoframe">
+<div class="wrapper tipoframe-noresize" style="overflow-x: hidden;">
  <div class="panel-body">
   
   <?php if ($sindatos == '1'){ ?>
-	<table id="cartel" border="0" class="tablesorter responsiveWidth table table-hover table-bordered table-condensed">
+	<table id="tabla" border="0" class="tablesorter responsiveWidth table table-hover table-bordered table-condensed">
 	
 		<thead  class="alert-success wrapper" >
 			<tr>
 				<th style="text-align: center;"><?php echo __("ID") ?></th>
 				<th style="text-align: center;"><?php echo __("Nombre Proyecto") ?></th> 
-				<th style="text-align: center;"><?php echo __("Localidad") ?></th>
 				<th style="text-align: center;"><?php echo __("Fecha Inicio") ?></th>
-                <th style="text-align: center;"><?php echo __("Fecha Fin Estimada") ?></th>
+                <th style="text-align: center;"><?php echo __("Cierre Estimado") ?></th>
 				<th style="text-align: center;"><?php echo __("Observaciones") ?></th>
                 <th style="text-align: center;"><?php echo __("Acciones") ?></th>
             </tr>
 		</thead>
 		<tbody>
-
-		<?php foreach($cursor as $row): ?>
-
-		<tr class="<?php echo $class ?>">
-			<td style="text-align:center; vertical-align: middle;width: 50px"><?php echo $row['proy_id'] ?></td>
-			<td style="vertical-align: middle;"><?php echo $row['proy_nombre'] ?></td>
-			<td style="vertical-align: middle;text-align:center"><?php echo $row['proy_loca_id'] ?></td>
-			<td style="vertical-align: middle;text-align:center;width: 100px"><?php echo $row['proy_inicio_f'] ?></td>
-            <td style="vertical-align: middle;text-align:center;width: 150px"><?php echo $row['proy_fin_estimado_f'] ?></td>
-            <td style="vertical-align: middle;"><?php echo $row['proy_obser'] ?></td>
-			<td style="vertical-align: middle; width: 80px">
-						<?php if($_SESSION["usuario"]["modi"] == "S"){ ?>
-							<a class = "btn btn-mini" href="<?php echo url_for("abmProyecto/formularioProyecto?proy_id=".$row['proy_id']) ?>" rel="tooltip" title="Modificar">
-								<i class="icon icon-pencil text-success"></i>
-							</a>
-							<a class = "btn btn-mini" onclick="eliminarEntidad('<?php echo url_for("abmProyecto/baja?proy_id=".$row['proy_id']) ?>');" href="#">
-								<i class="icon icon-remove text-danger"></i>
-							</a>
-						<?php } ?>
-					</td>
-                </tr>
-			<?php endforeach; ?>
+    		<?php foreach($cursor as $row): ?>
+    		<tr class="<?php echo $class ?>">
+    		  <td style="text-align:center; vertical-align: middle;width: 50px"><?php echo $row['proy_id'] ?></td>
+    		  <td style="vertical-align: middle;"><?php echo $row['proy_nombre'] ?></td>
+    		  <td style="vertical-align: middle;text-align:center;width: 100px"><?php echo $row['proy_inicio_f'] ?></td>
+              <td style="vertical-align: middle;text-align:center;width: 150px"><?php echo $row['proy_fin_estimado_f'] ?></td>
+              <td style="vertical-align: middle;"><?php echo $row['proy_obser'] ?></td>
+    	      <td style="vertical-align: middle; width: 80px">
+    				<?php if($_SESSION["usuario"]["modi"] == "S"){ ?>
+    					<a class = "btn btn-mini" href="<?php echo url_for("seguimientoProyecto/formularioSeguiProyecto?proy_id=".$row['proy_id']) ?>" data-content="Editar" data-toggle="popover" data-trigger="hover" data-placement="top">
+    						<i class="icon icon-pencil text-success"></i>
+    					</a>
+    				<?php } ?>
+    		  </td>
+            </tr>
+            <?php endforeach; ?>
 		</tbody>
 	</table>
 	

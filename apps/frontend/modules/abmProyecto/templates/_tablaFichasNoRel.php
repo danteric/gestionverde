@@ -25,7 +25,7 @@ $(document).ready(function(){
 <div class ="row">
   
   <div class="col-md-5">
-      <div class="wrapper tipoframe " style="overflow-x: hidden;">
+      <div class="wrapper tipoframe-noresize" style="overflow-x: hidden;">
       <table id="frelacionadas" border="0" class=" tablesorter responsiveWidth table table-hover table-bordered table-condensed">
               <thead  class="alert-success wrapper" >
                    <tr>

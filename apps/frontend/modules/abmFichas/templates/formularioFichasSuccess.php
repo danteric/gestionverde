@@ -91,7 +91,7 @@
 </script>
 
 <style>  input[type="text"] {  width: 150px;}  
-
+html { overflow-y:hidden; }
 .encabezado {background-color: #37474f; color: white}
 
 </style>
@@ -114,7 +114,7 @@
 
         if($_SESSION["usuario"]["modi"] == "S")
         {
-            $cabecera->accion('<input type="submit" id="btngrabar" value="Grabar" class="btn btn-primary" />');
+            $cabecera->accion('<button type="submit" id="btngrabar" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Grabar</button>');
             $cabecera->accion('<button type="button" onclick="cancelar()" class="btn btn-warning"><i class="icon-chevron-left"></i> Volver</button>');
         }
         
@@ -132,7 +132,7 @@
 <input type="hidden" id="alta" name="alta" value="<?php echo $alta; ?>" />
 <input type="hidden" id="id" name="id" class="" value="<?php echo $id; ?>" />
 
-<div class="wrapper tipoframe">
+<div>
     <div class="panel-body">
 
         <ul id="tabs" class="nav nav-tabs">
@@ -141,7 +141,7 @@
             </li>
 
             <li>
-              <a data-toggle="tab" href="#menu1">Aplica a</a>
+              <a data-toggle="tab" href="#menu1">Clasificaciones</a>
             </li>
 
             <li>
@@ -169,7 +169,7 @@
               </div>
 
               <div class="form-group row">
-                <label for="example-tel-input" class="col-md-1 col-form-label">Denominacion</label>
+                <label for="example-tel-input" class="col-md-1 col-form-label">Nombre</label>
                 <div class="col-xs-8 col-md-8">
                   <input class="form-control" name="fich_deno" value="<?php echo $row['fich_deno'] ?>" required>
                 </div>
@@ -178,7 +178,7 @@
               <div class="form-group row">
                 <label for="example-tel-input" class="col-md-1 col-form-label">Descripción</label>
                 <div class="col-xs-8 col-md-8">
-                  <textarea class="form-control" name="fich_desc" required=""><?php echo $row['fich_desc'] ?></textarea>
+                  <textarea class="form-control" style="resize: none;" name="fich_desc" required=""><?php echo $row['fich_desc'] ?></textarea>
                 </div>  
               </div>
 
@@ -199,7 +199,7 @@
               
           </div> <!--cierre del div id=home-->
             
-            <!---  solapa de Aplica a .. -->
+            <!---  solapa de Clasificaciones .. -->
             <div id="menu1" class="tab-pane fade">
 
                 <div class="row">
@@ -311,7 +311,7 @@
         </div> <!-- cierre solapa "aplica a" -->
 
         <!---  solapa de procedimientos y recursos .. -->
-          <div id="menu2" class="tab-pane fade">
+          <div id="menu2" class="tab-pane fade ">
               <div class="row">
 
                   <table id="tablaProc" class="tablaProc table-striped col-md-5 col-xs-12" style="margin-left: 15px; ">
@@ -320,7 +320,7 @@
                             <tr class="encabezado">
                                 <th style="padding-left: 5px; box-sizing: border-box;"><?php echo "Procedimientos Recomendados"; ?></th>
                              
-                                <th><a title="Agregar un procedimiento" onclick="agregarProce(); return false;" class="btn btn-info pull-right"> <i class="icon-plus text-info"></i>  Nuevo </a></th>
+                                <th><a title="Agregar un procedimiento" onclick="agregarProce(); return false;" class="btn btn-success pull-right"> <i class="icon-plus"></i>  Nuevo </a></th>
                                 
                                 <th  class="nosort" style="text-align: center">Eliminar</th>
       
@@ -359,7 +359,7 @@
                             <tr class="encabezado">
                                 <th style="padding-left: 5px; box-sizing: border-box;"><?php echo "Previsión de recursos recomendada"; ?>
                                 
-                                <th><a title="Agregar recurso" onclick="agregarRecurso(); return false;" class="btn btn-info pull-right"> <i class="icon-plus text-info"></i>  Nuevo </a>
+                                <th><a title="Agregar recurso" onclick="agregarRecurso(); return false;" class="btn btn-success pull-right"> <i class="icon-plus"></i>  Nuevo </a>
                            
                                 <th  class="nosort" style="text-align: center">Eliminar</th>
                             </tr>
@@ -401,7 +401,7 @@
                             <tr class="encabezado">
                                 <th style="padding-left: 5px; box-sizing: border-box;"><?php echo "Fuentes Registradas"; ?></th>
                                 
-                                <th><a title="Agregar fuente" onclick="agregarFuen(); return false;" class="btn btn-info pull-right"> <i class="icon-plus text-info"></i>  Nuevo </a></th>
+                                <th><a title="Agregar fuente" onclick="agregarFuen(); return false;" class="btn btn-success pull-right"> <i class="icon-plus"></i>  Nuevo </a></th>
                            
                                 <th  class="nosort" style="text-align: center">Eliminar</th>
                                 <th colspan="2" style="text-align: center">Acciones</th>
@@ -445,5 +445,5 @@
 	 
 
 
-<?php require __DIR__. '/../../ayuda/templates/_datos_top.php' ?>
+<?php //require __DIR__. '/../../ayuda/templates/_datos_top.php' ?>
 <!-- /ayuda -->

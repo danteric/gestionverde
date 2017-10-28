@@ -49,23 +49,18 @@
   <div class="panel-body">
     
       <div class="form-group row">
-        <label for="example-tel-input" class="col-xs-3 col-form-label">Cod interno</label>
+        <label for="example-tel-input" class="col-xs-3 col-form-label">Cod. interno</label>
         <div class="col-xs-9">
           <input class="form-control" type="text" name="fase_id" value="<?php echo $fase_id ?>" readonly >
         </div>
       </div>
       <div class="form-group row">
-        <label for="example-tel-input" class="col-xs-3 col-form-label">Denominacion extensa</label>
+        <label for="example-tel-input" class="col-xs-3 col-form-label">Nombre de fase</label>
         <div class="col-xs-9">
           <input class="form-control" type="text" name="fase_deno" value="<?php echo $fase_deno ?>" required >
         </div>
       </div>
-      <div class="form-group row">
-        <label for="example-tel-input" class="col-xs-3 col-form-label">Denominacion reducida</label>
-        <div class="col-xs-9">
-          <input class="form-control" type="text" name="fase_deno_redu" value="<?php echo $fase_deno_redu ?>" required>
-        </div>
-      </div>
+  
   </div> 
 </div>
 </form>

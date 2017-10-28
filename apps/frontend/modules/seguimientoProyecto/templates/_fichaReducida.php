@@ -6,7 +6,7 @@
   #item-tabla-ficha p {padding: 5px 0px 5px 8px; margin-top: -10px; border-bottom: 1px solid #ccc; background-color:#bdbdbd;}
 </style>
 
-<div class="wrapper tipoframe" style="overflow-x: hidden;">
+<div  style="overflow-x: hidden;border-style: ridge">
   <div class="container-fluid">
      
       <!-- ...............row de datos cabecera ...............................-->

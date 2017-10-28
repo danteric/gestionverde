@@ -28,7 +28,7 @@
 
         /*---Si el usuario tiene permisos para grabar, muestra boton "grabar"-----*/
         if($_SESSION["usuario"]["modi"] == "S"){
-            $cabecera->accion('<input type="submit" id="btngrabar" value="Grabar" class="btn btn-primary" />');
+            $cabecera->accion('<button type="submit" id="btngrabar" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Grabar</button>');
             $cabecera->accion('<button type="button" onclick="cancelar()" class="btn btn-warning"><i class="icon-chevron-left"></i> Volver</button>');
         }
         
@@ -49,23 +49,18 @@
   <div class="panel-body">
     
       <div class="form-group row">
-        <label for="example-tel-input" class="col-xs-3 col-form-label">Cod interno</label>
+        <label for="example-tel-input" class="col-xs-3 col-form-label">Cod. interno</label>
         <div class="col-xs-9">
           <input class="form-control" type="text" name="medi_id" value="<?php echo $medi_id ?>" readonly >
         </div>
       </div>
       <div class="form-group row">
-        <label for="example-tel-input" class="col-xs-3 col-form-label">Denominacion extensa</label>
+        <label for="example-tel-input" class="col-xs-3 col-form-label">Nombre de medio</label>
         <div class="col-xs-9">
           <input class="form-control" type="text" name="medi_deno" value="<?php echo $medi_deno ?>" required >
         </div>
       </div>
-      <div class="form-group row">
-        <label for="example-tel-input" class="col-xs-3 col-form-label">Denominacion reducida</label>
-        <div class="col-xs-9">
-          <input class="form-control" type="text" name="medi_deno_redu" value="<?php echo $medi_deno_redu ?>" required>
-        </div>
-      </div>
+
   </div> 
 </div>
 </form>

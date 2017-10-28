@@ -8,7 +8,7 @@
 
   $(".menu-fichas").mouseleave(function() {
 
-      $(".menu-fichas").css( "width", "90px" );  
+      $(".menu-fichas").css( "width", "50px" );  
        });
 
 </script>
@@ -16,9 +16,9 @@
 
 
 <style>
- .menu-fichas {position: absolute; left: 0px;transition: .4s; z-index: 99999; width: 90px}
+ .menu-fichas {position: absolute; left: 0px;transition: .4s; z-index: 99999; width: 150px}
  .btn-group-vertical {width: 100%; margin: 0px}
- .scrollbar{margin-left: 10px;float: left;height: 300px;width: 65px;background: #F5F5F5;overflow-y: scroll;margin-bottom:25px;overflow-x: hidden;}
+ .scrollbar{margin-left: 10px;float: left;height: 400px;width: 50px;background: #F5F5F5;overflow-y: scroll;margin-bottom:25px;overflow-x: hidden;}
  #style-3::-webkit-scrollbar-track{-webkit-box-shadow: insert 0 0 6px rgba(9,0,0,0.3);background-color: #F5F5F5}
  #style-3::-webkit-scrollbar{width: 6px;background-color: #F5F5F5}
  #style-3::-webkit-scrollbar-thumb{background-color: #424242}
@@ -27,19 +27,21 @@
 <input type="hidden" id="total_paginas" name="total_paginas" value="<?php echo $total_paginas ?>"/>
 
 
-<div class="wrapper tipoframe menu-fichas scrollbar" id="style-3">
+<div class="wrapper tipoframe-noresize menu-fichas scrollbar" id="style-3">
      <div class="panel-body">
       
       	<?php if ($sindatos == '1'){ ?>
-      		<div class="btn-group-vertical" role="group" aria-label="...">
+      		<div class="btn-group-vertical" aria-label="...">
         			<?php foreach($cursor as $row) { ?>
-      			
-                  <div class="btn-group" role="group">
-                      <button type="button" class="btn btn-primary btn-sm" style="text-align: left " onclick="<?php echo 'cargarFicha('.$row['fich_id'].')' ?>">
+      			     <div class="row"> 
+                  <div class="btn-group" style="width: 400px">
+                     <button class="btn btn-primary btn-sm" style="width: 50px"><i class="icon-chevron-right"></i></button>
+        
+                      <button class="btn btn-primary btn-sm" style="text-align: left;margin-left: 0px;width: 350px " onclick="<?php echo 'cargarFicha('.$row['fich_id'].')' ?>">
                       <?php echo $row['fich_deno'] ?>
                       </button>
           			  </div>
-
+                </div> 
         			<?php }; ?>
       		</div>
     	  <?php }else{ ?>

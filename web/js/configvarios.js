@@ -11,3 +11,10 @@ function CambiaColor(esto,fondo,texto)
 			esto.style.background=colorfondo;
 			esto.style.color=texto;
 		}
+
+
+$(document).ready(function(){
+    $("[data-toggle='popover']").popover(); 
+
+});
+

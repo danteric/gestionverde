@@ -2,15 +2,13 @@
 
 <script type="text/javascript">
 
-
+//--- inicializo para utilizar el popover----------------
 $(document).ready(function(){
     $("[data-toggle='popover']").popover(); 
 
 });
 
-
-
-
+//--- al editar un proyecto, traigo todas las fichas relacionadas al mismo----------------
 window.onload = function() {
   <?php 
       if($alta == 0) { ?>
@@ -45,14 +43,6 @@ window.onload = function() {
       var proy_inicio_f = $('#proy_inicio_f').val();
       var proy_fin_estimado_f = $('#proy_fin_estimado_f').val();
 
-     //$("from#formulario").submit(function(){
-
-     if ( (proy_medi_id == '') || (proy_tama_id == '') || (proy_tipo_id == '') 
-            || (proy_nombre == '') || (proy_inicio_f == '') || (proy_fin_estimado_f == '') )
-     {  
-        $('#men_err_completar').modal('show');
-
-     }else{
 
         //dependiendo de la clasificación, busca en la BD las fichas relacionadas
         $.get("<?php echo url_for('abmProyecto/FichasRelacionadas') ?> ", 
@@ -90,7 +80,8 @@ window.onload = function() {
 
         //habilito las pestañas para adjuntar fichas
          $('#tabFichRel').removeClass('disabled disabledTab');    
-         $('#tabFichNoRel').removeClass('disabled disabledTab');  
+         $('#tabFichNoRel').removeClass('disabled disabledTab'); 
+         $('#tabFichAdHoc').removeClass('disabled disabledTab'); 
 
         //cambio el boton de confirmar a deshabilitado y habilito el de modificar datos
          $('#botonConfirmar').removeClass('btn-primary');
@@ -99,7 +90,6 @@ window.onload = function() {
          $('#botonConfirmar').addClass('disabled');
          $('#botonModificar').addClass('btn-primary');
          
-      }
       
     }
 
@@ -107,12 +97,15 @@ window.onload = function() {
  //modal para modificar las clasificaciones   
 modal_modificarDatos = function() { $('#alert_modificarDatos').modal('show'); }
 
-  //modificar los datos de las clasificaciones de la obra
-  modificarDatos = function() {
 
+//modificar los datos de las clasificaciones de la obra
+modificarDatos = function() {
+
+      //var proy_id = $('#proy_id').val();
       $('#alert_modificarDatos').modal('hide');
       $('#tabFichRel').addClass('disabled disabledTab');
       $('#tabFichNoRel').addClass('disabled disabledTab');
+      $('#tabFichAdHoc').addClass('disabled disabledTab');
       $('#botonConfirmar').removeClass('disabled');
       $('#botonConfirmar').addClass('btn-primary');
       $('#botonModificar').addClass('disabled');
@@ -120,6 +113,16 @@ modal_modificarDatos = function() { $('#alert_modificarDatos').modal('show'); }
       $('#proy_tama_id').attr("disabled",false);
       $('#proy_tipo_id').attr("disabled",false);
       $('#proy_medi_id').attr("disabled",false);
+
+      //borro las fichas que se adjuntaron al proyecto
+      $.get("<?php echo url_for('abmProyecto/borrarFichasProyecto') ?> ", 
+      {
+       proy_id : $('#proy_id').val()
+       },
+            function(data){
+                $('#resulborra').html(data);
+            });
+
   }
 
 
@@ -152,13 +155,13 @@ $(document).ready(function(){
     $('.datosinfo').keyup(function(){
 
         var valor = $(this).val();   
-        var pais = $("#proy_pais_id").val();
+        if (valor.length > 2) {
+                 var pais = $("#proy_pais_id").val();
         var prov = $("#p_id_provincia").val();
-        
         var accion = 'loca_prov';
         var dataString = "valor="+valor+','+accion+','+pais+','+prov;
 
-        console.log(dataString);
+   
         $("#id_localidad").show();
         $.ajax({
             type: "POST",
@@ -168,23 +171,33 @@ $(document).ready(function(){
                 //alert(data);
                 $('#muestroayudabuscado').fadeIn(({width:250,height:250,left:-25,top:-25})).html(data);
                  $("#id_localidad").hide(); 
-                 
-                 $('.activocombo').click(function()
-                 {
+                
+                  $('.activocombo').click(function(event){
+                  event.preventDefault();
                     var id = $(this).attr('id');
                     console.log(id);
                     $('#muestroayudabuscado').fadeOut(({width:200,height:200,left:0,top:0}),1000);
                                 $('#datosinfo').val($('#'+id).attr('data2'));
                                 $('#proy_loca_id').val($('#'+id).attr('data'));
                                
-                }); 
-                // SI HAGLO CLICK AFUERA CIERRO EL DIV Y LIMPIO EL CAMPO
-                $('.container').click(function(){
-                     $('#muestroayudabuscado').hide();
-                    
                 });  
+                
           
-         } });     
+         } });  
+
+        }
+        // SI HAGLO CLICK AFUERA CIERRO EL DIV Y LIMPIO EL CAMPO
+                $('.container-fluid').click(function(event){
+                  console.log("CLICK");
+                  event.preventDefault();
+                  if (!$(event.target).hasClass('activocombo')) {
+                     $('#muestroayudabuscado').hide();
+                  }
+                    
+                    
+                }); 
+               
+    
        
     });
     });
@@ -192,22 +205,24 @@ $(document).ready(function(){
 
 </script>
 
-<style>  input[type="text"] {  width: 150px;} 
+<style>
+input[type="text"] {  width: 150px;} 
 
 .encabezado {background-color: #37474f; color: white}
 .modal.modal-wide {top:10%;}
 .modal.modal-wide .modal-dialog{max-width: 50%;}
 .disabledTab{ pointer-events: none;}
+fieldset{border: 2px groove #ccc !important; width: : auto; position: relative; border-radius: 4px;padding:  0px 0px 0px 15px !important; border-bottom: none; } 
+legend {margin-bottom: 5px}
 
 
 </style>
 
 <!-- ..............................FORMULARIO......................................... -->
 
-
-
-<form id="formulario" method="POST" action="<?php echo url_for("abmProyecto/formularioProyecto") ?>">
+<form id="formulario" class="form-project" method="POST" action="<?php echo url_for("abmProyecto/formularioProyecto") ?>" autocomplete="off">
 <?php $optionsSelect = $cursor;
+      $optionsSelect_fich_adhoc = $cursor_fich_adhoc;
 
 		$cabecera = new cabecera();
 		$cabecera->ruta(link_to(__("Adm. de Proyectos"),'abmProyecto/abmProyecto'));
@@ -224,14 +239,14 @@ $(document).ready(function(){
 
         if($_SESSION["usuario"]["modi"] == "S")
         {
-            $cabecera->accion('<input type="submit" id="btngrabar" value="Grabar" onclick="grabo_clasif()"class="btn btn-primary" />');
+            $cabecera->accion('<button type="submit" id="btngrabar" onclick="grabo_clasif()"class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Grabar</button>');
             $cabecera->accion('<button type="button" onclick="cancelar()" class="btn btn-warning"><i class="icon-chevron-left"></i> Volver</button>');
         }
-        
+      
    		echo $cabecera;
 ?>
 
-
+<!-- .................................................................................. -->
 
 <div id="spinner" class="spinner">
     <p class="text-error">
@@ -242,7 +257,7 @@ $(document).ready(function(){
 
 
 
-<div class="wrapper tipoframe">
+
     <div class="panel-body">
 
         <ul id="tabs" class="nav nav-tabs">
@@ -264,13 +279,14 @@ $(document).ready(function(){
         </ul>
              
         
-        <div class="tab-content" id="content" style="margin-top: 20px; overflow-x: hidden;">
+        <div class="tab-content" id="content" style="margin-top: 10px; ">
 
             <div id="home" class="tab-pane fade in active" >
               
               <!-- selecciona cursor que es donde estan todos los datos del proyecto en abmProyecto.php -->
               
-              <?php foreach ($cursor as $row) {} ?>
+              <?php foreach ($cursor as $row) {} ?> <!-- datos del proyecto -->
+              <?php foreach ($cursor_fich_adhoc as $row_2) {} ?> <!-- ficha adhoc -->  
 
               <div class="form-group row">
                   <label for="example-tel-input" class="col-xs-1 col-md-1 col-form-label">Cod. interno</label>
@@ -340,60 +356,68 @@ $(document).ready(function(){
               </div>
      
 
-             
-
-              <div class="form-group row">
-                  
-                  <label for="example-tel-input" class="col-md-1 col-form-label">Tamaño de la obra</label>
-                  <div class="col-md-2">
-                        <?php $optionsSelect = $dd_tama;?>
-                        <select id= "proy_tama_id" name="proy_tama_id" class="form-control" required>
-                        <?php foreach ($optionsSelect as $arraySelect) { ?>
-                            <option value="<?php echo $arraySelect['tama_id'];?>" <?php if($arraySelect['tama_id'] == $row['proy_tama_id']){echo 'selected';} ?> >
-                              <?php echo $arraySelect['tama_deno']; ?>
-                            </option> 
-                        <?php } ?>
-                        </select>
-
-                  </div>
-  
-                  <label for="example-tel-input" class="col-md-1 col-form-label">Medio</label>
-                  <div class="col-md-2">
-                        <?php $optionsSelect = $dd_medi;?>
-                        <select id= "proy_medi_id" name="proy_medi_id" class="form-control" required>
-                        <?php foreach ($optionsSelect as $arraySelect) { ?>
-                            <option value="<?php echo $arraySelect['medi_id'];?>" <?php if($arraySelect['medi_id'] == $row['proy_medi_id']){echo 'selected';} ?> >
-                              <?php echo $arraySelect['medi_deno']; ?>
-                            </option> 
-                        <?php } ?>
-                       </select>
-                  </div>
-                
-                  <label for="example-tel-input" class="col-md-1 col-form-label">Tipología</label>
-                  <div class="col-md-2">
-                        <?php $optionsSelect = $dd_tipo;?>
-                        <select id= "proy_tipo_id" name="proy_tipo_id" class="form-control" required>
-                        <?php foreach ($optionsSelect as $arraySelect) { ?>
-                            <option value="<?php echo $arraySelect['tipo_id'];?>" <?php if($arraySelect['tipo_id'] == $row['proy_tipo_id']){echo 'selected';} ?> >
-                              <?php echo $arraySelect['tipo_deno']; ?>
-                            </option> 
-                        <?php } ?>
-                       </select>
-                  </div>
-
-              </div><!-- cierre form group row -->
-
-              
-             <div class="form-group row" style="margin-left: 0px ;margin-top:15px">
-                             
-                <a  href="#" id="botonConfirmar" class="btn btn-primary" onclick="agregarFichas()" data-content="Al confirmar podrá adjuntar fichas al proyecto" data-toggle="popover" data-trigger="hover" data-placement="right">Confirmar datos</a>
-
-                <a  href="#" id="botonModificar" class="btn btn-default disabled" style="margin-left: 5px" onclick="modal_modificarDatos()" data-content="Modificar Tamaño/Medio/Tipología" data-toggle="popover" data-trigger="hover" data-placement="right">Modificar Clasificaciones</a>
-
-             </div>
-        
-          </div> <!--cierre del div id=home-->
+            <div class="row col-md-8">
+            <fieldset>
+            <legend style="font-size: 14px;width: auto;border-bottom: none">Clasificación del proyecto</legend>
+                                    
+                       <div class="form-group row">
             
+                          <label for="example-tel-input" class="col-md-1 col-form-label">Tamaño</label>
+                          <div class="col-md-2" >
+                                <?php $optionsSelect = $dd_tama;?>
+                                <select id= "proy_tama_id" name="proy_tama_id" class="form-control" required>
+                                <?php foreach ($optionsSelect as $arraySelect) { ?>
+                                    <option value="<?php echo $arraySelect['tama_id'];?>" <?php if($arraySelect['tama_id'] == $row['proy_tama_id']){echo 'selected';} ?> >
+                                      <?php echo $arraySelect['tama_deno']; ?>
+                                    </option> 
+                                <?php } ?>
+                                </select>
+
+                          </div>
+          
+                          <label for="example-tel-input" class="col-md-1 col-md-offset-1 col-form-label">Medio</label>
+                          <div class="col-md-2 ">
+                                <?php $optionsSelect = $dd_medi;?>
+                                <select id= "proy_medi_id" name="proy_medi_id" class="form-control" required>
+                                <?php foreach ($optionsSelect as $arraySelect) { ?>
+                                    <option value="<?php echo $arraySelect['medi_id'];?>" <?php if($arraySelect['medi_id'] == $row['proy_medi_id']){echo 'selected';} ?> >
+                                      <?php echo $arraySelect['medi_deno']; ?>
+                                    </option> 
+                                <?php } ?>
+                               </select>
+                          </div>
+                        
+                          <label for="example-tel-input" class="col-md-1 col-md-offset-1 col-form-label">Tipología</label>
+                          <div class="col-md-2">
+                                <?php $optionsSelect = $dd_tipo;?>
+                                <select id= "proy_tipo_id" name="proy_tipo_id" class="form-control" required>
+                                <?php foreach ($optionsSelect as $arraySelect) { ?>
+                                    <option value="<?php echo $arraySelect['tipo_id'];?>" <?php if($arraySelect['tipo_id'] == $row['proy_tipo_id']){echo 'selected';} ?> >
+                                      <?php echo $arraySelect['tipo_deno']; ?>
+                                    </option> 
+                                <?php } ?>
+                               </select>
+                          </div>
+
+                      </div><!-- cierre form group row -->
+                 
+              
+              </fieldset>
+            </div>
+           
+            <div class="row col-md-8">
+               <div class="form-group row" style="margin-left: 0px ;margin-top:10px;margin-bottom: 20px">
+                               
+                  <a  href="#" id="botonConfirmar" class="btn btn-success" onclick="agregarFichas()" data-content="Al confirmar el tamaño de obra, medio y tipología, podrá adjuntar fichas al proyecto" data-toggle="popover" data-trigger="hover" data-placement="right"><i class="glyphicon glyphicon-ok"></i> Confirmar clasificación</a>
+
+                  <a  href="#" id="botonModificar" class="btn btn-default disabled" style="margin-left: 5px" onclick="modal_modificarDatos()" data-content="Modificar las clasificaciones (Tamaño/Medio/Tipología)" data-toggle="popover" data-trigger="hover" data-placement="right"><i class="glyphicon glyphicon-edit"></i> Modificar Clasificaciones</a>
+                  <div id="resulborra" class="responsiveWidth">
+                  </div>
+               </div>
+            </div>
+           
+          </div> <!--cierre del div id=home-->
+         
         
           <!-- .................................Panel de Fichas relacionadas........................ -->
           <div id="fich_rel" class="tab-pane fade" >
@@ -410,10 +434,37 @@ $(document).ready(function(){
 
           </div>
 
+          <!-- .................................Panel de Ficha Ad-Hoc........................ -->
+          <div id="fich_ad_hoc" class="tab-pane fade" >
+          
+              <div class="row">
+                  <div class="col-md-8">   
+                      <div class="row">
+                            <label for="example-tel-input" class="col-xs-2 col-md-2 col-form-label">Nombre Ficha</label>
+                            <div class="col-xs-8 col-md-4">
+                                  <textarea class="form-control" name="pfad_nombre" style="margin-bottom: 5px"><?php echo $row_2['pfad_nombre'] ?></textarea>
+                            </div>  
+                       </div> 
+
+                      <div class="row">
+                              <label for="example-tel-input" class="col-xs-2 col-md-2 col-form-label">Procedimiento</label>
+                              <div class="col-xs-12 col-md-8">
+                                 <textarea class="form-control" name="pfad_proce" style="margin-bottom: 5px"><?php echo $row_2['pfad_proce'] ?></textarea>
+                              </div>
+                      </div>  
+
+                      <div class="row">
+                              <label for="example-tel-input" class="col-xs-2 col-md-2 col-form-label">Recursos Estimados</label>
+                              <div class="col-xs-12 col-md-8">
+                                 <textarea class="form-control" name="pfad_recurso" style="margin-bottom: 5px"><?php echo $row_2['pfad_recurso'] ?></textarea>
+                              </div> 
+                      </div>
+                  </div>    
+              </div> 
+          </div>
 
 
-
-
+                  
           <!-- .......................Modal de advertencia al modificar clasificaciones........................... -->
           <div id="alert_modificarDatos" class="modal modal-wide fade" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
@@ -425,7 +476,7 @@ $(document).ready(function(){
                   </div>
                   
                   <div class="modal-body">
-                      <p>Se eliminarán todas las fichas incluidas al proyecto.</p>
+                      <p>Se eliminarán todas las fichas que se incluyeron al proyecto. Deberá volverlas a incluir confirmando la nueva clasificación (Tamaño/Medio/Tipología).</p>
                   </div>
               
                   <div class="modal-footer">
@@ -437,49 +488,8 @@ $(document).ready(function(){
              </div> <!-- modal dialog-->
            </div> <!-- modal--> 
 
-           <!-- .......................Modal de Adjuntar Ficha adhoc........................... -->
-          <div id="adjFichAd" class="modal modal-wide fade" data-backdrop="static">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                  
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                      <h4 class="modal-title">Adjuntar Ficha Propia</h4>
-                  </div>
-                  
-                  <div class="modal-body" style="overflow-x: hidden;">
-                     
-                      <div class="form-group row">
-                        <div class="row">
 
-                          <label for="example-tel-input" class="col-xs-2 col-md-2 col-form-label" style="margin-left: 15px">Nombre Ficha</label>
-                          <div class="col-xs-9 col-md-4">
-                             <textarea class="form-control" name="pfad_nombre" style="margin-bottom: 5px"></textarea>
-                          </div>  
-                        </div>
-                        <div class="row">
-                          <label for="example-tel-input" class="col-xs-2 col-md-2 col-form-label" style="margin-left: 15px">Procedimientos</label>
-                          <div class="col-xs-9 col-md-9">
-                             <textarea class="form-control" name="pfad_proce" style="margin-bottom: 5px"></textarea>
-                          </div>
-                         </div>  
-                        <div class="row">
-                          <label for="example-tel-input" class="col-xs-2 col-md-2 col-form-label" style="margin-left: 15px">Recursos Estimados</label>
-                          <div class="col-xs-9 col-md-9">
-                             <textarea class="form-control" name="pfad_recurso" style="margin-bottom: 5px"></textarea>
-                          </div> 
-                        </div>
-                    </div>
-                  </div>
-              
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Guardar</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                  </div>
-
-                </div> <!-- modal content-->
-             </div> <!-- modal dialog-->
-           </div> <!-- modal--> 
+           
   
           <!-- ............modal de error al no completar campos de caracteristicas.... -->        
           <div id="men_err_completar" class="modal modal-wide fade" style="top: 30%">

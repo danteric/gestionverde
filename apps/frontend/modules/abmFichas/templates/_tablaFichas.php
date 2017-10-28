@@ -2,17 +2,12 @@
 
 <script>
 
+//$.fn.dataTable.moment( 'DD/MM' );
 
-$.fn.dataTable.moment( 'DD/MM' );
-
+//------------------------------------ formato de la tabla------------------------------
 $(document).ready(function() {
-    $('#cartel').DataTable({            
-    //"scrollY": '200px',
-    "dom" : '<"clear">',
-    "responsive" : true,
-    "scrollCollapse": true,
-    "paging": false , 
-    "processing": true, 
+$('#tabla').DataTable({            
+
     "language":{
         "sProcessing":     "<i class='fa fa-cog fa-spin'></i>   Procesando...",
         "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -39,17 +34,19 @@ $(document).ready(function() {
     },
 });
 } );
+//------------------------------------ formato de la tabla------------------------------
+
 
 </script>
 
-<input type="hidden" id="total_paginas" name="total_paginas" value="<?php echo $total_paginas ?>"/>
+<!-- <input type="hidden" id="total_paginas" name="total_paginas" value="<?php //echo $total_paginas ?>"/> -->
 
 
-<div class="wrapper tipoframe">
+<div class="wrapper tipoframe-noresize" style="overflow-x: hidden;">
  <div class="panel-body">
   
   <?php if ($sindatos == '1'){ ?>
-	<table id="cartel" border="0" class="tablesorter responsiveWidth table table-hover table-bordered table-condensed">
+	<table id="tabla" border="0" class="tablesorter responsiveWidth table table-hover table-bordered table-condensed">
 	
 		<thead  class="alert-success wrapper" >
 			<tr>
@@ -71,10 +68,10 @@ $(document).ready(function() {
                     <td style="vertical-align: middle;"><?php echo $row['cata_deno'] ?></td>
 					<td style="vertical-align: middle; width: 80px">
 						<?php if($_SESSION["usuario"]["modi"] == "S"){ ?>
-							<a class = "btn btn-mini" href="<?php echo url_for("abmFichas/formularioFichas?fich_id=".$row['fich_id']) ?>" >
+							<a class = "btn btn-mini" href="<?php echo url_for("abmFichas/formularioFichas?fich_id=".$row['fich_id']) ?>" data-content="Editar" data-toggle="popover" data-trigger="hover" data-placement="top">
 								<i class="icon icon-pencil text-success"></i>
 							</a>
-							<a class = "btn btn-mini" onclick="eliminarEntidad('<?php echo url_for("abmFichas/baja?fich_id=".$row['fich_id']) ?>');" href="#">
+							<a class = "btn btn-mini" onclick="eliminarEntidad('<?php echo url_for("abmFichas/baja?fich_id=".$row['fich_id']) ?>');" href="#" data-content="Eliminar" data-toggle="popover" data-trigger="hover" data-placement="top">
 								<i class="icon icon-remove text-danger"></i>
 							</a>
                             

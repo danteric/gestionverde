@@ -225,7 +225,7 @@ legend {margin-bottom: 5px}
       $optionsSelect_fich_adhoc = $cursor_fich_adhoc;
 
 		$cabecera = new cabecera();
-		$cabecera->ruta(link_to(__("Adm. de Proyectos"),'abmProyecto/abmProyecto'));
+		$cabecera->ruta(link_to(__("Administración de Proyectos"),'abmProyecto/abmProyecto'));
     
     $alta_proyecto = $alta; //para inicializar en esta sección si es un alta o no
 
@@ -333,7 +333,7 @@ legend {margin-bottom: 5px}
                     <div class="col-xs-8 col-md-2">
                             <i id="id_localidad" style="display:none" class="icon-spinner icon-spin icon-large"></i>
                             <input type='text' id="datosinfo"  placeholder="Escriba localidad" class='form-control datosinfo limpiarcampo' value=''>
-                            <input type="hidden" id="proy_loca_id" name="proy_loca_id" value="<?php echo $row['proy_loca_id']?>" />
+                            <input type="hidden" id="proy_loca_id" name="proy_loca_id" value="<?php echo $row['proy_loca_id']?>" >
                             <div id="muestroayudabuscado"></div>
                             <b class="focusMensajes" id="focusMensajes" ></b>  
                     </div>

@@ -37,7 +37,7 @@ class consultaFichasActions extends sfActions
          $sql = "GET_ABM_FICHA_OPCIONES_RS()";
          $this->dd_opciones = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
-         $this->filasPorPagina = $_SESSION['usuario']['filas_pag'];
+
 
 	}
 

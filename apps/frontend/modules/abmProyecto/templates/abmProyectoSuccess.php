@@ -26,7 +26,7 @@
 <?php 
 
 	$cabecera = new Cabecera();
-	$cabecera->ruta("Adm. de Proyectos");
+	$cabecera->ruta("Administración de Proyectos");
 	$cabecera->titulo(__('Administración de Proyectos'));
 
     $cabecera->boton('filtrar') ;

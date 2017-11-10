@@ -44,11 +44,11 @@ $('#tabla').DataTable({
 <!--................................ Cabecera..................................... -->
     <?php
         $cabecera = new Cabecera();
-        $cabecera->ruta('Catalogos');
+        $cabecera->ruta('Catálogos');
         $cabecera->titulo(__("Catálogos"));
         
 
-        $cabecera->accion(sprintf('<a href="%s" button type="button" class="btn btn-success"><i class="icon-plus"></i> Nuevo Catalogo</a>', url_for("catalogos/formularioCatalogos"))); 
+        $cabecera->accion(sprintf('<a href="%s" button type="button" class="btn btn-success"><i class="icon-plus"></i> Nuevo Catálogo</a>', url_for("catalogos/formularioCatalogos"))); 
  
         echo $cabecera;
     ?>

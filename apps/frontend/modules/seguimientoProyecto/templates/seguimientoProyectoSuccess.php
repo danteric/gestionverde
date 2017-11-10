@@ -26,7 +26,7 @@
 <?php 
 
 	$cabecera = new Cabecera();
-	$cabecera->ruta("Seguim. de Proyectos");
+	$cabecera->ruta("Seguimiento de Proyectos");
 	$cabecera->titulo(__('Seguimiento de Proyectos'));
 
     $cabecera->boton('filtrar') ;
@@ -39,15 +39,6 @@
     $cabecera->ini_filtro(__("Fecha inicio desde:"));?>
     <input type="date" id="id_fecha" name="id_fecha" class="form-control pull-right"  />
     <?php $cabecera->fin_filtro(__("Fecha inicio desde:"));
-
-    $cabecera->ini_filtro(__("Estado:"));?>
-    <select id="id_estado" class="form-control">
-        <option value="T" selected>(Todos)</option>
-        <option value="T">Abiertos</option>
-        <option value="T">Cerrados</option>
-    </select>
-    <?php $cabecera->fin_filtro(__("Estado:"));
-
 
     echo $cabecera;
 

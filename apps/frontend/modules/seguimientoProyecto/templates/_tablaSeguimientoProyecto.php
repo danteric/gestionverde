@@ -69,10 +69,10 @@ $('#tabla').DataTable({
     		  <td style="vertical-align: middle;text-align:center;width: 100px"><?php echo $row['proy_inicio_f'] ?></td>
               <td style="vertical-align: middle;text-align:center;width: 150px"><?php echo $row['proy_fin_estimado_f'] ?></td>
               <td style="vertical-align: middle;"><?php echo $row['proy_obser'] ?></td>
-    	      <td style="vertical-align: middle; width: 80px">
+    	      <td style="vertical-align: middle;text-align: center; width: 80px">
     				<?php if($_SESSION["usuario"]["modi"] == "S"){ ?>
-    					<a class = "btn btn-mini" href="<?php echo url_for("seguimientoProyecto/formularioSeguiProyecto?proy_id=".$row['proy_id']) ?>" data-content="Editar" data-toggle="popover" data-trigger="hover" data-placement="top">
-    						<i class="icon icon-pencil text-success"></i>
+    					<a class = "btn btn-primary" href="<?php echo url_for("seguimientoProyecto/formularioSeguiProyecto?proy_id=".$row['proy_id']) ?>" data-content="Ver Proyecto" data-toggle="popover" data-trigger="hover" data-placement="top">
+    						<i class="glyphicon glyphicon-search"></i>
     					</a>
     				<?php } ?>
     		  </td>

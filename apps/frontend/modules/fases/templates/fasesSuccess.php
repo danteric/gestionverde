@@ -1,4 +1,46 @@
 <script language="JavaScript" type="text/javascript" src="/js/configvarios.js"></script>
+    
+
+<script>
+//------------------------------------ formato de la tabla------------------------------
+
+$(document).ready(function() {
+
+$('#tablaFase').DataTable({            
+
+            "language":
+            {
+                "sProcessing":     "<i class='fa fa-cog fa-spin'></i>   Procesando...",
+                "sLengthMenu":     "Mostrar _MENU_ registros",
+                "sZeroRecords":    "No se encontraron resultados",
+                "sEmptyTable":     "Ning&uacute;n dato disponible en esta tabla",
+                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix":    "",
+                "sSearch":         "Buscar:",
+                "sUrl":            "",
+                "sInfoThousands":  ",",
+                "sLoadingRecords": "<br><i class='fa fa-cog fa-spin'></i>   Cargando...<br><br>",
+                    "oPaginate": 
+                    {
+                        "sFirst":    "Primero",
+                        "sLast":     "Último",
+                        "sNext":     "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": 
+                    {
+                        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+            },
+        });
+} );
+</script>
+
+
+<!--................................ Cabecera..................................... -->
     <?php
         $cabecera = new Cabecera();
         $cabecera->ruta('Fases');
@@ -10,13 +52,19 @@
     ?>
 
     <?php include_partial('services/notices', array('errors' => $errors, 'notices' => $notices)) ?>
-    <div class="wrapper tipoframe">
+  
+
+<!-- .............................body...................................... -->
+
+
+    <div class="wrapper tipoframe-noresize" style="overflow-x: hidden;">
     <div class="panel-body">
-    <table border="0" frame="" class="tablesorter responsiveWidth table table-striped table-hover table-bordered">
+    <table id=tablaFase border="0" frame="" class="tablesorter responsiveWidth table table-hover table-bordered table-condensed">
         <thead>
                 <tr class="alert-success wrapper">
                     <th style="text-align: center;vertical-align: middle;width: 80px"><?php echo "ID"; ?></th>
                     <th style="text-align: center;vertical-align: middle;"><?php echo "Nombre"; ?></th>
+                    <th style="text-align: center;vertical-align: middle;"><?php echo "Orden"; ?></th>
                     <th class="nosort" style="text-align: center;vertical-align: middle;width: 150px">Acciones</th>
                 </tr>
         </thead>
@@ -25,6 +73,7 @@
                 <tr onMouseOver="CambiaColor(this,'#dff0d8','blue')" onMouseOut="CambiaColor2(this,'#000000')">
                     <td style="text-align: center;vertical-align: middle;"><?php echo $row['fase_id']; ?></td>
                     <td style="vertical-align: middle;"><?php echo $row['fase_deno']; ?></td>
+                    <td style="vertical-align: middle;"><?php echo $row['fase_orden']; ?></td>
                     <td style="text-align: center;vertical-align: middle;">
                         <?php if($_SESSION["usuario"]["modi"] == "S"){ ?>
                             <a class = "btn btn-mini" href="<?php echo url_for("fases/formularioFases?fase_id=".$row['fase_id']) ?>">

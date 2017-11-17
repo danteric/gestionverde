@@ -127,6 +127,7 @@ class abmProyectoActions extends sfActions
 			$this->proy_pais_id = $request->getParameter("proy_pais_id");
 			$this->proy_prov_id = $request->getParameter("p_id_provincia");
 			$this->proy_loca_id = $request->getParameter("proy_loca_id");
+			$this->proy_domicilio = $request->getParameter("proy_domicilio");
 			$this->proy_tama_id = $request->getParameter("proy_tama_id");
 			$this->proy_medi_id= $request->getParameter("proy_medi_id");
 			$this->proy_tipo_id = $request->getParameter("proy_tipo_id");
@@ -144,11 +145,13 @@ class abmProyectoActions extends sfActions
 								   '".$this->proy_pais_id."',
 								   '".$this->proy_prov_id."',
 								   '".$this->proy_loca_id."',
+								   '".$this->proy_domicilio."',
    								   '".$this->proy_tama_id."',
                                    '".$this->proy_medi_id."',
 								   '".$this->proy_tipo_id."',
 								   @out_id);";
-          
+
+
 			//echo "<pre>"; print_r($_REQUEST);die;
 			//echo ($sql);die;
 

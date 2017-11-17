@@ -1,5 +1,7 @@
 <script languaje= "JavaScript" type="text/javascript" src= "js/configvarios.js"> </script>
 
+
+
 <script>
 
     cargarGrilla = function() {
@@ -61,6 +63,7 @@ document.getElementById('tablaFichas').addEventListener('click', function () {
 
 
 show(document.getElementById('one'));
+
 
 
  </script>
@@ -180,6 +183,8 @@ show(document.getElementById('one'));
   <div class="col-xs-1 col-md-1">
         <div id="tablaFichas" class="responsiveWidth"></div>
   </div>
+
+  
 
   <div class="col-xs-11 col-md-11 ">
         <div id="derecha" class="wrapper tipoframe-noresize" style="; padding-left:15px;overflow-x: hidden;">

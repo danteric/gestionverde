@@ -233,13 +233,14 @@ legend {margin-bottom: 5px}
         {  
             $cabecera->titulo(__("Nuevo Proyecto"))->ruta(__("Nuevo Proyecto"));
         }else{
-            $cabecera->titulo(__("Editando Proyecto: '".$optionsSelect[0]['proy_nombre']."'" ))->ruta(__("Editando Proyecto"));
+            $cabecera->titulo(__("Proyecto: '".$optionsSelect[0]['proy_nombre']."'" ))->ruta(__("Editando Proyecto"));
        
         }
 
         if($_SESSION["usuario"]["modi"] == "S")
         {
-            $cabecera->accion('<button type="submit" id="btngrabar" onclick="grabo_clasif()"class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Grabar</button>');
+            $cabecera->accion('<button type="submit" id="btngrabar" onclick="grabo_clasif()" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Grabar</button>');
+            
             $cabecera->accion('<button type="button" onclick="cancelar()" class="btn btn-warning"><i class="icon-chevron-left"></i> Volver</button>');
         }
       
@@ -305,7 +306,14 @@ legend {margin-bottom: 5px}
               <div class="form-group row">
                 <label for="example-tel-input" class="col-xs-1 col-md-1 col-form-label">Descripción</label>
                 <div class="col-xs-8 col-md-8">
-                  <textarea class="form-control" name="proy_obser" required><?php echo $row['proy_obser'] ?></textarea>
+                  <textarea class="form-control" id="proy_obser" name="proy_obser" required><?php echo $row['proy_obser'] ?></textarea>
+                </div>  
+              </div>
+
+                <div class="form-group row">
+                <label for="example-tel-input" class="col-xs-1 col-md-1 col-form-label">Domicilio</label>
+                <div class="col-xs-8 col-md-8">
+                  <textarea class="form-control" id="proy_domicilio" name="proy_domicilio" rows="1" required ><?php echo $row['proy_domicilio'] ?></textarea>
                 </div>  
               </div>
               
@@ -362,7 +370,7 @@ legend {margin-bottom: 5px}
                                     
                        <div class="form-group row">
             
-                          <label for="example-tel-input" class="col-md-1 col-form-label">Tamaño</label>
+                          <label for="example-tel-input" class="col-md-1" style="margin-top:5px;padding-right: 0px">Tamaño</label>
                           <div class="col-md-2" >
                                 <?php $optionsSelect = $dd_tama;?>
                                 <select id= "proy_tama_id" name="proy_tama_id" class="form-control" required>
@@ -375,8 +383,8 @@ legend {margin-bottom: 5px}
 
                           </div>
           
-                          <label for="example-tel-input" class="col-md-1 col-md-offset-1 col-form-label">Medio</label>
-                          <div class="col-md-2 ">
+                          <label for="example-tel-input" class="col-md-1" style="margin-top:5px">Medio</label>
+                          <div class="col-md-3">
                                 <?php $optionsSelect = $dd_medi;?>
                                 <select id= "proy_medi_id" name="proy_medi_id" class="form-control" required>
                                 <?php foreach ($optionsSelect as $arraySelect) { ?>
@@ -387,8 +395,8 @@ legend {margin-bottom: 5px}
                                </select>
                           </div>
                         
-                          <label for="example-tel-input" class="col-md-1 col-md-offset-1 col-form-label">Tipología</label>
-                          <div class="col-md-2">
+                          <label for="example-tel-input" class="col-md-1" style="margin-top:5px">Tipología</label>
+                          <div class="col-md-3">
                                 <?php $optionsSelect = $dd_tipo;?>
                                 <select id= "proy_tipo_id" name="proy_tipo_id" class="form-control" required>
                                 <?php foreach ($optionsSelect as $arraySelect) { ?>

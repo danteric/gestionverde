@@ -11,7 +11,7 @@
         var fila=$("#tablaProc tr").length;
 
         $(".tablaProc").append('<tr><td colspan="2">'+
-                                  '<textarea class="form-control" name="proc_text_f['+fila+']" placeholder="Nuevo procedimiento..."></textarea></td>'+       
+                                  '<textarea class="form-control" name="proc_text_f['+fila+']" style="resize: none;" placeholder="Nuevo procedimiento..."></textarea></td>'+       
                                   '<input type="hidden" name="proc_id_f['+fila+']" value="0">'+      
                                   '<td style="text-align: center">'+ 
                                     '<label class="switch">'+
@@ -28,7 +28,7 @@
         var fila=$("#tablaRecur tr").length;
 
         $(".tablaRecur").append('<tr><td colspan="2">'+
-                                  '<textarea class="form-control" name="recu_text_f['+fila+']" placeholder="Nuevo Recurso..."></textarea></td>'+       
+                                  '<textarea class="form-control" name="recu_text_f['+fila+']" style="resize: none;" placeholder="Nuevo Recurso..."></textarea></td>'+       
                                   '<input type="hidden" name="recu_id_f['+fila+']" value="0">'+      
                                   '<td style="text-align: center">'+ 
                                     '<label class="switch">'+
@@ -45,7 +45,7 @@
         var fila=$("#tablaFuen tr").length;
 
         $(".tablaFuen").append('<tr><td colspan="2">'+
-                                  '<textarea class="form-control" name="fuen_text_f['+fila+']" placeholder="Nueva fuente (URL)...">'+ 
+                                  '<textarea class="form-control" name="fuen_text_f['+fila+']" style="resize: none;" placeholder="Nueva fuente (URL)...">'+ 
                                   '</textarea></td>'+       
                                   '<input type="hidden" name="fuen_id_f['+fila+']" value="0">'+      
                                   '<td style="text-align: center">'+ 
@@ -56,14 +56,14 @@
                                          '<span class="switch-label" id="lopi" data-on="Si" data-off="No"></span>'+
                                          '<span class="switch-handle"></span>'+
                                     '</label>'+
-                                  '</td>'+
+                                  '</td>'/*+
                                    '<td>'+
-                                    '<a title="Copy al clipboard" onclick="copyToClipboard(<?php echo $c ?>); return false;" class="btn btn-info pull-right"> <i class="icon-copy text-info"></i></a>'+
-                                '</td>'+
-                               '<td>'+
+                                      '<a title="Copy al clipboard" onclick="copyToClipboard(<?php echo $c ?>); return false;" class="btn btn-info pull-right"> <i class="icon-copy text-info"></i></a>'+
+                                    '</td>'+
+                                    '<td>'+
                                     '<a title="Abrir en nueva solapa" onclick="abrirFuen(<?php echo $c ?>); return false;" class="btn btn-info pull-center">Abrir</a>'+  
                                 '</td>'+ 
-                                  '</tr>');
+                                  '</tr>'*/);
                                   
     }
 
@@ -184,7 +184,7 @@ html { overflow-y:hidden; }
 
               <div class="form-group row" >
                 <label for="example-tel-input" class="col-md-1 col-form-label">Catálogo</label>
-                <div class="col-xs-8">
+                <div class="col-xs-8 col-md-3">
                  <?php $optionsSelect = $dd_cata;?>
                   <select id= "fich_cata_id" name="fich_cata_id" class="form-control" required>
                   <?php foreach ($optionsSelect as $arraySelect) { ?>
@@ -404,7 +404,7 @@ html { overflow-y:hidden; }
                                 <th><a title="Agregar fuente" onclick="agregarFuen(); return false;" class="btn btn-success pull-right"> <i class="icon-plus"></i>  Nuevo </a></th>
                            
                                 <th  class="nosort" style="text-align: center">Eliminar</th>
-                                <th colspan="2" style="text-align: center">Acciones</th>
+                                <!--<th colspan="2" style="text-align: center">Acciones</th>-->
                             </tr>
                         </thead>
 
@@ -425,12 +425,14 @@ html { overflow-y:hidden; }
                                          <span class="switch-handle"></span>
                                     </label>
                                 </td>
+                                <!-- 
                                  <td>
-                                    <a title="Copy al clipboard" onclick="copyToClipboard(<?php echo $c ?>); return false;" class="btn btn-info pull-right"> <i class="icon-copy text-info"></i></a>
+                                    <a title="Copy al clipboard" onclick="copyToClipboard(<?php //echo $c ?>); return false;" class="btn btn-info pull-right"> <i class="icon-copy text-info"></i></a>
                                 </td>
                                 <td>
-                                    <a title="Abrir en nueva solapa" onclick="abrirFuen(<?php echo $c ?>); return false;" class="btn btn-info pull-center">Abrir</a>  
+                                    <a title="Abrir en nueva solapa" onclick="abrirFuen(<?php //echo $c ?>); return false;" class="btn btn-info pull-center">Abrir</a>  
                                 </td> 
+                                -->
                             </tr>
                           <?php $c++; } ?>
                       </tbody>

@@ -1,7 +1,8 @@
-<script language="JavaScript" type="text/javascript" src="/js/configvarios.js">
+<script language="JavaScript" type="text/javascript" src="/js/configvarios.js"> </script>
+<script> 
     
 $(document).ready(function() {
-$('#tabla').DataTable({            
+$('#tablaTipologias').DataTable({            
 
     "language":{
         "sProcessing":     "<i class='fa fa-cog fa-spin'></i>   Procesando...",
@@ -45,9 +46,11 @@ $('#tabla').DataTable({
     ?>
 
     <?php include_partial('services/notices', array('errors' => $errors, 'notices' => $notices)) ?>
-    <div class="wrapper tipoframe">
+   
+<!--................................ Body.............................................. -->
+    <div class="wrapper tipoframe-noresize" style="overflow-x: hidden;">
     <div class="panel-body">
-    <table id="tabla" border="0" frame="" class="tablesorter responsiveWidth table table-hover table-bordered table-condensed">
+    <table id="tablaTipologias" border="0" frame="" class="tablesorter responsiveWidth table table-hover table-bordered table-condensed">
         <thead>
                 <tr class="alert-success wrapper">
                     <th style="text-align: center;vertical-align: middle;width: 80px"><?php echo "ID"; ?></th>

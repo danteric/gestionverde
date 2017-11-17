@@ -52,7 +52,8 @@ class fasesActions extends sfActions
                //echo "<pre>";print_r($this->cursor);die;  para verificar que trae los datos
                $this->fase_id         = $this->cursor['fase_id'];
                $this->fase_deno       = $this->cursor['fase_deno'];
-               $this->fase_deno_redu  = $this->cursor['fase_deno_redu'];
+               $this->fase_orden       = $this->cursor['fase_orden'];
+
             }
             
             /*----alta-----*/
@@ -63,13 +64,14 @@ class fasesActions extends sfActions
              
                 $this->fase_id        = $request->getParameter("fase_id");
                 $this->fase_deno      = $request->getParameter("fase_deno");
-                $this->fase_deno_redu = $request->getParameter("fase_deno_redu");
+                $this->fase_orden       = $this->cursor['fase_orden'];
    
                 /* Validacion de campos vacios y tipos de datos*/
                 $sql = "AM_FASE_RS('".$_SESSION['usuario']['username']."',
                                        '".$this->fase_id."',
                                        '".$this->fase_deno."',
-                                       '".$this->fase_deno_redu."');";
+                                       '".$this->fase_deno_redu."',
+                                       '".$this->fase_orden."');";
 
                 $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql); 
       

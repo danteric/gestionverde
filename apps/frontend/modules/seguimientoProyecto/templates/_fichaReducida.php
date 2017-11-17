@@ -82,6 +82,26 @@
 
       </div>
 
+      <!-- .....................row de fuentes................................. --> 
+        <div class="row" style="background-color: #e0e0e0">
+             
+                <div class="col-md-12" style="background-color: #1976d2; color: white; padding: 5px 0px 5px 0px; font-size: 11px; font-weight: bold;">
+                      <h2 style="margin-left: 5px">Fuente:</h2>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-11" style= "padding-top: 5px">
+                        
+                           <ul>
+                                <?php foreach ($fuen as $row) { ?>
+                                        <li><p class="text-justify" style="padding-bottom: 5px; border-bottom: 2px solid white; color:black "><?php echo $row['fifu_texto'] ?></p></li>
+                                <?php } // del ciclo ?>
+                           </ul>
+                        
+                   </div>
+                </div>
+
+      </div>
 
      
   </div> <!-- div container -->

@@ -4,7 +4,9 @@
 
 //--- inicializo para utilizar el popover----------------
 $(document).ready(function(){
-    $("[data-toggle='popover']").popover(); 
+    $("[data-toggle='popover']").popover({
+      container: 'body'
+    }); 
 
 });
 
@@ -81,8 +83,8 @@ window.onload = function() {
 
 <!-- ..............................FORMULARIO......................................... -->
 
-<form id="formulario" method="POST" action="<?php echo url_for("abmProyecto/formularioProyecto") ?>">
-<?php $optionsSelect = $cursor;
+<form id="formulario" method="POST" action="<?php echo url_for("seguimientoProyecto/FormularioSeguiProyecto") ?>">
+<?php 
       $optionsSelect_fich_adhoc = $cursor_fich_adhoc;
 
 		$cabecera = new cabecera();
@@ -92,7 +94,10 @@ window.onload = function() {
       
     if($_SESSION["usuario"]["modi"] == "S")
     {
-        $cabecera->accion('<button type="submit" id="btngrabar" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i>  Grabar</button>');
+        $cabecera->accion('<button type="button"  class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Cerrar Proyecto</button>');
+
+        $cabecera->accion('<button type="submit" id="btngrabar" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i>  Guardar Fase Actual</button>');
+
         $cabecera->accion('<button type="button" onclick="cancelar()" class="btn btn-warning"><i class="icon-chevron-left"></i> Volver</button>');
     }
     
@@ -108,22 +113,24 @@ window.onload = function() {
     </p>
 </div>
 
+<?php foreach ($cursor as $row) {}?> <!-- inicializo datos del proyecto -->
 
 <div class="form-group row" style="margin-top: 10px">
         
         <label for="example-tel-input" class="col-md-1 col-form-label">Fase actual</label>
         <div class="col-md-2">
-              <?php $optionsSelect = $dd_fase;?>
-              <select id= "proy_fase_id" name="proy_fase_id" class="form-control" onchange="fichasPorFase()">
-              <?php foreach ($optionsSelect as $arraySelect) { ?>
-                  <option value="<?php echo $arraySelect['fase_id'];?>" <?php if($arraySelect['fase_id'] == $row['proy_fase_id']){echo 'selected';} ?> >
+              <?php $optionsSelectFases = $dd_fase;?>
+              <select id= "proy_fase_id" name="proy_fase_id" class="form-control" onchange="fichasPorFase()" data-content="Seleccione la fase actual del proyecto" data-toggle="popover" data-trigger="hover" data-placement="right">
+              <?php foreach ($optionsSelectFases as $arraySelect) { ?>
+                  <option value="<?php echo $arraySelect['fase_id'];?>" <?php if($arraySelect['fase_id'] == $row['proy_fase_actual']){echo 'selected';} ?> >
                     <?php echo $arraySelect['fase_deno']; ?>
                   </option> 
               <?php } ?>
               </select>
 
         </div>
-
+        
+        <!-- 
         <label for="example-tel-input" class="col-md-1 col-form-label">Estado</label>
         <div class="col-md-2">
               <select id= "proy_estado" name="proy_estado" class="form-control">
@@ -134,8 +141,9 @@ window.onload = function() {
 
         <label for="example-tel-input" class="col-md-1 col-form-label">Fecha de cierre real</label>
         <div class="col-xs-2 col-md-2">
-          <input type="date" class="form-control" id="proy_cierre_f" name="proy_cierre_f" value="<?php echo $row['proy_cierre_f']?>">
+          <input type="date" class="form-control" id="proy_cierre_f" name="proy_cierre_f" value="<?php //echo $row['proy_cierre_f']?>">
         </div> 
+        -->
  </div>
 
 
@@ -152,10 +160,6 @@ window.onload = function() {
               <a data-toggle="tab" href="#datosProy">Datos del Proyecto</a>
             </li>
           
-            
-            <li id="tabFichNoRel">
-              <a data-toggle="tab" href="#fich_no_rel">Todas las fichas</a>
-            </li>
 
         </ul>
              
@@ -175,7 +179,7 @@ window.onload = function() {
             
             <!-- selecciona cursor que es donde estan todos los datos del proyecto en seguimiento.php -->
             
-            <?php foreach ($cursor as $row) {} ?> <!-- datos del proyecto -->
+          
             <?php foreach ($cursor_fich_adhoc as $row_2) {} ?> <!-- ficha adhoc -->  
 
             <div class="form-group row">
@@ -199,30 +203,28 @@ window.onload = function() {
               </div>  
             </div>
               
+             <div class="form-group row">
+              <label for="example-tel-input" class="col-xs-1 col-md-1 col-form-label">Domicilio</label>
+              <div class="col-xs-8 col-md-8">
+                <textarea class="form-control" name="proy_domicilio" readonly><?php echo $row['proy_domicilio'] ?></textarea>
+              </div>  
+            </div>
+              
             <div class="form-group row">
                   
                   <label for="proy_pais_id" class="col-md-1 col-form-label">Pais</label>
                   <div class="col-xs-8 col-md-2">
-                      <?php $optionsSelect = $sf_data->getRaw('dd_pais');?>
-
-                      <select id="proy_pais_id" name="proy_pais_id" class="form-control" readonly>
-                      <?php foreach ($optionsSelect as $arraySelect) { ?>                   
-                      <option data="<?php echo $arraySelect["cpai_id_pais"] ?>" <?php if($row['proy_pais_id'] ==$arraySelect["cpai_id_pais"]) { echo 'selected'; }; ?> value="<?php echo $arraySelect["cpai_id_pais"] ?>"><?php echo $arraySelect["cpai_pais"] ?></option> 
-                      <?php } ?>
-                       </select>
+                      <input  id="proy_pais_id" class="form-control" name="proy_pais_id" value="<?php echo $row['cpai_pais'] ?>" readonly>
                   </div>
 
                   <label for="proy_prov_id" class="col-md-1 col-form-label">Provincia</label>
                   <div class="col-xs-8 col-md-2">
-                      <input type="hidden" id="proy_prov_id" value="<?php echo $row['proy_prov_id'] ?>" readonly>
-                      <b id="resulSubprov" style="font-weight: normal" readonly></b>
+                     <input id="proy_prov_id" class="form-control" value="<?php echo $row['cprv_provincia'] ?>" readonly>
                   </div>
     
                   <label for="id_localidad" class="col-md-1 col-form-label">Localidad</label>
                   <div class="col-xs-8 col-md-2">
-                          <input type='text' id="datosinfo"  placeholder="-" class='form-control datosinfo limpiarcampo' value='' readonly>
-                          <input type="hidden" id="proy_loca_id" name="proy_loca_id" value="<?php echo $row['proy_loca_id']?>" >
-
+                      <input class='form-control' id="proy_loca_id"  name="proy_loca_id" value="<?php echo $row['cloc_localidad']?>" readonly>
                   </div>
                              
             </div> <!-- form group localidad -->
@@ -244,12 +246,6 @@ window.onload = function() {
 </div> <!--cierre del div id=home-->
    
 
-            <!-- .................................Panel de Fichas No relacionadas........................ -->
-          <div id="fich_no_rel" class="tab-pane fade" >
-          
-            <div id="tablaFichasNoRel" class="responsiveWidth"></div>
-
-          </div>
 
  
                   

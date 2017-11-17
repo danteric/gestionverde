@@ -48,7 +48,7 @@ $('#tabla').DataTable({
 <div class="wrapper tipoframe-noresize" style="overflow-x: hidden;">
  <div class="panel-body">
   
-  <?php if ($sindatos == '1'){ ?>
+ <?php if ($sindatos == '1'){ ?> 
 	<table id="tabla" border="0" class="tablesorter responsiveWidth table table-hover table-bordered table-condensed">
 	
 		<thead  class="alert-success wrapper" >
@@ -89,7 +89,7 @@ $('#tabla').DataTable({
                        </div>     
                 </div>
             </div>
-    <?php } ?>
+    <?php } ?> 
 
 </div>
 </div>

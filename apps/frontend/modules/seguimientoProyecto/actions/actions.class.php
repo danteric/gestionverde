@@ -41,7 +41,7 @@ class seguimientoProyectoActions extends sfActions
                       
 
 		$cursor_nombre = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-   
+   		
 
     	$this->cursor = $cursor_nombre;
 
@@ -90,7 +90,6 @@ class seguimientoProyectoActions extends sfActions
 		 $sql = "GET_PROYECTO_FICHA_ADHOC_RS(".$proy_id.")";
 		 $this->cursor_fich_adhoc = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
-		
 
 		// -------------------------------grabar-----------------------------
 		
@@ -98,90 +97,39 @@ class seguimientoProyectoActions extends sfActions
 		{
 
 			$proy_id		= $request->getParameter("proy_id");
-			$this->proy_fase_id = $request->getParameter("proy_fase_id");
-			$this->proy_estado 	= $request->getParameter("proy_estado");
-			$this->proy_cierre_f = $request->getParameter("proy_cierre_f");
-
+			$this->fase_id = $request->getParameter("proy_fase_id");
 			$this->graba_ok 	= 1;	
 
 
 		//-----------Validacion de campos vacios y tipos de datos---------
-		/*	
-            $sql = "AM_SEGUIM_PROYE_FICHA_FASE_RS('".$_SESSION['usuario']['username']."',
-                                   '".$proy_id."',
-                                   '".$this->proy_nombre."',
-                                   '".$this->proy_obser."',
-                                   '".$this->proy_inicio_f."',
-								   '".$this->proy_fin_estimado_f."',
-								   '".$this->proy_pais_id."',
-								   '".$this->proy_prov_id."',
-								   '".$this->proy_loca_id."',
-   								   '".$this->proy_tama_id."',
-                                   '".$this->proy_medi_id."',
-								   '".$this->proy_tipo_id."',
-								   @out_id);";
-          
-			//echo "<pre>"; print_r($_REQUEST);die;
-			//echo ($sql);die;
+		
+            $sql = "M_PROYECTO_MODIF_FASE_RS('".$_SESSION['usuario']['username']."','"
+            						  .$proy_id."','"
+                                     .$this->fase_id."')"; 
 
 
             $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql); 
             $resp_sp = $this->cursor[0]['respuesta'];
-			
-			$resp_sp_id = $this->cursor[0]['respuesta_id'];
-			$proy_id= $resp_sp_id ;
-					
-			
 
+	
 			  //si hubo problemas, no graba
             if ($resp_sp != 'OK') {
                 $this->getUser()->setFlash('error', $this->cursor[0]['respuesta']);
                 $this->graba_ok = 0;
             }
- 		*/	
-
-
-			//----------- adjunto la ficha adhoc al proyecto-----------
-			/*
-            if ($this->graba_ok == 1) { 	
-
-            $this->pfad_nombre = $request->getParameter("pfad_nombre");
-			$this->pfad_proce = $request->getParameter("pfad_proce");
-			$this->pfad_recurso = $request->getParameter("pfad_recurso");
-
-
-            $sql = "AM_PROYECTO_FICHA_AD_HOC_RS('".$_SESSION["usuario"]["username"]."','"
-			                                        .$proy_id."','"
-			                                        .$this->pfad_nombre."','"
-			                                        .$this->pfad_proce."','"
-			                                        .$this->pfad_recurso."')"; 
-			
-			 
-			 $this->cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-
-
-             $resp_sp = $this->cursor[0]['respuesta'];
-			 $exito   = $this->cursor[0]['respues_exito'];
-			    if ($resp_sp != 'OK') 
-			    {
-			        $this->getUser()->setFlash('error', $this->cursor[0]['respuesta']);
-			        $this->graba_ok = 0;
-			    }
-   
-			} 	  
-
+ 		
 
 
            	//-------Si hay algun error, no graba y continua en el ABM de un proyecto -----
 			if ($this->graba_ok == 1) 
 			{
-				$this->redirect("abmProyecto/abmProyecto");
+				$this->redirect("seguimientoProyecto/seguimientoProyecto");
 			    $this->getUser()->setFlash('notice', $this->cursor[0]['respues_exito']);			        
 			}else{    // error vuelve al item editado
- 				$this->redirect("abmProyecto/formularioProyecto?proy_id=".$proy_id);
+ 				$this->redirect("seguimientoProyecto/FormularioSeguiProyecto?proy_id=".$proy_id);
 				
 			} 
-			*/
+			
 		}//post
 		
 	}//end function formularioProyecto
@@ -191,7 +139,7 @@ class seguimientoProyectoActions extends sfActions
 
 
 /*-------------------------------Guardar el seguimiento de la ficha-------------------------------*/
-	public function guardarSeguimientoFicha(sfWebRequest $request) {
+	public function executeGuardarSeguimientoFicha(sfWebRequest $request) {
 	
       	$proy_id = $request->getParameter("proy_id");
       	$proy_fase = $request->getParameter("proy_fase");
@@ -206,8 +154,7 @@ class seguimientoProyectoActions extends sfActions
                                    '".$proy_fich_id ."',
                                    '".$proy_fase."',
                                    '".$proy_fich_text."');";
- 
- 		echo $sql;die;
+
 		$cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
    		
    		$this->cursor_ficha = $cursor;
@@ -235,6 +182,44 @@ class seguimientoProyectoActions extends sfActions
 
 
 
+/*-------------------------------Lee el seguimiento de una ficha--------------------------------*/
+	public function executeLeerSeguimientoFicha(sfWebRequest $request) {
+	
+      	$proy_id = $request->getParameter("proy_id");
+      	$fich_id= $request->getParameter("fich_id");
+      	$proy_fase= $request->getParameter("proy_fase");
+		$cursor_fichas  = array();
+
+
+    	$sql = "SEL_SEGUIM_PROYE_FICHA('".$proy_id."','".
+    									  $fich_id."','".
+					                      $proy_fase."')";
+
+ 		
+		$cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+   		$this->cursor_fichas = $cursor;
+
+   		if ($this->cursor_fichas == NULL)
+		{
+        	$this->sindatos = '0';
+		}else{
+         	$this->sindatos = '1';
+		}
+
+		if(empty($this->cursor_fichas)){
+			$this->cursor_fichas = array(0);
+		}
+
+		return $this->renderPartial
+				('seguimientoProyecto/fichaSeguimientoLeida', array('cursor' =>$this->cursor_fichas,
+											     'sindatos' =>$this->sindatos
+												 ));
+		
+	}	
+
+
+
 /*-------------------------------Buscar fichas relacionadas--------------------------------*/
 	public function executeFichasPorFase(sfWebRequest $request) {
 	
@@ -246,7 +231,7 @@ class seguimientoProyectoActions extends sfActions
     	$sql = "SEL_SEGUIM_PROYE_FICHA_FASE_RS('".$proy_id."','".
 					                              $proy_fase."')";
  
- 
+
 		$cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
    		
    		$this->cursor_fichas = $cursor;
@@ -289,6 +274,8 @@ class seguimientoProyectoActions extends sfActions
         $sql = "GET_FICHA_RECURSOS_RS('".$this->fich_id."')";         
         $this->recu = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
+        $sql = "GET_FICHA_FUENTES_RS('".$this->fich_id."')";         
+        $this->fuen = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
    		//echo $sql;
    		//echo "<pre>"; print_r($this->cursor_fichas_rel);die;
@@ -296,7 +283,8 @@ class seguimientoProyectoActions extends sfActions
 		return $this->renderPartial
 				('seguimientoProyecto/fichaReducida', array('fich'=>$this->fich,
 												  'proc'=>$this->proc,
-												  'recu'=>$this->recu
+												  'recu'=>$this->recu,
+												  'fuen'=>$this->fuen
 												 ));
 	
 	}

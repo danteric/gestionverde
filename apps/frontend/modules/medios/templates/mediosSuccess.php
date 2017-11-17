@@ -1,5 +1,5 @@
-<script language="JavaScript" type="text/javascript" src="/js/configvarios.js">
-    
+<script language="JavaScript" type="text/javascript" src="/js/configvarios.js"></script>
+<script>
 $(document).ready(function() {
 $('#tabla').DataTable({            
 
@@ -44,7 +44,11 @@ $('#tabla').DataTable({
     ?>
 
     <?php include_partial('services/notices', array('errors' => $errors, 'notices' => $notices)) ?>
-    <div class="wrapper tipoframe">
+   
+
+<!--................................ Body.............................................. -->
+
+    <div class="wrapper tipoframe-noresize" style="overflow-x: hidden;">
     <div class="panel-body">
     <table id="tabla" border="0" frame="" class="tablesorter responsiveWidth table table-hover table-bordered table-condensed">
         <thead>
@@ -75,9 +79,3 @@ $('#tabla').DataTable({
     </table>
     </div>
     </div>
-<?php //require __DIR__. '/../../pagcomun/templates/_paginaciona_listas_ajax.php' ?>
-<?php require __DIR__. '/../../pagcomun/templates/_pagcomun.php' ?> 
-<!-- /ayuda -->
-<?php require __DIR__. '/../../ayuda/templates/_datos_top.php' ?>
-<!-- /ayuda -->
-

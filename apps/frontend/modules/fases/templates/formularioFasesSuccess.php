@@ -54,10 +54,18 @@
           <input class="form-control" type="text" name="fase_id" value="<?php echo $fase_id ?>" readonly >
         </div>
       </div>
+
       <div class="form-group row">
         <label for="example-tel-input" class="col-xs-3 col-form-label">Nombre de fase</label>
         <div class="col-xs-9">
           <input class="form-control" type="text" name="fase_deno" value="<?php echo $fase_deno ?>" required >
+        </div>
+      </div>
+    
+       <div class="form-group row">
+        <label for="example-tel-input" class="col-xs-3 col-form-label">Orden Lógico</label>
+        <div class="col-xs-9">
+          <input class="form-control" type="text" name="fase_orden" value="<?php echo $fase_orden ?>" required >
         </div>
       </div>
   

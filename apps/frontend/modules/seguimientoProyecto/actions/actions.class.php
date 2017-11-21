@@ -19,7 +19,9 @@ class seguimientoProyectoActions extends sfActions
 		 $this->errors = array();
          $this->notices = array();
 
-
+         
+         $sql = "GET_FASE_RS(null,'S')";
+         $this->dd_fase = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
 	}
 
@@ -28,12 +30,14 @@ class seguimientoProyectoActions extends sfActions
 	
         $this->nombre_proyecto	= $request->getParameter("id_nombre");
       	$this->fecha_desde	= $request->getParameter("id_fecha");
+      	$this->fase_actual = $request->getParameter("proy_fase_actual");
 		$this->cursor       = array();
-		$this->total_paginas = 1;
+
 
 
     	$sql = "GET_ABM_PROYECTO_RS('".$_SESSION["usuario"]["username"]."','".
     							   'A'."','".
+    							   $this->fase_actual."','".
     							   $this->fecha_desde."','".
     							   $this->nombre_proyecto."','".                             
                                    'P'."')";
@@ -58,10 +62,7 @@ class seguimientoProyectoActions extends sfActions
 
 		return $this->renderPartial
 				('seguimientoProyecto/tablaSeguimientoProyecto', array('cursor' =>$this->cursor,
-											     'sindatos' =>$this->sindatos,
-												 'total_paginas' => $this->total_paginas,
-					                            'total_registros' =>$this->total_registros,
-					                            'pagina' => $this->pagina));
+											     'sindatos' =>$this->sindatos));
 	
 	}
 	
@@ -188,8 +189,7 @@ class seguimientoProyectoActions extends sfActions
       	$proy_id = $request->getParameter("proy_id");
       	$fich_id= $request->getParameter("fich_id");
       	$proy_fase= $request->getParameter("proy_fase");
-		$cursor_fichas  = array();
-
+		$this->$cursor_fichas  = array();
 
     	$sql = "SEL_SEGUIM_PROYE_FICHA('".$proy_id."','".
     									  $fich_id."','".
@@ -218,7 +218,42 @@ class seguimientoProyectoActions extends sfActions
 		
 	}	
 
+/*-------------------------------Cerrar el proyecto en seguimiento--------------------------------*/
+	public function executeCierreProyecto(sfWebRequest $request) {
+	
+      	$proy_id = $request->getParameter("proy_id");
+      	$proy_fase = $request->getParameter("proy_fase");
+		$this->$sindatos  = array();
+		$cursor  = array();
 
+		
+		//Store procedure para el cierre del proyecto.
+    	$sql = "M_CIERRE_PROYECTO_RS('".$_SESSION['usuario']['username']."','"
+    									.$proy_id."','"
+    									.$proy_fase."')";
+		
+
+ 		
+		$cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
+
+
+   		if ($cursor == NULL)
+		{
+        	$this->sindatos = '0';
+		}else{
+         	$this->sindatos = '1';
+		}
+
+		if(empty($cursor)){
+			$cursor = array(0);
+		}
+
+		return $this->renderPartial
+				('seguimientoProyecto/cierreProyectoCorrecto', array('cursor' =>$cursor,
+											     'sindatos' =>$this->sindatos
+												 ));
+		
+	}	
 
 /*-------------------------------Buscar fichas relacionadas--------------------------------*/
 	public function executeFichasPorFase(sfWebRequest $request) {
@@ -228,10 +263,10 @@ class seguimientoProyectoActions extends sfActions
 		$cursor_fichas  = array();
 		$total_paginas = 1;
 
+
     	$sql = "SEL_SEGUIM_PROYE_FICHA_FASE_RS('".$proy_id."','".
 					                              $proy_fase."')";
  
-
 		$cursor = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
    		
    		$this->cursor_fichas = $cursor;

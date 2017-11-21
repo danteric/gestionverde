@@ -181,26 +181,14 @@ $(document).ready(function(){
                                 $('#proy_loca_id').val($('#'+id).attr('data'));
                                
                 });  
-                
-          
          } });  
 
-        }
-        // SI HAGLO CLICK AFUERA CIERRO EL DIV Y LIMPIO EL CAMPO
-                $('.container-fluid').click(function(event){
-                  console.log("CLICK");
-                  event.preventDefault();
-                  if (!$(event.target).hasClass('activocombo')) {
-                     $('#muestroayudabuscado').hide();
-                  }
-                    
-                    
-                }); 
-               
-    
-       
+        }   
     });
     });
+
+
+
 
 
 </script>
@@ -273,10 +261,12 @@ legend {margin-bottom: 5px}
             <li id="tabFichNoRel" class="disabled disabledTab">
               <a data-toggle="tab" href="#fich_no_rel">Fichas no Relacionadas</a>
             </li>
-
+            
+            <!--
             <li id="tabFichAdHoc" class="disabled disabledTab">
               <a data-toggle="tab" href="#fich_ad_hoc">Ficha Ad-Hoc</a>
             </li>
+            -->
         </ul>
              
         
@@ -311,7 +301,7 @@ legend {margin-bottom: 5px}
               </div>
 
                 <div class="form-group row">
-                <label for="example-tel-input" class="col-xs-1 col-md-1 col-form-label">Domicilio</label>
+                <label for="example-tel-input" class="col-xs-1 col-md-1 col-form-label">Dirección</label>
                 <div class="col-xs-8 col-md-8">
                   <textarea class="form-control" id="proy_domicilio" name="proy_domicilio" rows="1" required ><?php echo $row['proy_domicilio'] ?></textarea>
                 </div>  
@@ -441,8 +431,9 @@ legend {margin-bottom: 5px}
             <div id="tablaFichasNoRel" class="responsiveWidth"></div>
 
           </div>
-
+    
           <!-- .................................Panel de Ficha Ad-Hoc........................ -->
+          <!--
           <div id="fich_ad_hoc" class="tab-pane fade" >
           
               <div class="row">
@@ -470,7 +461,7 @@ legend {margin-bottom: 5px}
                   </div>    
               </div> 
           </div>
-
+          -->
 
                   
           <!-- .......................Modal de advertencia al modificar clasificaciones........................... -->

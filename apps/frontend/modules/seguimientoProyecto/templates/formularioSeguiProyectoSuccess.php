@@ -24,15 +24,13 @@ window.onload = function() {
     }
 
 
-
-
     //--------ver las fichas dependiendo de la fase--------------------- 
    fichasPorFase = function() {
       var proy_id = $('#proy_id').val();
       var proy_fase = $('#proy_fase_id').val();
 
         //dependiendo de la fase, busca las fichas que debe tomar acción
-        $.get("<?php echo url_for('seguimientoProyecto/FichasPorFase') ?> ", 
+        $.get("<?php echo url_for('seguimientoProyecto/fichasPorFase') ?> ", 
         {
          proy_id,
          proy_fase
@@ -44,9 +42,6 @@ window.onload = function() {
               });        
       
     }
-
-
-
 
 
   //  dependiendo del pais , trae el listado de provincias
@@ -67,6 +62,34 @@ window.onload = function() {
         mostrarSubProvin();
   });
 
+   // modal para el cierre de proyecto, pregunta si esta seguro de cerrar el proyecto
+   modal_cerrarProyecto = function(){
+      $('#modal_cierreProyecto').modal('show');
+   }
+
+  
+   //funcion para cerrar el proyecto, colocando su estado en cerrado
+   cerrarProyecto = function(){
+
+      var proy_id = $('#proy_id').val();
+      var proy_fase = $('#proy_fase_id').val();
+
+      $.get("<?php echo url_for('seguimientoProyecto/cierreProyecto') ?>",
+      { 
+       proy_id,
+       proy_fase
+      },  
+            function(data){
+                $('#cierreProyectoCorrecto').html(data);
+            });
+            
+            $('#modal_cierreProyecto').modal('hide');
+            location.href = '<?php echo url_for("seguimientoProyecto/seguimientoProyecto") ?>';
+            
+    }
+
+
+
 
 
 </script>
@@ -86,7 +109,7 @@ window.onload = function() {
 <form id="formulario" method="POST" action="<?php echo url_for("seguimientoProyecto/FormularioSeguiProyecto") ?>">
 <?php 
       $optionsSelect_fich_adhoc = $cursor_fich_adhoc;
-
+      $optionsSelect = $cursor;
 		$cabecera = new cabecera();
 		$cabecera->ruta(link_to(__("Seguimiento de Proyectos"),'seguimientoProyecto/seguimientoProyecto'));
     $cabecera->titulo(__("Seguimiento del Proyecto: '".$optionsSelect[0]['proy_nombre']."'" ))->ruta(__("Proyecto"));
@@ -94,7 +117,7 @@ window.onload = function() {
       
     if($_SESSION["usuario"]["modi"] == "S")
     {
-        $cabecera->accion('<button type="button"  class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Cerrar Proyecto</button>');
+        $cabecera->accion('<button type="button" class="btn btn-success" onclick="modal_cerrarProyecto()"><i class="glyphicon glyphicon-ok"></i> Cerrar Proyecto</button>');
 
         $cabecera->accion('<button type="submit" id="btngrabar" class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i>  Guardar Fase Actual</button>');
 
@@ -273,6 +296,31 @@ window.onload = function() {
            </div> <!-- modal--> 
 
            
+         <!-- .......................Modal de advertencia al cerrar el proyecto........................... -->
+          <div id="modal_cierreProyecto" class="modal modal-wide fade" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                  
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title">¿Está seguro de cerrar el proyecto?</h4>
+                  </div>
+                  
+                  <div class="modal-body">
+                    <p>El proyecto se colocará en estado "cerrado" y se removerá del módulo de seguimiento de proyectos</p>
+                  </div>
+              
+                  <div id="cierreProyectoCorrecto"></div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="cerrarProyecto()">Cerrar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Volver</button>
+                  </div>
+                  
+
+                </div> <!-- modal content-->
+             </div> <!-- modal dialog-->
+           </div> <!-- modal-->   
   
 
     

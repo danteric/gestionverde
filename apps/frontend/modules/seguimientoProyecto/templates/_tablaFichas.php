@@ -115,9 +115,9 @@ guardarSeguimiento = function() {
                            <td style="text-align: center;vertical-align: middle"> 
                              <div class="row">
                                 <?php if ($row['tiene_seguimiento'] == 'S'){ ?>
-                                      <a data-content="Ficha con comentario de seguimiento" data-toggle="popover" data-trigger="hover" ><i class="glyphicon glyphicon-ok-circle text-success"></i></a>
+                                      <a data-content="Ficha con comentario de seguimiento para la fase actual" data-toggle="popover" data-trigger="hover" ><i class="glyphicon glyphicon-ok-circle text-success"></i></a>
                                       <?php }else { ?>
-                                       <a data-content="Ficha sin comentario de seguimiento" data-toggle="popover" data-trigger="hover"><i class="glyphicon glyphicon-remove-circle text-danger"></i></a>
+                                       <a data-content="Ficha sin comentario de seguimiento para la fase actual" data-toggle="popover" data-trigger="hover"><i class="glyphicon glyphicon-remove-circle text-danger"></i></a>
                                    <?php }; ?>                                  
                              </div> 
                           </td>

@@ -34,11 +34,12 @@ class abmProyectoActions extends sfActions
       	$this->estado	= $request->getParameter("id_estado");
       	$this->fecha_desde	= $request->getParameter("id_fecha");
 		$this->cursor       = array();
-		$this->total_paginas = 1;
+		$this->fase = ''; //fase en blanco ya que no se utiliza en esta parte
 
 
     	$sql = "GET_ABM_PROYECTO_RS('".$_SESSION["usuario"]["username"]."','".
     							   $this->estado."','".
+    							   $this->fase."','".
     							   $this->fecha_desde."','".
     							   $this->nombre_proyecto."','".                             
                                    'P'."')";
@@ -62,10 +63,7 @@ class abmProyectoActions extends sfActions
 
 		return $this->renderPartial
 				('abmProyecto/tablaProyecto', array('cursor' =>$this->cursor,
-											     'sindatos' =>$this->sindatos,
-												 'total_paginas' => $this->total_paginas,
-					                            'total_registros' =>$this->total_registros,
-					                            'pagina' => $this->pagina));
+											     'sindatos' =>$this->sindatos));
 	
 	}
 	
@@ -199,13 +197,12 @@ class abmProyectoActions extends sfActions
 			                                        .$proy_id."','"
 			                                        .$this->listaAnota."')"; 
 			
-			          
+			    
 
 
 			    $this->cursor_fichas = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
 
-				 
-			    
+
 				
 			    $resp_sp = $this->cursor_fichas[0]['respuesta'];
 			    $exito   = $this->cursor_fichas[0]['respues_exito'];

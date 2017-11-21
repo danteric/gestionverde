@@ -54,7 +54,8 @@ $('#tabla').DataTable({
 		<thead  class="alert-success wrapper" >
 			<tr>
 				<th style="text-align: center;"><?php echo __("ID") ?></th>
-				<th style="text-align: center;"><?php echo __("Nombre Proyecto") ?></th> 
+				<th style="text-align: center;"><?php echo __("Nombre Proyecto") ?></th>
+                <th style="text-align: center;"><?php echo __("Fase actual") ?></th> 
 				<th style="text-align: center;"><?php echo __("Fecha Inicio") ?></th>
                 <th style="text-align: center;"><?php echo __("Cierre Estimado") ?></th>
 				<th style="text-align: center;"><?php echo __("Observaciones") ?></th>
@@ -66,6 +67,7 @@ $('#tabla').DataTable({
     		<tr class="<?php echo $class ?>">
     		  <td style="text-align:center; vertical-align: middle;width: 50px"><?php echo $row['proy_id'] ?></td>
     		  <td style="vertical-align: middle;"><?php echo $row['proy_nombre'] ?></td>
+              <td style="vertical-align: middle;text-align: center;width: 150px"><?php echo $row['fase_deno_actual'] ?></td>
     		  <td style="vertical-align: middle;text-align:center;width: 100px"><?php echo $row['proy_inicio_f'] ?></td>
               <td style="vertical-align: middle;text-align:center;width: 150px"><?php echo $row['proy_fin_estimado_f'] ?></td>
               <td style="vertical-align: middle;"><?php echo $row['proy_obser'] ?></td>

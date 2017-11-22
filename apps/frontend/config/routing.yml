@@ -14,7 +14,7 @@ sf_guard_password:
 # default rules
 homepage:
   url:   /
-  param: { module: cronoActividades, action: home }
+  param: { module: paginaInicio, action: home }
 
 # generic rules
 # please, remove them by adding more specific rules
@@ -24,7 +24,7 @@ doc_reg:
   
 default_index:
   url:   /:module
-  param: { module: cronoActividades, action: home }
+  param: { module: paginaInicio, action: home }
 
  
 default:

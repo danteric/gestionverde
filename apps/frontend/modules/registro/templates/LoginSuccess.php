@@ -17,77 +17,27 @@
 
 
 /*
-    llenaRazonSocial = function() {
-        $('#empresa_razon_social').val($('#empresa option:selected').text());
-    }
+function submitContactForm(){
+    var usu = $('#usu').val();
+    var password2 = $('#password2').val();
+    var password_nuevo = $('#password_nuevo').val();
+    var password_nuevo_rep = $('#password_nuevo_rep').val();
 
-     $(document).ready(function(){
-    llenaRazonSocial();
-    jQuery.validator.messages.required = "";
-    $("#loginForm").validate({
-        invalidHandler: function(e, validator) {
-            var errors = validator.numberOfInvalids();
-            if (errors) {
-                var message = errors == 1
-                    ? 'You missed 1 field. It has been highlighted below'
-                    : 'You missed ' + errors + ' fields.  They have been highlighted below';
-                $("div.error span").html(message);
-                $("div.error").show();
-            } else {
-                $("div.error").hide();
-            }
-        },
-        onkeyup: false,
-        messages: {
-            username: {
-                required: "Nombre de usuario requerido"
-            }
-        },
-        debug:false
-    });
-    //setTimeout( "refresh()", 100 );   
-   //nuevo cpmbox modal x leon 
-	var panel = $('.seleccione .panelcargando');
-	var timeout;
-	
-	$('.seleccione').hover(
-		function(){	
-			//abrir combox al pasar sobre ella	
-			clearTimeout(timeout);
-			timeout = setTimeout(function(){panel.trigger('open');},100);
-		},
-		function(){
-			//cerrar combox
-			clearTimeout(timeout);
-			timeout = setTimeout(function(){panel.trigger('close');},100);
-		}
-	);
-	var loaded=false;
-	panel.bind('open',function(){
-		panel.slideDown(function(){
-			if(!loaded)
-			{
-				// Leo los paises disponibles
-				panel.load('/combox_paisuser/_paisLogin.php');
-				//panel.load('/../../consola/index.php');\
-				loaded=true;
-			}
-		});
-	}).bind('close',function(){
-		panel.slideUp();
-	});
-});
+    $.ajax({
+            type:'POST',
+            url:'echo url_for("registro/nuevaContrasena")',
+            data: $('#form').serialize();
+            
+        });
+    $('#recuperarContraseñaForm').modal('hide');
+    }
 */
-/*
-$("#paginando2").live("click", function(){
-		var ur_actual = $('#ur_actual').val();
-		var ur_aredirect=$(this).attr("data");
-        var toLoad= "http://"+ur_aredirect ;
-        console.log(toLoad);
-        location.href = toLoad;
-});
-*/
+
 </script>
+
+
+
+
 
 
 <?php include_partial('services/notices', array('errors' => $errors, 'notices' => $notices)) ?>
@@ -125,12 +75,69 @@ $("#paginando2").live("click", function(){
                 <input class="btn btn-default  btn-block" type="button" value="Cambiar contraseña" onclick="$('#recuperarContraseñaForm').show('slow');"/>
                 
                 <a href="#" onclick="$('#mandarMailForm').show('slow');" id="mandarmail">Mandar contraseña al mail</a>
+
         </form>
         <br>
     </div>
 </div>
 
 </center>
+
+
+
+<!-- .......................Modal para el cambio de contraseña........................... 
+<div id="recuperarContraseñaForm" class="modal modal-wide fade" >
+<div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Modificar Contraseña</h4>
+      </div>
+      
+      <div class="modal-body">
+        <form id="form" role="form">
+            <table  >
+                <tr>
+                    <td >Usuario:</td>
+                    <td>
+                        <input type="text" id="usu" name="usu" class="form-control" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Contraseña anterior:</td>
+                    <td>
+                        <input type="password" id="password2" name="password2" class="form-control" required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td >Contraseña nueva:</td>
+                    <td>
+                        <input type="password" id="password_nuevo" name="password_nuevo" class="form-control" required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Repetir contraseña:</td>
+                    <td>
+                        <input type="password" id="password_nuevo_rep" name="password_nuevo_rep" class="form-control" required/>
+                    </td>
+                </tr>
+            </table>
+        
+        </form>
+      </div>
+  
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary submitBtn" onclick="submitContactForm()">Modificar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Volver</button>
+      </div>
+
+    </div> 
+ </div> 
+</div> 
+
+ -->
+
 
 <div id="recuperarContraseñaForm" class="well" style="display: none;">
     <div class="text-center">
@@ -173,6 +180,8 @@ $("#paginando2").live("click", function(){
     </div>
 
 </div>
+
+
 
 <div id="mandarMailForm" class="well" style="display: none;">
     <div class="text-center">

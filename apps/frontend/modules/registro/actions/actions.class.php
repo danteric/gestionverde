@@ -8,9 +8,7 @@ class RegistroActions extends sfActions
 
 	public function executeLogin(sfWebRequest $request) {
 
-//		$sql = "GET_EMPRESAS_RS(null)";
-//        $this->empresas = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-		//print_r($this->empresas);//exit;
+
 		$_SESSION["usuario"] = "";
 		unset($_SESSION["usuario"]);
 
@@ -26,7 +24,7 @@ class RegistroActions extends sfActions
 			}
 
 			if($usuarioSession->login($nombreUsuario, $password, $usuarioSession)) {
-				return $this->redirect('cronoActividades/home');
+				return $this->redirect('paginaInicio/home');
 			} else {
 				BackendServices::getInstance()->forbiddenError();
 			}
@@ -38,11 +36,6 @@ class RegistroActions extends sfActions
 	}
 
 	public function executeNuevaContrasena(sfWebRequest $request) {
-//		$sql = "begin ".sfConfig::get('SCHEMA_ORACLE').".get_empresas_rs('', :data); end;";
-//		$this->empresas = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-//		$sql = "GET_EMPRESAS_RS(null)";
-//        $this->empresas = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-
 
 		$_SESSION["usuario"] = "";
 		unset($_SESSION["usuario"]);
@@ -61,7 +54,7 @@ class RegistroActions extends sfActions
 											.$password_nuevo."', '"
 											.$password_nuevo_rep."')";
 			$result = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-			//print_r($result);exit;
+
 			if($result[0]['respuesta'] == "OK") {
 				$this->notices = array(0 => $result[0]['respues_exito']);
 			} else {
@@ -76,11 +69,6 @@ class RegistroActions extends sfActions
 	}
 
 public function executeEnviarContrasena(sfWebRequest $request) {
-//		$sql = "begin ".sfConfig::get('SCHEMA_ORACLE').".get_empresas_rs('', :data); end;";
-//		$this->empresas = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-//		$sql = "GET_EMPRESAS_RS(null)";
-//        $this->empresas = BackendServices::getInstance()->getResultsFromStoreProcedure($sql);
-
 
 		$_SESSION["usuario"] = "";
 		unset($_SESSION["usuario"]);
@@ -105,7 +93,7 @@ public function executeEnviarContrasena(sfWebRequest $request) {
 			    $mesanje_ok = "Mail no enviado - ";
 			}
 			$mesanje_ok = $mesanje_ok.$result[0]['respues_exito'];
-			//echo $mesanje_ok;exit;
+
 			$this->notices = array(0 => $mesanje_ok);
 		} else {
 			$this->errors = array(0 => $result[0]['respuesta']);
